@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2: Student Grade Management System</title>
+    <link rel="manifest" href="../manifest.json" />
+    <link rel="apple-touch-icon" href="../logo.jpg">
+    <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
+    <meta name="theme-color" content="#b21f1f">
+    <link rel="shortcut icon" href="../logo.jpg" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin: 20px 0;
+        }
+
+        .coach {
+            background-color: white;
+            width: 80px;
+            border-radius: 0 0 50% 0;
+            color: black;
+            padding: 10px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 100;
+        }
+        
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        #title {
+            padding-top: 20px;
+        }
+
+        .language-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .language-toggle:hover {
+            background: #2980b9;
+        }
+
+        .task-content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        h3 {
+            color: #2980b9;
+            margin: 15px 0;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .requirements {
+            background: #e8f4fc;
+            border-left: 5px solid #3498db;
+        }
+
+        .bonus {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+        }
+
+        .output-example {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-family: monospace;
+            white-space: pre;
+            overflow: auto;
+        }
+
+        .timer-section {
+            text-align: center;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+            margin-top: 30px;
+            border-radius: 10px;
+        }
+
+        .timer {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .timer-unit {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            min-width: 80px;
+        }
+
+        .timer-value {
+            font-size: 2.5rem;
+            display: block;
+        }
+
+        .timer-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            display: block;
+        }
+
+        .finish-date {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .thank-you {
+            text-align: center;
+            padding: 20px;
+            font-style: italic;
+            color: #6c757d;
+            border-top: 1px solid #dee2e6;
+            margin-top: 30px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+            width: 100%;
+            max-width: 1000px;
+            border-radius: 15px;
+        }
+
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .footer p {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .task-content {
+                padding: 15px;
+            }
+            
+            .language-toggle {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-bottom: 15px;
+                display: block;
+                width: 100%;
+            }
+            
+            .timer {
+                font-size: 1.5rem;
+                flex-wrap: wrap;
+            }
+            
+            .timer-unit {
+                min-width: 70px;
+            }
+            
+            .timer-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
+        <header>
+            <h1 id="title">Task 1: Student Grade Management System</h1>
+            <p class="subtitle" id="subtitle">Node.js program to calculate employee salary with taxes, bonuses, and deductions</p>
+            <button class="language-toggle" id="languageToggle">العربية / English</button>
+        </header>
+        
+        <div class="task-content" id="taskContent">
+            <!-- Content will be dynamically inserted here -->
+        </div>
+        
+        <div class="timer-section">
+            <h3 id="timer-title">Time Remaining to Complete Task</h3>
+            <div class="timer" id="timer">
+                <div class="timer-unit">
+                    <span class="timer-value" id="days">00</span>
+                    <span class="timer-label" id="days-label">Days</span>
+                </div>
+                <div class="timer-unit">
+                    <span class="timer-value" id="hours">00</span>
+                    <span class="timer-label" id="hours-label">Hours</span>
+                </div>
+                <div class="timer-unit">
+                    <span class="timer-value" id="minutes">00</span>
+                    <span class="timer-label" id="minutes-label">Minutes</span>
+                </div>
+                <div class="timer-unit">
+                    <span class="timer-value" id="seconds">00</span>
+                    <span class="timer-label" id="seconds-label">Seconds</span>
+                </div>
+            </div>
+            <p class="finish-date" id="finish-date">Finish by: September 13, 2025</p>
+            <p id="timer-message">Complete the task before the deadline!</p>
+        </div>
+        
+        <div class="thank-you" id="thankYou">
+            "Thank you for your hard work and dedication. Your efforts are appreciated!"
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>&copy; 2025 <a href="https://focal-x.com/" target="_blank">Focal X</a> - Node.js Bootcamp V10</p>
+    </div>
+
+        <script src="../reg.js"></script>
+<script>
+        // Content data structure
+        const taskData = {
+            en: {
+                title: "Task 2: Student Grade Management System",
+                subtitle: "A Comprehensive Node.js Application for Managing, Calculating, and Analyzing Student Academic Grades", // New longer subtitle
+                sections: [
+                    {
+                        type: "idea",
+                        title: "💻 The Task: \"Student Grade Management System\"",
+                        content: "A simple Node.js program designed to handle and manage student grades efficiently."
+                    },
+                    {
+                        type: "requirements",
+                        title: "📝 Requirements",
+                        content: [
+                            {
+                                type: "list",
+                                title: "Rules:",
+                                items: [
+                                    "Use `let` and `const` to declare variables, do not use `var`.",
+                                    "Use arrays and objects for data structures.",
+                                    "Implement `try` and `catch` blocks for error handling.",
+                                    "Write helpful comments for each significant block of code.",
+                                ]
+                            },
+                            {
+                                type: "output",
+                                title: "Students Array:",
+                                content: "Create a `students` array containing 5 objects with the following structure:",
+                                example: `{ id: number, name: string, grades: [], avg: number, createdAt: Date }
+
+// Note 1: Each object must have a unique \`id\`.
+// Note 2: The \`createdAt\` value must be dynamically generated and represent the date the student was added.`},
+                            {
+                                type: "list",
+                                title: "Add Grade Method:",
+                                items: [
+                                    "`addGrade(studentId, grade)`",
+                                    "Search for the student with the provided `studentId` and add the new grade to their record.",
+                                    "Recalculate and update the grade average (`avg`) for this student.",
+                                    "If the student does not exist → print 'Student Not Found'.",
+                                    "If the grade is invalid → print 'Invalid Grade'.",
+                                    "A valid grade must be a number between 0 and 100 (0 <= grade <= 100)."
+                                ]
+                            },
+                            {
+                                type: "list",
+                                title: "Calculate GPA Method:",
+                                items: [
+                                    "`calculateGPA()`",
+                                    "Return a new array based on the student data.",
+                                    "Each item in the new array must be an object like: `{ id, name, gpa, createdAt }`."
+                                ]
+                            },
+                            {
+                                type: "list",
+                                title: "Get Student Details Method:",
+                                items: [
+                                    "`getStudentInfo(studentId)`",
+                                    "Search for the student with the provided `studentId`.",
+                                    "If the student does not exist → print 'Student Not Found'.",
+                                    "If the student exists → return an object: `{ name, grades, avg, createdAt }`.",
+                                    "The `grades` array within the returned object must be sorted."
+                                ]
+                            },
+                            {
+                                type: "list",
+                                title: "Update All Grades Method:",
+                                items: [
+                                    "`updateAllGrades()`",
+                                    "Remove any grade for any student that is less than or equal to 50 (grade <= 50).",
+                                    "Recalculate and update the grade average (`avg`) for each affected student.",
+                                    "This method should execute after a 2-second delay (using `setTimeout`)."
+                                ]
+                            },
+                            {
+                                type: "list",
+                                title: "Remove Student Method:",
+                                items: [
+                                    "`removeStudent(studentId)`", // Improved method name for clarity
+                                    "Remove the student with the provided `studentId` from the array.",
+                                    "If the student does not exist → print 'Student Not Found'."
+                                ]
+                            },
+                            {
+                                type: "list",
+                                title: "Student State Method:",
+                                items: [
+                                    "`getStudentState(studentId)`", // Improved method name
+                                    "Search for the student with the provided `studentId`.",
+                                    "If the student does not exist → print 'Student Not Found'.",
+                                    "If (student 'avg' <= 60) → return 'Bad'.",
+                                    "If (60 < student 'avg' <= 80) → return 'Good'.",
+                                    "If (80 < student 'avg' <= 90) → return 'Very Good'.",
+                                    "If (student 'avg' > 90) → return 'Excellent'.", // Changed "Super Good" to more common "Excellent"
+                                    "This method should execute after a 1-second delay (using `setTimeout`)."
+                                ]
+                            },
+                            {
+                                type: "list",
+                                title: "Count Students by State Method:",
+                                items: [
+                                    "`countStudentsByState(state)`", // Improved method name
+                                    "Count and return the number of students who have the specified academic `state`.",
+                                    "If the provided state is invalid → return 'Invalid State'.",
+                                    "Valid 'state' values are: ['Bad', 'Good', 'Very Good', 'Excellent'].",
+                                    "This method must utilize the 'getStudentState' method.",
+                                    "This method should execute after a 1-second delay (using `setTimeout`)."
+                                ]
+                            },
+                        ]
+                    },
+                ],
+                timer: {
+                    title: "Time Remaining to Complete Task",
+                    message: "Complete the task before the deadline! - Submissions are only accepted within the final six hours.",
+                    days: "Days",
+                    hours: "Hours",
+                    minutes: "Minutes",
+                    seconds: "Seconds"
+                },
+                thankYou: "\"Thank you for your hard work and dedication. Your efforts are appreciated!\"",
+                buttonText: "العربية / English",
+                finishDate: "Finish by: September 20, 2025"
+            },
+                ar: {
+                    title: "المهمة 2: نظام إدارة درجات الطلاب",
+                    subtitle: "تطبيق Node.js شامل لإدارة وحساب وتحليل الدرجات الأكاديمية للطلاب", // Translated longer subtitle
+                    sections: [
+                        {
+                            type: "idea",
+                            title: "💻 المهمة: \"نظام إدارة درجات الطلاب\"",
+                            content: "برنامج Node.js بسيط مصمم للتعامل مع وإدارة درجات الطلاب بكفاءة."
+                        },
+                        {
+                            type: "requirements",
+                            title: "📝 المتطلبات",
+                            content: [
+                                {
+                                    type: "list",
+                                    title: "القواعد:",
+                                    items: [
+                                        "استخدم `let` و `const` لتعريف المتغيرات؛ لا تستخدم `var`.",
+                                        "استخدم المصفوفات (Arrays) والكائنات (Objects) لهياكل البيانات.",
+                                        "نفذ كتل `try` و `catch` للتعامل مع الأخطاء.",
+                                        "اكتب تعليقات مفيدة لكل كتلة مهمة من الكود."
+                                    ]
+                                },
+                                {
+                                    type: "output",
+                                    title: "مصفوفة الطلاب:",
+                                    content: "أنشئ مصفوفة `students` تحتوي على 5 كائنات بالهيكل التالي:",
+                                    example: `{ id: number, name: string, grades: [], avg: number, createdAt: Date }
+
+// ملاحظة 1: كل كائن يجب أن يحتوي على \`id\` فريد.
+// ملاحظة 2: قيمة \`createdAt\` يجب أن يتم توليدها ديناميكيًا وتمثل تاريخ إضافة الطالب.`},
+                                {
+                                    type: "list",
+                                    title: "طريقة إضافة الدرجة:",
+                                    items: [
+                                        "`addGrade(studentId, grade)`",
+                                        "ابحث عن الطالب الذي لديه `studentId` المعطاة وأضف الدرجة الجديدة إلى سجله.",
+                                        "أعد حساب وتحديث متوسط الدرجات (`avg`) لهذا الطالب.",
+                                        "إذا لم يوجد الطالب -> اطبع 'الطالب غير موجود'.",
+                                        "إذا كانت الدرجة غير صالحة -> اطبع 'درجة غير صالحة'.",
+                                        "الدرجة الصالحة يجب أن تكون رقمًا بين 0 و 100 (0 <= grade <= 100)."
+                                    ]
+                                },
+                                {
+                                    type: "list",
+                                    title: "طريقة حساب المعدل التراكمي (GPA):",
+                                    items: [
+                                        "`()calculateGPA`",
+                                        "أعد مصفوفة جديدة بناءً على بيانات الطلاب.",
+                                        "كل عنصر في المصفوفة الجديدة يجب أن يكون كائنًا مثل: `{ id, name, gpa, createdAt }`."
+                                    ]
+                                },
+                                {
+                                    type: "list",
+                                    title: "طريقة الحصول على تفاصيل الطالب:",
+                                    items: [
+                                        "`getStudentInfo(studentId)`",
+                                        "ابحث عن الطالب الذي لديه `studentId` المعطاة.",
+                                        "إذا لم يوجد الطالب -> اطبع 'الطالب غير موجود'.",
+                                        "إذا وجد الطالب -> أعد كائنًا: `{ name, grades, avg, createdAt }`.",
+                                        "مصفوفة `grades` داخل الكائن المعاد يجب أن تكون مرتبة."
+                                    ]
+                                },
+                                {
+                                    type: "list",
+                                    title: "طريقة تحديث كل الدرجات:",
+                                    items: [
+                                        "`()updateAllGrades`",
+                                        "أزل أي درجة لأي طالب تكون أقل من أو تساوي 50 (grade <= 50).",
+                                        "أعد حساب وتحديث متوسط الدرجات (`avg`) لكل طالب متأثر.",
+                                        "هذه الطريقة يجب أن تنفذ بعد تأخير قدره ثانيتين (باستخدام `setTimeout`)."
+                                    ]
+                                },
+                                {
+                                    type: "list",
+                                    title: "طريقة إزالة الطالب:",
+                                    items: [
+                                        "`removeStudent(studentId)`",
+                                        "أزل الطالب الذي لديه `studentId` المعطاة من المصفوفة.",
+                                        "إذا لم يوجد الطالب -> اطبع 'الطالب غير موجود'."
+                                    ]
+                                },
+                                {
+                                    type: "list",
+                                    title: "طريقة الحالة الأكاديمية للطالب:",
+                                    items: [
+                                        "`getStudentState(studentId)`",
+                                        "ابحث عن الطالب الذي لديه `studentId` المعطاة.",
+                                        "إذا لم يوجد الطالب -> اطبع 'الطالب غير موجود'.",
+                                        "إذا ( avg الطالب <= 60) -> أعد 'ضعيف'.",
+                                        "إذا (60 < avg الطالب <= 80) -> أعد 'جيد'.",
+                                        "إذا (80 < avg الطالب <= 90) -> أعد 'جيد جدًا'.",
+                                        "إذا ( avg الطالب > 90) -> أعد 'ممتاز'.",
+                                        "هذه الطريقة يجب أن تنفذ بعد تأخير قدره ثانية واحدة (باستخدام `setTimeout`)."
+                                    ]
+                                },
+                                {
+                                    type: "list",
+                                    title: "طريقة عد الطلاب حسب الحالة:",
+                                    items: [
+                                        "`countStudentsByState(state)`",
+                                        "احسب وأعد عدد الطلاب الذين لديهم `state` أكاديمية محددة.",
+                                        "إذا كانت الحالة المعطاة غير صالحة -> أعد 'حالة غير صالحة'.",
+                                        "قيم 'state' الصالحة هي: ['ضعيف', 'جيد', 'جيد جدًا', 'ممتاز'].",
+                                        "هذه الطريقة يجب أن تستخدم طريقة 'getStudentState'.",
+                                        "هذه الطريقة يجب أن تنفذ بعد تأخير قدره ثانية واحدة (باستخدام `setTimeout`)."
+                                    ]
+                                },
+                            ]
+                        },
+                    ],
+                    timer: {
+                        title: "الوقت المتبقي لإكمال المهمة",
+                        message: "أكمل المهمة قبل الموعد النهائي! - يتم قبول التسليم فقط في الساعات الست الأخيرة.",
+                        days: "أيام",
+                        hours: "ساعات",
+                        minutes: "دقائق",
+                        seconds: "ثواني"
+                    },
+                    thankYou: "\"شكرًا لجهودك الجادة وتفانيك. نقدر جهودك!\"",
+                    buttonText: "English / العربية",
+                    finishDate: "الانتهاء بحلول: 20 سبتمبر 2025"
+                }
+        };
+
+        // Render content based on language
+        function renderContent(lang) {
+            const data = taskData[lang];
+            const taskContent = document.getElementById('taskContent');
+            
+            // Update page title and subtitle
+            document.getElementById('title').textContent = data.title;
+            document.getElementById('subtitle').textContent = data.subtitle;
+            
+            // Update timer section
+            document.getElementById('timer-title').textContent = data.timer.title;
+            document.getElementById('timer-message').textContent = data.timer.message;
+            document.getElementById('days-label').textContent = data.timer.days;
+            document.getElementById('hours-label').textContent = data.timer.hours;
+            document.getElementById('minutes-label').textContent = data.timer.minutes;
+            document.getElementById('seconds-label').textContent = data.timer.seconds;
+            document.getElementById('finish-date').textContent = data.finishDate;
+            
+            // Update thank you message
+            document.getElementById('thankYou').textContent = data.thankYou;
+            
+            // Update button text
+            document.getElementById('languageToggle').textContent = data.buttonText;
+            
+            // Clear existing content
+            taskContent.innerHTML = '';
+            
+            // Render each section
+            data.sections.forEach(section => {
+                const sectionEl = document.createElement('div');
+                sectionEl.className = 'section';
+                
+                if (section.type === 'requirements') {
+                    sectionEl.classList.add('requirements');
+                } else if (section.type === 'bonus') {
+                    sectionEl.classList.add('bonus');
+                }
+                
+                const titleEl = document.createElement('h2');
+                titleEl.textContent = section.title;
+                sectionEl.appendChild(titleEl);
+                
+                if (section.type === 'idea' || section.type === 'note') {
+                    const contentEl = document.createElement('p');
+                    contentEl.textContent = section.content;
+                    sectionEl.appendChild(contentEl);
+                } else if (section.type === 'requirements') {
+                    section.content.forEach(item => {
+                        const itemTitle = document.createElement('h3');
+                        itemTitle.textContent = item.title;
+                        sectionEl.appendChild(itemTitle);
+                        
+                        if (item.type === 'list') {
+                            const listEl = document.createElement('ul');
+                            item.items.forEach(listItem => {
+                                const li = document.createElement('li');
+                                li.innerHTML = listItem;
+                                listEl.appendChild(li);
+                            });
+                            sectionEl.appendChild(listEl);
+                        } else if (item.type === 'output') {
+                            const contentEl = document.createElement('p');
+                            contentEl.textContent = item.content;
+                            sectionEl.appendChild(contentEl);
+                            
+                            const exampleEl = document.createElement('div');
+                            exampleEl.className = 'output-example';
+                            exampleEl.textContent = item.example;
+                            sectionEl.appendChild(exampleEl);
+                        }
+                    });
+                } else if (section.type === 'learning' || section.type === 'bonus') {
+                    const listEl = document.createElement('ul');
+                    section.content.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = item;
+                        listEl.appendChild(li);
+                    });
+                    sectionEl.appendChild(listEl);
+                }
+                
+                taskContent.appendChild(sectionEl);
+            });
+            
+            // Set text direction based on language
+            if (lang === 'ar') {
+                document.body.setAttribute('dir', 'rtl');
+                document.querySelectorAll('.section').forEach(section => {
+                    section.style.textAlign = 'right';
+                });
+            } else {
+                document.body.removeAttribute('dir');
+                document.querySelectorAll('.section').forEach(section => {
+                    section.style.textAlign = 'left';
+                });
+            }
+        }
+
+        // Timer functionality
+        function startCountdown() {
+            // Set the date we're counting down to (September 13, 2025)
+            const countDownDate = new Date("Sep 20, 2025 23:59:59").getTime();
+            
+            // Update the countdown every 1 second
+            const countdown = setInterval(() => {
+                // Get today's date and time
+                const now = new Date().getTime();
+                
+                // Find the distance between now and the countdown date
+                const distance = countDownDate - now;
+                
+                // If the countdown is over, write some text
+                if (distance < 0) {
+                    clearInterval(countdown);
+                    document.getElementById("days").textContent = "00";
+                    document.getElementById("hours").textContent = "00";
+                    document.getElementById("minutes").textContent = "00";
+                    document.getElementById("seconds").textContent = "00";
+                    return;
+                }
+                
+                // Time calculations for days, hours, minutes and seconds
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                // Display the results
+                document.getElementById("days").textContent = days.toString().padStart(2, '0');
+                document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
+                document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
+                document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
+            }, 1000);
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Render English content by default
+            renderContent('en');
+            
+            // Start the countdown timer
+            startCountdown();
+            
+            // Language toggle functionality
+            document.getElementById('languageToggle').addEventListener('click', function() {
+                const currentLang = document.body.getAttribute('dir') === 'rtl' ? 'ar' : 'en';
+                const newLang = currentLang === 'en' ? 'ar' : 'en';
+                renderContent(newLang);
+            });
+        });
+    </script>
+</body>
+</html>

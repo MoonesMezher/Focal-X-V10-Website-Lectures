@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focal X - Node.js Bootcamp: Lecture 5 </title><link rel="manifest" href="./manifest.json" />
+    <link rel="apple-touch-icon" href="./logo.jpg">
+    <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
+    <meta name="theme-color" content="#b21f1f">
+    <link rel="stylesheet" href="./assets/lecture.css">
+</head>
+<body>
+    <div class="container">
+        <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
+        <header>
+            <h1 id="lecture-title">Focal X - Node.js Bootcamp</h1>
+            <p class="subtitle" id="lecture-subtitle">Advanced JavaScript: Event Loop, Regex, ES6, OOP, and APIs</p>
+        </header>
+        
+        <div class="content">
+            <div class="lecture-content">
+                <h2>Lecture Content</h2>
+                <div id="tabs-container"></div>
+                <div id="tab-content-container"></div>
+            </div>
+            
+            <div class="interactive-section">
+                <h2>Interactive Questions & Tasks</h2>
+                <div id="questions-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
+    </footer>
+        <script src="./reg.js"></script>
+<script>
+        // ==================== CONFIGURATION ====================
+        // Update these arrays to change the content of your lecture
+        
+        // Lecture metadata
+        const lectureConfig = {
+            title: "Focal X - Node.js Bootcamp",
+            subtitle: "Advanced JavaScript: Objects, Promises, Error Handling"
+        };
+        
+        // Lecture content organized by tabs
+        const lectureContent = [
+            {
+                tabTitle: "Last Lesson",
+                title: "Last Lesson Recap",
+                content: `/*
+1- Arrays 
+2- Mutate & Not-Mutate methods
+3- SetTimeout & SetInterval
+4- Date in JavaScript 
+*/`
+            },
+                        {
+                tabTitle: "Map & Set",
+                title: "Map and Set Data Structures",
+                content: `// A Map stores key-value pairs and preserves insertion order
+const map = new Map();
+
+// - Add
+map.set(0, "A");
+map.set(1, "B");
+
+// - Get
+const item1 = map.get(0);
+console.log(item1); // A
+
+// - Length
+console.log(map.size); // 2
+
+// - Has
+const isExist = map.has(1); // by key
+console.log(isExist); // true
+
+// - Delete
+map.delete(0);
+console.log(map); // Map(1) { 1 => "B" }
+
+// - Get keys as array
+console.log([...map.keys()]); // [1]
+
+// - Get values as array
+console.log([...map.values()]); // ["B"]
+
+// - Get keys and values as array
+console.log([...map.entries()]); // [[1, "B"]]
+
+// - Foreach
+map.forEach((val, key) => {
+    console.log(key, val); // 1 "B"
+});
+
+// - Clear
+map.clear();
+console.log(map); // Map(0) {}
+
+// A Set stores unique values (no duplicates)
+const set = new Set();
+
+// - Add
+set.add("AA");
+set.add("BB");
+set.add("AA"); // Won't be added (duplicate)
+
+// - Get (no direct get method, convert to array)
+const item1InSet = [...set][0];
+console.log(item1InSet); // AA
+
+// - Length
+console.log(set.size); // 2
+
+// - Has
+const isExistInSet = set.has("AA"); // by value
+console.log(isExistInSet); // true
+
+// - Delete
+set.delete("AA");
+console.log(set); // Set(1) { "BB" }
+
+// - Get values as array
+console.log([...set.values()]); // ["BB"]
+
+// - Foreach
+set.forEach((val) => {
+    console.log(val); // BB
+});
+
+// - Clear
+set.clear();
+console.log(set); // Set(0) {}`
+            },
+            {
+                tabTitle: "Objects",
+                title: "JavaScript Objects",
+                content: `// Objects group related properties/behaviors
+const person = {
+    name: "Alice",
+    age: 30,
+    isStudent: true,
+    subjects: ["Math", "Programming"],
+    address: {
+        city: "Paris",
+        country: "France"
+    },
+    greet: function() {
+        return \`Hello, my name is \${this.name}\`;
+    }
+};
+
+// Accessing data (two ways)
+console.log(person.name); // Alice
+console.log(person["name"]); // Alice
+
+const prop = "age";
+console.log(person[prop]); // 30
+
+console.log(person.address.city); // Paris
+console.log(person.greet()); // Hello, my name is Alice
+
+// Object Operations:
+// Add Property
+person.job = "Developer";
+
+// Delete Property
+delete person.isStudent;
+
+// Modify Property
+person.age = 31;
+
+// Check if Property Exists
+console.log("name" in person); // true
+
+// Object Methods:
+console.log(Object.keys(person)); // ["name", "age", "subjects", "address", "greet", "job"]
+console.log(Object.values(person)); // ["Alice", 31, Array(2), {…}, ƒ, "Developer"]
+console.log(Object.entries(person)); // Array of [key, value] pairs
+
+// Object.assign() (merge)
+const car = { brand: "Toyota" };
+const updatedCar = Object.assign({}, car, { model: "Camry", year: 2023 });
+console.log(updatedCar); // { brand: "Toyota", model: "Camry", year: 2023 }
+
+// Object.freeze()
+Object.freeze(car);
+car.brand = "Honda"; // Fails silently in non-strict mode
+console.log(car.brand); // "Toyota"
+
+// Iterating Over Objects:
+// for...in loop
+for (const key in person) {
+    console.log(\`\${key}: \${person[key]}\`);
+}
+
+// Object.entries() + forEach
+Object.entries(person).forEach(([key, value]) => {
+    console.log(\`\${key} -> \${value}\`);
+});
+
+// Transforming Objects:
+// Spread operator
+const updatedPerson = { ...person, age: 31 };
+
+// Destructuring
+const { name: personName, address: { city } } = person;
+console.log(personName, city); // "Alice Paris"
+
+// Deep copy
+const personClone = JSON.parse(JSON.stringify(person));
+
+// Dynamic property names
+const propName = "email";
+const user = {
+    [propName]: "alice@example.com",
+    [\`\${propName}-verified\`]: true
+};
+
+// Optional chaining (ES2020)
+console.log(person?.address?.zipCode ?? "Unknown"); // "Unknown"`
+            },
+            {
+                tabTitle: "Error Handling",
+                title: "try...catch for Error Handling",
+                content: `// Use try...catch to handle errors gracefully
+// Most commonly used with promises and async methods
+
+/*
+Form:
+try {
+    // code that might throw an error
+} catch (err) {
+    // handle the error
+} finally { 
+    // code that runs regardless of try/catch outcome
+}
+=> finally is optional
+*/
+
+try {
+    // Example 1: Assignment to constant
+    // const x = 1;
+    // x = 2; // This would throw an error
+    
+    // Example 2: Calling function before declaration (with const)
+    // console.log(hello());
+    // const hello = () => "hello"; // This would throw an error
+    
+    // Example 3: Accessing undefined variable
+    // console.log(title); // This would throw an error
+    
+    // Example 4: Calling non-function property
+    // const obj = { age: 10 };
+    // console.log(obj.age()); // This would throw an error
+    
+    console.log("success =>", 1);
+} catch (error) {
+    console.log("error =>", error.message);    
+} finally {
+    console.log("Completed");
+}
+
+// Custom error throwing
+function divide(a, b) {
+    if (b === 0) {
+        throw new Error("Division by zero is not allowed");
+    }
+    return a / b;
+}
+
+try {
+    const result = divide(10, 0);
+    console.log(result);
+} catch (error) {
+    console.log("Caught an error:", error.message);
+}`
+            },
+            {
+                tabTitle: "Operators",
+                title: "Important JavaScript Operators",
+                content: `// Logical Operators:
+
+// 1. && (Logical AND): Returns the first falsy value or the last truthy value
+const user = { isAdmin: true };
+user.isAdmin && console.log("Access granted"); // "Access granted"
+
+console.log(0 && "hello"); // 0 (first falsy value)
+console.log(1 && "hello"); // "hello" (both truthy, returns last)
+
+// 2. || (Logical OR): Returns the first truthy value or the last falsy value
+const username = "";
+console.log(username || "Guest"); // "Guest"
+
+console.log(0 || ""); // "" (both falsy, returns last)
+console.log(0 || "hello"); // "hello" (first truthy value)
+
+// 3. ?? (Nullish Coalescing): Returns right-hand value only if left is null or undefined
+const quantity = 0;
+console.log(quantity ?? 5); // 0 (0 is not null/undefined)
+console.log(null ?? 5); // 5
+
+// Compare with ||:
+console.log(quantity || 5); // 5 (0 is falsy)
+
+// 4. ?. (Optional Chaining): Safely access nested properties
+const user2 = { address: null };
+console.log(user2?.address?.city); // undefined (no error)
+
+// Works with functions:
+const fetchData = null;
+console.log(fetchData?.()); // undefined
+
+// 5. ? : (Ternary Operator): Conditional value assignment
+const isValid = true;
+const message = isValid ? "Yes" : "No";
+console.log(message); // "Yes"
+
+// Comparison Table:
+// | Operator | Name                | Returns                           | Example                    |  
+// |----------|---------------------|-----------------------------------|----------------------------|  
+// | &&       | Logical AND         | First falsy value or last truthy  | 0 && "hi" → 0              |  
+// | ||       | Logical OR          | First truthy value or last falsy  | "" || "hi" → "hi"          |  
+// | ??       | Nullish Coalescing  | Right-hand if left is null/undefined | 0 ?? 5 → 0             |  
+// | ?.       | Optional Chaining   | undefined if path is nullish      | user?.address?.city → safe |  
+// | ? :      | Ternary             | Value based on condition          | isValid ? "Yes" : "No"     |`
+            },
+            {
+                tabTitle: "Promises",
+                title: "JavaScript Promises",
+                content: `// Promises represent the eventual completion of an asynchronous operation
+
+// Creating a promise
+const promise = new Promise((resolve, reject) => {
+    // Simulate complex code
+    for(let i = 0; i < 1_000_000_000; i++) {}
+    
+    const data = Math.random();
+    
+    if(data < 0.5) {
+        resolve(data); // Success
+    } else {
+        reject("Error"); // Failure
+    }
+});
+
+// Using .then() and .catch()
+promise
+    .then((data) => {
+        console.log(data);
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+    .finally(() => {
+        console.log("Completed");
+    });
+
+// Converting to async/await
+const app = async () => {
+    try {
+        const data = await promise;
+        console.log("Success:", data);
+    } catch (error) {
+        console.log("Error:", error);
+    }
+};
+app();
+
+// Real-world example: API call simulation
+function fetchUserData() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const success = Math.random() > 0.3;
+            if (success) {
+                resolve({ name: "Alice", age: 30 });
+            } else {
+                reject("Failed to fetch user data");
+            }
+        }, 2000);
+    });
+}
+
+// Using the promise
+fetchUserData()
+    .then(user => console.log("User:", user))
+    .catch(error => console.error("Error:", error));
+
+// Using Promise.all() with arrays
+const promise1 = Promise.resolve(3);
+const promise2 = new Promise((resolve) => setTimeout(resolve, 100, 'foo'));
+const promise3 = fetchUserData();
+
+Promise.all([promise1, promise2, promise3])
+    .then(values => console.log(values))
+    .catch(error => console.error(error));`
+            }
+            ];
+        
+        // Questions and tasks
+        const questions = [
+        {
+                type: "question",
+                question: "Which operator returns the right-hand value only if the left-hand value is null or undefined?",
+                options: [
+                    "Logical OR (||)",
+                    "Optional Chaining (?.)",
+                    "Nullish Coalescing (??)",
+                    "Ternary Operator (?:)"
+                ],
+                correctIndex: 2
+            },
+            {
+                type: "question",
+                question: "What does the finally block do in a try/catch statement?",
+                options: [
+                    "Runs only if an error occurs",
+                    "Runs only if no error occurs",
+                    "Runs regardless of try/catch outcome",
+                    "Runs instead of the catch block"
+                ],
+                correctIndex: 2
+            },
+            {
+                type: "question",
+                question: "Which of these is NOT a way to access object properties?",
+                options: [
+                    "obj.property",
+                    "obj['property']",
+                    "obj->property",
+                    "obj[variable]"
+                ],
+                correctIndex: 2
+            },
+            {
+                type: "question",
+                question: "What will this code output? console.log(0 || 'hello')",
+                options: [
+                    "0",
+                    "'hello'",
+                    "true",
+                    "false"
+                ],
+                correctIndex: 1
+            },
+            {
+                type: "question",
+                question: "What does the await keyword do?",
+                options: [
+                    "Pauses execution until the promise is settled",
+                    "Cancels a promise",
+                    "Creates a new promise",
+                    "Handles promise rejection"
+                ],
+                correctIndex: 0
+            },
+            {
+                type: "question",
+                question: "Which method would you use to make an object immutable?",
+                options: [
+                    "Object.freeze()",
+                    "Object.seal()",
+                    "Object.preventExtensions()",
+                    "Object.lock()"
+                ],
+                correctIndex: 0
+            },
+            {
+                type: "question",
+                question: "What does the 'finally' block do in a try/catch statement?",
+                options: [
+                    "Runs only if an error occurs",
+                    "Runs only if no error occurs",
+                    "Runs regardless of try/catch outcome",
+                    "Runs instead of the catch block"
+                ],
+                correctIndex: 2
+            },
+            {
+                type: "question",
+                question: "Which method converts a JSON string to a JavaScript object?",
+                options: [
+                    "JSON.parse()",
+                    "JSON.stringify()",
+                    "JSON.toObject()",
+                    "JSON.convert()"
+                ],
+                correctIndex: 0
+            },
+            {
+                type: "task",
+                title: "Practice: Working with Objects",
+                content: "Create a person object with properties for name, age, and address. Then create a function that deep clones this object using JSON methods. Modify the clone and verify the original object remains unchanged."
+            },
+            {
+                type: "search-task",
+                title: "Research: Map & Set",
+                content: "Research the differences between Map & Set in JavaScript, and how can you use it instead of arrays."
+            },
+            {
+                type: "search-task",
+                title: "Research: Promise Methods",
+                content: "Research the differences between Promise.all(), Promise.race(), Promise.allSettled(), and Promise.any(). Create examples demonstrating each method's behavior."
+            }
+        ];
+        
+        // ==================== TEMPLATE RENDERING ====================
+        // Functions to render the content - you don't need to modify these
+        
+        </script><script src="./assets/lecture.js"></script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focal X - Node.js Bootcamp: Lecture 22 </title><link rel="manifest" href="./manifest.json" />
+    <link rel="apple-touch-icon" href="./logo.jpg">
+    <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
+    <meta name="theme-color" content="#b21f1f">
+    <link rel="stylesheet" href="./assets/lecture.css">
+</head>
+<body>
+    <div class="container">
+        <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
+        <header>
+            <h1 id="lecture-title">Focal X - Node.js Bootcamp</h1>
+            <p class="subtitle" id="lecture-subtitle">Node</p>
+        </header>
+        
+        <div class="content">
+            <div class="lecture-content">
+                <h2>Lecture Content</h2>
+                <div id="tabs-container"></div>
+                <div id="tab-content-container"></div>
+            </div>
+            
+            <div class="interactive-section">
+                <h2>Interactive Questions & Tasks</h2>
+                <div id="questions-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
+    </footer>
+
+        <script src="./reg.js"></script>
+<script>
+        // ==================== CONFIGURATION ====================
+        // Update these arrays to change the content of your lecture
+        
+        // Lecture metadata
+        const lectureConfig = {
+            title: "Focal X - Node.js Bootcamp",
+            subtitle: "Solve Task 6"
+        };
+        
+       // Lecture content organized by tabs
+const lectureContent = [
+    {
+        tabTitle: "Last Lesson",
+        title: "Last Lesson Recap",
+        content: `/*
+1- Mongoose Basics
+2- Mongoose Schemas
+3- Mongoose CRUD
+4- Chaining
+5- Not Found & Error Middlewares
+*/`
+    },
+    {
+        tabTitle: "Solve Task 6",
+        title: "Solve Task (Express.js Product Management Server)",
+        content: `https://github.com/MoonesMezher/solve-task-6-focal-V10`
+    },
+];
+
+// Updated Questions array aligned with the new topics
+const questions = [
+    // MongoDB Setup
+    {
+        type: "question",
+        question: "What is the main advantage of using MongoDB Atlas over local MongoDB installation?",
+        options: [
+            "It's always free with unlimited storage",
+            "It provides automated backups, scaling, and managed infrastructure",
+            "It doesn't require any configuration",
+            "It only works with JavaScript applications"
+        ],
+        correctIndex: 1
+    },
+    {
+        type: "question",
+        question: "Which connection string format is used for MongoDB Atlas clusters?",
+        options: [
+            "mongodb://localhost:27017",
+            "mysql://username:password@host:port/database",
+            "mongodb+srv://username:password@cluster.mongodb.net/database",
+            "postgresql://user:pass@host/db"
+        ],
+        correctIndex: 2
+    },
+
+    // MongoDB Compass
+    {
+        type: "question",
+        question: "What is the primary purpose of MongoDB Compass?",
+        options: [
+            "To write Node.js application code",
+            "To provide a graphical interface for database management and query building",
+            "To deploy applications to production servers",
+            "To monitor server CPU and memory usage"
+        ],
+        correctIndex: 1
+    },
+
+    // Mongoose Basics
+    {
+        type: "question",
+        question: "What is Mongoose in the context of Node.js and MongoDB?",
+        options: [
+            "A template engine for rendering HTML",
+            "An Object Data Modeling (ODM) library that provides schema-based solution",
+            "A testing framework for JavaScript applications",
+            "A package manager for Node.js"
+        ],
+        correctIndex: 1
+    },
+
+    // Mongoose Schemas
+    {
+        type: "question",
+        question: "What is the purpose of the 'timestamps' option in a Mongoose schema?",
+        options: [
+            "It automatically adds createdAt and updatedAt fields to documents",
+            "It creates indexes on all date fields",
+            "It validates that all dates are in the correct format",
+            "It converts all dates to UTC timezone"
+        ],
+        correctIndex: 0
+    },
+    // Mongoose CRUD
+    {
+        type: "question",
+        question: "What is the difference between findOne() and findById() in Mongoose?",
+        options: [
+            "findOne() is faster than findById()",
+            "findById() specifically searches by the _id field while findOne() can search by any field",
+            "findOne() returns an array while findById() returns a single document",
+            "There is no difference, they are aliases for the same method"
+        ],
+        correctIndex: 1
+    },
+    {
+        type: "question",
+        question: "Which method is used to update a document and return the updated version in a single operation?",
+        options: [
+            "updateOne()",
+            "updateMany()",
+            "findOneAndUpdate() with {new: true}",
+            "save() after modification"
+        ],
+        correctIndex: 2
+    },
+    {
+        type: "question",
+        question: "What is the purpose of the populate() method in Mongoose?",
+        options: [
+            "To fill a collection with sample data for testing",
+            "To replace document references with actual documents from other collections",
+            "To increase database performance by caching queries",
+            "To validate all documents in a collection"
+        ],
+        correctIndex: 1
+    },
+
+    // Practical Tasks - MongoDB & Tools
+    {
+        type: "task",
+        title: "MongoDB Atlas Cluster Setup",
+        content: "Create a MongoDB Atlas cluster, configure database access with proper security settings, set up network access rules, and test the connection. Create separate database users for development and production environments."
+    },
+    {
+        type: "task",
+        title: "MongoDB Compass Mastery",
+        content: "Use MongoDB Compass to explore your database, create and edit documents visually, build complex queries using the GUI, analyze query performance, create indexes, and use the aggregation pipeline builder. Export your database schema analysis."
+    },
+
+    // Practical Tasks - Mongoose Basics
+    {
+        type: "task",
+        title: "Mongoose Connection Management",
+        content: "Implement a robust database connection module with connection pooling, proper error handling, reconnection logic, and graceful shutdown. Add connection state monitoring and environment-specific configurations."
+    },
+    {
+        type: "task", 
+        title: "Advanced Schema Design",
+        content: "Design and implement comprehensive Mongoose schemas for a social media application including users, posts, comments, and reactions. Add proper validation, virtual properties, instance/static methods, and middleware hooks."
+    },
+
+    // Practical Tasks - Mongoose CRUD
+    {
+        type: "task",
+        title: "Complete CRUD API Implementation",
+        content: "Build a complete REST API with full CRUD operations using Mongoose. Implement filtering, sorting, pagination, population of related data, and proper error handling. Add transaction support for complex operations."
+    },
+    {
+        type: "task",
+        title: "Advanced Query Building",
+        content: "Create advanced Mongoose queries including aggregation pipelines, text search, geospatial queries, and complex filtering. Implement query performance optimization and indexing strategies."
+    },
+
+    // Search & Research Tasks
+    {
+        type: "search-task",
+        title: "Research: Mongoose Performance Optimization",
+        content: "Research and document Mongoose performance optimization techniques including connection pooling, query optimization, indexing strategies, and memory management. Create performance benchmarks for different query patterns."
+    },
+    {
+        type: "search-task", 
+        title: "Research: MongoDB Best Practices",
+        content: "Research MongoDB best practices for schema design, indexing, aggregation pipelines, and data modeling. Compare different approaches for common use cases and create implementation guidelines."
+    },
+
+];    </script><script src="./assets/lecture.js"></script>
+</body>
+</html>

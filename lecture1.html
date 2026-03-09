@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focal X - Node.js Bootcamp: Lecture 1</title>
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="apple-touch-icon" href="./logo.jpg">
+    <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
+    <meta name="theme-color" content="#b21f1f">
+    <link rel="shortcut icon" href="./logo.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/lecture.css">
+</head>
+<body>
+    <div class="container">
+        <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
+        <header>
+            <h1 id="lecture-title">Focal X - Node.js Bootcamp</h1>
+            <p class="subtitle" id="lecture-subtitle">JavaScript Fundamentals: Variables, Data Types, and More</p>
+        </header>
+        
+        <div class="content">
+            <div class="lecture-content">
+                <h2>Lecture Content</h2>
+                <div id="tabs-container"></div>
+                <div id="tab-content-container"></div>
+            </div>
+            
+            <div class="interactive-section">
+                <h2>Interactive Questions & Tasks</h2>
+                <div id="questions-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
+    </footer>
+
+        <script src="./reg.js"></script>
+<script>
+        // ==================== CONFIGURATION ====================
+        // Update these arrays to change the content of your lecture
+
+        // ==================== CONFIGURATION ====================
+// Update these arrays to change the content of your lecture
+
+// Lecture metadata
+const lectureConfig = {
+    title: "Focal X V10 - Node.js Bootcamp",
+    subtitle: "Backend Concepts & API Theory"
+};
+
+// Lecture content organized by tabs
+const lectureContent = [
+    {
+        tabTitle: "What is Backend?",
+        title: "Backend Development Explained",
+        content: `// Backend Development: The "Server-Side" of Applications
+
+// Frontend (Client-Side)         Backend (Server-Side)
+// - What users see               - What users DON'T see
+// - User interface               - Business logic
+// - HTML, CSS, JavaScript        - Node.js, Python, Java, etc.
+// - Browser runs                 - Server runs
+
+// Backend Responsibilities:
+// 1. Data storage & management
+// 2. Business logic processing
+// 3. User authentication & authorization
+// 4. Server-side validation
+// 5. Communication with databases
+// 6. File handling & processing
+// 7. API creation & management
+
+// Example: Online Shopping
+// Frontend: Product images, buttons, forms
+// Backend: User accounts, payment processing, order tracking, inventory management
+
+console.log("Welcome to Backend Development!");`
+    },
+    {
+        tabTitle: "Client-Server",
+        title: "Client-Server Architecture",
+        content: `// Client-Server Model: The Foundation of Web
+
+// Client (Frontend)                  Server (Backend)
+// - Makes REQUESTS                    - Receives requests
+// - Browser, Mobile App, Postman      - Processes requests
+// - Displays data                     - Sends RESPONSES
+//                                      - Stores/retrieves data
+
+// Communication Flow:
+// 1. Client sends request → Server
+// 2. Server processes request
+// 3. Server sends response → Client
+// 4. Client displays response
+
+// Analogy: Restaurant
+// Customer (Client)   →   Waiter (API)   →   Kitchen (Server)
+
+// Types of Clients:
+// - Web browsers (Chrome, Firefox)
+// - Mobile apps (iOS, Android)
+// - Desktop applications
+// - IoT devices
+// - Other servers (microservices)
+
+// Types of Servers:
+// - Web servers (Apache, Nginx)
+// - Application servers (Node.js, Django)
+// - Database servers (MySQL, MongoDB)
+// - File servers
+
+console.log("Client: I need data!");
+console.log("Server: Here's your data!");`
+    },
+    {
+        tabTitle: "HTTP Protocol",
+        title: "HTTP - The Language of the Web",
+        content: `// HTTP (HyperText Transfer Protocol)
+// The foundation of data communication on the web
+
+// HTTP Methods (CRUD Operations):
+// GET    - Read data (Safe, Idempotent)
+// POST   - Create data (Not idempotent)
+// PUT    - Update/replace data (Idempotent)
+// PATCH  - Partial update (Not idempotent)
+// DELETE - Remove data (Idempotent)
+
+// HTTP Status Codes:
+// 1xx - Informational (100 Continue)
+// 2xx - Success (200 OK, 201 Created, 204 No Content)
+// 3xx - Redirection (301 Moved, 304 Not Modified)
+// 4xx - Client Error (400 Bad Request, 401 Unauthorized, 404 Not Found)
+// 5xx - Server Error (500 Internal Server Error, 502 Bad Gateway)
+
+// HTTP Request Structure:
+// GET /api/users HTTP/1.1
+// Host: api.example.com
+// Content-Type: application/json
+// Authorization: Bearer token123
+
+// HTTP Response Structure:
+// HTTP/1.1 200 OK
+// Content-Type: application/json
+// Date: Wed, 11 Dec 2024 10:00:00 GMT
+// 
+// {
+//   "data": "Hello World"
+// }
+
+// Key Headers:
+// - Content-Type: Format of data (JSON, HTML, XML)
+// - Authorization: Authentication tokens
+// - Accept: What client can accept
+// - User-Agent: Client information
+
+console.log("HTTP: The language servers and clients speak!");`
+    },
+    {
+        tabTitle: "What are APIs?",
+        title: "APIs Explained Simply",
+        content: `// API = Application Programming Interface
+
+// Simple Definition:
+// A set of rules that allows different software applications to communicate.
+
+// Restaurant Analogy:
+// Menu = API Documentation
+// Order = API Request
+// Food = API Response
+// Kitchen = Server/Business Logic
+
+// Real-World Examples:
+// 1. Weather App → Weather API → Gets weather data
+// 2. Payment App → Bank API → Processes payment
+// 3. Social Media App → Facebook API → Posts content
+
+// Types of APIs:
+// 1. Web APIs (HTTP APIs) - Most common for web
+// 2. Library APIs (SDKs) - Code libraries
+// 3. Operating System APIs - System functions
+// 4. Database APIs - Database access
+
+// Why APIs are Important:
+// - Enable software communication
+// - Allow building on existing services
+// - Facilitate microservices architecture
+// - Enable mobile app development
+// - Allow third-party integrations
+
+// Example API Request:
+// GET https://api.weather.com/forecast?city=Damascus
+
+// Example API Response:
+// {
+//   "city": "Damascus",
+//   "temperature": "22°C",
+//   "condition": "Sunny"
+// }
+
+console.log("APIs: The bridges between applications!");`
+    },
+    {
+    tabTitle: "APIs & HTTP Methods",
+    title: "Understanding APIs and Web Communication",
+    content: `# API: Application Programming Interface
+
+## What is an API?
+- Like a waiter in a restaurant: You (the application) give your order to the waiter (the API) who delivers it to the kitchen (the server) and brings back the result
+- A mediator for communication between different applications
+- A set of rules that govern how software programs communicate with each other
+
+## Backend Role (Server)
+The backend works like the kitchen in a restaurant:
+1. Receives requests - Like receiving customer orders
+2. Applies rules - Validates data and prevents errors
+3. Handles database - Stores and retrieves information
+4. Verifies identity - Checks user permissions for actions
+5. Sends results - Provides the requested data
+
+## Frontend Role (User Interface)
+The frontend works like the menu and ordering system:
+1. Displays data - Like showing the menu
+2. Sends user requests - Like ordering a specific meal
+3. Updates interface - Shows changes immediately
+4. Handles user interaction - Receives clicks and inputs
+
+# Request Components
+
+## Request Structure:
+Request Method + URL + Headers + Body (optional)
+
+### 1. HTTP Methods (Actions)
+GET - Retrieve data (like: asking for a menu)
+POST - Add new data (like: ordering a new meal)
+PUT - Update existing data (like: modifying an order)
+DELETE - Delete data (like: canceling an order)
+
+### 2. URL (Address)
+- Like a home address or table number in a restaurant
+- Specifies the location you want to access
+- Examples:
+  - \`/api/products\` - All products
+  - \`/api/products/1\` - Product number 1
+  - \`/api/products?category=electronics\` - Only electronics products
+
+### 3. Headers
+- Metadata about the request
+- Like additional instructions: "Meal for diabetic person", "Delivery required"
+- Examples:
+  - \`Content-Type\`: Data type (Arabic, English, JSON)
+  - \`Authorization\`: ID card or permission
+  - \`User-Agent\`: Type of device used
+
+### 4. Body
+- The actual data being sent
+- Like order details: "Large pizza, drink, salad"
+- Used with POST and PUT requests
+
+# Response Components
+
+## Response Structure:
+Status Code + Headers + Data
+
+### Response Examples:
+- Success: 200 - With product list
+- Created: 201 - With new product data
+- Error: 404 - Product not found
+- Permission Error: 401 - Login required
+
+# HTTP Methods Explained with Life Examples
+
+## GET - Read Data
+Like: Asking for a restaurant menu
+Request: "I want the menu"
+Response: Complete menu list
+
+## POST - Create New Data
+Like: Ordering a new meal
+Request: "I want a large pizza"
+Response: "Your order number 5 has been received"
+
+## PUT - Update Data
+Like: Modifying an order
+Request: "I want to change the pizza to medium"
+Response: "Order 5 has been modified"
+
+## DELETE - Delete Data
+Like: Canceling an order
+Request: "I want to cancel order 5"
+Response: "Order 5 has been canceled"
+
+# Status Codes
+
+## 100-199: Informational
+- Like: "Preparing", "Please wait"
+
+## 200-299: Success ✅
+- 200 OK - Operation completed successfully
+- 201 Created - New item created successfully
+- 204 No Content - Success but no content to return
+
+## 300-399: Redirects 🔄
+- 301 Moved - Content moved to another location
+- 304 Not Modified - Content hasn't changed (like using cached version)
+
+## 400-499: Client Errors ❌
+- 400 Bad Request - Request not understood (like: incomplete order)
+- 401 Unauthorized - Login required
+- 403 Forbidden - Access denied (like: employee trying to access manager data)
+- 404 Not Found - Content doesn't exist
+- 409 Conflict - Conflict (like: trying to register an existing email)
+
+## 500-599: Server Errors 🚨
+- 500 Internal Error - Server error (like: database malfunction)
+- 503 Service Unavailable - Service not available (like: maintenance)
+
+# Complete Life Example
+
+## Ordering from an Online Store:
+
+### 1. User Opens the Store (Frontend)
+- Displays product list (GET request)
+- Clicks "Add to Cart" (POST request)
+- Modifies quantity (PUT request)
+- Deletes product (DELETE request)
+
+### 2. The Store (Backend)
+- Receives requests and validates them
+- Checks product availability in inventory
+- Calculates final price
+- Sends order confirmation
+
+### 3. Communication Between Them:
+Frontend: "I want product number 123" (GET)
+Backend: "Here is product 123" (200)
+
+Frontend: "I want to buy product 123" (POST)
+Backend: "Operation completed successfully" (201)
+
+Frontend: "I want to cancel the order" (DELETE)
+Backend: "Order canceled" (200)
+
+# Summary
+APIs are the communication bridge between user interface and server, working like an ordering system in a restaurant where:
+- Frontend is the customer who places orders
+- API is the waiter who delivers orders
+- Backend is the kitchen that prepares orders
+
+Every request has a method (GET, POST, PUT, DELETE) and every response has a status (200, 404, 500) that tells us the operation result.`,
+table: {
+    headers: ["Aspect", "Headers", "Body"],
+    rows: [
+        ["Purpose", "Metadata about the request", "Actual data"],
+        ["Content", "Data type, permissions","Products, users, orders"],
+        ["Usage", "Present in every request", "Only when needed"],
+        ["Life Example", "Delivery instructions, meal type","The actual meal"]
+    ]
+}
+},
+      {
+        tabTitle: "JSON Format",
+        title: "JSON - JavaScript Object Notation",
+        content: `// JSON = JavaScript Object Notation
+// A lightweight data format for exchanging data
+
+// Why JSON?
+// - Human readable and writable
+// - Machine parsable
+// - Language independent
+// - Supported by all modern programming languages
+
+// JSON Syntax Rules:
+// - Data is in key/value pairs
+// - Keys must be strings (in double quotes)
+// - Values can be: string, number, object, array, boolean, null
+// - Data separated by commas
+// - Curly braces hold objects {}
+// - Square brackets hold arrays []
+
+// Valid JSON Example:
+{
+  "name": "Moones",
+  "age": 30,
+  "isInstructor": true,
+  "courses": ["Node.js", "JavaScript", "React"],
+  "address": {
+    "city": "Damascus",
+    "country": "Syria"
+  }
+}
+
+// Common Mistakes:
+// BAD:  { name: "Moones" }          // Keys need quotes
+// BAD:  { 'name': 'Moones' }        // Must use double quotes
+// BAD:  { "age": undefined }        // undefined not valid in JSON
+// GOOD: { "name": "Moones" }
+
+// Working with JSON in JavaScript:
+const user = {
+  name: "Moones",
+  age: 30
+};
+
+// Convert JavaScript object to JSON string
+const jsonString = JSON.stringify(user);
+console.log(jsonString); // '{"name":"Moones","age":30}'
+
+// Convert JSON string to JavaScript object
+const parsedObject = JSON.parse(jsonString);
+console.log(parsedObject.name); // 'Moones'
+
+// JSON vs JavaScript Object:
+// JSON (for data exchange)     JavaScript Object (for programming)
+// Keys in quotes               Keys without quotes OK
+// No functions                 Can have functions
+// No undefined                 Can have undefined
+// No comments                  Can have comments
+
+console.log("JSON: The universal language for data exchange!");`
+    },
+    {
+        tabTitle: "Middlewares",
+        title: "Middleware - The Processing Layer",
+        content: `// Middleware: Software that sits between client and server
+
+// Simple Analogy:
+// Request → Security Check (Middleware) → Processing → Response
+// Like airport security before boarding
+
+// What Middleware Does:
+// 1. Intercepts incoming requests
+// 2. Performs operations
+// 3. Passes request to next middleware/route
+// 4. Can modify request/response
+
+// Common Middleware Examples:
+// 1. Authentication (Is user logged in?)
+// 2. Logging (Log all requests)
+// 3. Validation (Check data format)
+// 4. Compression (Compress responses)
+// 5. CORS (Cross-Origin Resource Sharing)
+// 6. Rate Limiting (Prevent abuse)
+
+// Middleware Flow in Express.js:
+// Request → Middleware 1 → Middleware 2 → Route Handler → Response
+//        (Logging)      (Auth Check)     (Process Data)
+
+// Express.js Middleware Example:
+const express = require('express');
+const app = express();
+
+// Logger Middleware
+app.use((req, res, next) => {
+  console.log(\`\${req.method} \${req.url} - \${new Date()}\`);
+  next(); // Pass to next middleware
+});
+
+// Authentication Middleware
+app.use('/api', (req, res, next) => {
+  const token = req.headers.authorization;
+  if (!token) {
+    return res.status(401).json({ error: 'No token provided' });
+  }
+  next(); // User is authenticated
+});
+
+// Route Handler
+app.get('/api/users', (req, res) => {
+  res.json({ users: ['Moones', 'Ali', 'Sarah'] });
+});
+
+// Types of Middleware:
+// 1. Application-level (app.use())
+// 2. Router-level (router.use())
+// 3. Error-handling (app.use(err, req, res, next))
+// 4. Built-in (express.json(), express.static())
+// 5. Third-party (cors, helmet, morgan)
+
+// Why Use Middleware?
+// - Reusable code
+// - Separation of concerns
+// - Easier testing
+// - Better error handling
+// - Security enhancement
+
+console.log("Middleware: The gatekeepers and processors of your app!");`
+    },
+    {
+        tabTitle: "API Lifecycle",
+        title: "Complete API Request-Response Flow",
+        content: `// Complete Journey of an API Request:
+
+// 1. Client Makes Request
+// Browser/App → GET https://api.example.com/users
+
+// 2. DNS Resolution
+// api.example.com → 192.168.1.1
+
+// 3. Request Reaches Server
+// Server receives HTTP request
+
+// 4. Middleware Processing
+// - Security checks
+// - Authentication
+// - Logging
+// - Rate limiting
+
+// 5. Route Matching
+// GET /users → Users Controller
+
+// 6. Business Logic
+// - Validate data
+// - Process request
+// - Database operations
+
+// 7. Database Interaction
+// - Query database
+// - Get/update data
+
+// 8. Response Preparation
+// - Format data as JSON
+// - Set HTTP status
+// - Add headers
+
+// 9. Response Sent Back
+// Server → Client (JSON response)
+
+// 10. Client Processes Response
+// - Parse JSON
+// - Update UI
+// - Handle errors
+
+// Example Complete Flow:
+// 1. User clicks "Load Users" in app
+// 2. App sends: GET /api/users
+// 3. Server logs request
+// 4. Server checks authentication token
+// 5. Server queries database: SELECT * FROM users
+// 6. Database returns user list
+// 7. Server formats as JSON
+// 8. Server sends: 200 OK + JSON data
+// 9. App receives data and displays users
+
+// Tools for Testing APIs:
+// - Postman (API testing)
+// - cURL (Command line)
+// - Insomnia (Alternative to Postman)
+// - Browser DevTools (Network tab)
+
+console.log("API Flow: From request to response!");`
+    }
+];
+
+// Questions and tasks
+const questions = [
+    {
+        type: "question",
+        question: "What is the primary responsibility of backend development?",
+        options: [
+            "Creating user interfaces",
+            "Managing business logic and data",
+            "Designing website layouts",
+            "Writing CSS styles"
+        ],
+        correctIndex: 1
+    },
+    {
+        type: "question",
+        question: "In the client-server model, which component makes requests?",
+        options: [
+            "Server",
+            "Client",
+            "Database",
+            "Middleware"
+        ],
+        correctIndex: 1
+    },
+    {
+        type: "question",
+        question: "Which HTTP status code means 'Resource Created Successfully'?",
+        options: [
+            "200 OK",
+            "201 Created",
+            "404 Not Found",
+            "500 Internal Server Error"
+        ],
+        correctIndex: 1
+    },
+    {
+        type: "question",
+        question: "What does REST stand for in RESTful APIs?",
+        options: [
+            "Rapid Efficient System Transfer",
+            "Representational State Transfer",
+            "Relational Entity Structure Type",
+            "Remote Endpoint Service Technology"
+        ],
+        correctIndex: 1
+    },
+    {
+        type: "question",
+        question: "Which HTTP method should be used to retrieve data from a server?",
+        options: [
+            "POST",
+            "PUT",
+            "GET",
+            "DELETE"
+        ],
+        correctIndex: 2
+    },
+    {
+        type: "question",
+        question: "What is the main purpose of middleware in a web application?",
+        options: [
+            "To style the user interface",
+            "To intercept and process requests before they reach route handlers",
+            "To store data in the database",
+            "To write HTML code"
+        ],
+        correctIndex: 1
+    },
+    {
+        type: "search-task",
+        title: "Research: HTTP Methods",
+        content: "Research the differences between PUT and PATCH HTTP methods. When would you use each one? Provide examples of each."
+    },
+    {
+        type: "question",
+        question: "Which of these is a valid JSON format?",
+        code: `Option A: { name: "Moones", age: 30 }
+Option B: { "name": "Moones", "age": 30 }
+Option C: { 'name': 'Moones', 'age': 30 }
+Option D: name="Moones" age=30`,
+        options: [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+        ],
+        correctIndex: 1
+    },
+    {
+        type: "task",
+        title: "Client-Server Flow Diagram",
+        content: "Draw a simple diagram showing the client-server architecture flow. Label: Client, Server, Request, Response, Database, and Middleware."
+    },
+    {
+        type: "question",
+        question: "What is the purpose of the 'Content-Type' header in HTTP?",
+        options: [
+            "To authenticate the user",
+            "To specify the format of the data being sent",
+            "To track user sessions",
+            "To compress the response data"
+        ],
+        correctIndex: 1
+    },
+    {
+        type: "task",
+        title: "Real-World API Identification",
+        content: "Think of 3 real-world applications you use daily (like Facebook, WhatsApp, Uber). For each, identify: 1) What clients are used, 2) What backend APIs might be needed, 3) What data might be exchanged."
+    },
+    {
+        type: "question",
+        question: "In RESTful API design, what should endpoints use?",
+        options: [
+            "Verbs (like /getUsers, /createUser)",
+            "Nouns (like /users, /products)",
+            "Adjectives (like /active, /inactive)",
+            "Prepositions (like /with, /from)"
+        ],
+        correctIndex: 1
+    },
+    {
+        type: "task",
+        title: "Middleware Brainstorm",
+        content: "Imagine you're building an e-commerce API. List 5 different middleware functions you might need and what each would do (e.g., authentication middleware checks if user is logged in)."
+    }
+];
+
+    </script>
+    <script src="./assets/lecture.js"></script>
+</body>
+</html>

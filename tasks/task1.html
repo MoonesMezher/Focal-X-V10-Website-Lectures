@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 1: Employee Salary Calculator</title>
+    <link rel="manifest" href="../manifest.json" />
+    <link rel="apple-touch-icon" href="../logo.jpg">
+    <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
+    <meta name="theme-color" content="#b21f1f">
+    <link rel="shortcut icon" href="../logo.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/task.css">
+</head>
+<body>
+    <div class="container">
+        <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
+        <header>
+            <h1 id="title">Task 1: Employee Monthly Salary Calculator</h1>
+            <p class="subtitle" id="subtitle">Node.js program to calculate employee salary with taxes, bonuses, and deductions</p>
+            <button class="language-toggle" id="languageToggle">العربية / English</button>
+        </header>
+        
+        <div class="task-content" id="taskContent">
+            <!-- Content will be dynamically inserted here -->
+        </div>
+        
+        <div class="timer-section">
+            <h3 id="timer-title">Time Remaining to Complete Task</h3>
+            <div class="timer" id="timer">
+                <div class="timer-unit">
+                    <span class="timer-value" id="days">00</span>
+                    <span class="timer-label" id="days-label">Days</span>
+                </div>
+                <div class="timer-unit">
+                    <span class="timer-value" id="hours">00</span>
+                    <span class="timer-label" id="hours-label">Hours</span>
+                </div>
+                <div class="timer-unit">
+                    <span class="timer-value" id="minutes">00</span>
+                    <span class="timer-label" id="minutes-label">Minutes</span>
+                </div>
+                <div class="timer-unit">
+                    <span class="timer-value" id="seconds">00</span>
+                    <span class="timer-label" id="seconds-label">Seconds</span>
+                </div>
+            </div>
+            <p class="finish-date" id="finish-date">Finish by: September 13, 2025</p>
+            <p id="timer-message">Complete the task before the deadline!</p>
+        </div>
+        
+        <div class="thank-you" id="thankYou">
+            "Thank you for your hard work and dedication. Your efforts are appreciated!"
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>&copy; 2025 <a href="https://focal-x.com/" target="_blank">Focal X</a> - Node.js Bootcamp V10</p>
+    </div>
+
+        <script src="../reg.js"></script>
+<script>
+        // Content data structure
+        const taskData = {
+            en: {
+                title: "Task 1: Employee Monthly Salary Calculator",
+                subtitle: "Node.js program to calculate employee salary with taxes, bonuses, and deductions",
+                sections: [
+                    {
+                        type: "idea",
+                        title: "💻 The Task: \"Monthly Employee Salary Calculator\"",
+                        content: "A simple Node.js program that calculates the monthly salary of a single employee based on their monthly data, including taxes, bonuses, and deductions, and prints a formatted report of the output. The program handles only one employee at a time — no storage for multiple employees (since we don't want arrays)."
+                    },
+                    {
+                        type: "requirements",
+                        title: "📝 Requirements",
+                        content: [
+                            {
+                                type: "list",
+                                title: "Inputs (via readline from the terminal):",
+                                items: [
+                                    "Employee name (string)",
+                                    "Job title (string)",
+                                    "Base salary (number)",
+                                    "Overtime hours (number)",
+                                    "Monthly bonus (number)",
+                                    "Deduction (number)",
+                                    "Tax percentage (number)"
+                                ]
+                            },
+                            {
+                                type: "list",
+                                title: "Calculations (executed via functions):",
+                                items: [
+                                    "calculateOvertimePay(hours) → Each overtime hour = $5 (or any value)",
+                                    "calculateGrossSalary(baseSalary, overtime, bonus) → Sum of base salary + overtime + bonus",
+                                    "calculateTax(amount, taxPercent) → Tax percentage of the total",
+                                    "calculateNetSalary(gross, tax, deduction) → Gross - tax - deductions"
+                                ]
+                            },
+                            {
+                                type: "list",
+                                title: "Conditions:",
+                                items: [
+                                    "If the tax percentage is greater than 20 → Print a warning \"High tax rate\"",
+                                    "If the net salary is less than 1000 → Print an alert \"Low salary\"",
+                                    "If the bonus exceeds 500 → Print \"Exceptional bonus 🎉\""
+                                ]
+                            },
+                            {
+                                type: "output",
+                                title: "Report (Output):",
+                                content: "Print a formatted text report like:",
+                                example: `===============================
+Monthly Employee Salary Report
+===============================
+Name:           Ahmed Mohamed
+Job Title:      Accountant
+Base Salary:    1200
+Overtime:       4 hours (20$)
+Bonus:          200$
+Deductions:     50$
+Tax (10%):      142$
+-------------------------------
+Net Salary:     1228$
+===============================`
+                            }
+                        ]
+                    },
+                    {
+                        type: "learning",
+                        title: "🔎 Targeted Learning Points",
+                        content: [
+                            "Collecting user input and using it in programming logic",
+                            "Conditional branching (if/else) to change messages or add warnings",
+                            "Loops: Can be used to repeat input until a correct value is obtained (e.g., verifying that salary ≥ 0)",
+                            "Functions: Dividing calculations into small, clear functions that return a single value",
+                            "Text formatting (String concatenation or template literals) to display the report"
+                        ]
+                    },
+                ],
+                timer: {
+                    title: "Time Remaining to Complete Task",
+                    message: "Complete the task before the deadline! - Submissions must be made within the last six hours only.",
+                    days: "Days",
+                    hours: "Hours",
+                    minutes: "Minutes",
+                    seconds: "Seconds"
+                },
+                thankYou: "\"Thank you for your hard work and dedication. Your efforts are appreciated!\"",
+                buttonText: "العربية / English",
+                finishDate: "Finish by: September 13, 2025"
+            },
+            ar: {
+                title: "التاسـك 1: حاسبة رواتب الموظفين الشهرية",
+                subtitle: "برنامج Node.js لحساب راتب الموظف مع الضرائب والمكافآت والخصومات",
+                sections: [
+                    {
+                        type: "idea",
+                        title: "💻 التـاسـك: \"حاسبة رواتب الموظفين الشهرية\"",
+                        content: "برنامج Node.js بسيط يحسب راتب موظف واحد في الشركة بناءً على بياناته الشهرية، مع ضرائب، مكافآت، وخصومات، ويطبع تقريرًا منسّقًا للناتج. البرنامج يتعامل مع موظف واحد فقط في كل تشغيل — لا يوجد تخزين لمجموعة موظفين (إذ لا نريد مصفوفات)."
+                    },
+                    {
+                        type: "requirements",
+                        title: "📝 المتطلبات",
+                        content: [
+                            {
+                                type: "list",
+                                title: "المدخلات (input):",
+                                items: [
+                                    "اسم الموظف (string)",
+                                    "الوظيفة (string)",
+                                    "الراتب الأساسي (number)",
+                                    "عدد ساعات العمل الإضافية (number)",
+                                    "المكافأة الشهرية (number)",
+                                    "الخصم (number)",
+                                    "نسبة الضريبة (number)"
+                                ]
+                            },
+                            {
+                                type: "list",
+                                title: "الحسابات (يتم تنفيذها عبر دوال):",
+                                items: [
+                                    "calculateOvertimePay(hours) → كل ساعة إضافية = 5 دولار (أو أي قيمة)",
+                                    "calculateGrossSalary(baseSalary, overtime, bonus) → تجمع الراتب الأساسي + الإضافي + المكافأة",
+                                    "calculateTax(amount, taxPercent) → نسبة الضريبة من الإجمالي",
+                                    "calculateNetSalary(gross, tax, deduction) → الإجمالي - الضريبة - الخصومات"
+                                ]
+                            },
+                            {
+                                type: "list",
+                                title: "الشروط:",
+                                items: [
+                                    "إذا كانت نسبة الضريبة أكبر من 20 → اطبع تحذير \"نسبة الضريبة عالية\"",
+                                    "إذا كان الراتب الصافي أقل من 1000 → اطبع تنبيه \"الراتب منخفض\"",
+                                    "إذا تجاوزت المكافأة 500 → اطبع \"مكافأة استثنائية 🎉\""
+                                ]
+                            },
+                            {
+                                type: "output",
+                                title: "التقرير (Output):",
+                                content: "اطبع تقريرًا نصيًا منسّقًا مثل:",
+                                example: `===============================
+تقرير راتب الموظف الشهري
+===============================
+الاسم:           أحمد محمد
+الوظيفة:         محاسب
+الراتب الأساسي:  1200
+العمل الإضافي:   4 ساعة (20$)
+المكافأة:        200$
+الخصومات:        50$
+الضريبة (10%):   142$
+-------------------------------
+الراتب الصافي:   1228$
+===============================`
+                            }
+                        ]
+                    },
+                    {
+                        type: "learning",
+                        title: "🔎 النقاط المستهدفة في التعليم",
+                        content: [
+                            "جمع مدخلات المستخدم واستخدامها في منطق البرمجة",
+                            "التفرعات الشرطية (if/else) لتغيير الرسائل أو إضافة تحذيرات",
+                            "الحلقات: يمكن استخدامها لتكرار إدخال حتى يحصل على قيمة صحيحة (مثل التحقق أن الراتب ≥ 0)",
+                            "الدوال: تقسيم الحسابات إلى دوال صغيرة واضحة تعيد قيمة واحدة",
+                            "تنسيق النصوص (String concatenation أو template literals) لعرض التقرير"
+                        ]
+                    },
+                ],
+                timer: {
+                    title: "الوقت المتبقي لإكمال المهمة",
+                    message: "أكمل المهمة قبل الموعد النهائي! - التسليم حصراً في أخر ست ساعات فقط",
+                    days: "أيام",
+                    hours: "ساعات",
+                    minutes: "دقائق",
+                    seconds: "ثواني"
+                },
+                thankYou: "\"شكرًا لجهودك الجادة وتفانيك. نقدر جهودك!\"",
+                buttonText: "English / العربية",
+                finishDate: "تاريخ الانتهاء: 13 سبتمبر 2025"
+            }
+        };
+
+        // Render content based on language
+        function renderContent(lang) {
+            const data = taskData[lang];
+            const taskContent = document.getElementById('taskContent');
+            
+            // Update page title and subtitle
+            document.getElementById('title').textContent = data.title;
+            document.getElementById('subtitle').textContent = data.subtitle;
+            
+            // Update timer section
+            document.getElementById('timer-title').textContent = data.timer.title;
+            document.getElementById('timer-message').textContent = data.timer.message;
+            document.getElementById('days-label').textContent = data.timer.days;
+            document.getElementById('hours-label').textContent = data.timer.hours;
+            document.getElementById('minutes-label').textContent = data.timer.minutes;
+            document.getElementById('seconds-label').textContent = data.timer.seconds;
+            document.getElementById('finish-date').textContent = data.finishDate;
+            
+            // Update thank you message
+            document.getElementById('thankYou').textContent = data.thankYou;
+            
+            // Update button text
+            document.getElementById('languageToggle').textContent = data.buttonText;
+            
+            // Clear existing content
+            taskContent.innerHTML = '';
+            
+            // Render each section
+            data.sections.forEach(section => {
+                const sectionEl = document.createElement('div');
+                sectionEl.className = 'section';
+                
+                if (section.type === 'requirements') {
+                    sectionEl.classList.add('requirements');
+                } else if (section.type === 'bonus') {
+                    sectionEl.classList.add('bonus');
+                }
+                
+                const titleEl = document.createElement('h2');
+                titleEl.textContent = section.title;
+                sectionEl.appendChild(titleEl);
+                
+                if (section.type === 'idea' || section.type === 'note') {
+                    const contentEl = document.createElement('p');
+                    contentEl.textContent = section.content;
+                    sectionEl.appendChild(contentEl);
+                } else if (section.type === 'requirements') {
+                    section.content.forEach(item => {
+                        const itemTitle = document.createElement('h3');
+                        itemTitle.textContent = item.title;
+                        sectionEl.appendChild(itemTitle);
+                        
+                        if (item.type === 'list') {
+                            const listEl = document.createElement('ul');
+                            item.items.forEach(listItem => {
+                                const li = document.createElement('li');
+                                li.innerHTML = listItem;
+                                listEl.appendChild(li);
+                            });
+                            sectionEl.appendChild(listEl);
+                        } else if (item.type === 'output') {
+                            const contentEl = document.createElement('p');
+                            contentEl.textContent = item.content;
+                            sectionEl.appendChild(contentEl);
+                            
+                            const exampleEl = document.createElement('div');
+                            exampleEl.className = 'output-example';
+                            exampleEl.textContent = item.example;
+                            sectionEl.appendChild(exampleEl);
+                        }
+                    });
+                } else if (section.type === 'learning' || section.type === 'bonus') {
+                    const listEl = document.createElement('ul');
+                    section.content.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = item;
+                        listEl.appendChild(li);
+                    });
+                    sectionEl.appendChild(listEl);
+                }
+                
+                taskContent.appendChild(sectionEl);
+            });
+            
+            // Set text direction based on language
+            if (lang === 'ar') {
+                document.body.setAttribute('dir', 'rtl');
+                document.querySelectorAll('.section').forEach(section => {
+                    section.style.textAlign = 'right';
+                });
+            } else {
+                document.body.removeAttribute('dir');
+                document.querySelectorAll('.section').forEach(section => {
+                    section.style.textAlign = 'left';
+                });
+            }
+        }
+
+        // Timer functionality
+        function startCountdown() {
+            // Set the date we're counting down to (September 13, 2025)
+            const countDownDate = new Date("Sep 13, 2025 23:59:59").getTime();
+            
+            // Update the countdown every 1 second
+            const countdown = setInterval(() => {
+                // Get today's date and time
+                const now = new Date().getTime();
+                
+                // Find the distance between now and the countdown date
+                const distance = countDownDate - now;
+                
+                // If the countdown is over, write some text
+                if (distance < 0) {
+                    clearInterval(countdown);
+                    document.getElementById("days").textContent = "00";
+                    document.getElementById("hours").textContent = "00";
+                    document.getElementById("minutes").textContent = "00";
+                    document.getElementById("seconds").textContent = "00";
+                    return;
+                }
+                
+                // Time calculations for days, hours, minutes and seconds
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                // Display the results
+                document.getElementById("days").textContent = days.toString().padStart(2, '0');
+                document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
+                document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
+                document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
+            }, 1000);
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Render English content by default
+            renderContent('en');
+            
+            // Start the countdown timer
+            startCountdown();
+            
+            // Language toggle functionality
+            document.getElementById('languageToggle').addEventListener('click', function() {
+                const currentLang = document.body.getAttribute('dir') === 'rtl' ? 'ar' : 'en';
+                const newLang = currentLang === 'en' ? 'ar' : 'en';
+                renderContent(newLang);
+            });
+        });
+    </script>
+</body>
+</html>

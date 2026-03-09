@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 8: Task Management System API Design</title>
+    <link rel="manifest" href="../manifest.json" />
+    <link rel="apple-touch-icon" href="../logo.jpg">
+    <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
+    <meta name="theme-color" content="#b21f1f">
+    <link rel="shortcut icon" href="../logo.jpg" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin: 20px 0;
+        }
+
+        .coach {
+            background-color: white;
+            width: 80px;
+            border-radius: 0 0 50% 0;
+            color: black;
+            padding: 10px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 100;
+        }
+        
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        #title {
+            padding-top: 20px;
+        }
+
+        .language-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .language-toggle:hover {
+            background: #2980b9;
+        }
+
+        .task-content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        h3 {
+            color: #2980b9;
+            margin: 15px 0;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .requirements {
+            background: #e8f4fc;
+            border-left: 5px solid #3498db;
+        }
+
+        .bonus {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+        }
+
+        .output-example {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-family: monospace;
+            white-space: pre;
+            overflow: auto;
+            direction: ltr !important;
+            text-align: left !important;
+        }
+
+        .timer-section {
+            text-align: center;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+            margin-top: 30px;
+            border-radius: 10px;
+        }
+
+        .timer {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .timer-unit {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            min-width: 80px;
+        }
+
+        .timer-value {
+            font-size: 2.5rem;
+            display: block;
+        }
+
+        .timer-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            display: block;
+        }
+
+        .finish-date {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .thank-you {
+            text-align: center;
+            padding: 20px;
+            font-style: italic;
+            color: #6c757d;
+            border-top: 1px solid #dee2e6;
+            margin-top: 30px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+            width: 100%;
+            max-width: 1000px;
+            border-radius: 15px;
+        }
+
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .footer p {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .task-content {
+                padding: 15px;
+            }
+            
+            .language-toggle {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-bottom: 15px;
+                display: block;
+                width: 100%;
+            }
+            
+            .timer {
+                font-size: 1.5rem;
+                flex-wrap: wrap;
+            }
+            
+            .timer-unit {
+                min-width: 70px;
+            }
+            
+            .timer-value {
+                font-size: 2rem;
+            }
+        }
+        
+        .typescript-feature {
+            background: #f0f8ff;
+            border-left: 5px solid #3178c6;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .code-comparison {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .code-comparison > div {
+            flex: 1;
+        }
+        
+        .js-code {
+            border-left: 3px solid #f7df1e;
+        }
+        
+        .ts-code {
+            border-left: 3px solid #3178c6;
+        }
+        
+        @media (max-width: 768px) {
+            .code-comparison {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
+        <header>
+            <h1 id="title">Task 8: Task Management System API Design</h1>
+            <p class="subtitle" id="subtitle">Create a complete Express.js server with MongoDB integration, middleware, and CRUD operations for movies and genres.</p>
+            <button class="language-toggle" id="languageToggle">العربية / English</button>
+        </header>
+        
+        <div class="task-content" id="taskContent">
+            <!-- Content will be dynamically inserted here -->
+        </div>
+        
+        <div class="timer-section">
+            <h3 id="timer-title">Time Remaining to Complete Task</h3>
+            <div class="timer" id="timer">
+                <div class="timer-unit">
+                    <span class="timer-value" id="days">00</span>
+                    <span class="timer-label" id="days-label">Days</span>
+                </div>
+                <div class="timer-unit">
+                    <span class="timer-value" id="hours">00</span>
+                    <span class="timer-label" id="hours-label">Hours</span>
+                </div>
+                <div class="timer-unit">
+                    <span class="timer-value" id="minutes">00</span>
+                    <span class="timer-label" id="minutes-label">Minutes</span>
+                </div>
+                <div class="timer-unit">
+                    <span class="timer-value" id="seconds">00</span>
+                    <span class="timer-label" id="seconds-label">Seconds</span>
+                </div>
+            </div>
+            <p class="finish-date" id="finish-date">Finish by: November 22, 2025</p>
+            <p id="timer-message">Complete the task before the deadline!</p>
+        </div>
+        
+        <div class="thank-you" id="thankYou">
+            "Thank you for your hard work and dedication. Your efforts are appreciated!"
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>&copy; 2025 <a href="https://focal-x.com/" target="_blank">Focal X</a> - Node.js Bootcamp V10</p>
+    </div>
+
+        <script src="../reg.js"></script>
+<script>
+        // Content data structure
+const taskData = {
+    en: {
+        title: "Task 8: Task Management System API Design",
+        subtitle: "Analyze user stories to determine required APIs and propose project structure without writing code",
+        sections: [
+            {
+                type: "idea",
+                title: "💡 Task 8: \"Task Management System API Design\"",
+                content: "Design a complete backend system for a task management application that helps users organize their daily tasks, projects, and collaborate with team members."
+            },
+            {
+                type: "requirements",
+                title: "📋 Project Requirements",
+                content: [
+                    {
+                        type: "list",
+                        title: "System Story:",
+                        items: [
+                            "A startup wants to build a collaborative task management platform",
+                            "Users should be able to create personal accounts and manage their tasks",
+                            "Users can create projects and invite team members to collaborate",
+                            "Tasks can be assigned to different team members with due dates",
+                            "Users should receive notifications for task assignments and deadlines",
+                            "The system should track task progress and provide basic analytics"
+                        ]
+                    },
+                    {
+                        type: "list",
+                        title: "User Stories:",
+                        items: [
+                            "As a new user, I want to create an account so I can start managing my tasks",
+                            "As a user, I want to login to access my tasks and projects",
+                            "As a user, I want to create personal tasks with due dates and priorities",
+                            "As a user, I want to organize my tasks into different projects",
+                            "As a project owner, I want to invite team members to my project",
+                            "As a team member, I want to see all tasks assigned to me",
+                            "As a user, I want to update task status (todo, in progress, done)",
+                            "As a user, I want to set reminders for important tasks",
+                            "As a user, I want to search and filter my tasks",
+                            "As a user, I want to see my task completion statistics"
+                        ]
+                    },
+                    {
+                        type: "list",
+                        title: "What Students Should Design in README.md:",
+                        items: [
+                            "Project Structure: Complete folder organization and file structure",
+                            "Required Libraries: All Node.js packages with explanations why each is needed",
+                            "Database Models: All Mongoose schemas with fields, data types, and relationships",
+                            "API Endpoints: All required APIs with detailed documentation following the format below",
+                            "Middleware: All custom middleware functions with their purposes",
+                            "Authentication: JWT implementation strategy and protected routes",
+                            "Error Handling: Comprehensive error scenarios and handling approaches"
+                        ]
+                    },
+                    {
+                        type: "output",
+                        title: "API Documentation Format Example:",
+                        content: "For each API endpoint, use this exact format:",
+                        example: `## POST /api/auth/register
+- Method: POST
+- Description: Create a new user account
+- Authentication: Not required
+- Request Body: 
+  - name (string, required)
+  - email (string, required, must be unique)
+  - password (string, required, minimum 6 characters)
+- Response Success (200): 
+  { success: true, message: "User registered successfully", data: { user: {...}, token: "..." } }
+- Response Errors:
+  - 400: { success: false, error: "Email already exists" }
+  - 400: { success: false, error: "Password must be at least 6 characters" }
+  - 400: { success: false, error: "All fields are required" }
+- Potential User Mistakes:
+  - Submitting without filling all required fields
+  - Using an email that already exists
+  - Entering a weak password
+
+## GET /api/tasks
+- Method: GET
+- Description: Get all tasks for the logged-in user
+- Authentication: Required (JWT token in header)
+- Query Parameters:
+  - status (string: 'todo', 'in progress', 'done')
+  - project (string: project ID)
+  - search (string: search in task title)
+- Response Success (200):
+  { success: true, data: [{ task1 }, { task2 }, ...] }
+- Response Errors:
+  - 401: { success: false, error: "Authentication required" }
+  - 500: { success: false, error: "Server error" }
+- Potential User Mistakes:
+  - Forgetting to include authentication token
+  - Using invalid status filter
+  - Searching with empty query`
+                    }
+                ]
+            },
+            {
+                type: "learning",
+                title: "📚 Technical Areas to Research",
+                content: [
+                    "JWT Authentication flow and implementation",
+                    "MongoDB relationships and data modeling",
+                    "Express.js middleware and routing",
+                    "Mongoose schema design and population",
+                    "RESTful API best practices",
+                    "Password security with bcrypt",
+                    "Error handling patterns in Node.js",
+                    "API validation and sanitization"
+                ]
+            }
+        ],
+        timer: {
+            title: "Time Remaining to Complete Task",
+            message: "Complete the task before the deadline!",
+            days: "Days",
+            hours: "Hours",
+            minutes: "Minutes",
+            seconds: "Seconds"
+        },
+        thankYou: "\"Think creatively and design a system that solves real user problems!\"",
+        buttonText: "العربية / English",
+        finishDate: "Finish by: November 22, 2025"
+    },
+    ar: {
+        title: "المهمة 8: تصميم واجهات برمجة نظام إدارة المهام",
+        subtitle: "حلل قصص المستخدم لتحديد واجهات برمجة التطبيقات المطلوبة واقترح بنية المشروع دون كتابة كود",
+        sections: [
+            {
+                type: "idea",
+                title: "💡 المهمة 8: \"تصميم واجهات برمجة نظام إدارة المهام\"",
+                content: "صمم نظام backend كاملاً لتطبيق إدارة المهام يساعد المستخدمين في تنظيم مهامهم اليومية، مشاريعهم، والتعاون مع أعضاء الفريق."
+            },
+            {
+                type: "requirements",
+                title: "📋 متطلبات المشروع",
+                content: [
+                    {
+                        type: "list",
+                        title: "قصة النظام:",
+                        items: [
+                            "تريد شركة ناشئة بناء منصة تعاونية لإدارة المهام",
+                            "يجب أن يتمكن المستخدمون من إنشاء حسابات شخصية وإدارة مهامهم",
+                            "يمكن للمستخدمين إنشاء مشاريع ودعوة أعضاء الفريق للتعاون",
+                            "يمكن تعيين المهام لأعضاء فريق مختلفين مع تواريخ استحقاق",
+                            "يجب أن يتلقى المستخدمون إشعارات لتكليفات المهام والمواعيد النهائية",
+                            "يجب على النظام تتبع تقدم المهام وتقديم تحليلات أساسية"
+                        ]
+                    },
+                    {
+                        type: "list",
+                        title: "قصص المستخدم:",
+                        items: [
+                            "كمستخدم جديد، أريد إنشاء حساب حتى أتمكن من البدء في إدارة مهامي",
+                            "كمستخدم، أريد تسجيل الدخول للوصول إلى مهامي ومشاريعي",
+                            "كمستخدم، أريد إنشاء مهام شخصية مع تواريخ استحقاق وأولويات",
+                            "كمستخدم، أريد تنظيم مهامي في مشاريع مختلفة",
+                            "كمالك مشروع، أريد دعوة أعضاء الفريق إلى مشروعي",
+                            "كعضو في الفريق، أريد رؤية جميع المهام المسندة إلي",
+                            "كمستخدم، أريد تحديث حالة المهمة (قيد الانتظار، قيد التنفيذ، مكتملة)",
+                            "كمستخدم، أريد تعيين تذكيرات للمهام المهمة",
+                            "كمستخدم، أريد البحث عن مهامي وتصفيتها",
+                            "كمستخدم، أريد رؤية إحصائيات إكمال مهامي"
+                        ]
+                    },
+                    {
+                        type: "list",
+                        title: "ما يجب على الطلاب تصميمه في README.md:",
+                        items: [
+                            "هيكل المشروع: تنظيم المجلدات الكامل وبنية الملفات",
+                            "المكتبات المطلوبة: جميع حزم Node.js مع توضيح سبب الحاجة لكل منها",
+                            "نماذج قاعدة البيانات: جميع مخططات Mongoose مع الحقول، أنواع البيانات، والعلاقات",
+                            "واجهات برمجة التطبيقات: جميع واجهات API المطلوبة مع توثيق مفصل حسب التنسيق أدناه",
+                            "الـ Middleware: جميع دوال الـ middleware المخصصة مع أغراضها",
+                            "المصادقة: استراتيجية تنفيذ JWT والمسارات المحمية",
+                            "معالجة الأخطاء: سيناريوهات الأخطاء الشاملة وطرق المعالجة"
+                        ]
+                    },
+                    {
+                        type: "output",
+                        title: "مثال على تنسيق توثيق API:",
+                        content: "لكل نقطة طرفية في API، استخدم هذا التنسيق بالضبط:",
+                        example: `## POST /api/auth/register
+- الأسلوب: POST
+- الوصف: إنشاء حساب مستخدم جديد
+- المصادقة: غير مطلوبة
+- جسم الطلب: 
+  - name (نص, مطلوب)
+  - email (نص, مطلوب, يجب أن يكون فريداً)
+  - password (نص, مطلوب, 6 أحرف على الأقل)
+- رد النجاح (200): 
+  { success: true, message: "تم تسجيل المستخدم بنجاح", data: { user: {...}, token: "..." } }
+- ردود الأخطاء:
+  - 400: { success: false, error: "البريد الإلكتروني موجود مسبقاً" }
+  - 400: { success: false, error: "كلمة المرور يجب أن تكون 6 أحرف على الأقل" }
+  - 400: { success: false, error: "جميع الحقول مطلوبة" }
+- أخطاء المستخدم المحتملة:
+  - الإرسال دون ملء جميع الحقول المطلوبة
+  - استخدام بريد إلكتروني موجود مسبقاً
+  - إدخال كلمة مرور ضعيفة
+
+## GET /api/tasks
+- الأسلوب: GET
+- الوصف: جلب جميع مهام المستخدم المسجل الدخول
+- المصادقة: مطلوبة (رمز JWT في الهيدر)
+- معاملات البحث:
+  - status (نص: 'todo', 'in progress', 'done')
+  - project (نص: معرّف المشروع)
+  - search (نص: البحث في عنوان المهمة)
+- رد النجاح (200):
+  { success: true, data: [{ task1 }, { task2 }, ...] }
+- ردود الأخطاء:
+  - 401: { success: false, error: "المصادقة مطلوبة" }
+  - 500: { success: false, error: "خطأ في الخادم" }
+- أخطاء المستخدم المحتملة:
+  - نسيان تضمين رمز المصادقة
+  - استخدام عامل تصفية حالة غير صالح
+  - البحث باستعلام فارغ`
+                    }
+                ]
+            },
+            {
+                type: "learning",
+                title: "📚 المجالات التقنية للبحث",
+                content: [
+                    "تدفق مصادقة JWT وتنفيذها",
+                    "علاقات MongoDB ونمذجة البيانات",
+                    "الـ Middleware والتوجيه في Express.js",
+                    "تصميم مخطط Mongoose والتعبئة",
+                    "أفضل ممارسات RESTful API",
+                    "أمان كلمة المرور باستخدام bcrypt",
+                    "أنماط معالجة الأخطاء في Node.js",
+                    "التحقق من صحة API والتطهير"
+                ]
+            }
+        ],
+        timer: {
+            title: "الوقت المتبقي لإكمال المهمة",
+            message: "أكمل المهمة قبل الموعد النهائي!",
+            days: "أيام",
+            hours: "ساعات",
+            minutes: "دقائق",
+            seconds: "ثواني"
+        },
+        thankYou: "\"فكر بشكل إبداعي وصمم نظامًا يحل مشاكل المستخدم الحقيقية!\"",
+        buttonText: "English / العربية",
+        finishDate: "الانتهاء بحلول: 22 نوفمبر 2025"
+    }
+};
+
+function renderContent(lang) {
+            const data = taskData[lang];
+            const taskContent = document.getElementById('taskContent');
+            
+            // Update page title and subtitle
+            document.getElementById('title').textContent = data.title;
+            document.getElementById('subtitle').textContent = data.subtitle;
+            
+            // Update timer section
+            document.getElementById('timer-title').textContent = data.timer.title;
+            document.getElementById('timer-message').textContent = data.timer.message;
+            document.getElementById('days-label').textContent = data.timer.days;
+            document.getElementById('hours-label').textContent = data.timer.hours;
+            document.getElementById('minutes-label').textContent = data.timer.minutes;
+            document.getElementById('seconds-label').textContent = data.timer.seconds;
+            document.getElementById('finish-date').textContent = data.finishDate;
+            
+            // Update thank you message
+            document.getElementById('thankYou').textContent = data.thankYou;
+            
+            // Update button text
+            document.getElementById('languageToggle').textContent = data.buttonText;
+            
+            // Clear existing content
+            taskContent.innerHTML = '';
+            
+            // Render each section
+            data.sections.forEach(section => {
+                const sectionEl = document.createElement('div');
+                sectionEl.className = 'section';
+                
+                if (section.type === 'requirements') {
+                    sectionEl.classList.add('requirements');
+                } else if (section.type === 'bonus') {
+                    sectionEl.classList.add('bonus');
+                }
+                
+                const titleEl = document.createElement('h2');
+                titleEl.textContent = section.title;
+                sectionEl.appendChild(titleEl);
+                
+                if (section.type === 'idea' || section.type === 'note') {
+                    const contentEl = document.createElement('p');
+                    contentEl.textContent = section.content;
+                    sectionEl.appendChild(contentEl);
+                } else if (section.type === 'requirements') {
+                    section.content.forEach(item => {
+                        const itemTitle = document.createElement('h3');
+                        itemTitle.textContent = item.title;
+                        sectionEl.appendChild(itemTitle);
+                        
+                        if (item.type === 'list') {
+                            const listEl = document.createElement('ul');
+                            item.items.forEach(listItem => {
+                                const li = document.createElement('li');
+                                li.innerHTML = listItem;
+                                listEl.appendChild(li);
+                            });
+                            sectionEl.appendChild(listEl);
+                        } else if (item.type === 'output') {
+                            const contentEl = document.createElement('p');
+                            contentEl.textContent = item.content;
+                            sectionEl.appendChild(contentEl);
+                            
+                            const exampleEl = document.createElement('div');
+                            exampleEl.className = 'output-example';
+                            exampleEl.textContent = item.example;
+                            sectionEl.appendChild(exampleEl);
+                        }
+                    });
+                } else if (section.type === 'learning' || section.type === 'bonus') {
+                    const listEl = document.createElement('ul');
+                    section.content.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = item;
+                        listEl.appendChild(li);
+                    });
+                    sectionEl.appendChild(listEl);
+                }
+                
+                taskContent.appendChild(sectionEl);
+            });
+            
+            // Set text direction based on language
+            if (lang === 'ar') {
+                document.body.setAttribute('dir', 'rtl');
+                document.querySelectorAll('.section').forEach(section => {
+                    section.style.textAlign = 'right';
+                });
+            } else {
+                document.body.removeAttribute('dir');
+                document.querySelectorAll('.section').forEach(section => {
+                    section.style.textAlign = 'left';
+                });
+            }
+        }
+
+        // Timer functionality
+        function startCountdown() {
+            // Set the date we're counting down to (September 27, 2025)
+            const countDownDate = new Date("Nov 22, 2025 23:59:59").getTime();
+            
+            // Update the countdown every 1 second
+            const countdown = setInterval(() => {
+                // Get today's date and time
+                const now = new Date().getTime();
+                
+                // Find the distance between now and the countdown date
+                const distance = countDownDate - now;
+                
+                // If the countdown is over, write some text
+                if (distance < 0) {
+                    clearInterval(countdown);
+                    document.getElementById("days").textContent = "00";
+                    document.getElementById("hours").textContent = "00";
+                    document.getElementById("minutes").textContent = "00";
+                    document.getElementById("seconds").textContent = "00";
+                    return;
+                }
+                
+                // Time calculations for days, hours, minutes and seconds
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                // Display the results
+                document.getElementById("days").textContent = days.toString().padStart(2, '0');
+                document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
+                document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
+                document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
+            }, 1000);
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Render English content by default
+            renderContent('en');
+            
+            // Start the countdown timer
+            startCountdown();
+            
+            // Language toggle functionality
+            document.getElementById('languageToggle').addEventListener('click', function() {
+                const currentLang = document.body.getAttribute('dir') === 'rtl' ? 'ar' : 'en';
+                const newLang = currentLang === 'en' ? 'ar' : 'en';
+                renderContent(newLang);
+            });
+        });
+    </script>
+</body>
+</html>

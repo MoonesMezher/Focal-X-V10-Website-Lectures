@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focal X - Node.js Bootcamp: Lecture 24 </title>
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="apple-touch-icon" href="./logo.jpg">
+    <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
+    <meta name="theme-color" content="#b21f1f">
+    <link rel="stylesheet" href="./assets/lecture.css">
+</head>
+<body>
+    <div class="container">
+        <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
+        <header>
+            <h1 id="lecture-title">Focal X - Node.js Bootcamp</h1>
+            <p class="subtitle" id="lecture-subtitle">Node</p>
+        </header>
+        
+        <div class="content">
+            <div class="lecture-content">
+                <h2>Lecture Content</h2>
+                <div id="tabs-container"></div>
+                <div id="tab-content-container"></div>
+            </div>
+            
+            <div class="interactive-section">
+                <h2>Interactive Questions & Tasks</h2>
+                <div id="questions-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
+    </footer>
+
+        <script src="./reg.js"></script>
+<script>
+        // ==================== CONFIGURATION ====================
+        // Update these arrays to change the content of your lecture
+        
+        // Lecture metadata
+        const lectureConfig = {
+            title: "Focal X - Node.js Bootcamp",
+            subtitle: "Authentication & Authorization"
+        };
+        
+       // Lecture content organized by tabs
+const lectureContent = [
+    {
+        tabTitle: "Last Lesson",
+        title: "Last Lesson Recap",
+        content: `/*
+1- Populate
+2- Pagination
+3- Statics 
+4- Plugins
+*/`
+    },
+    {
+        tabTitle: "Auth Fundamentals",
+        title: "Authentication & Authorization Fundamentals",
+        content: `// ###################### AUTHENTICATION vs AUTHORIZATION ##############################
+
+/*
+1. Authentication (Who are you?)
+   - Verifying user identity
+   - Examples: Username/password, Social login, Biometrics
+   - Answers: "Is this person who they claim to be?"
+
+2. Authorization (What can you do?)
+   - Checking permissions after authentication
+   - Examples: Role-based access, Permission levels
+   - Answers: "What is this person allowed to do?"
+
+3. Real-world Analogy:
+   - Hotel Key Card System:
+     • Authentication: Checking your ID at front desk
+     • Authorization: Your key card only opens your room, not others
+*/
+
+// ###################### MODERN AUTHENTICATION CONCEPTS ##############################
+
+/*
+Authentication Methods:
+• Password-based (traditional)
+• Multi-factor (MFA/2FA)
+• Social OAuth (Google, GitHub, Facebook)
+• Biometric (Face ID, Fingerprint)
+• Passwordless (Magic links, WebAuthn)
+• Single Sign-On (SSO)
+
+Authorization Models:
+• Role-Based Access Control (RBAC)
+• Permission-based systems
+• Scope-based access (OAuth2)
+• Attribute-Based Access Control (ABAC)
+*/
+
+// ###################### AUTH FLOW OVERVIEW ##############################
+
+/*
+Modern Authentication Flow:
+
+1. Registration/Login → Credentials verification
+2. Multi-factor authentication (if enabled)
+3. Token generation (Access + Refresh tokens)
+4. Secure token storage (HTTP-only cookies)
+5. Automatic token inclusion in requests
+6. Token validation + permission checks
+7. Token refresh mechanism
+
+    Client          Server          Database
+    |                |                |
+    |── Login ──────>│                |
+    │                │← Verify Creds →│
+    │                │← Check MFA ───>│
+    │                │← Generate JWT ─│
+    │← Set Cookies ──│                │
+    │                │                │
+    │── API Request →│                │
+    │ (Auto cookie)  │← Verify JWT ──>│
+    │                │← Check RBAC ──>│
+    │←── Response ───│                │
+*/
+
+// ###################### WHY BEARER TOKENS? ##############################
+
+/*
+Bearer Token Standard: Authorization: Bearer <token>
+
+Why use "Bearer" prefix?
+1. Standard Convention - RFC 6750
+2. Clear Identification - Differentiates from other auth schemes
+3. Security Best Practice - Prevents confusion with other token types
+4. Framework Compatibility - Understood by all modern frameworks
+
+Examples of other schemes:
+• Basic: Authorization: Basic base64(username:password)
+• Digest: More secure than Basic
+• API Key: Authorization: Api-Key xxx
+*/
+
+// ###################### COOKIES VS LOCALSTORAGE ##############################
+
+/*
+Security Comparison:
+
+HTTP-Only Cookies (Recommended):
+✅ Automatic sending with requests
+✅ Protected from XSS (JavaScript can't access)
+✅ Secure, SameSite options available
+✅ Proper expiration management
+❌ Requires CSRF protection
+❌ Slightly more complex setup
+
+LocalStorage (Not Recommended for tokens):
+✅ Simple to implement
+✅ Large storage capacity
+❌ Vulnerable to XSS attacks
+❌ Manual token attachment required
+❌ No built-in security features
+
+Best Practice: Use HTTP-only cookies for tokens in production.`
+    },
+    {
+        tabTitle: "JWT Deep Dive",
+        title: "JWT Tokens & Implementation",
+        content: `// ###################### JWT DEEP DIVE ##############################
+
+/*
+JWT Structure: Header.Payload.Signature
+
+1. Header (Base64Url encoded):
+   {
+     "alg": "HS256",     // Algorithm
+     "typ": "JWT"        // Token type
+   }
+
+2. Payload (Base64Url encoded):
+   {
+     "sub": "1234567890",  // Subject (user ID)
+     "name": "John Doe",   // Custom claims
+     "role": "admin",      // Custom claims
+     "iat": 1516239022,   // Issued at
+     "exp": 1516242622    // Expiration time
+   }
+
+3. Signature:
+   HMACSHA256(
+     base64UrlEncode(header) + "." +
+     base64UrlEncode(payload),
+     secret-key
+   )
+*/
+
+// ###################### JWT IMPLEMENTATION ##############################
+
+const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+
+// Secure JWT configuration
+const JWT_CONFIG = {
+    accessTokenSecret: process.env.JWT_ACCESS_SECRET || crypto.randomBytes(64).toString('hex'),
+    refreshTokenSecret: process.env.JWT_REFRESH_SECRET || crypto.randomBytes(64).toString('hex'),
+    accessTokenExpiry: '15m',    // Short-lived for security
+    refreshTokenExpiry: '7d',    // Longer-lived for convenience
+    issuer: 'your-app-name',
+    audience: 'your-app-users'
+};
+
+// Token service with enhanced security
+const tokenService = {
+    generateAccessToken(payload) {
+        return jwt.sign(
+            {
+                ...payload,
+                type: 'access',
+                jti: crypto.randomUUID() // Unique token ID for revocation
+            },
+            JWT_CONFIG.accessTokenSecret,
+            {
+                expiresIn: JWT_CONFIG.accessTokenExpiry,
+                issuer: JWT_CONFIG.issuer,
+                audience: JWT_CONFIG.audience
+            }
+        );
+    },
+
+    generateRefreshToken(payload) {
+        return jwt.sign(
+            {
+                ...payload,
+                type: 'refresh',
+                jti: crypto.randomUUID()
+            },
+            JWT_CONFIG.refreshTokenSecret,
+            {
+                expiresIn: JWT_CONFIG.refreshTokenExpiry,
+                issuer: JWT_CONFIG.issuer,
+                audience: JWT_CONFIG.audience
+            }
+        );
+    },
+
+    verifyAccessToken(token) {
+        try {
+            return jwt.verify(token, JWT_CONFIG.accessTokenSecret, {
+                issuer: JWT_CONFIG.issuer,
+                audience: JWT_CONFIG.audience
+            });
+        } catch (error) {
+            if (error.name === 'TokenExpiredError') {
+                throw new Error('Access token expired');
+            }
+            if (error.name === 'JsonWebTokenError') {
+                throw new Error('Invalid access token');
+            }
+            throw new Error('Token verification failed');
+        }
+    },
+
+    verifyRefreshToken(token) {
+        try {
+            return jwt.verify(token, JWT_CONFIG.refreshTokenSecret, {
+                issuer: JWT_CONFIG.issuer,
+                audience: JWT_CONFIG.audience
+            });
+        } catch (error) {
+            throw new Error('Invalid or expired refresh token');
+        }
+    },
+
+    decodeTokenWithoutVerification(token) {
+        // Only for debugging - doesn't verify signature
+        return jwt.decode(token);
+    }
+};
+
+// ###################### PASSWORD SECURITY ##############################
+Hashing vs Encryption - Key Difference:
+- Hashing: One-way function (cannot be reversed)
+
+- Encryption: Two-way function (can be decrypted with key)
+
+=> Passwords should always be HASHED, never encrypted.
+
+=> There are many Hashing algorithms but Argon2 is the current winner of the Password Hashing 
+Competition and is considered the most secure option for modern applications.
+
+const bcrypt = require('bcryptjs');
+
+const passwordService = {
+    async hashPassword(password) {
+        const saltRounds = 12; // Modern standard (was 10 previously)
+        return await bcrypt.hash(password, saltRounds);
+    },
+
+    async verifyPassword(password, hashedPassword) {
+        return await bcrypt.compare(password, hashedPassword);
+    },
+
+    validatePasswordStrength(password) {
+        const minLength = 8;
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasLowerCase = /[a-z]/.test(password);
+        const hasNumbers = /\d/.test(password);
+        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+        if (password.length < minLength) {
+            throw new Error('Password must be at least 8 characters long');
+        }
+        if (!hasUpperCase || !hasLowerCase) {
+            throw new Error('Password must contain both uppercase and lowercase letters');
+        }
+        if (!hasNumbers) {
+            throw new Error('Password must contain at least one number');
+        }
+        if (!hasSpecialChar) {
+            throw new Error('Password must contain at least one special character');
+        }
+
+        return true;
+    }
+};
+
+// ###################### TOKEN TYPES & USAGE ##############################
+
+/*
+Access Token:
+• Short-lived (15-30 minutes)
+• Contains user identity and permissions
+• Used for API access
+• Sent with every request
+
+Refresh Token:
+• Long-lived (7-30 days)
+• Used only to get new access tokens
+• Stored securely (HTTP-only cookie)
+• Can be revoked if compromised
+
+Why two tokens?
+• Security: Short access tokens limit exposure
+• User Experience: Don't need to login frequently
+• Control: Can revoke refresh tokens without changing password
+*/
+
+// Example token payloads
+const accessTokenPayload = {
+    id: '507f1f77bcf86cd799439011',
+    email: 'user@example.com',
+    role: 'user',
+    permissions: ['read:profile', 'write:posts'],
+    iat: Math.floor(Date.now() / 1000),
+    exp: Math.floor(Date.now() / 1000) + (15 * 60), // 15 minutes
+    jti: 'unique-token-id-123',
+    type: 'access'
+};
+
+const refreshTokenPayload = {
+    id: '507f1f77bcf86cd799439011',
+    iat: Math.floor(Date.now() / 1000),
+    exp: Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60), // 7 days
+    jti: 'unique-refresh-token-456',
+    type: 'refresh'
+};`
+    },
+    {
+        tabTitle: "Cookie Security",
+        title: "Secure Cookie Management & Sessions",
+        content: `// ###################### COOKIE SECURITY CONFIGURATION ##############################
+
+const cookieParser = require('cookie-parser');
+
+// Initialize cookie parser middleware
+app.use(cookieParser());
+
+// Secure cookie configuration
+const cookieConfig = {
+    httpOnly: true,        // Prevent XSS attacks - JavaScript cannot access
+    secure: process.env.NODE_ENV === 'production', // HTTPS only in production
+    sameSite: 'strict',    // CSRF protection - 'strict', 'lax', or 'none'
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days for refresh token
+    path: '/',             // Available across the entire app
+    domain: process.env.COOKIE_DOMAIN || undefined // Specify domain if needed
+};
+
+const accessTokenCookieConfig = {
+    ...cookieConfig,
+    maxAge: 15 * 60 * 1000 // 15 minutes for access token
+};
+
+// ###################### COOKIE ATTRIBUTES EXPLAINED ##############################
+
+/*
+httpOnly: true
+• Prevents JavaScript access to cookies
+• Critical for protecting against XSS attacks
+• Cookies can only be sent to server
+
+secure: true (production only)
+• Cookies only sent over HTTPS
+• Prevents man-in-the-middle attacks
+• Always true in production, false in development
+
+sameSite: 'strict'
+• Prevents CSRF attacks
+• 'strict': No cross-site requests
+• 'lax': Allows some safe cross-site requests
+• 'none': Allows all cross-site requests (requires secure: true)
+
+maxAge: milliseconds
+• Automatic cookie expiration
+• Better than 'expires' for modern browsers
+• Automatically cleaned up by browser
+
+path: '/'
+• Which paths can access the cookie
+• '/' means entire domain
+• '/api' would restrict to API routes only
+*/
+
+// ###################### COOKIE MANAGEMENT FUNCTIONS ##############################
+
+const cookieService = {
+    setAccessToken(res, token) {
+        res.cookie('accessToken', token, accessTokenCookieConfig);
+    },
+
+    setRefreshToken(res, token) {
+        res.cookie('refreshToken', token, cookieConfig);
+    },
+
+    clearTokens(res) {
+        res.clearCookie('accessToken');
+        res.clearCookie('refreshToken');
+    },
+
+    getAccessToken(req) {
+        return req.cookies.accessToken;
+    },
+
+    getRefreshToken(req) {
+        return req.cookies.refreshToken;
+    },
+
+    // For cross-domain scenarios (microservices)
+    setCrossDomainToken(res, token, domain) {
+        res.cookie('serviceToken', token, {
+            ...cookieConfig,
+            domain: domain,
+            sameSite: 'none',
+            secure: true
+        });
+    }
+};
+
+// ###################### COOKIE-BASED AUTH ENDPOINTS ##############################
+
+// Login endpoint with secure cookies
+app.post('/api/auth/login', asyncHandler(async (req, res) => {
+    const { email, password } = req.body;
+
+    // Validate input
+    if (!email || !password) {
+        throw new AppError('Email and password are required', 400);
+    }
+
+    // Find user and verify credentials
+    const user = await User.findOne({ email }).select('+password');
+    if (!user || !(await passwordService.verifyPassword(password, user.password))) {
+        throw new AppError('Invalid credentials', 401);
+    }
+
+    // Generate tokens
+    const tokenPayload = {
+        id: user._id,
+        email: user.email,
+        role: user.role
+    };
+
+    const accessToken = tokenService.generateAccessToken(tokenPayload);
+    const refreshToken = tokenService.generateRefreshToken(tokenPayload);
+
+    // Store refresh token in database for rotation
+    await RefreshToken.create({
+        token: refreshToken,
+        userId: user._id,
+        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+    });
+
+    // Set secure cookies
+    cookieService.setAccessToken(res, accessToken);
+    cookieService.setRefreshToken(res, refreshToken);
+
+    // Update user last login
+    user.lastLogin = new Date();
+    await user.save();
+
+    res.json({
+        success: true,
+        data: {
+            user: {
+                id: user._id,
+                email: user.email,
+                name: user.name,
+                role: user.role
+            }
+        }
+    });
+}));
+
+// Logout endpoint with token cleanup
+app.post('/api/auth/logout', asyncHandler(async (req, res) => {
+    const refreshToken = cookieService.getRefreshToken(req);
+
+    // Revoke refresh token from database
+    if (refreshToken) {
+        await RefreshToken.findOneAndUpdate(
+            { token: refreshToken },
+            { isRevoked: true, revokedAt: new Date() }
+        );
+    }
+
+    // Clear cookies
+    cookieService.clearTokens(res);
+
+    res.json({
+        success: true,
+        message: 'Logged out successfully'
+    });
+}));
+
+// Refresh token endpoint
+app.post('/api/auth/refresh', asyncHandler(async (req, res) => {
+    const refreshToken = cookieService.getRefreshToken(req);
+    
+    if (!refreshToken) {
+        throw new AppError('Refresh token required', 401);
+    }
+
+    // Verify refresh token and check database
+    const decoded = tokenService.verifyRefreshToken(refreshToken);
+    const storedToken = await RefreshToken.findOne({ 
+        token: refreshToken, 
+        userId: decoded.id 
+    });
+
+    if (!storedToken || storedToken.isRevoked) {
+        throw new AppError('Invalid refresh token', 401);
+    }
+
+    // Generate new tokens
+    const tokenPayload = {
+        id: decoded.id,
+        email: decoded.email,
+        role: decoded.role
+    };
+
+    const newAccessToken = tokenService.generateAccessToken(tokenPayload);
+    const newRefreshToken = tokenService.generateRefreshToken(tokenPayload);
+
+    // Token rotation: revoke old, store new
+    await RefreshToken.findByIdAndUpdate(storedToken._id, { 
+        isRevoked: true,
+        revokedAt: new Date()
+    });
+    
+    await RefreshToken.create({
+        token: newRefreshToken,
+        userId: decoded.id,
+        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+    });
+
+    // Set new cookies
+    cookieService.setAccessToken(res, newAccessToken);
+    cookieService.setRefreshToken(res, newRefreshToken);
+
+    res.json({
+        success: true,
+        message: 'Tokens refreshed successfully'
+    });
+}));
+
+// ###################### CSRF PROTECTION ##############################
+
+/*
+Since we're using SameSite cookies, CSRF risk is reduced.
+For additional protection, consider:
+
+1. CSRF Tokens:
+   const csrf = require('csurf');
+   app.use(csrf({ cookie: true }));
+
+2. Double Submit Cookie Pattern:
+   - Server sends CSRF token in separate cookie
+   - Client includes token in header for state-changing requests
+
+3. Additional Headers:
+   app.use((req, res, next) => {
+     res.setHeader('X-Content-Type-Options', 'nosniff');
+     res.setHeader('X-Frame-Options', 'DENY');
+     res.setHeader('X-XSS-Protection', '1; mode=block');
+     next();
+   });
+*/
+
+// ###################### COOKIE SECURITY AUDIT ##############################
+
+const cookieSecurity = {
+    auditCookies(req) {
+        const cookies = req.cookies;
+        const securityReport = {};
+
+        for (const [name, value] of Object.entries(cookies)) {
+            securityReport[name] = {
+                hasHttpOnly: false, // We can't detect this from server-side
+                hasSecure: req.secure, // Assuming secure cookies only sent over HTTPS
+                length: value.length,
+                isJWT: value.split('.').length === 3 // Basic JWT detection
+            };
+        }
+
+        return securityReport;
+    },
+
+    validateCookieSecurity(res) {
+        // In real implementation, you'd check response headers
+        const securityHeaders = res.getHeaders();
+        return {
+            hasSecureFlag: securityHeaders['set-cookie']?.some(cookie => cookie.includes('Secure')),
+            hasHttpOnly: securityHeaders['set-cookie']?.some(cookie => cookie.includes('HttpOnly')),
+            hasSameSite: securityHeaders['set-cookie']?.some(cookie => cookie.includes('SameSite'))
+        };
+    }
+};`
+    },
+        ];
+
+// Updated Questions array aligned with authentication & security topics
+const questions = [
+    // Authentication Fundamentals
+    {
+        type: "question",
+        question: "What is the key difference between Authentication and Authorization?",
+        options: [
+            "Authentication checks permissions, Authorization verifies identity",
+            "Authentication verifies identity, Authorization checks permissions",
+            "They are the same concept with different names",
+            "Authentication is for users, Authorization is for applications"
+        ],
+        correctIndex: 1
+    },
+    {
+        type: "question",
+        question: "In the hotel key card analogy, what represents Authorization?",
+        options: [
+            "Checking your ID at the front desk",
+            "Your key card only opening your specific room",
+            "The hotel receptionist verifying your reservation",
+            "The hotel building security system"
+        ],
+        correctIndex: 1
+    },
+
+    // JWT Deep Dive
+    {
+        type: "question",
+        question: "What are the three main parts of a JWT token?",
+        options: [
+            "Username, Password, Signature",
+            "Header, Payload, Signature",
+            "Token, Secret, Algorithm",
+            "Public Key, Private Key, Certificate"
+        ],
+        correctIndex: 1
+    },
+    {
+        type: "question",
+        question: "Why should access tokens have short expiration times (15-30 minutes)?",
+        options: [
+            "To force users to login frequently",
+            "To reduce server load",
+            "To limit exposure if token is compromised",
+            "To comply with legal requirements"
+        ],
+        correctIndex: 2
+    },
+    {
+        type: "question",
+        question: "Which SameSite cookie setting provides the strongest CSRF protection?",
+        options: [
+            "'none'",
+            "'lax'",
+            "'strict'",
+            "'secure'"
+        ],
+        correctIndex: 2
+    },
+    {
+        type: "question",
+        question: "Why is localStorage NOT recommended for storing authentication tokens?",
+        options: [
+            "It has limited storage capacity",
+            "It's vulnerable to XSS attacks",
+            "It doesn't work in all browsers",
+            "It requires manual token management"
+        ],
+        correctIndex: 1
+    },
+
+    // Auth Middleware
+    {
+        type: "question",
+        question: "What does Role-Based Access Control (RBAC) primarily manage?",
+        options: [
+            "User authentication methods",
+            "Token expiration times",
+            "User permissions based on roles",
+            "Password complexity requirements"
+        ],
+        correctIndex: 2
+    },
+    {
+        type: "question",
+        question: "In the token refresh flow, why do we implement token rotation?",
+        options: [
+            "To reduce database queries",
+            "To automatically extend token expiration",
+            "To enhance security by issuing new refresh tokens",
+            "To support multiple devices simultaneously"
+        ],
+        correctIndex: 2
+    },
+
+    // Security Practices
+    {
+        type: "question",
+        question: "What is the recommended bcrypt salt rounds value for modern applications?",
+        options: [
+            "8",
+            "10",
+            "12",
+            "16"
+        ],
+        correctIndex: 2
+    },
+    {
+        type: "question",
+        question: "Which security measure helps prevent brute force attacks on login endpoints?",
+        options: [
+            "JWT tokens",
+            "Rate limiting",
+            "CORS configuration",
+            "Cookie flags"
+        ],
+        correctIndex: 1
+    },
+    {
+        type: "question",
+        question: "What is the purpose of the 'jti' (JWT ID) claim in tokens?",
+        options: [
+            "To identify the token type",
+            "To enable token revocation capabilities",
+            "To specify the token algorithm",
+            "To indicate token creation time"
+        ],
+        correctIndex: 1
+    },
+
+    // Practical Implementation Tasks
+    {
+        type: "task",
+        title: "JWT Token Service Implementation",
+        content: "Implement a complete JWT token service with access/refresh tokens, proper payload structure, token verification, error handling, and secure configuration. Include token blacklisting and rotation mechanisms."
+    },
+    {
+        type: "task",
+        title: "Cookie-Based Authentication System",
+        content: "Build a complete authentication system using HTTP-only cookies. Implement login, logout, token refresh endpoints with proper cookie security flags (httpOnly, secure, sameSite)."
+    },
+    {
+        type: "search-task",
+        title: "Research: OAuth 2.0 & Social Authentication",
+        content: "Research OAuth 2.0 flows and social authentication providers. Compare implementation strategies for Google, GitHub, and Facebook OAuth. Document security considerations and best practices."
+    },
+    {
+        type: "search-task",
+        title: "Research: Advanced Security Threats",
+        content: "Research modern authentication security threats including JWT vulnerabilities, timing attacks, session fixation, and token sidejacking. Document prevention strategies and mitigation techniques."
+    },
+    {
+        type: "search-task",
+        title: "Research: Passwordless Authentication",
+        content: "Research passwordless authentication methods including magic links, WebAuthn, and biometric authentication. Compare security, user experience, and implementation complexity across different approaches."
+    },
+];     document.getElementById('lecture-title').textContent = lectureConfig.title;
+    </script><script src="./assets/lecture.js"></script>
+</body>
+</html>

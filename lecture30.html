@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focal X - Node.js Bootcamp: Lecture 30 </title>
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="apple-touch-icon" href="./logo.jpg">
+    <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
+    <meta name="theme-color" content="#b21f1f">
+    <link rel="stylesheet" href="./assets/lecture.css">
+</head>
+<body>
+    <div class="container">
+        <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
+        <header>
+            <h1 id="lecture-title">Focal X - Node.js Bootcamp</h1>
+            <p class="subtitle" id="lecture-subtitle">Node</p>
+        </header>
+        
+        <div class="content">
+            <div class="lecture-content">
+                <h2>Lecture Content</h2>
+                <div id="tabs-container"></div>
+                <div id="tab-content-container"></div>
+            </div>
+            
+            <div class="interactive-section">
+                <h2>Interactive Questions & Tasks</h2>
+                <div id="questions-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
+    </footer>
+
+        <script src="./reg.js"></script>
+<script>
+        // ==================== CONFIGURATION ====================
+        // Update these arrays to change the content of your lecture
+        
+const lectureConfig = {
+    title: "Focal X - Node.js Bootcamp",
+    subtitle: "File Managment & Production Deployment"
+};
+
+// Lecture content organized by tabs
+const lectureContent = [
+    {
+        tabTitle: "Last Lesson",
+        title: "Last Lesson",
+        content: `1- Solve Task 7`
+    },
+{
+        tabTitle: "File Handling",
+        title: "File Uploads with Multer & Cloud Storage",
+        content: `/*
+File Upload Best Practices:
+• Multer for file handling
+• Local storage with static file serving
+• Cloudinary for cloud storage
+• File validation & security
+*/
+
+// ===== MULTER WITH LOCAL STORAGE =====
+// src/middleware/uploadMiddleware.js
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+
+// Ensure upload directory exists
+const uploadDir = path.join(__dirname, '../uploads');
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+// Configure local storage with Multer
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        // Organize files by type
+        let folder = 'uploads/';
+        if (file.mimetype.startsWith('image/')) {
+            folder += 'images/';
+        } else if (file.mimetype.startsWith('application/')) {
+            folder += 'documents/';
+        } else {
+            folder += 'others/';
+        }
+        
+        // Create folder if it doesn't exist
+        if (!fs.existsSync(folder)) {
+            fs.mkdirSync(folder, { recursive: true });
+        }
+        cb(null, folder);
+    },
+    filename: (req, file, cb) => {
+        // Generate unique filename with original extension
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        const fileExtension = path.extname(file.originalname);
+        const baseName = path.basename(file.originalname, fileExtension);
+        const safeFileName = baseName.replace(/[^a-zA-Z0-9]/g, '_');
+        cb(null, safeFileName + '-' + uniqueSuffix + fileExtension);
+    }
+});
+
+// File filter for security
+const fileFilter = (req, file, cb) => {
+    // Check file types
+    if (file.mimetype.startsWith('image/')) {
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        if (allowedTypes.includes(file.mimetype)) {
+            cb(null, true);
+        } else {
+            cb(new Error('Only JPEG, PNG, GIF, and WebP images are allowed'), false);
+        }
+    } else if (file.mimetype.startsWith('application/')) {
+        const allowedDocs = ['application/pdf', 'application/msword'];
+        if (allowedDocs.includes(file.mimetype)) {
+            cb(null, true);
+        } else {
+            cb(new Error('Only PDF and DOC files are allowed'), false);
+        }
+    } else {
+        cb(new Error('Unsupported file type'), false);
+    }
+};
+
+// Multer configuration for local storage
+const uploadLocal = multer({
+    storage: storage,
+    fileFilter: fileFilter,
+    limits: {
+        fileSize: 5 * 1024 * 1024, // 5MB limit
+        files: 5 // Maximum 5 files
+    }
+});
+
+// Serve static files from uploads directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// File upload controller for local storage
+const uploadFileLocal = async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({
+                success: false,
+                message: 'No file uploaded'
+            });
+        }
+
+        // Construct public URL
+        const fileUrl = \`\${req.protocol}://\${req.get('host')}/uploads/\${req.file.path.replace('uploads/', '')}\`;
+
+        res.status(200).json({
+            success: true,
+            message: 'File uploaded successfully',
+            data: {
+                filename: req.file.filename,
+                originalname: req.file.originalname,
+                size: req.file.size,
+                path: req.file.path,
+                url: fileUrl,
+                mimetype: req.file.mimetype
+            }
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'File upload failed',
+            error: error.message
+        });
+    }
+};
+
+// ===== CLOUDINARY CLOUD STORAGE =====
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const cloudinary = require('cloudinary').v2;
+
+// Configure Cloudinary (free tier available)
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// Cloudinary storage configuration
+const cloudStorage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: 'nodejs-app',
+        format: async (req, file) => {
+            if (file.mimetype.startsWith('image/')) return 'webp';
+            return file.originalname.split('.').pop();
+        },
+        transformation: [
+            { width: 800, height: 600, crop: 'limit' },
+            { quality: 'auto' },
+            { format: 'webp' }
+        ],
+        public_id: (req, file) => {
+            const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+            return file.fieldname + '-' + uniqueSuffix;
+        }
+    },
+});
+
+// Multer configuration for Cloudinary
+const uploadCloud = multer({
+    storage: cloudStorage,
+    fileFilter: fileFilter,
+    limits: {
+        fileSize: 5 * 1024 * 1024,
+        files: 5
+    }
+});
+
+// File upload controller for Cloudinary
+const uploadFileCloud = async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({
+                success: false,
+                message: 'No file uploaded'
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'File uploaded to cloud successfully',
+            data: {
+                filename: req.file.filename,
+                originalname: req.file.originalname,
+                size: req.file.size,
+                url: req.file.path, // Cloudinary URL
+                format: req.file.format,
+                public_id: req.file.filename
+            }
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Cloud file upload failed',
+            error: error.message
+        });
+    }
+};
+
+// File deletion function for Cloudinary
+const deleteCloudFile = async (publicId) => {
+    try {
+        const result = await cloudinary.uploader.destroy(publicId);
+        return result;
+    } catch (error) {
+        throw new Error('Cloud file deletion failed');
+    }
+};
+
+// Usage in routes - Choose one method based on your needs
+router.post('/upload-local', uploadLocal.single('file'), uploadFileLocal);
+router.post('/upload-cloud', uploadCloud.single('file'), uploadFileCloud);
+router.delete('/cloud-files/:publicId', fileController.deleteCloudFile);
+
+// ===== COMPARISON: LOCAL VS CLOUD STORAGE =====
+/*
+Local Storage (Multer):
+✅ Pros:
+   - No additional costs
+   - Full control over files
+   - No internet dependency for uploads
+   - Easy to implement
+
+❌ Cons:
+   - Limited scalability
+   - Manual backup required
+   - Storage space limitations
+   - Slower delivery for users
+
+Cloud Storage (Cloudinary):
+✅ Pros:
+   - Automatic scaling
+   - Global CDN for fast delivery
+   - Built-in image optimization
+   - Automatic backups
+   - Advanced features (transformations, etc.)
+
+❌ Cons:
+   - Additional cost for high usage
+   - Internet dependency
+   - Third-party service reliance
+*/`
+    },
+];
+
+// Updated Questions array aligned with new topics
+const questions = [
+    // Argon2 Hashing
+    {
+        type: "question",
+        question: "Why is Argon2 considered more secure than bcrypt for password hashing?",
+        options: [
+            "It's faster than bcrypt",
+            "It uses less memory",
+            "It's resistant to GPU and side-channel attacks",
+            "It produces shorter hash outputs"
+        ],
+        correctIndex: 2
+    },
+    {
+        type: "question",
+        question: "What does the 'argon2id' variant provide compared to other Argon2 variants?",
+        options: [
+            "Faster hashing speed",
+            "Hybrid resistance to both side-channel and GPU attacks",
+            "Smaller memory footprint",
+            "Better browser compatibility"
+        ],
+        correctIndex: 1
+    },
+
+    // XSS Protection
+    {
+        type: "question",
+        question: "What is the primary purpose of input sanitization in XSS protection?",
+        options: [
+            "To encrypt user input",
+            "To remove or neutralize malicious scripts from user input",
+            "To compress data for storage",
+            "To validate email formats"
+        ],
+        correctIndex: 1
+    },
+    {
+        type: "question",
+        question: "Which HTTP security header helps prevent XSS attacks by restricting script sources?",
+        options: [
+            "Content-Security-Policy",
+            "X-Frame-Options",
+            "Strict-Transport-Security",
+            "X-Content-Type-Options"
+        ],
+        correctIndex: 0
+    },
+
+    // Express Validator
+    {
+        type: "question",
+        question: "In express-validator, what's the difference between .trim() and .escape()?",
+        options: [
+            ".trim() removes whitespace, .escape() converts HTML entities",
+            ".trim() encrypts data, .escape() compresses it",
+            ".trim() validates format, .escape() checks length",
+            ".trim() converts to lowercase, .escape() removes special characters"
+        ],
+        correctIndex: 0
+    },
+    {
+        type: "question",
+        question: "How do you create a custom validation rule in express-validator?",
+        options: [
+            "Using .custom() method with a validation function",
+            "By extending the Validator class",
+            "Using .validateCustom() middleware",
+            "Through Joi schema integration"
+        ],
+        correctIndex: 0
+    },
+
+    // File Upload Security
+    {
+        type: "question",
+        question: "What security risk does checking only file extension pose in file uploads?",
+        options: [
+            "It may allow malicious files with correct extensions",
+            "It slows down the upload process",
+            "It increases storage costs",
+            "It breaks image compression"
+        ],
+        correctIndex: 0
+    },
+    {
+        type: "question",
+        question: "Why should you process images through Cloudinary instead of storing them directly?",
+        options: [
+            "To add watermarks automatically",
+            "To prevent malicious file execution and optimize delivery",
+            "To reduce database size",
+            "To enable social media sharing"
+        ],
+        correctIndex: 1
+    },
+
+    // Deployment & Email
+    {
+        type: "question",
+        question: "What is the main advantage of using app passwords with Gmail in Nodemailer?",
+        options: [
+            "Faster email delivery",
+            "Better security through 2FA compliance",
+            "Unlimited email sending",
+            "Automatic template generation"
+        ],
+        correctIndex: 1
+    },
+    {
+        type: "question",
+        question: "In Render deployment, why is binding to '0.0.0.0' important?",
+        options: [
+            "It enables HTTPS automatically",
+            "It allows connections from any network interface",
+            "It improves application performance",
+            "It reduces memory usage"
+        ],
+        correctIndex: 1
+    },
+
+    // Practical Implementation Tasks
+    {
+        type: "task",
+        title: "Secure Authentication System with Argon2",
+        content: "Implement a complete authentication system using Argon2 for password hashing. Include registration, login, password reset, and email verification with proper security measures and error handling."
+    },
+    {
+        type: "task",
+        title: "Advanced Data Validation System",
+        content: "Create a comprehensive validation system using express-validator with custom rules, conditional validation, async validators, and proper error response formatting for different data types."
+    },
+    {
+        type: "task",
+        title: "File Upload & Management Service",
+        content: "Build a secure file upload service with Multer and Cloudinary. Implement file type validation, size limits, image optimization, and secure file deletion with proper error handling."
+    },
+
+    // Production Deployment Tasks
+    {
+        type: "task",
+        title: "Production Deployment Pipeline",
+        content: "Set up a complete production deployment on Render with MongoDB Atlas. Configure environment variables, health checks, logging, monitoring, and implement proper security headers and CORS policies."
+    },
+    {
+        type: "task",
+        title: "Email Service Integration",
+        content: "Implement a robust email service using Nodemailer with Gmail. Create email templates for verification, password reset, and notifications. Handle email failures gracefully and implement retry logic."
+    },
+
+    // Research & Analysis Tasks
+    {
+        type: "search-task",
+        title: "Research: Modern Hashing Algorithms",
+        content: "Research and compare modern hashing algorithms (Argon2, bcrypt, scrypt). Analyze their security features, performance characteristics, and suitability for different use cases in web applications."
+    },
+    {
+        type: "search-task",
+        title: "Research: Cloud File Storage Solutions",
+        content: "Research different cloud file storage providers (Cloudinary, AWS S3, Google Cloud Storage). Compare pricing, features, security, and integration complexity for Node.js applications."
+    },
+    {
+        type: "search-task",
+        title: "Research: Serverless Deployment Platforms",
+        content: "Research serverless deployment platforms (Render, Heroku, Railway, AWS). Compare pricing, scalability, features, and deployment workflows for Node.js applications with database integration."
+    }
+];
+
+</script><script src="./assets/lecture.js"></script>
+</body>
+</html>

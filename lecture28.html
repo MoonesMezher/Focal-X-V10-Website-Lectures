@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focal X - Node.js Bootcamp: Lecture 28 </title>
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="apple-touch-icon" href="./logo.jpg">
+    <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
+    <meta name="theme-color" content="#b21f1f">
+    <link rel="stylesheet" href="./assets/lecture.css">
+</head>
+<body>
+    <div class="container">
+        <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
+        <header>
+            <h1 id="lecture-title">Focal X - Node.js Bootcamp</h1>
+            <p class="subtitle" id="lecture-subtitle">Node</p>
+        </header>
+        
+        <div class="content">
+            <div class="lecture-content">
+                <h2>Lecture Content</h2>
+                <div id="tabs-container"></div>
+                <div id="tab-content-container"></div>
+            </div>
+            
+            <div class="interactive-section">
+                <h2>Interactive Questions & Tasks</h2>
+                <div id="questions-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
+    </footer>
+
+        <script src="./reg.js"></script>
+<script>
+        // ==================== CONFIGURATION ====================
+        // Update these arrays to change the content of your lecture
+        
+const lectureConfig = {
+    title: "Focal X - Node.js Bootcamp",
+    subtitle: "Advanced Security & Express Validation"
+};
+
+// Lecture content organized by tabs
+const lectureContent = [
+    {
+        tabTitle: "Last Lesson",
+        title: "Last Lesson",
+        content: `1- Create Superadmin by Seeds
+2- Locked by Failed Login 
+3- Rate Limiter
+4- Security Practice (helmet, cors)`
+    },
+    {
+        tabTitle: "Security & Hashing",
+        title: "Advanced Security Practices",
+        content: `/*
+Modern Security Implementation:
+• Argon2 Password Hashing
+• XSS Protection
+• Data Validation & Sanitization
+• Secure File Uploads
+*/
+
+// ===== ARGON2 HASHING IMPLEMENTATION =====
+const argon2 = require('argon2');
+
+class PasswordService {
+    // Hash password with Argon2 (modern & secure)
+    static async hashPassword(password) {
+        try {
+            return await argon2.hash(password, {
+                type: argon2.argon2id,
+                memoryCost: 2 ** 16, // 64MB
+                timeCost: 3,
+                parallelism: 1,
+                hashLength: 32
+            });
+        } catch (error) {
+            throw new Error('Password hashing failed');
+        }
+    }
+
+    // Verify password against hash
+    static async verifyPassword(hash, password) {
+        try {
+            return await argon2.verify(hash, password);
+        } catch (error) {
+            throw new Error('Password verification failed');
+        }
+    }
+}
+
+// Usage in auth controller
+const registerUser = async (userData) => {
+    const hashedPassword = await PasswordService.hashPassword(userData.password);
+    
+    return await User.create({
+        ...userData,
+        password: hashedPassword
+    });
+};
+
+const loginUser = async (email, password) => {
+    const user = await User.findOne({ email });
+    if (!user) return false;
+
+    const isValid = await PasswordService.verifyPassword(user.password, password);
+    return isValid ? user : false;
+};
+
+// ===== XSS PROTECTION =====
+const xss = require('xss');
+
+// XSS sanitization function
+const sanitizeInput = (input) => {
+    if (typeof input === 'string') {
+        return xss(input, {
+            whiteList: {}, // empty means remove all tags
+            stripIgnoreTag: true,
+            stripIgnoreTagBody: ['script', 'style']
+        }).trim();
+    }
+    return input;
+};
+
+// Middleware to sanitize all incoming data
+const xssSanitize = (req, res, next) => {
+    if (req.body) {
+        Object.keys(req.body).forEach(key => {
+            req.body[key] = sanitizeInput(req.body[key]);
+        });
+    }
+    if (req.query) {
+        Object.keys(req.query).forEach(key => {
+            req.query[key] = sanitizeInput(req.query[key]);
+        });
+    }
+    if (req.params) {
+        Object.keys(req.params).forEach(key => {
+            req.params[key] = sanitizeInput(req.params[key]);
+        });
+    }
+    next();
+};
+
+app.use(xssSanitize);`
+    },
+    {
+        tabTitle: "Data Validation",
+        title: "Express Validator & Sanitization",
+        content: `/*
+Data Validation & Sanitization:
+• Request validation with express-validator
+• Custom validation rules
+• Optional fields handling
+• Input sanitization
+*/
+
+// src/validation/userValidation.js
+const { body, param, query, validationResult } = require('express-validator');
+const User = require('../models/User');
+
+// Custom validation functions
+const isStrongPassword = (value) => {
+    if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}/.test(value)) {
+        throw new Error('Password must contain uppercase, lowercase, number, special character, and be at least 8 characters long');
+    }
+    return true;
+};
+
+const isEmailAvailable = async (email) => {
+    const user = await User.findOne({ email });
+    if (user) {
+        throw new Error('Email is already registered');
+    }
+    return true;
+};
+
+// User registration validation schema
+const validateUserRegistration = [
+    body('email')
+        .isEmail().normalizeEmail()
+        .withMessage('Please provide a valid email')
+        .custom(isEmailAvailable),
+
+    body('password')
+        .isLength({ min: 8 }).withMessage('Password must be at least 8 characters')
+        .custom(isStrongPassword),
+
+    body('username')
+        .optional() // Optional field
+        .isAlphanumeric().withMessage('Username must be alphanumeric')
+        .isLength({ min: 3, max: 30 }).withMessage('Username must be between 3-30 characters')
+        .trim(),
+
+    body('phone')
+        .optional()
+        .isMobilePhone().withMessage('Please provide a valid phone number'),
+
+    body('role')
+        .optional()
+        .isIn(['user', 'admin', 'moderator']).withMessage('Invalid role specified')
+];
+
+// User update validation (different rules for updates)
+const validateUserUpdate = [
+    body('email')
+        .optional()
+        .isEmail().normalizeEmail()
+        .withMessage('Please provide a valid email'),
+
+    body('username')
+        .optional()
+        .isAlphanumeric().withMessage('Username must be alphanumeric')
+        .isLength({ min: 3, max: 30 }).withMessage('Username must be between 3-30 characters')
+        .trim(),
+
+    body('profile.bio')
+        .optional()
+        .isLength({ max: 500 }).withMessage('Bio cannot exceed 500 characters')
+        .escape() // HTML escape for safety
+];
+
+// ID parameter validation
+const validateObjectId = [
+    param('id')
+        .isMongoId().withMessage('Invalid ID format')
+        .escape()
+];
+
+// Search query validation
+const validateSearchQuery = [
+    query('q')
+        .optional()
+        .isLength({ min: 1, max: 50 }).withMessage('Search query must be between 1-50 characters')
+        .trim().escape(),
+
+    query('page')
+        .optional()
+        .isInt({ min: 1 }).withMessage('Page must be a positive integer')
+        .toInt(),
+
+    query('limit')
+        .optional()
+        .isInt({ min: 1, max: 100 }).withMessage('Limit must be between 1-100')
+        .toInt()
+];
+
+// Validation middleware
+const handleValidationErrors = (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({
+            success: false,
+            message: 'Validation failed',
+            errors: errors.array().map(err => ({
+                field: err.path,
+                message: err.msg,
+                value: err.value
+            }))
+        });
+    }
+    next();
+};
+
+// Usage in routes
+router.post('/register', 
+    validateUserRegistration, 
+    handleValidationErrors,
+    userController.register
+);
+
+router.put('/users/:id',
+    validateObjectId,
+    validateUserUpdate,
+    handleValidationErrors, 
+    userController.updateUser
+);
+
+router.get('/search',
+    validateSearchQuery,
+    handleValidationErrors,
+    userController.searchUsers
+);`
+    },
+    {
+        tabTitle: "Advanced Express",
+        title: "Production-Ready Express Applications",
+        content: `/*
+Production Best Practices:
+• Environment configuration
+• Security headers
+• Rate limiting
+• Request sanitization
+• Proper error handling
+• Logging
+• Performance optimization
+*/
+
+const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const compression = require('compression');
+
+// Security middleware
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            styleSrc: ["'self'", "'unsafe-inline'"],
+            scriptSrc: ["'self'"],
+            imgSrc: ["'self'", "data:", "https:"],
+        },
+    },
+    crossOriginEmbedderPolicy: false
+}));
+
+// CORS configuration
+app.use(cors({
+    origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000'],
+    credentials: true
+}));
+
+// Rate limiting
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+    message: {
+        error: 'Too many requests from this IP, please try again later.'
+    }
+});
+app.use('/api/', limiter);
+
+// Compression
+app.use(compression());
+
+// Environment-based configuration
+const config = {
+    development: {
+        port: 4000,
+        host: 'localhost',
+        logLevel: 'debug'
+    },
+    production: {
+        port: process.env.PORT || 80,
+        host: '0.0.0.0',
+        logLevel: 'warn'
+    }
+};
+
+const environment = process.env.NODE_ENV || 'development';
+const currentConfig = config[environment];
+
+// Advanced error handling
+class AppError extends Error {
+    constructor(message, statusCode) {
+        super(message);
+        this.statusCode = statusCode;
+        this.isOperational = true;
+        Error.captureStackTrace(this, this.constructor);
+    }
+}
+
+// Async error wrapper (avoid try-catch in every route)
+const asyncHandler = (fn) => (req, res, next) => {
+    Promise.resolve(fn(req, res, next)).catch(next);
+};
+
+// Example with async handler
+app.get('/api/async-users', asyncHandler(async (req, res) => {
+    // Simulate async operation
+    const users = await Promise.resolve([...users]);
+    res.json({ success: true, data: users });
+}));
+
+// Global error handler
+app.use((err, req, res, next) => {
+    err.statusCode = err.statusCode || 500;
+    err.status = err.status || 'error';
+
+    if (process.env.NODE_ENV === 'development') {
+        res.status(err.statusCode).json({
+            status: err.status,
+            error: err,
+            message: err.message,
+            stack: err.stack
+        });
+    } else {
+        // Production: don't leak error details
+        if (err.isOperational) {
+            res.status(err.statusCode).json({
+                status: err.status,
+                message: err.message
+            });
+        } else {
+            console.error('ERROR 💥', err);
+            res.status(500).json({
+                status: 'error',
+                message: 'Something went wrong!'
+            });
+        }
+    }
+});
+
+// Graceful shutdown
+process.on('SIGTERM', () => {
+    console.log('SIGTERM received. Shutting down gracefully...');
+    server.close(() => {
+        console.log('Process terminated');
+    });
+});`
+    }
+];
+
+// Updated Questions array aligned with new topics
+const questions = [
+    // Argon2 Hashing
+    {
+        type: "question",
+        question: "Why is Argon2 considered more secure than bcrypt for password hashing?",
+        options: [
+            "It's faster than bcrypt",
+            "It uses less memory",
+            "It's resistant to GPU and side-channel attacks",
+            "It produces shorter hash outputs"
+        ],
+        correctIndex: 2
+    },
+    {
+        type: "question",
+        question: "What does the 'argon2id' variant provide compared to other Argon2 variants?",
+        options: [
+            "Faster hashing speed",
+            "Hybrid resistance to both side-channel and GPU attacks",
+            "Smaller memory footprint",
+            "Better browser compatibility"
+        ],
+        correctIndex: 1
+    },
+
+    // XSS Protection
+    {
+        type: "question",
+        question: "What is the primary purpose of input sanitization in XSS protection?",
+        options: [
+            "To encrypt user input",
+            "To remove or neutralize malicious scripts from user input",
+            "To compress data for storage",
+            "To validate email formats"
+        ],
+        correctIndex: 1
+    },
+    {
+        type: "question",
+        question: "Which HTTP security header helps prevent XSS attacks by restricting script sources?",
+        options: [
+            "Content-Security-Policy",
+            "X-Frame-Options",
+            "Strict-Transport-Security",
+            "X-Content-Type-Options"
+        ],
+        correctIndex: 0
+    },
+
+    // Express Validator
+    {
+        type: "question",
+        question: "In express-validator, what's the difference between .trim() and .escape()?",
+        options: [
+            ".trim() removes whitespace, .escape() converts HTML entities",
+            ".trim() encrypts data, .escape() compresses it",
+            ".trim() validates format, .escape() checks length",
+            ".trim() converts to lowercase, .escape() removes special characters"
+        ],
+        correctIndex: 0
+    },
+    {
+        type: "question",
+        question: "How do you create a custom validation rule in express-validator?",
+        options: [
+            "Using .custom() method with a validation function",
+            "By extending the Validator class",
+            "Using .validateCustom() middleware",
+            "Through Joi schema integration"
+        ],
+        correctIndex: 0
+    },
+
+    // File Upload Security
+    {
+        type: "question",
+        question: "What security risk does checking only file extension pose in file uploads?",
+        options: [
+            "It may allow malicious files with correct extensions",
+            "It slows down the upload process",
+            "It increases storage costs",
+            "It breaks image compression"
+        ],
+        correctIndex: 0
+    },
+    {
+        type: "question",
+        question: "Why should you process images through Cloudinary instead of storing them directly?",
+        options: [
+            "To add watermarks automatically",
+            "To prevent malicious file execution and optimize delivery",
+            "To reduce database size",
+            "To enable social media sharing"
+        ],
+        correctIndex: 1
+    },
+
+    // Deployment & Email
+    {
+        type: "question",
+        question: "What is the main advantage of using app passwords with Gmail in Nodemailer?",
+        options: [
+            "Faster email delivery",
+            "Better security through 2FA compliance",
+            "Unlimited email sending",
+            "Automatic template generation"
+        ],
+        correctIndex: 1
+    },
+    {
+        type: "question",
+        question: "In Render deployment, why is binding to '0.0.0.0' important?",
+        options: [
+            "It enables HTTPS automatically",
+            "It allows connections from any network interface",
+            "It improves application performance",
+            "It reduces memory usage"
+        ],
+        correctIndex: 1
+    },
+
+    // Practical Implementation Tasks
+    {
+        type: "task",
+        title: "Secure Authentication System with Argon2",
+        content: "Implement a complete authentication system using Argon2 for password hashing. Include registration, login, password reset, and email verification with proper security measures and error handling."
+    },
+    {
+        type: "task",
+        title: "Advanced Data Validation System",
+        content: "Create a comprehensive validation system using express-validator with custom rules, conditional validation, async validators, and proper error response formatting for different data types."
+    },
+    {
+        type: "task",
+        title: "File Upload & Management Service",
+        content: "Build a secure file upload service with Multer and Cloudinary. Implement file type validation, size limits, image optimization, and secure file deletion with proper error handling."
+    },
+
+    // Production Deployment Tasks
+    {
+        type: "task",
+        title: "Production Deployment Pipeline",
+        content: "Set up a complete production deployment on Render with MongoDB Atlas. Configure environment variables, health checks, logging, monitoring, and implement proper security headers and CORS policies."
+    },
+    {
+        type: "task",
+        title: "Email Service Integration",
+        content: "Implement a robust email service using Nodemailer with Gmail. Create email templates for verification, password reset, and notifications. Handle email failures gracefully and implement retry logic."
+    },
+
+    // Research & Analysis Tasks
+    {
+        type: "search-task",
+        title: "Research: Modern Hashing Algorithms",
+        content: "Research and compare modern hashing algorithms (Argon2, bcrypt, scrypt). Analyze their security features, performance characteristics, and suitability for different use cases in web applications."
+    },
+    {
+        type: "search-task",
+        title: "Research: Cloud File Storage Solutions",
+        content: "Research different cloud file storage providers (Cloudinary, AWS S3, Google Cloud Storage). Compare pricing, features, security, and integration complexity for Node.js applications."
+    },
+    {
+        type: "search-task",
+        title: "Research: Serverless Deployment Platforms",
+        content: "Research serverless deployment platforms (Render, Heroku, Railway, AWS). Compare pricing, scalability, features, and deployment workflows for Node.js applications with database integration."
+    }
+];
+
+</script><script src="./assets/lecture.js"></script>
+</body>
+</html>
