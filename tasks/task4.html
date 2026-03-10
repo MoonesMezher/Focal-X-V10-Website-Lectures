@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +28,7 @@
             flex-direction: column;
             align-items: center;
         }
-
+        
         .container {
             width: 100%;
             max-width: 1000px;
@@ -37,7 +38,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             margin: 20px 0;
         }
-
+        
         .coach {
             background-color: white;
             width: 80px;
@@ -67,11 +68,11 @@
             font-size: 1.1rem;
             opacity: 0.9;
         }
-
+        
         #title {
             padding-top: 20px;
         }
-
+        
         .language-toggle {
             position: absolute;
             top: 20px;
@@ -85,15 +86,15 @@
             font-weight: 600;
             transition: background 0.3s;
         }
-
+        
         .language-toggle:hover {
             background: #2980b9;
         }
-
+        
         .task-content {
             padding: 30px;
         }
-
+        
         .section {
             margin-bottom: 30px;
             padding: 20px;
@@ -101,32 +102,33 @@
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
-
+        
         h2 {
             color: #2c3e50;
             margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 2px solid #3498db;
         }
-
+        
         h3 {
             color: #2980b9;
             margin: 15px 0;
         }
-
+        
         p {
             margin-bottom: 15px;
         }
-
-        ul, ol {
+        
+        ul,
+        ol {
             margin-left: 20px;
             margin-bottom: 15px;
         }
-
+        
         li {
             margin-bottom: 8px;
         }
-
+        
         .code-block {
             background: #2c3e50;
             color: #ecf0f1;
@@ -138,17 +140,17 @@
             font-size: 0.9rem;
             line-height: 1.5;
         }
-
+        
         .requirements {
             background: #e8f4fc;
             border-left: 5px solid #3498db;
         }
-
+        
         .bonus {
             background: #fff3cd;
             border-left: 5px solid #ffc107;
         }
-
+        
         .output-example {
             background: #d4edda;
             border-left: 5px solid #28a745;
@@ -161,7 +163,7 @@
             direction: ltr !important;
             text-align: left !important;
         }
-
+        
         .timer-section {
             text-align: center;
             padding: 20px;
@@ -170,7 +172,7 @@
             margin-top: 30px;
             border-radius: 10px;
         }
-
+        
         .timer {
             font-size: 2rem;
             font-weight: bold;
@@ -179,30 +181,30 @@
             justify-content: center;
             gap: 15px;
         }
-
+        
         .timer-unit {
             background: rgba(255, 255, 255, 0.1);
             padding: 10px;
             border-radius: 5px;
             min-width: 80px;
         }
-
+        
         .timer-value {
             font-size: 2.5rem;
             display: block;
         }
-
+        
         .timer-label {
             font-size: 0.9rem;
             text-transform: uppercase;
             display: block;
         }
-
+        
         .finish-date {
             font-size: 1.2rem;
             margin-top: 10px;
         }
-
+        
         .thank-you {
             text-align: center;
             padding: 20px;
@@ -211,7 +213,7 @@
             border-top: 1px solid #dee2e6;
             margin-top: 30px;
         }
-
+        
         .footer {
             text-align: center;
             padding: 20px;
@@ -221,7 +223,7 @@
             max-width: 1000px;
             border-radius: 15px;
         }
-
+        
         .footer a {
             color: #3498db;
             text-decoration: none;
@@ -231,20 +233,18 @@
             padding: 0 !important;
             margin: 0 !important;
         }
-
+        
         .footer a:hover {
             text-decoration: underline;
         }
-
+        
         @media (max-width: 768px) {
             h1 {
                 font-size: 1.8rem;
             }
-            
             .task-content {
                 padding: 15px;
             }
-            
             .language-toggle {
                 position: relative;
                 top: 0;
@@ -253,16 +253,13 @@
                 display: block;
                 width: 100%;
             }
-            
             .timer {
                 font-size: 1.5rem;
                 flex-wrap: wrap;
             }
-            
             .timer-unit {
                 min-width: 70px;
             }
-            
             .timer-value {
                 font-size: 2rem;
             }
@@ -282,7 +279,7 @@
             margin: 20px 0;
         }
         
-        .code-comparison > div {
+        .code-comparison>div {
             flex: 1;
         }
         
@@ -301,6 +298,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
@@ -309,11 +307,11 @@
             <p class="subtitle" id="subtitle">Convert JavaScript code to TypeScript using proper typing without using 'any'</p>
             <button class="language-toggle" id="languageToggle">العربية / English</button>
         </header>
-        
+
         <div class="task-content" id="taskContent">
             <!-- Content will be dynamically inserted here -->
         </div>
-        
+
         <div class="timer-section">
             <h3 id="timer-title">Time Remaining to Complete Task</h3>
             <div class="timer" id="timer">
@@ -334,37 +332,34 @@
                     <span class="timer-label" id="seconds-label">Seconds</span>
                 </div>
             </div>
-            <p class="finish-date" id="finish-date">Finish by: September 27, 2025</p>
+            <p class="finish-date" id="finish-date">Finish by: September 27, 2026</p>
             <p id="timer-message">Complete the task before the deadline!</p>
         </div>
-        
+
         <div class="thank-you" id="thankYou">
             "Thank you for your hard work and dedication. Your efforts are appreciated!"
         </div>
     </div>
-    
+
     <div class="footer">
-        <p>&copy; 2025 <a href="https://focal-x.com/" target="_blank">Focal X</a> - Node.js Bootcamp V10</p>
+        <p>&copy; 2026 <a href="https://focal-x.com/" target="_blank">Focal X</a> - Node.js Bootcamp V10</p>
     </div>
 
-        <script src="../reg.js"></script>
-<script>
+    <script src="../reg.js"></script>
+    <script>
         // Content data structure
         const taskData = {
-    en: {
-        title: "Task 4: JavaScript to TypeScript Conversion",
-        subtitle: "Convert JavaScript code to TypeScript using proper typing without using 'any'",
-        sections: [
-            {
-                type: "idea",
-                title: "💻 The Task: \"JavaScript to TypeScript Conversion\"",
-                content: "Convert the provided JavaScript code to TypeScript by adding proper type annotations, interfaces, type guards, and union types. Avoid using the 'any' type."
-            },
-            {
-                type: "requirements",
-                title: "📝 Requirements",
-                content: [
-                    {
+            en: {
+                title: "Task 4: JavaScript to TypeScript Conversion",
+                subtitle: "Convert JavaScript code to TypeScript using proper typing without using 'any'",
+                sections: [{
+                    type: "idea",
+                    title: "💻 The Task: \"JavaScript to TypeScript Conversion\"",
+                    content: "Convert the provided JavaScript code to TypeScript by adding proper type annotations, interfaces, type guards, and union types. Avoid using the 'any' type."
+                }, {
+                    type: "requirements",
+                    title: "📝 Requirements",
+                    content: [{
                         type: "list",
                         title: "Setup Instructions:",
                         items: [
@@ -375,8 +370,7 @@
                             "Create a `src` folder and add your TypeScript files there",
                             "Configure TypeScript compiler to output to a `dist` folder"
                         ]
-                    },
-                    {
+                    }, {
                         type: "list",
                         title: "TypeScript Concepts to Use:",
                         items: [
@@ -387,8 +381,7 @@
                             "Generic types where appropriate",
                             "Proper function return types and parameter types"
                         ]
-                    },
-                    {
+                    }, {
                         type: "output",
                         title: "JavaScript Code to Convert:",
                         content: "Here is the JavaScript code you need to convert to TypeScript:",
@@ -452,8 +445,8 @@ function processItems(items) {
     });
     
     return results;
-}`},
-                    {
+}`
+                    }, {
                         type: "list",
                         title: "Conversion Requirements:",
                         items: [
@@ -464,8 +457,7 @@ function processItems(items) {
                             "Create a tagged type system for better type discrimination",
                             "Ensure no use of the 'any' type in your solution"
                         ]
-                    },
-                    {
+                    }, {
                         type: "list",
                         title: "Expected TypeScript Features:",
                         items: [
@@ -475,48 +467,42 @@ function processItems(items) {
                             "Proper typing for the `processItems` function",
                             "Type-safe implementation of `formatDisplay` function"
                         ]
-                    },
-                ]
+                    }, ]
+                }, {
+                    type: "learning",
+                    title: "📚 TypeScript Concepts Reference",
+                    content: [
+                        "Type Aliases: `type UserRole = 'admin' | 'user' | 'moderator';`",
+                        "Interfaces: `interface User { id: number; name: string; }`",
+                        "Type Guards: `function isUser(obj: any): obj is User { return 'role' in obj; }`",
+                        "Discriminated Unions: `type Item = User | Product` with a common discriminant property",
+                        "Union Types: `let value: string | number;`",
+                        "Generic Types: `function identity<T>(arg: T): T { return arg; }`"
+                    ]
+                }],
+                timer: {
+                    title: "Time Remaining to Complete Task",
+                    message: "Complete the task before the deadline! - Submissions are only accepted within the final six hours.",
+                    days: "Days",
+                    hours: "Hours",
+                    minutes: "Minutes",
+                    seconds: "Seconds"
+                },
+                thankYou: "\"Thank you for your hard work and dedication. Your efforts are appreciated!\"",
+                buttonText: "العربية / English",
+                finishDate: "Finish by: October 4, 2026"
             },
-            {
-                type: "learning",
-                title: "📚 TypeScript Concepts Reference",
-                content: [
-                    "Type Aliases: `type UserRole = 'admin' | 'user' | 'moderator';`",
-                    "Interfaces: `interface User { id: number; name: string; }`",
-                    "Type Guards: `function isUser(obj: any): obj is User { return 'role' in obj; }`",
-                    "Discriminated Unions: `type Item = User | Product` with a common discriminant property",
-                    "Union Types: `let value: string | number;`",
-                    "Generic Types: `function identity<T>(arg: T): T { return arg; }`"
-                ]
-            }
-        ],
-        timer: {
-            title: "Time Remaining to Complete Task",
-            message: "Complete the task before the deadline! - Submissions are only accepted within the final six hours.",
-            days: "Days",
-            hours: "Hours",
-            minutes: "Minutes",
-            seconds: "Seconds"
-        },
-        thankYou: "\"Thank you for your hard work and dedication. Your efforts are appreciated!\"",
-        buttonText: "العربية / English",
-        finishDate: "Finish by: October 4, 2025"
-    },
-    ar: {
-        title: "المهمة 4: تحويل JavaScript إلى TypeScript",
-        subtitle: "تحويل كود JavaScript إلى TypeScript باستخدام الأنواع المناسبة دون استخدام 'any'",
-        sections: [
-            {
-                type: "idea",
-                title: "💻 المهمة: \"تحويل JavaScript إلى TypeScript\"",
-                content: "قم بتحويل كود JavaScript المقدم إلى TypeScript بإضافة تعريفات الأنواع، الواجهات، حراس النوع، والأنواع المتحدة. تجنب استخدام النوع 'any'."
-            },
-            {
-                type: "requirements",
-                title: "📝 المتطلبات",
-                content: [
-                    {
+            ar: {
+                title: "المهمة 4: تحويل JavaScript إلى TypeScript",
+                subtitle: "تحويل كود JavaScript إلى TypeScript باستخدام الأنواع المناسبة دون استخدام 'any'",
+                sections: [{
+                    type: "idea",
+                    title: "💻 المهمة: \"تحويل JavaScript إلى TypeScript\"",
+                    content: "قم بتحويل كود JavaScript المقدم إلى TypeScript بإضافة تعريفات الأنواع، الواجهات، حراس النوع، والأنواع المتحدة. تجنب استخدام النوع 'any'."
+                }, {
+                    type: "requirements",
+                    title: "📝 المتطلبات",
+                    content: [{
                         type: "list",
                         title: "تعليمات الإعداد:",
                         items: [
@@ -527,8 +513,7 @@ function processItems(items) {
                             "أنشئ مجلد `src` وأضف ملفات TypeScript الخاصة بك هناك",
                             "اضبط مترجم TypeScript لإخراج الملفات إلى مجلد `dist`"
                         ]
-                    },
-                    {
+                    }, {
                         type: "list",
                         title: "مفاهيم TypeScript التي يجب استخدامها:",
                         items: [
@@ -539,8 +524,7 @@ function processItems(items) {
                             "الأنواع العامة حيثما كان ذلك مناسباً",
                             "أنواع الإرجاع المناسبة للدوال وأنواع المعاملات"
                         ]
-                    },
-                    {
+                    }, {
                         type: "output",
                         title: "كود JavaScript المطلوب تحويله:",
                         content: "إليك كود JavaScript الذي تحتاج لتحويله إلى TypeScript:",
@@ -604,8 +588,8 @@ function processItems(items) {
     });
     
     return results;
-}`},
-                    {
+}`
+                    }, {
                         type: "list",
                         title: "متطلبات التحويل:",
                         items: [
@@ -616,8 +600,7 @@ function processItems(items) {
                             "أنشئ نظام أنواع موسوم لتمييز أفضل للنوع",
                             "تأكد من عدم استخدام النوع 'any' في حلك"
                         ]
-                    },
-                    {
+                    }, {
                         type: "list",
                         title: "ميزات TypeScript المتوقعة:",
                         items: [
@@ -627,45 +610,42 @@ function processItems(items) {
                             "كتابة مناسبة لدالة `processItems`",
                             "تنفيذ آمن للنوع لدالة `formatDisplay`"
                         ]
-                    },
-                ]
-            },
-            {
-                type: "learning",
-                title: "📚 مرجع مفاهيم TypeScript",
-                content: [
-                    "أسماء الأنواع: `type UserRole = 'admin' | 'user' | 'moderator';`",
-                    "الواجهات: `interface User { id: number; name: string; }`",
-                    "حراس النوع: `function isUser(obj: any): obj is User { return 'role' in obj; }`",
-                    "الاتحادات المميزة: `type Item = User | Product` مع خاصية مميزة مشتركة",
-                    "الأنواع المتحدة: `let value: string | number;`",
-                    "الأنواع العامة: `function identity<T>(arg: T): T { return arg; }`"
-                ]
+                    }, ]
+                }, {
+                    type: "learning",
+                    title: "📚 مرجع مفاهيم TypeScript",
+                    content: [
+                        "أسماء الأنواع: `type UserRole = 'admin' | 'user' | 'moderator';`",
+                        "الواجهات: `interface User { id: number; name: string; }`",
+                        "حراس النوع: `function isUser(obj: any): obj is User { return 'role' in obj; }`",
+                        "الاتحادات المميزة: `type Item = User | Product` مع خاصية مميزة مشتركة",
+                        "الأنواع المتحدة: `let value: string | number;`",
+                        "الأنواع العامة: `function identity<T>(arg: T): T { return arg; }`"
+                    ]
+                }],
+                timer: {
+                    title: "الوقت المتبقي لإكمال المهمة",
+                    message: "أكمل المهمة قبل الموعد النهائي! - يتم قبول التسليم فقط في الساعات الست الأخيرة.",
+                    days: "أيام",
+                    hours: "ساعات",
+                    minutes: "دقائق",
+                    seconds: "ثواني"
+                },
+                thankYou: "\"شكرًا لجهودك الجادة وتفانيك. نقدر جهودك!\"",
+                buttonText: "English / العربية",
+                finishDate: "الانتهاء بحلول: 4 اوكتوبر 2026"
             }
-        ],
-        timer: {
-            title: "الوقت المتبقي لإكمال المهمة",
-            message: "أكمل المهمة قبل الموعد النهائي! - يتم قبول التسليم فقط في الساعات الست الأخيرة.",
-            days: "أيام",
-            hours: "ساعات",
-            minutes: "دقائق",
-            seconds: "ثواني"
-        },
-        thankYou: "\"شكرًا لجهودك الجادة وتفانيك. نقدر جهودك!\"",
-        buttonText: "English / العربية",
-        finishDate: "الانتهاء بحلول: 4 اوكتوبر 2025"
-    }
-};
+        };
 
         // Render content based on language
         function renderContent(lang) {
             const data = taskData[lang];
             const taskContent = document.getElementById('taskContent');
-            
+
             // Update page title and subtitle
             document.getElementById('title').textContent = data.title;
             document.getElementById('subtitle').textContent = data.subtitle;
-            
+
             // Update timer section
             document.getElementById('timer-title').textContent = data.timer.title;
             document.getElementById('timer-message').textContent = data.timer.message;
@@ -674,31 +654,31 @@ function processItems(items) {
             document.getElementById('minutes-label').textContent = data.timer.minutes;
             document.getElementById('seconds-label').textContent = data.timer.seconds;
             document.getElementById('finish-date').textContent = data.finishDate;
-            
+
             // Update thank you message
             document.getElementById('thankYou').textContent = data.thankYou;
-            
+
             // Update button text
             document.getElementById('languageToggle').textContent = data.buttonText;
-            
+
             // Clear existing content
             taskContent.innerHTML = '';
-            
+
             // Render each section
             data.sections.forEach(section => {
                 const sectionEl = document.createElement('div');
                 sectionEl.className = 'section';
-                
+
                 if (section.type === 'requirements') {
                     sectionEl.classList.add('requirements');
                 } else if (section.type === 'bonus') {
                     sectionEl.classList.add('bonus');
                 }
-                
+
                 const titleEl = document.createElement('h2');
                 titleEl.textContent = section.title;
                 sectionEl.appendChild(titleEl);
-                
+
                 if (section.type === 'idea' || section.type === 'note') {
                     const contentEl = document.createElement('p');
                     contentEl.textContent = section.content;
@@ -708,7 +688,7 @@ function processItems(items) {
                         const itemTitle = document.createElement('h3');
                         itemTitle.textContent = item.title;
                         sectionEl.appendChild(itemTitle);
-                        
+
                         if (item.type === 'list') {
                             const listEl = document.createElement('ul');
                             item.items.forEach(listItem => {
@@ -721,7 +701,7 @@ function processItems(items) {
                             const contentEl = document.createElement('p');
                             contentEl.textContent = item.content;
                             sectionEl.appendChild(contentEl);
-                            
+
                             const exampleEl = document.createElement('div');
                             exampleEl.className = 'output-example';
                             exampleEl.textContent = item.example;
@@ -737,10 +717,10 @@ function processItems(items) {
                     });
                     sectionEl.appendChild(listEl);
                 }
-                
+
                 taskContent.appendChild(sectionEl);
             });
-            
+
             // Set text direction based on language
             if (lang === 'ar') {
                 document.body.setAttribute('dir', 'rtl');
@@ -757,17 +737,17 @@ function processItems(items) {
 
         // Timer functionality
         function startCountdown() {
-            // Set the date we're counting down to (September 27, 2025)
-            const countDownDate = new Date("Oct 4, 2025 23:59:59").getTime();
-            
+            // Set the date we're counting down to (September 27, 2026)
+            const countDownDate = new Date("Oct 4, 2026 23:59:59").getTime();
+
             // Update the countdown every 1 second
             const countdown = setInterval(() => {
                 // Get today's date and time
                 const now = new Date().getTime();
-                
+
                 // Find the distance between now and the countdown date
                 const distance = countDownDate - now;
-                
+
                 // If the countdown is over, write some text
                 if (distance < 0) {
                     clearInterval(countdown);
@@ -777,13 +757,13 @@ function processItems(items) {
                     document.getElementById("seconds").textContent = "00";
                     return;
                 }
-                
+
                 // Time calculations for days, hours, minutes and seconds
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                
+
                 // Display the results
                 document.getElementById("days").textContent = days.toString().padStart(2, '0');
                 document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
@@ -796,10 +776,10 @@ function processItems(items) {
         document.addEventListener('DOMContentLoaded', function() {
             // Render English content by default
             renderContent('en');
-            
+
             // Start the countdown timer
             startCountdown();
-            
+
             // Language toggle functionality
             document.getElementById('languageToggle').addEventListener('click', function() {
                 const currentLang = document.body.getAttribute('dir') === 'rtl' ? 'ar' : 'en';
@@ -809,4 +789,5 @@ function processItems(items) {
         });
     </script>
 </body>
+
 </html>

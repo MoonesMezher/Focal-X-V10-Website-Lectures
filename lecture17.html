@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Focal X - Node.js Bootcamp: Lecture 17 </title><link rel="manifest" href="./manifest.json" />
+    <title>Focal X - Node.js Bootcamp: Lecture 17 </title>
+    <link rel="manifest" href="./manifest.json" />
     <link rel="apple-touch-icon" href="./logo.jpg">
     <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
     <meta name="theme-color" content="#b21f1f">
     <link rel="stylesheet" href="./assets/lecture.css">
 </head>
+
 <body>
     <div class="container">
         <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
@@ -16,14 +19,14 @@
             <h1 id="lecture-title">Focal X - Node.js Bootcamp</h1>
             <p class="subtitle" id="lecture-subtitle">Node</p>
         </header>
-        
+
         <div class="content">
             <div class="lecture-content">
                 <h2>Lecture Content</h2>
                 <div id="tabs-container"></div>
                 <div id="tab-content-container"></div>
             </div>
-            
+
             <div class="interactive-section">
                 <h2>Interactive Questions & Tasks</h2>
                 <div id="questions-container"></div>
@@ -32,35 +35,33 @@
     </div>
 
     <footer class="footer">
-        <p>&copy; 2025 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
+        <p>&copy; 2026 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
     </footer>
 
-        <script src="./reg.js"></script>
-<script>
+    <script src="./reg.js"></script>
+    <script>
         // ==================== CONFIGURATION ====================
         // Update these arrays to change the content of your lecture
-        
+
         // Lecture metadata
         const lectureConfig = {
             title: "Focal X - Node.js Bootcamp",
             subtitle: "NPM, Development Tools & ExpressJS (Middlewares, Project Structure)"
         };
-        
-       // Lecture content organized by tabs
-const lectureContent = [
-    {
-        tabTitle: "Last Lesson",
-        title: "Last Lesson Recap",
-        content: `/*
+
+        // Lecture content organized by tabs
+        const lectureContent = [{
+            tabTitle: "Last Lesson",
+            title: "Last Lesson Recap",
+            content: `/*
 1- HTTP Module
 2- ExpressJS Setup
 3- ExpressJS Routing
 */`
-    },
-    {
-        tabTitle: "NPM & Package Management",
-        title: "Node Package Manager Essentials",
-        content: `/*
+        }, {
+            tabTitle: "NPM & Package Management",
+            title: "Node Package Manager Essentials",
+            content: `/*
 NPM (Node Package Manager) - Your development toolbox
 
 Why we need libraries?
@@ -114,11 +115,10 @@ Security Best Practices:
 
 // Versioning: [major].[minor].[patch]
 // Example: 1.2.3 - Major changes . minor features . bug fixes`
-    },
-    {
-        tabTitle: "Development Tools & Environment",
-        title: "Essential Development Setup",
-        content: `/*
+        }, {
+            tabTitle: "Development Tools & Environment",
+            title: "Essential Development Setup",
+            content: `/*
 Development Tools & Environment Configuration
 */
 
@@ -186,11 +186,10 @@ coverage/
 // - Debug request/response cycles
 // - Document API endpoints
 // - Automated testing`
-    },
-    {
-        tabTitle: "Request & Response Objects",
-        title: "Mastering Request & Response",
-        content: `/*
+        }, {
+            tabTitle: "Request & Response Objects",
+            title: "Mastering Request & Response",
+            content: `/*
 Request Object Properties:
 • req.params - Route parameters
 • req.query - URL query parameters  
@@ -276,11 +275,10 @@ app.get('/set-headers', (req, res) => {
     });
     res.json({ message: 'Custom headers set' });
 });`
-    },
-    {
-        tabTitle: "Middleware Concepts",
-        title: "Express Middleware Mastery",
-        content: `/*
+        }, {
+            tabTitle: "Middleware Concepts",
+            title: "Express Middleware Mastery",
+            content: `/*
 Middleware: Functions that have access to request, response, and next function
 
 Types of Middleware:
@@ -357,11 +355,10 @@ app.use('*', (req, res) => {
 // 2. Morgan: npm install morgan
 const morgan = require('morgan');
 app.use(morgan('dev')); // Pre-configured logging formats`
-    },
-    {
-        tabTitle: "Project Structure & Organization",
-        title: "Scalable Express Application Architecture",
-        content: `/*
+        }, {
+            tabTitle: "Project Structure & Organization",
+            title: "Scalable Express Application Architecture",
+            content: `/*
 Recommended Project Structure:
 src/
   ├── controllers/     # Route handlers (OOP style)
@@ -458,98 +455,94 @@ module.exports = app;
 
 // Using plop.js for code generation (devDependencies)
 // Why in devDependencies? Only used during development, not in production`
-    },
-];
+        }, ];
 
-// Enhanced Questions and Tasks with new content
-const questions = [
-    // Development Tools & Environment
-    {
-        type: "question",
-        question: "What is the main purpose of a .env file in Node.js applications?",
-        options: [
-            "To store HTML templates",
-            "To store environment variables and configuration",
-            "To store JavaScript functions",
-            "To store database queries"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "Which files should be included in .gitignore for a Node.js project?",
-        options: [
-            "package.json and app.js",
-            "node_modules and .env",
-            "src folder and routes",
-            "README.md and documentation"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "What is the key difference between nodemon and Node.js --watch flag?",
-        options: [
-            "Nodemon only works on Windows",
-            "--watch has more features and configuration options",
-            "Nodemon watches more file types and is more configurable",
-            "There is no difference, they are the same"
-        ],
-        correctIndex: 2
-    },
-    {
-        type: "question",
-        question: "How do you access environment variables in a Node.js application?",
-        options: [
-            "Using process.config",
-            "Using global.env",
-            "Using process.env",
-            "Using require('env')"
-        ],
-        correctIndex: 2
-    },
+        // Enhanced Questions and Tasks with new content
+        const questions = [
+            // Development Tools & Environment
+            {
+                type: "question",
+                question: "What is the main purpose of a .env file in Node.js applications?",
+                options: [
+                    "To store HTML templates",
+                    "To store environment variables and configuration",
+                    "To store JavaScript functions",
+                    "To store database queries"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "Which files should be included in .gitignore for a Node.js project?",
+                options: [
+                    "package.json and app.js",
+                    "node_modules and .env",
+                    "src folder and routes",
+                    "README.md and documentation"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "What is the key difference between nodemon and Node.js --watch flag?",
+                options: [
+                    "Nodemon only works on Windows",
+                    "--watch has more features and configuration options",
+                    "Nodemon watches more file types and is more configurable",
+                    "There is no difference, they are the same"
+                ],
+                correctIndex: 2
+            }, {
+                type: "question",
+                question: "How do you access environment variables in a Node.js application?",
+                options: [
+                    "Using process.config",
+                    "Using global.env",
+                    "Using process.env",
+                    "Using require('env')"
+                ],
+                correctIndex: 2
+            },
 
-    // Project Structure & Organization
+            // Project Structure & Organization
 
-    // Middleware & Error Handling
-    {
-        type: "question",
-        question: "What does the 'next' function do in Express middleware?",
-        options: [
-            "It sends a response to the client",
-            "It moves to the next middleware function in the stack",
-            "It skips the current request",
-            "It terminates the request-response cycle"
-        ],
-        correctIndex: 1
-    },
-    // Practical Tasks - Development Tools
-    {
-        type: "task",
-        title: "Project Structure Implementation",
-        content: "Restructure an existing Express application using the recommended folder structure (src/ with controllers, routes, middlewares, models). Convert existing route handlers to OOP controller classes with proper error handling using try-catch. Implement a central error handling middleware."
-    },
+            // Middleware & Error Handling
+            {
+                type: "question",
+                question: "What does the 'next' function do in Express middleware?",
+                options: [
+                    "It sends a response to the client",
+                    "It moves to the next middleware function in the stack",
+                    "It skips the current request",
+                    "It terminates the request-response cycle"
+                ],
+                correctIndex: 1
+            },
+            // Practical Tasks - Development Tools
+            {
+                type: "task",
+                title: "Project Structure Implementation",
+                content: "Restructure an existing Express application using the recommended folder structure (src/ with controllers, routes, middlewares, models). Convert existing route handlers to OOP controller classes with proper error handling using try-catch. Implement a central error handling middleware."
+            },
 
-    // Practical Tasks - Express.js
-    {
-        type: "task",
-        title: "Middleware Development",
-        content: "Create custom middleware for authentication, request logging, and rate limiting. Implement HOF middleware for role-based access control. Create an error handling middleware that differentiates between operational errors and programming errors, providing appropriate responses for each."
-    },
+            // Practical Tasks - Express.js
+            {
+                type: "task",
+                title: "Middleware Development",
+                content: "Create custom middleware for authentication, request logging, and rate limiting. Implement HOF middleware for role-based access control. Create an error handling middleware that differentiates between operational errors and programming errors, providing appropriate responses for each."
+            },
 
-    // Search & Research Tasks
-    {
-        type: "search-task",
-        title: "Research: Express.js Best Practices",
-        content: "Research and document Express.js best practices for production applications. Include topics like project structure, environment configuration, performance optimization, security practices, and deployment strategies. Create a checklist for production-ready Express applications."
-    },
-    {
-        type: "search-task", 
-        title: "Study: Express Middleware Ecosystem",
-        content: "Explore the most popular Express middleware packages and their use cases. Research and compare packages for authentication (Passport.js, JWT), validation (Joi, Express-validator), logging (Morgan, Winston), and error handling. Create a guide on when to use each middleware."
-    },
-];// Functions to render the content - you don't need to modify these
-        
-        </script><script src="./assets/lecture.js"></script>
+            // Search & Research Tasks
+            {
+                type: "search-task",
+                title: "Research: Express.js Best Practices",
+                content: "Research and document Express.js best practices for production applications. Include topics like project structure, environment configuration, performance optimization, security practices, and deployment strategies. Create a checklist for production-ready Express applications."
+            }, {
+                type: "search-task",
+                title: "Study: Express Middleware Ecosystem",
+                content: "Explore the most popular Express middleware packages and their use cases. Research and compare packages for authentication (Passport.js, JWT), validation (Joi, Express-validator), logging (Morgan, Winston), and error handling. Create a guide on when to use each middleware."
+            },
+        ]; // Functions to render the content - you don't need to modify these
+    </script>
+    <script src="./assets/lecture.js"></script>
 </body>
+
 </html>

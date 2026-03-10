@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Focal X - Node.js Bootcamp: Lecture 5 </title><link rel="manifest" href="./manifest.json" />
+    <title>Focal X - Node.js Bootcamp: Lecture 5 </title>
+    <link rel="manifest" href="./manifest.json" />
     <link rel="apple-touch-icon" href="./logo.jpg">
     <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
     <meta name="theme-color" content="#b21f1f">
     <link rel="stylesheet" href="./assets/lecture.css">
 </head>
+
 <body>
     <div class="container">
         <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
@@ -16,14 +19,14 @@
             <h1 id="lecture-title">Focal X - Node.js Bootcamp</h1>
             <p class="subtitle" id="lecture-subtitle">Advanced JavaScript: Event Loop, Regex, ES6, OOP, and APIs</p>
         </header>
-        
+
         <div class="content">
             <div class="lecture-content">
                 <h2>Lecture Content</h2>
                 <div id="tabs-container"></div>
                 <div id="tab-content-container"></div>
             </div>
-            
+
             <div class="interactive-section">
                 <h2>Interactive Questions & Tasks</h2>
                 <div id="questions-container"></div>
@@ -32,35 +35,33 @@
     </div>
 
     <footer class="footer">
-        <p>&copy; 2025 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
+        <p>&copy; 2026 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
     </footer>
-        <script src="./reg.js"></script>
-<script>
+    <script src="./reg.js"></script>
+    <script>
         // ==================== CONFIGURATION ====================
         // Update these arrays to change the content of your lecture
-        
+
         // Lecture metadata
         const lectureConfig = {
             title: "Focal X - Node.js Bootcamp",
             subtitle: "Advanced JavaScript: Objects, Promises, Error Handling"
         };
-        
+
         // Lecture content organized by tabs
-        const lectureContent = [
-            {
-                tabTitle: "Last Lesson",
-                title: "Last Lesson Recap",
-                content: `/*
+        const lectureContent = [{
+            tabTitle: "Last Lesson",
+            title: "Last Lesson Recap",
+            content: `/*
 1- Arrays 
 2- Mutate & Not-Mutate methods
 3- SetTimeout & SetInterval
 4- Date in JavaScript 
 */`
-            },
-                        {
-                tabTitle: "Map & Set",
-                title: "Map and Set Data Structures",
-                content: `// A Map stores key-value pairs and preserves insertion order
+        }, {
+            tabTitle: "Map & Set",
+            title: "Map and Set Data Structures",
+            content: `// A Map stores key-value pairs and preserves insertion order
 const map = new Map();
 
 // - Add
@@ -134,11 +135,10 @@ set.forEach((val) => {
 // - Clear
 set.clear();
 console.log(set); // Set(0) {}`
-            },
-            {
-                tabTitle: "Objects",
-                title: "JavaScript Objects",
-                content: `// Objects group related properties/behaviors
+        }, {
+            tabTitle: "Objects",
+            title: "JavaScript Objects",
+            content: `// Objects group related properties/behaviors
 const person = {
     name: "Alice",
     age: 30,
@@ -222,11 +222,10 @@ const user = {
 
 // Optional chaining (ES2020)
 console.log(person?.address?.zipCode ?? "Unknown"); // "Unknown"`
-            },
-            {
-                tabTitle: "Error Handling",
-                title: "try...catch for Error Handling",
-                content: `// Use try...catch to handle errors gracefully
+        }, {
+            tabTitle: "Error Handling",
+            title: "try...catch for Error Handling",
+            content: `// Use try...catch to handle errors gracefully
 // Most commonly used with promises and async methods
 
 /*
@@ -278,11 +277,10 @@ try {
 } catch (error) {
     console.log("Caught an error:", error.message);
 }`
-            },
-            {
-                tabTitle: "Operators",
-                title: "Important JavaScript Operators",
-                content: `// Logical Operators:
+        }, {
+            tabTitle: "Operators",
+            title: "Important JavaScript Operators",
+            content: `// Logical Operators:
 
 // 1. && (Logical AND): Returns the first falsy value or the last truthy value
 const user = { isAdmin: true };
@@ -327,11 +325,10 @@ console.log(message); // "Yes"
 // | ??       | Nullish Coalescing  | Right-hand if left is null/undefined | 0 ?? 5 → 0             |  
 // | ?.       | Optional Chaining   | undefined if path is nullish      | user?.address?.city → safe |  
 // | ? :      | Ternary             | Value based on condition          | isValid ? "Yes" : "No"     |`
-            },
-            {
-                tabTitle: "Promises",
-                title: "JavaScript Promises",
-                content: `// Promises represent the eventual completion of an asynchronous operation
+        }, {
+            tabTitle: "Promises",
+            title: "JavaScript Promises",
+            content: `// Promises represent the eventual completion of an asynchronous operation
 
 // Creating a promise
 const promise = new Promise((resolve, reject) => {
@@ -397,119 +394,107 @@ const promise3 = fetchUserData();
 Promise.all([promise1, promise2, promise3])
     .then(values => console.log(values))
     .catch(error => console.error(error));`
-            }
-            ];
-        
+        }];
+
         // Questions and tasks
-        const questions = [
-        {
-                type: "question",
-                question: "Which operator returns the right-hand value only if the left-hand value is null or undefined?",
-                options: [
-                    "Logical OR (||)",
-                    "Optional Chaining (?.)",
-                    "Nullish Coalescing (??)",
-                    "Ternary Operator (?:)"
-                ],
-                correctIndex: 2
-            },
-            {
-                type: "question",
-                question: "What does the finally block do in a try/catch statement?",
-                options: [
-                    "Runs only if an error occurs",
-                    "Runs only if no error occurs",
-                    "Runs regardless of try/catch outcome",
-                    "Runs instead of the catch block"
-                ],
-                correctIndex: 2
-            },
-            {
-                type: "question",
-                question: "Which of these is NOT a way to access object properties?",
-                options: [
-                    "obj.property",
-                    "obj['property']",
-                    "obj->property",
-                    "obj[variable]"
-                ],
-                correctIndex: 2
-            },
-            {
-                type: "question",
-                question: "What will this code output? console.log(0 || 'hello')",
-                options: [
-                    "0",
-                    "'hello'",
-                    "true",
-                    "false"
-                ],
-                correctIndex: 1
-            },
-            {
-                type: "question",
-                question: "What does the await keyword do?",
-                options: [
-                    "Pauses execution until the promise is settled",
-                    "Cancels a promise",
-                    "Creates a new promise",
-                    "Handles promise rejection"
-                ],
-                correctIndex: 0
-            },
-            {
-                type: "question",
-                question: "Which method would you use to make an object immutable?",
-                options: [
-                    "Object.freeze()",
-                    "Object.seal()",
-                    "Object.preventExtensions()",
-                    "Object.lock()"
-                ],
-                correctIndex: 0
-            },
-            {
-                type: "question",
-                question: "What does the 'finally' block do in a try/catch statement?",
-                options: [
-                    "Runs only if an error occurs",
-                    "Runs only if no error occurs",
-                    "Runs regardless of try/catch outcome",
-                    "Runs instead of the catch block"
-                ],
-                correctIndex: 2
-            },
-            {
-                type: "question",
-                question: "Which method converts a JSON string to a JavaScript object?",
-                options: [
-                    "JSON.parse()",
-                    "JSON.stringify()",
-                    "JSON.toObject()",
-                    "JSON.convert()"
-                ],
-                correctIndex: 0
-            },
-            {
-                type: "task",
-                title: "Practice: Working with Objects",
-                content: "Create a person object with properties for name, age, and address. Then create a function that deep clones this object using JSON methods. Modify the clone and verify the original object remains unchanged."
-            },
-            {
-                type: "search-task",
-                title: "Research: Map & Set",
-                content: "Research the differences between Map & Set in JavaScript, and how can you use it instead of arrays."
-            },
-            {
-                type: "search-task",
-                title: "Research: Promise Methods",
-                content: "Research the differences between Promise.all(), Promise.race(), Promise.allSettled(), and Promise.any(). Create examples demonstrating each method's behavior."
-            }
-        ];
-        
+        const questions = [{
+            type: "question",
+            question: "Which operator returns the right-hand value only if the left-hand value is null or undefined?",
+            options: [
+                "Logical OR (||)",
+                "Optional Chaining (?.)",
+                "Nullish Coalescing (??)",
+                "Ternary Operator (?:)"
+            ],
+            correctIndex: 2
+        }, {
+            type: "question",
+            question: "What does the finally block do in a try/catch statement?",
+            options: [
+                "Runs only if an error occurs",
+                "Runs only if no error occurs",
+                "Runs regardless of try/catch outcome",
+                "Runs instead of the catch block"
+            ],
+            correctIndex: 2
+        }, {
+            type: "question",
+            question: "Which of these is NOT a way to access object properties?",
+            options: [
+                "obj.property",
+                "obj['property']",
+                "obj->property",
+                "obj[variable]"
+            ],
+            correctIndex: 2
+        }, {
+            type: "question",
+            question: "What will this code output? console.log(0 || 'hello')",
+            options: [
+                "0",
+                "'hello'",
+                "true",
+                "false"
+            ],
+            correctIndex: 1
+        }, {
+            type: "question",
+            question: "What does the await keyword do?",
+            options: [
+                "Pauses execution until the promise is settled",
+                "Cancels a promise",
+                "Creates a new promise",
+                "Handles promise rejection"
+            ],
+            correctIndex: 0
+        }, {
+            type: "question",
+            question: "Which method would you use to make an object immutable?",
+            options: [
+                "Object.freeze()",
+                "Object.seal()",
+                "Object.preventExtensions()",
+                "Object.lock()"
+            ],
+            correctIndex: 0
+        }, {
+            type: "question",
+            question: "What does the 'finally' block do in a try/catch statement?",
+            options: [
+                "Runs only if an error occurs",
+                "Runs only if no error occurs",
+                "Runs regardless of try/catch outcome",
+                "Runs instead of the catch block"
+            ],
+            correctIndex: 2
+        }, {
+            type: "question",
+            question: "Which method converts a JSON string to a JavaScript object?",
+            options: [
+                "JSON.parse()",
+                "JSON.stringify()",
+                "JSON.toObject()",
+                "JSON.convert()"
+            ],
+            correctIndex: 0
+        }, {
+            type: "task",
+            title: "Practice: Working with Objects",
+            content: "Create a person object with properties for name, age, and address. Then create a function that deep clones this object using JSON methods. Modify the clone and verify the original object remains unchanged."
+        }, {
+            type: "search-task",
+            title: "Research: Map & Set",
+            content: "Research the differences between Map & Set in JavaScript, and how can you use it instead of arrays."
+        }, {
+            type: "search-task",
+            title: "Research: Promise Methods",
+            content: "Research the differences between Promise.all(), Promise.race(), Promise.allSettled(), and Promise.any(). Create examples demonstrating each method's behavior."
+        }];
+
         // ==================== TEMPLATE RENDERING ====================
         // Functions to render the content - you don't need to modify these
-        
-        </script><script src="./assets/lecture.js"></script>
+    </script>
+    <script src="./assets/lecture.js"></script>
 </body>
+
 </html>

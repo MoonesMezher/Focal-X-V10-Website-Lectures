@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <meta name="theme-color" content="#b21f1f">
     <link rel="stylesheet" href="./assets/lecture.css">
 </head>
+
 <body>
     <div class="container">
         <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
@@ -17,14 +19,14 @@
             <h1 id="lecture-title">Focal X - Node.js Bootcamp</h1>
             <p class="subtitle" id="lecture-subtitle">Node</p>
         </header>
-        
+
         <div class="content">
             <div class="lecture-content">
                 <h2>Lecture Content</h2>
                 <div id="tabs-container"></div>
                 <div id="tab-content-container"></div>
             </div>
-            
+
             <div class="interactive-section">
                 <h2>Interactive Questions & Tasks</h2>
                 <div id="questions-container"></div>
@@ -33,28 +35,27 @@
     </div>
 
     <footer class="footer">
-        <p>&copy; 2025 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
+        <p>&copy; 2026 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
     </footer>
 
-        <script src="./reg.js"></script>
-<script>
+    <script src="./reg.js"></script>
+    <script>
         // ==================== CONFIGURATION ====================
         // Update these arrays to change the content of your lecture
         // ==================== CONFIGURATION ====================
-// Update these arrays to change the content of your lecture
+        // Update these arrays to change the content of your lecture
 
-// Lecture metadata
-const lectureConfig = {
-    title: "Focal X V10 - Node.js Bootcamp",
-    subtitle: "Docker for Backend Developers"
-};
+        // Lecture metadata
+        const lectureConfig = {
+            title: "Focal X V10 - Node.js Bootcamp",
+            subtitle: "Docker for Backend Developers"
+        };
 
-// Lecture content organized by tabs
-const lectureContent = [
-    {
-        tabTitle: "Why Docker?",
-        title: "Why Docker? Containerization Benefits",
-        content: `// The Problem: "It works on my machine!"
+        // Lecture content organized by tabs
+        const lectureContent = [{
+            tabTitle: "Why Docker?",
+            title: "Why Docker? Containerization Benefits",
+            content: `// The Problem: "It works on my machine!"
 // Developers face environment inconsistencies:
 // - Different operating systems
 // - Different software versions
@@ -105,11 +106,10 @@ const lectureContent = [
 // - Docker Compose (Multi-container apps)
 
 console.log("Docker: Solve 'works on my machine' problems!");`
-    },
-    {
-        tabTitle: "Docker vs VMs",
-        title: "Docker vs Virtual Machines",
-        content: `// Traditional Virtual Machines (VMs) vs Docker Containers
+        }, {
+            tabTitle: "Docker vs VMs",
+            title: "Docker vs Virtual Machines",
+            content: `// Traditional Virtual Machines (VMs) vs Docker Containers
 
 // Virtual Machine:
 // +-------------------------------+
@@ -182,11 +182,10 @@ console.log("Docker: Solve 'works on my machine' problems!");`
 // Docker: Like renting a room in a shared house (lightweight, efficient)
 
 console.log("Containers: Lightweight, fast, and efficient!");`
-    },
-    {
-        tabTitle: "Basic Commands",
-        title: "Basic Docker Commands",
-        content: `// Docker CLI Cheat Sheet
+        }, {
+            tabTitle: "Basic Commands",
+            title: "Basic Docker Commands",
+            content: `// Docker CLI Cheat Sheet
 
 // 1. Version & Info
 docker --version                   # Check Docker version
@@ -254,11 +253,10 @@ docker volume prune                # Remove unused volumes
 // 6. docker rm myapp
 
 console.log("Master Docker commands for efficient development!");`
-    },
-    {
-        tabTitle: "Dockerizing Node.js",
-        title: "Dockerizing a Node.js/Express Application",
-        content: `// Step-by-Step: Dockerize Node.js Application
+        }, {
+            tabTitle: "Dockerizing Node.js",
+            title: "Dockerizing a Node.js/Express Application",
+            content: `// Step-by-Step: Dockerize Node.js Application
 
 // 1. Create a Simple Express App
 // package.json
@@ -358,11 +356,10 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \\
 //    Create non-root user in Dockerfile
 
 console.log("Node.js app successfully dockerized! 🎉");`
-    },
-    {
-        tabTitle: "Docker Compose",
-        title: "Docker Compose for Multi-Container Apps",
-        content: `// Docker Compose: Manage Multi-Container Applications
+        }, {
+            tabTitle: "Docker Compose",
+            title: "Docker Compose for Multi-Container Apps",
+            content: `// Docker Compose: Manage Multi-Container Applications
 
 // Why Docker Compose?
 // - Define and run multi-container Docker apps
@@ -478,11 +475,10 @@ services:
 // docker volume inspect mongo-data  # Volume details
 
 console.log("Docker Compose: Simplify multi-container apps!");`
-    },
-    {
-        tabTitle: "Environment Mgmt",
-        title: "Environment Management with Docker",
-        content: `// Best Practices for Environment Management
+        }, {
+            tabTitle: "Environment Mgmt",
+            title: "Environment Management with Docker",
+            content: `// Best Practices for Environment Management
 
 // 1. Environment Variables
 // Pass sensitive data via environment variables, not in code
@@ -619,11 +615,10 @@ const req = http.request(options, (res) => {
 // 5. Provide default values for non-critical variables
 
 console.log("Secure and flexible environment management!");`
-    },
-    {
-        tabTitle: "Dockerfile Best Practices",
-        title: "Dockerfile Best Practices for Node.js",
-        content: `// Dockerfile Best Practices for Node.js Applications
+        }, {
+            tabTitle: "Dockerfile Best Practices",
+            title: "Dockerfile Best Practices for Node.js",
+            content: `// Dockerfile Best Practices for Node.js Applications
 
 // 1. Use Official Base Images
 // Good:
@@ -788,11 +783,10 @@ CMD ["npm", "start"]
 // Best practices: ~80MB
 
 console.log("Follow best practices for efficient, secure Docker images!");`
-    },
-    {
-        tabTitle: "CI/CD Pipeline",
-        title: "Docker in CI/CD Pipeline",
-        content: `// Docker in Continuous Integration/Continuous Deployment
+        }, {
+            tabTitle: "CI/CD Pipeline",
+            title: "Docker in CI/CD Pipeline",
+            content: `// Docker in Continuous Integration/Continuous Deployment
 
 // Basic CI/CD Pipeline with Docker:
 
@@ -942,146 +936,130 @@ docker logs myapp
 docker run --log-driver=syslog myapp
 
 console.log("Docker: The foundation of modern CI/CD pipelines!");`
-    }
-];
+        }];
 
-// Questions and tasks
-const questions = [
-    {
-        type: "question",
-        question: "What is the main benefit of using Docker containers?",
-        options: [
-            "They make applications run faster",
-            "They provide consistent environments across different machines",
-            "They automatically write code for you",
-            "They replace the need for databases"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "How are Docker containers different from Virtual Machines?",
-        options: [
-            "Containers are heavier and slower than VMs",
-            "Containers share the host OS kernel, making them lighter",
-            "VMs use less memory than containers",
-            "Containers require a full operating system for each container"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "Which command builds a Docker image from a Dockerfile?",
-        options: [
-            "docker run -t myapp .",
-            "docker build -t myapp .",
-            "docker create image myapp",
-            "docker image build myapp"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "What is the purpose of Docker Compose?",
-        options: [
-            "To write Dockerfiles",
-            "To manage single container applications only",
-            "To define and run multi-container Docker applications",
-            "To monitor Docker container performance"
-        ],
-        correctIndex: 2
-    },
-    {
-        type: "task",
-        title: "Docker Command Practice",
-        content: "Practice these Docker commands: 1) List all containers, 2) Run a Node.js container interactively, 3) Build an image from a Dockerfile, 4) View container logs, 5) Remove all stopped containers."
-    },
-    {
-        type: "question",
-        question: "In a Dockerfile, what does the 'EXPOSE' instruction do?",
-        options: [
-            "It publishes the port to the host machine",
-            "It documents which port the application uses",
-            "It automatically opens the port in the firewall",
-            "It installs network drivers"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "search-task",
-        title: "Research: Docker Hub vs GitHub Container Registry",
-        content: "Research the differences between Docker Hub and GitHub Container Registry. When would you choose one over the other? List the pros and cons of each."
-    },
-    {
-        type: "question",
-        question: "What is the purpose of a .dockerignore file?",
-        options: [
-            "To ignore Docker commands",
-            "To specify files that should not be copied into the Docker image",
-            "To ignore Docker errors",
-            "To specify which containers to ignore"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "task",
-        title: "Create a Dockerfile",
-        content: "Create a Dockerfile for a simple Express.js application that: 1) Uses Node.js 16 Alpine, 2) Installs dependencies, 3) Copies application code, 4) Exposes port 3000, 5) Runs the application with npm start."
-    },
-    {
-        type: "question",
-        question: "What is multi-stage build in Docker and why is it useful?",
-        options: [
-            "It allows building multiple applications at once",
-            "It creates smaller production images by separating build and runtime",
-            "It builds images for multiple platforms simultaneously",
-            "It stages Docker containers before deployment"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "task",
-        title: "Docker Compose Exercise",
-        content: "Create a docker-compose.yml file for a Node.js app with MongoDB. Include: 1) Node.js service that depends on MongoDB, 2) MongoDB service with volume for data persistence, 3) Environment variables, 4) Port mappings, 5) Health checks."
-    },
-    {
-        type: "question",
-        question: "Which base image is recommended for production Node.js applications?",
-        options: [
-            "node:latest",
-            "node:16-alpine",
-            "ubuntu:latest with Node.js installed",
-            "centos:latest"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "task",
-        title: "Dockerize Your Previous Project",
-        content: "Take one of your previous Node.js projects (like Task 7 or 8) and dockerize it. Create a Dockerfile and docker-compose.yml file. Test that it runs correctly in a container."
-    },
-    {
-        type: "question",
-        question: "What command would you use to run a container in the background?",
-        options: [
-            "docker run -it myapp",
-            "docker run -d myapp",
-            "docker run -b myapp",
-            "docker run --background myapp"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "search-task",
-        title: "Research: Docker Security Best Practices",
-        content: "Research Docker security best practices. Find 5 security recommendations for running Docker containers in production and explain why each is important."
-    },
-    {
-        type: "task",
-        title: "CI/CD Pipeline Design",
-        content: "Design a simple CI/CD pipeline using Docker. Describe each step: 1) Code push triggers build, 2) Docker image build, 3) Run tests in container, 4) Push image to registry, 5) Deploy to server."
-    }
-];
-</script><script src="./assets/lecture.js"></script>
+        // Questions and tasks
+        const questions = [{
+            type: "question",
+            question: "What is the main benefit of using Docker containers?",
+            options: [
+                "They make applications run faster",
+                "They provide consistent environments across different machines",
+                "They automatically write code for you",
+                "They replace the need for databases"
+            ],
+            correctIndex: 1
+        }, {
+            type: "question",
+            question: "How are Docker containers different from Virtual Machines?",
+            options: [
+                "Containers are heavier and slower than VMs",
+                "Containers share the host OS kernel, making them lighter",
+                "VMs use less memory than containers",
+                "Containers require a full operating system for each container"
+            ],
+            correctIndex: 1
+        }, {
+            type: "question",
+            question: "Which command builds a Docker image from a Dockerfile?",
+            options: [
+                "docker run -t myapp .",
+                "docker build -t myapp .",
+                "docker create image myapp",
+                "docker image build myapp"
+            ],
+            correctIndex: 1
+        }, {
+            type: "question",
+            question: "What is the purpose of Docker Compose?",
+            options: [
+                "To write Dockerfiles",
+                "To manage single container applications only",
+                "To define and run multi-container Docker applications",
+                "To monitor Docker container performance"
+            ],
+            correctIndex: 2
+        }, {
+            type: "task",
+            title: "Docker Command Practice",
+            content: "Practice these Docker commands: 1) List all containers, 2) Run a Node.js container interactively, 3) Build an image from a Dockerfile, 4) View container logs, 5) Remove all stopped containers."
+        }, {
+            type: "question",
+            question: "In a Dockerfile, what does the 'EXPOSE' instruction do?",
+            options: [
+                "It publishes the port to the host machine",
+                "It documents which port the application uses",
+                "It automatically opens the port in the firewall",
+                "It installs network drivers"
+            ],
+            correctIndex: 1
+        }, {
+            type: "search-task",
+            title: "Research: Docker Hub vs GitHub Container Registry",
+            content: "Research the differences between Docker Hub and GitHub Container Registry. When would you choose one over the other? List the pros and cons of each."
+        }, {
+            type: "question",
+            question: "What is the purpose of a .dockerignore file?",
+            options: [
+                "To ignore Docker commands",
+                "To specify files that should not be copied into the Docker image",
+                "To ignore Docker errors",
+                "To specify which containers to ignore"
+            ],
+            correctIndex: 1
+        }, {
+            type: "task",
+            title: "Create a Dockerfile",
+            content: "Create a Dockerfile for a simple Express.js application that: 1) Uses Node.js 16 Alpine, 2) Installs dependencies, 3) Copies application code, 4) Exposes port 3000, 5) Runs the application with npm start."
+        }, {
+            type: "question",
+            question: "What is multi-stage build in Docker and why is it useful?",
+            options: [
+                "It allows building multiple applications at once",
+                "It creates smaller production images by separating build and runtime",
+                "It builds images for multiple platforms simultaneously",
+                "It stages Docker containers before deployment"
+            ],
+            correctIndex: 1
+        }, {
+            type: "task",
+            title: "Docker Compose Exercise",
+            content: "Create a docker-compose.yml file for a Node.js app with MongoDB. Include: 1) Node.js service that depends on MongoDB, 2) MongoDB service with volume for data persistence, 3) Environment variables, 4) Port mappings, 5) Health checks."
+        }, {
+            type: "question",
+            question: "Which base image is recommended for production Node.js applications?",
+            options: [
+                "node:latest",
+                "node:16-alpine",
+                "ubuntu:latest with Node.js installed",
+                "centos:latest"
+            ],
+            correctIndex: 1
+        }, {
+            type: "task",
+            title: "Dockerize Your Previous Project",
+            content: "Take one of your previous Node.js projects (like Task 7 or 8) and dockerize it. Create a Dockerfile and docker-compose.yml file. Test that it runs correctly in a container."
+        }, {
+            type: "question",
+            question: "What command would you use to run a container in the background?",
+            options: [
+                "docker run -it myapp",
+                "docker run -d myapp",
+                "docker run -b myapp",
+                "docker run --background myapp"
+            ],
+            correctIndex: 1
+        }, {
+            type: "search-task",
+            title: "Research: Docker Security Best Practices",
+            content: "Research Docker security best practices. Find 5 security recommendations for running Docker containers in production and explain why each is important."
+        }, {
+            type: "task",
+            title: "CI/CD Pipeline Design",
+            content: "Design a simple CI/CD pipeline using Docker. Describe each step: 1) Code push triggers build, 2) Docker image build, 3) Run tests in container, 4) Push image to registry, 5) Deploy to server."
+        }];
+    </script>
+    <script src="./assets/lecture.js"></script>
 </body>
+
 </html>

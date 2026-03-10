@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <meta name="theme-color" content="#b21f1f">
     <link rel="stylesheet" href="./assets/lecture.css">
 </head>
+
 <body>
     <div class="container">
         <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
@@ -17,14 +19,14 @@
             <h1 id="lecture-title">Focal X - Node.js Bootcamp</h1>
             <p class="subtitle" id="lecture-subtitle">Node</p>
         </header>
-        
+
         <div class="content">
             <div class="lecture-content">
                 <h2>Lecture Content</h2>
                 <div id="tabs-container"></div>
                 <div id="tab-content-container"></div>
             </div>
-            
+
             <div class="interactive-section">
                 <h2>Interactive Questions & Tasks</h2>
                 <div id="questions-container"></div>
@@ -33,36 +35,34 @@
     </div>
 
     <footer class="footer">
-        <p>&copy; 2025 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
+        <p>&copy; 2026 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
     </footer>
 
-        <script src="./reg.js"></script>
-<script>
+    <script src="./reg.js"></script>
+    <script>
         // ==================== CONFIGURATION ====================
         // Update these arrays to change the content of your lecture
-        
+
         // Lecture metadata
         const lectureConfig = {
             title: "Focal X - Node.js Bootcamp",
             subtitle: "Authentication & Authorization"
         };
-        
-       // Lecture content organized by tabs
-const lectureContent = [
-    {
-        tabTitle: "Last Lesson",
-        title: "Last Lesson Recap",
-        content: `/*
+
+        // Lecture content organized by tabs
+        const lectureContent = [{
+            tabTitle: "Last Lesson",
+            title: "Last Lesson Recap",
+            content: `/*
 1- Populate
 2- Pagination
 3- Statics 
 4- Plugins
 */`
-    },
-    {
-        tabTitle: "Auth Fundamentals",
-        title: "Authentication & Authorization Fundamentals",
-        content: `// ###################### AUTHENTICATION vs AUTHORIZATION ##############################
+        }, {
+            tabTitle: "Auth Fundamentals",
+            title: "Authentication & Authorization Fundamentals",
+            content: `// ###################### AUTHENTICATION vs AUTHORIZATION ##############################
 
 /*
 1. Authentication (Who are you?)
@@ -164,11 +164,10 @@ LocalStorage (Not Recommended for tokens):
 ❌ No built-in security features
 
 Best Practice: Use HTTP-only cookies for tokens in production.`
-    },
-    {
-        tabTitle: "JWT Deep Dive",
-        title: "JWT Tokens & Implementation",
-        content: `// ###################### JWT DEEP DIVE ##############################
+        }, {
+            tabTitle: "JWT Deep Dive",
+            title: "JWT Tokens & Implementation",
+            content: `// ###################### JWT DEEP DIVE ##############################
 
 /*
 JWT Structure: Header.Payload.Signature
@@ -366,11 +365,10 @@ const refreshTokenPayload = {
     jti: 'unique-refresh-token-456',
     type: 'refresh'
 };`
-    },
-    {
-        tabTitle: "Cookie Security",
-        title: "Secure Cookie Management & Sessions",
-        content: `// ###################### COOKIE SECURITY CONFIGURATION ##############################
+        }, {
+            tabTitle: "Cookie Security",
+            title: "Secure Cookie Management & Sessions",
+            content: `// ###################### COOKIE SECURITY CONFIGURATION ##############################
 
 const cookieParser = require('cookie-parser');
 
@@ -636,167 +634,158 @@ const cookieSecurity = {
         };
     }
 };`
-    },
+        }, ];
+
+        // Updated Questions array aligned with authentication & security topics
+        const questions = [
+            // Authentication Fundamentals
+            {
+                type: "question",
+                question: "What is the key difference between Authentication and Authorization?",
+                options: [
+                    "Authentication checks permissions, Authorization verifies identity",
+                    "Authentication verifies identity, Authorization checks permissions",
+                    "They are the same concept with different names",
+                    "Authentication is for users, Authorization is for applications"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "In the hotel key card analogy, what represents Authorization?",
+                options: [
+                    "Checking your ID at the front desk",
+                    "Your key card only opening your specific room",
+                    "The hotel receptionist verifying your reservation",
+                    "The hotel building security system"
+                ],
+                correctIndex: 1
+            },
+
+            // JWT Deep Dive
+            {
+                type: "question",
+                question: "What are the three main parts of a JWT token?",
+                options: [
+                    "Username, Password, Signature",
+                    "Header, Payload, Signature",
+                    "Token, Secret, Algorithm",
+                    "Public Key, Private Key, Certificate"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "Why should access tokens have short expiration times (15-30 minutes)?",
+                options: [
+                    "To force users to login frequently",
+                    "To reduce server load",
+                    "To limit exposure if token is compromised",
+                    "To comply with legal requirements"
+                ],
+                correctIndex: 2
+            }, {
+                type: "question",
+                question: "Which SameSite cookie setting provides the strongest CSRF protection?",
+                options: [
+                    "'none'",
+                    "'lax'",
+                    "'strict'",
+                    "'secure'"
+                ],
+                correctIndex: 2
+            }, {
+                type: "question",
+                question: "Why is localStorage NOT recommended for storing authentication tokens?",
+                options: [
+                    "It has limited storage capacity",
+                    "It's vulnerable to XSS attacks",
+                    "It doesn't work in all browsers",
+                    "It requires manual token management"
+                ],
+                correctIndex: 1
+            },
+
+            // Auth Middleware
+            {
+                type: "question",
+                question: "What does Role-Based Access Control (RBAC) primarily manage?",
+                options: [
+                    "User authentication methods",
+                    "Token expiration times",
+                    "User permissions based on roles",
+                    "Password complexity requirements"
+                ],
+                correctIndex: 2
+            }, {
+                type: "question",
+                question: "In the token refresh flow, why do we implement token rotation?",
+                options: [
+                    "To reduce database queries",
+                    "To automatically extend token expiration",
+                    "To enhance security by issuing new refresh tokens",
+                    "To support multiple devices simultaneously"
+                ],
+                correctIndex: 2
+            },
+
+            // Security Practices
+            {
+                type: "question",
+                question: "What is the recommended bcrypt salt rounds value for modern applications?",
+                options: [
+                    "8",
+                    "10",
+                    "12",
+                    "16"
+                ],
+                correctIndex: 2
+            }, {
+                type: "question",
+                question: "Which security measure helps prevent brute force attacks on login endpoints?",
+                options: [
+                    "JWT tokens",
+                    "Rate limiting",
+                    "CORS configuration",
+                    "Cookie flags"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "What is the purpose of the 'jti' (JWT ID) claim in tokens?",
+                options: [
+                    "To identify the token type",
+                    "To enable token revocation capabilities",
+                    "To specify the token algorithm",
+                    "To indicate token creation time"
+                ],
+                correctIndex: 1
+            },
+
+            // Practical Implementation Tasks
+            {
+                type: "task",
+                title: "JWT Token Service Implementation",
+                content: "Implement a complete JWT token service with access/refresh tokens, proper payload structure, token verification, error handling, and secure configuration. Include token blacklisting and rotation mechanisms."
+            }, {
+                type: "task",
+                title: "Cookie-Based Authentication System",
+                content: "Build a complete authentication system using HTTP-only cookies. Implement login, logout, token refresh endpoints with proper cookie security flags (httpOnly, secure, sameSite)."
+            }, {
+                type: "search-task",
+                title: "Research: OAuth 2.0 & Social Authentication",
+                content: "Research OAuth 2.0 flows and social authentication providers. Compare implementation strategies for Google, GitHub, and Facebook OAuth. Document security considerations and best practices."
+            }, {
+                type: "search-task",
+                title: "Research: Advanced Security Threats",
+                content: "Research modern authentication security threats including JWT vulnerabilities, timing attacks, session fixation, and token sidejacking. Document prevention strategies and mitigation techniques."
+            }, {
+                type: "search-task",
+                title: "Research: Passwordless Authentication",
+                content: "Research passwordless authentication methods including magic links, WebAuthn, and biometric authentication. Compare security, user experience, and implementation complexity across different approaches."
+            },
         ];
-
-// Updated Questions array aligned with authentication & security topics
-const questions = [
-    // Authentication Fundamentals
-    {
-        type: "question",
-        question: "What is the key difference between Authentication and Authorization?",
-        options: [
-            "Authentication checks permissions, Authorization verifies identity",
-            "Authentication verifies identity, Authorization checks permissions",
-            "They are the same concept with different names",
-            "Authentication is for users, Authorization is for applications"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "In the hotel key card analogy, what represents Authorization?",
-        options: [
-            "Checking your ID at the front desk",
-            "Your key card only opening your specific room",
-            "The hotel receptionist verifying your reservation",
-            "The hotel building security system"
-        ],
-        correctIndex: 1
-    },
-
-    // JWT Deep Dive
-    {
-        type: "question",
-        question: "What are the three main parts of a JWT token?",
-        options: [
-            "Username, Password, Signature",
-            "Header, Payload, Signature",
-            "Token, Secret, Algorithm",
-            "Public Key, Private Key, Certificate"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "Why should access tokens have short expiration times (15-30 minutes)?",
-        options: [
-            "To force users to login frequently",
-            "To reduce server load",
-            "To limit exposure if token is compromised",
-            "To comply with legal requirements"
-        ],
-        correctIndex: 2
-    },
-    {
-        type: "question",
-        question: "Which SameSite cookie setting provides the strongest CSRF protection?",
-        options: [
-            "'none'",
-            "'lax'",
-            "'strict'",
-            "'secure'"
-        ],
-        correctIndex: 2
-    },
-    {
-        type: "question",
-        question: "Why is localStorage NOT recommended for storing authentication tokens?",
-        options: [
-            "It has limited storage capacity",
-            "It's vulnerable to XSS attacks",
-            "It doesn't work in all browsers",
-            "It requires manual token management"
-        ],
-        correctIndex: 1
-    },
-
-    // Auth Middleware
-    {
-        type: "question",
-        question: "What does Role-Based Access Control (RBAC) primarily manage?",
-        options: [
-            "User authentication methods",
-            "Token expiration times",
-            "User permissions based on roles",
-            "Password complexity requirements"
-        ],
-        correctIndex: 2
-    },
-    {
-        type: "question",
-        question: "In the token refresh flow, why do we implement token rotation?",
-        options: [
-            "To reduce database queries",
-            "To automatically extend token expiration",
-            "To enhance security by issuing new refresh tokens",
-            "To support multiple devices simultaneously"
-        ],
-        correctIndex: 2
-    },
-
-    // Security Practices
-    {
-        type: "question",
-        question: "What is the recommended bcrypt salt rounds value for modern applications?",
-        options: [
-            "8",
-            "10",
-            "12",
-            "16"
-        ],
-        correctIndex: 2
-    },
-    {
-        type: "question",
-        question: "Which security measure helps prevent brute force attacks on login endpoints?",
-        options: [
-            "JWT tokens",
-            "Rate limiting",
-            "CORS configuration",
-            "Cookie flags"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "What is the purpose of the 'jti' (JWT ID) claim in tokens?",
-        options: [
-            "To identify the token type",
-            "To enable token revocation capabilities",
-            "To specify the token algorithm",
-            "To indicate token creation time"
-        ],
-        correctIndex: 1
-    },
-
-    // Practical Implementation Tasks
-    {
-        type: "task",
-        title: "JWT Token Service Implementation",
-        content: "Implement a complete JWT token service with access/refresh tokens, proper payload structure, token verification, error handling, and secure configuration. Include token blacklisting and rotation mechanisms."
-    },
-    {
-        type: "task",
-        title: "Cookie-Based Authentication System",
-        content: "Build a complete authentication system using HTTP-only cookies. Implement login, logout, token refresh endpoints with proper cookie security flags (httpOnly, secure, sameSite)."
-    },
-    {
-        type: "search-task",
-        title: "Research: OAuth 2.0 & Social Authentication",
-        content: "Research OAuth 2.0 flows and social authentication providers. Compare implementation strategies for Google, GitHub, and Facebook OAuth. Document security considerations and best practices."
-    },
-    {
-        type: "search-task",
-        title: "Research: Advanced Security Threats",
-        content: "Research modern authentication security threats including JWT vulnerabilities, timing attacks, session fixation, and token sidejacking. Document prevention strategies and mitigation techniques."
-    },
-    {
-        type: "search-task",
-        title: "Research: Passwordless Authentication",
-        content: "Research passwordless authentication methods including magic links, WebAuthn, and biometric authentication. Compare security, user experience, and implementation complexity across different approaches."
-    },
-];     document.getElementById('lecture-title').textContent = lectureConfig.title;
-    </script><script src="./assets/lecture.js"></script>
+        document.getElementById('lecture-title').textContent = lectureConfig.title;
+    </script>
+    <script src="./assets/lecture.js"></script>
 </body>
+
 </html>

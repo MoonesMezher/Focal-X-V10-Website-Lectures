@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Focal X - Node.js Bootcamp: Lecture 10 </title><link rel="manifest" href="./manifest.json" />
+    <title>Focal X - Node.js Bootcamp: Lecture 10 </title>
+    <link rel="manifest" href="./manifest.json" />
     <link rel="apple-touch-icon" href="./logo.jpg">
     <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
     <meta name="theme-color" content="#b21f1f">
     <link rel="stylesheet" href="./assets/lecture.css">
 </head>
+
 <body>
     <div class="container">
         <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
@@ -16,14 +19,14 @@
             <h1 id="lecture-title">Focal X - Node.js Bootcamp</h1>
             <p class="subtitle" id="lecture-subtitle">TypeScript</p>
         </header>
-        
+
         <div class="content">
             <div class="lecture-content">
                 <h2>Lecture Content</h2>
                 <div id="tabs-container"></div>
                 <div id="tab-content-container"></div>
             </div>
-            
+
             <div class="interactive-section">
                 <h2>Interactive Questions & Tasks</h2>
                 <div id="questions-container"></div>
@@ -32,51 +35,47 @@
     </div>
 
     <footer class="footer">
-        <p>&copy; 2025 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
+        <p>&copy; 2026 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
     </footer>
 
-        <script src="./reg.js"></script>
-<script>
+    <script src="./reg.js"></script>
+    <script>
         // ==================== CONFIGURATION ====================
         // Update these arrays to change the content of your lecture
-        
+
         // Lecture metadata
         const lectureConfig = {
             title: "Focal X - Node.js Bootcamp",
             subtitle: "TypeScript"
         };
-        
+
         // Lecture content organized by tabs
-        const lectureContent = [
-            {
-                tabTitle: "Last Lesson",
-                title: "Last Lesson Recap",
-                content: `/*
+        const lectureContent = [{
+            tabTitle: "Last Lesson",
+            title: "Last Lesson Recap",
+            content: `/*
 1- Solve Task 2
 2- APIs & JSON
 */`
-            },
-            {
-                tabTitle: "Info",
-                title: "What is TypeScript?",
-                content: `// TypeScript is a superset of JavaScript developed by Microsoft that allows developers to write statically typed code. 
+        }, {
+            tabTitle: "Info",
+            title: "What is TypeScript?",
+            content: `// TypeScript is a superset of JavaScript developed by Microsoft that allows developers to write statically typed code. 
 
 // This means you can define variable types, which can help in catching errors during development and improving code maintainability.
 
 // example: sort the rubish
 
 // Q: what did happen before typescript?`
-            },
-            {
-                tabTitle: "Installation ",
-                title: "TypeScript Installation",
-                content: `// 1- node js
+        }, {
+            tabTitle: "Installation ",
+            title: "TypeScript Installation",
+            content: `// 1- node js
 // 2- npm install typescript --save-dev`
-            },
-            {
-                tabTitle: "Types ",
-                title: "Types in TypeScript",
-                content: `let carName = "ooo";
+        }, {
+            tabTitle: "Types ",
+            title: "Types in TypeScript",
+            content: `let carName = "ooo";
 
 // Error:
 carName = 5;
@@ -110,20 +109,19 @@ const listOfObj: Array<obj> = [
 let msg: string|number = "Hi";
 
 msg = "Hi 2";
-msg = 10;`},
-{
-                tabTitle: "Config",
-                title: "TypeScript Installation",
-                content: `// tsc --init
+msg = 10;`
+        }, {
+            tabTitle: "Config",
+            title: "TypeScript Installation",
+            content: `// tsc --init
 
 // tsc --watch
 
 // node --watch index.js`
-            },
-            {
-                tabTitle: "Arrays & Objects",
-                title: "Arrays & Objects in TypeScript",
-                content: `const arr: string[] = ["a", "b", "c", "d", "e"];
+        }, {
+            tabTitle: "Arrays & Objects",
+            title: "Arrays & Objects in TypeScript",
+            content: `const arr: string[] = ["a", "b", "c", "d", "e"];
 
 const arr2 = ["a", "b"];
 
@@ -139,11 +137,10 @@ const obj: { age: number, name: string } = { age: 1, name: "hello" };
 type objectType = { age: number, name: string };
 
 const obj1: objectType = { age: 1, name: "hello" };`
-            },
-            {
-                tabTitle: "Functions",
-                title: "Functions in TypeScript",
-                content: `function sum(num1: number, num2: number): number {
+        }, {
+            tabTitle: "Functions",
+            title: "Functions in TypeScript",
+            content: `function sum(num1: number, num2: number): number {
     return num1 + num2;
 }
 
@@ -157,11 +154,11 @@ const str: number[] = [1,2].map(e => e);
 // Error
 function sum(num1: number, num2: number): string {
     return num1 + num2;
-}`},
-            {
-                tabTitle: "Any",
-                title: "Any Type",
-                content: `// useful for migrating project from javascript to typescript
+}`
+        }, {
+            tabTitle: "Any",
+            title: "Any Type",
+            content: `// useful for migrating project from javascript to typescript
 
 let title: any = "Hello";
 
@@ -182,11 +179,11 @@ function sum(value: any): any {
 }
 
 sum(10);
-sum("A");`},
-                {
-                tabTitle: "Tubles",
-                title: "Tubles in TypeScript",
-                content: `// they are arrays with selected types
+sum("A");`
+        }, {
+            tabTitle: "Tubles",
+            title: "Tubles in TypeScript",
+            content: `// they are arrays with selected types
 
 const t1: [string, string, boolean, number] = ["a", "b", false, 10];
 
@@ -195,11 +192,11 @@ const t1: [string, string, boolean, number] = ["a", "b", false, 10];
 let t2: [name: string, age: number] = ["a", 10];
 
 console.log(t2[0]);
-console.log(t2[1]);`},
-{
-                tabTitle: "Interfaces",
-                title: "Interfaces in TypeScript",
-                content: `interface Author {
+console.log(t2[1]);`
+        }, {
+            tabTitle: "Interfaces",
+            title: "Interfaces in TypeScript",
+            content: `interface Author {
     name: string;
     age: number;
 }
@@ -286,145 +283,132 @@ const posts: Post[] = [];
 // Error
 posts.push("s");
 
-posts.push(post1);`},
-            ];
-        
+posts.push(post1);`
+        }, ];
+
         // Questions and tasks
-        const questions = [
-    {
-        type: "question",
-        question: "What is TypeScript and what problem does it solve?",
-        options: [
-            "A new programming language that replaces JavaScript",
-            "A superset of JavaScript that adds static typing",
-            "A library for building user interfaces",
-            "A testing framework for JavaScript"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "How do you install TypeScript locally in a project?",
-        options: [
-            "npm install -g typescript",
-            "npm install typescript --save-dev",
-            "npm install typescript",
-            "yarn add typescript --global"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "What will TypeScript report for this code?",
-        code: `let name: string = "John";
+        const questions = [{
+            type: "question",
+            question: "What is TypeScript and what problem does it solve?",
+            options: [
+                "A new programming language that replaces JavaScript",
+                "A superset of JavaScript that adds static typing",
+                "A library for building user interfaces",
+                "A testing framework for JavaScript"
+            ],
+            correctIndex: 1
+        }, {
+            type: "question",
+            question: "How do you install TypeScript locally in a project?",
+            options: [
+                "npm install -g typescript",
+                "npm install typescript --save-dev",
+                "npm install typescript",
+                "yarn add typescript --global"
+            ],
+            correctIndex: 1
+        }, {
+            type: "question",
+            question: "What will TypeScript report for this code?",
+            code: `let name: string = "John";
 name = 25;`,
-        options: [
-            "No error - TypeScript automatically converts types",
-            "Error - cannot assign number to string type",
-            "Warning but code will compile",
-            "Depends on tsconfig settings"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "Which type annotation is correct for an array of numbers?",
-        options: [
-            "let numbers: number[]",
-            "let numbers: Array<number>",
-            "let numbers: numberArray",
-            "Both A and B"
-        ],
-        correctIndex: 3
-    },
-    {
-        type: "question",
-        question: "What is the purpose of the 'any' type in TypeScript?",
-        options: [
-            "To represent any possible value type",
-            "To improve performance",
-            "To create generic functions",
-            "To handle API responses only"
-        ],
-        correctIndex: 0
-    },
-    {
-        type: "question",
-        question: "What will be the TypeScript error in this function?",
-        code: `function add(a: number, b: number): string {
+            options: [
+                "No error - TypeScript automatically converts types",
+                "Error - cannot assign number to string type",
+                "Warning but code will compile",
+                "Depends on tsconfig settings"
+            ],
+            correctIndex: 1
+        }, {
+            type: "question",
+            question: "Which type annotation is correct for an array of numbers?",
+            options: [
+                "let numbers: number[]",
+                "let numbers: Array<number>",
+                "let numbers: numberArray",
+                "Both A and B"
+            ],
+            correctIndex: 3
+        }, {
+            type: "question",
+            question: "What is the purpose of the 'any' type in TypeScript?",
+            options: [
+                "To represent any possible value type",
+                "To improve performance",
+                "To create generic functions",
+                "To handle API responses only"
+            ],
+            correctIndex: 0
+        }, {
+            type: "question",
+            question: "What will be the TypeScript error in this function?",
+            code: `function add(a: number, b: number): string {
     return a + b;
 }`,
-        options: [
-            "No parameters provided",
-            "Return type should be number, not string",
-            "Missing return statement",
-            "Parameters should be strings"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "What is the main difference between interface and type alias?",
-        options: [
-            "Interfaces can be extended, type aliases cannot",
-            "Type aliases are more performant",
-            "Interfaces only work with objects, type aliases work with primitives",
-            "No significant difference"
-        ],
-        correctIndex: 0
-    },
-    {
-        type: "question",
-        question: "What does the 'readonly' modifier do in an interface?",
-        options: [
-            "Makes the property optional",
-            "Prevents modification after initialization",
-            "Hides the property from other classes",
-            "Makes the property private"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "How do you define a tuple type in TypeScript?",
-        options: [
-            "[string, number, boolean]",
-            "Array<string, number, boolean>",
-            "Tuple<string, number, boolean>",
-            "(string | number | boolean)[]"
-        ],
-        correctIndex: 0
-    },
-    {
-        type: "question",
-        question: "Which command initializes a TypeScript configuration file?",
-        options: [
-            "tsc init",
-            "tsc --init",
-            "typescript init",
-            "npm init typescript"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "task",
-        title: "Implement: TypeScript Interface for User",
-        content: "Create an interface for a User object with properties: id (number), name (string), email (string), and optional phone (string). Include a method getFullName() that returns string."
-    },
-    {
-        type: "search-task",
-        title: "Research: TypeScript vs JavaScript",
-        content: "Compare TypeScript and JavaScript. What are the main advantages of using TypeScript? When might you choose plain JavaScript instead?"
-    },
-    {
-        type: "search-task",
-        title: "Research: TypeScript Configuration Options",
-        content: "Investigate the key configuration options in tsconfig.json. What do strict, noImplicitAny, and target options do? How do they affect compilation?"
-    },
-];
+            options: [
+                "No parameters provided",
+                "Return type should be number, not string",
+                "Missing return statement",
+                "Parameters should be strings"
+            ],
+            correctIndex: 1
+        }, {
+            type: "question",
+            question: "What is the main difference between interface and type alias?",
+            options: [
+                "Interfaces can be extended, type aliases cannot",
+                "Type aliases are more performant",
+                "Interfaces only work with objects, type aliases work with primitives",
+                "No significant difference"
+            ],
+            correctIndex: 0
+        }, {
+            type: "question",
+            question: "What does the 'readonly' modifier do in an interface?",
+            options: [
+                "Makes the property optional",
+                "Prevents modification after initialization",
+                "Hides the property from other classes",
+                "Makes the property private"
+            ],
+            correctIndex: 1
+        }, {
+            type: "question",
+            question: "How do you define a tuple type in TypeScript?",
+            options: [
+                "[string, number, boolean]",
+                "Array<string, number, boolean>",
+                "Tuple<string, number, boolean>",
+                "(string | number | boolean)[]"
+            ],
+            correctIndex: 0
+        }, {
+            type: "question",
+            question: "Which command initializes a TypeScript configuration file?",
+            options: [
+                "tsc init",
+                "tsc --init",
+                "typescript init",
+                "npm init typescript"
+            ],
+            correctIndex: 1
+        }, {
+            type: "task",
+            title: "Implement: TypeScript Interface for User",
+            content: "Create an interface for a User object with properties: id (number), name (string), email (string), and optional phone (string). Include a method getFullName() that returns string."
+        }, {
+            type: "search-task",
+            title: "Research: TypeScript vs JavaScript",
+            content: "Compare TypeScript and JavaScript. What are the main advantages of using TypeScript? When might you choose plain JavaScript instead?"
+        }, {
+            type: "search-task",
+            title: "Research: TypeScript Configuration Options",
+            content: "Investigate the key configuration options in tsconfig.json. What do strict, noImplicitAny, and target options do? How do they affect compilation?"
+        }, ];
         // ==================== TEMPLATE RENDERING ====================
         // Functions to render the content - you don't need to modify these
-        
-        </script><script src="./assets/lecture.js"></script>
+    </script>
+    <script src="./assets/lecture.js"></script>
 </body>
+
 </html>

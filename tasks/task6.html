@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 6: Express.js Product Management Server</title><link rel="manifest" href="../manifest.json" />
+    <title>Task 6: Express.js Product Management Server</title>
+    <link rel="manifest" href="../manifest.json" />
     <link rel="apple-touch-icon" href="../logo.jpg">
     <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
     <meta name="theme-color" content="#b21f1f">
@@ -26,7 +28,7 @@
             flex-direction: column;
             align-items: center;
         }
-
+        
         .container {
             width: 100%;
             max-width: 1000px;
@@ -36,7 +38,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             margin: 20px 0;
         }
-
+        
         .coach {
             background-color: white;
             width: 80px;
@@ -66,11 +68,11 @@
             font-size: 1.1rem;
             opacity: 0.9;
         }
-
+        
         #title {
             padding-top: 20px;
         }
-
+        
         .language-toggle {
             position: absolute;
             top: 20px;
@@ -84,15 +86,15 @@
             font-weight: 600;
             transition: background 0.3s;
         }
-
+        
         .language-toggle:hover {
             background: #2980b9;
         }
-
+        
         .task-content {
             padding: 30px;
         }
-
+        
         .section {
             margin-bottom: 30px;
             padding: 20px;
@@ -100,32 +102,33 @@
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
-
+        
         h2 {
             color: #2c3e50;
             margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 2px solid #3498db;
         }
-
+        
         h3 {
             color: #2980b9;
             margin: 15px 0;
         }
-
+        
         p {
             margin-bottom: 15px;
         }
-
-        ul, ol {
+        
+        ul,
+        ol {
             margin-left: 20px;
             margin-bottom: 15px;
         }
-
+        
         li {
             margin-bottom: 8px;
         }
-
+        
         .code-block {
             background: #2c3e50;
             color: #ecf0f1;
@@ -137,17 +140,17 @@
             font-size: 0.9rem;
             line-height: 1.5;
         }
-
+        
         .requirements {
             background: #e8f4fc;
             border-left: 5px solid #3498db;
         }
-
+        
         .bonus {
             background: #fff3cd;
             border-left: 5px solid #ffc107;
         }
-
+        
         .output-example {
             background: #d4edda;
             border-left: 5px solid #28a745;
@@ -160,7 +163,7 @@
             direction: ltr !important;
             text-align: left !important;
         }
-
+        
         .timer-section {
             text-align: center;
             padding: 20px;
@@ -169,7 +172,7 @@
             margin-top: 30px;
             border-radius: 10px;
         }
-
+        
         .timer {
             font-size: 2rem;
             font-weight: bold;
@@ -178,30 +181,30 @@
             justify-content: center;
             gap: 15px;
         }
-
+        
         .timer-unit {
             background: rgba(255, 255, 255, 0.1);
             padding: 10px;
             border-radius: 5px;
             min-width: 80px;
         }
-
+        
         .timer-value {
             font-size: 2.5rem;
             display: block;
         }
-
+        
         .timer-label {
             font-size: 0.9rem;
             text-transform: uppercase;
             display: block;
         }
-
+        
         .finish-date {
             font-size: 1.2rem;
             margin-top: 10px;
         }
-
+        
         .thank-you {
             text-align: center;
             padding: 20px;
@@ -210,7 +213,7 @@
             border-top: 1px solid #dee2e6;
             margin-top: 30px;
         }
-
+        
         .footer {
             text-align: center;
             padding: 20px;
@@ -220,7 +223,7 @@
             max-width: 1000px;
             border-radius: 15px;
         }
-
+        
         .footer a {
             color: #3498db;
             text-decoration: none;
@@ -230,20 +233,18 @@
             padding: 0 !important;
             margin: 0 !important;
         }
-
+        
         .footer a:hover {
             text-decoration: underline;
         }
-
+        
         @media (max-width: 768px) {
             h1 {
                 font-size: 1.8rem;
             }
-            
             .task-content {
                 padding: 15px;
             }
-            
             .language-toggle {
                 position: relative;
                 top: 0;
@@ -252,16 +253,13 @@
                 display: block;
                 width: 100%;
             }
-            
             .timer {
                 font-size: 1.5rem;
                 flex-wrap: wrap;
             }
-            
             .timer-unit {
                 min-width: 70px;
             }
-            
             .timer-value {
                 font-size: 2rem;
             }
@@ -281,7 +279,7 @@
             margin: 20px 0;
         }
         
-        .code-comparison > div {
+        .code-comparison>div {
             flex: 1;
         }
         
@@ -300,6 +298,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
@@ -308,11 +307,11 @@
             <p class="subtitle" id="subtitle">Create a JavaScript project with multiple files, implement Git branching strategy, and set up proper GitHub workflow with module imports and Git ignore rules.</p>
             <button class="language-toggle" id="languageToggle">العربية / English</button>
         </header>
-        
+
         <div class="task-content" id="taskContent">
             <!-- Content will be dynamically inserted here -->
         </div>
-        
+
         <div class="timer-section">
             <h3 id="timer-title">Time Remaining to Complete Task</h3>
             <div class="timer" id="timer">
@@ -333,52 +332,48 @@
                     <span class="timer-label" id="seconds-label">Seconds</span>
                 </div>
             </div>
-            <p class="finish-date" id="finish-date">Finish by: September 27, 2025</p>
+            <p class="finish-date" id="finish-date">Finish by: September 27, 2026</p>
             <p id="timer-message">Complete the task before the deadline!</p>
         </div>
-        
+
         <div class="thank-you" id="thankYou">
             "Thank you for your hard work and dedication. Your efforts are appreciated!"
         </div>
     </div>
-    
+
     <div class="footer">
-        <p>&copy; 2025 <a href="https://focal-x.com/" target="_blank">Focal X</a> - Node.js Bootcamp V10</p>
+        <p>&copy; 2026 <a href="https://focal-x.com/" target="_blank">Focal X</a> - Node.js Bootcamp V10</p>
     </div>
 
-        <script src="../reg.js"></script>
-<script>
+    <script src="../reg.js"></script>
+    <script>
         // Content data structure
         const taskData = {
-    en: {
-        title: "Task 6: Express.js Product Management Server",
-        subtitle: "Create an Express.js server with middleware, file structure, and CRUD operations for products",
-        sections: [
-            {
-                type: "idea",
-                title: "💻 The Task: \"Express.js Product Management Server\"",
-                content: "Build a complete Express.js server with proper file structure, custom middlewares, CRUD operations for products, and file system integration for data persistence."
-            },
-            {
-                type: "requirements",
-                title: "📝 Requirements",
-                content: [
-                    {
+            en: {
+                title: "Task 6: Express.js Product Management Server",
+                subtitle: "Create an Express.js server with middleware, file structure, and CRUD operations for products",
+                sections: [{
+                    type: "idea",
+                    title: "💻 The Task: \"Express.js Product Management Server\"",
+                    content: "Build a complete Express.js server with proper file structure, custom middlewares, CRUD operations for products, and file system integration for data persistence."
+                }, {
+                    type: "requirements",
+                    title: "📝 Requirements",
+                    content: [{
                         type: "list",
                         title: "Project Structure Requirements:",
                         items: [
                             "Create a project with the following folder structure:",
                             "src/controllers/ - Route handlers using OOP style",
                             "src/routes/ - Route definitions and endpoints",
-                            "src/middlewares/ - Custom middleware functions", 
+                            "src/middlewares/ - Custom middleware functions",
                             "src/models/ - Data models and product array management",
                             "src/config/ - Configuration files and environment setup",
                             "src/utils/ - Utility functions and helpers",
                             "app.js - Main Express application setup"
                         ]
-                    },
-                    {
-                        type: "list", 
+                    }, {
+                        type: "list",
                         title: "Server & CRUD Operations:",
                         items: [
                             "Create an Express server with all necessary dependencies",
@@ -391,8 +386,7 @@
                             "GET /products/export/json - Export all products to JSON file",
                             "Manage products using the following initial array:"
                         ]
-                    },
-                    {
+                    }, {
                         type: "output",
                         title: "Initial Products Array:",
                         example: `const products = [
@@ -418,8 +412,7 @@
         description: "Mechanical gaming keyboard"
     }
 ];`
-                    },
-                    {
+                    }, {
                         type: "output",
                         title: "Expected File Structure:",
                         content: "Your project should have the following structure:",
@@ -442,8 +435,8 @@
 ├── package.json
 ├── .env
 ├── .gitignore
-└── products.json (generated by export)`},
-                    {
+└── products.json (generated by export)`
+                    }, {
                         type: "list",
                         title: "Middleware Requirements:",
                         items: [
@@ -453,20 +446,18 @@
                             "Route-level middleware: Product validation that checks if product exists before update/delete operations",
                             "Use express.json() middleware for parsing JSON bodies"
                         ]
-                    },
-                    {
+                    }, {
                         type: "list",
                         title: "API Endpoints Specification:",
                         items: [
                             "GET /products - Return all products with status 200",
-                            "GET /products/:id - Return specific product, 404 if not found", 
+                            "GET /products/:id - Return specific product, 404 if not found",
                             "POST /products - Create new product (generate new ID), return 201",
                             "PUT /products/:id - Update existing product, 404 if not found",
                             "DELETE /products/:id - Delete product, 404 if not found",
                             "GET /products/export/json - Export all products to products.json file using fs module, return download link"
                         ]
-                    },
-                    {
+                    }, {
                         type: "list",
                         title: "Environment & Configuration:",
                         items: [
@@ -477,50 +468,44 @@
                             "`\"start\": \"node app.js\"`",
                             "`\"dev\": \"nodemon app.js\"`"
                         ]
-                    }
-                ]
+                    }]
+                }, {
+                    type: "learning",
+                    title: "📚 Express.js & Middleware Concepts Reference",
+                    content: [
+                        "Express Setup: `const express = require('express')`, `const app = express()`",
+                        "Middleware: `app.use(middleware)`, `app.use('/route', middleware)`",
+                        "Routing: `app.get()`, `app.post()`, `app.put()`, `app.delete()`",
+                        "Request/Response: `req.params`, `req.body`, `res.json()`, `res.status()`",
+                        "File System: `fs.writeFileSync()`, `fs.readFileSync()` for JSON operations",
+                        "Environment Variables: `require('dotenv').config()`, `process.env.PORT`",
+                        "Morgan: `const morgan = require('morgan')`, `app.use(morgan('combined'))`",
+                        "Middleware Example: `const logger = (req, res, next) => { console.log(); next(); }`"
+                    ]
+                }],
+                timer: {
+                    title: "Time Remaining to Complete Task",
+                    message: "Complete the task before the deadline! - Submissions are only accepted within the final six hours.",
+                    days: "Days",
+                    hours: "Hours",
+                    minutes: "Minutes",
+                    seconds: "Seconds"
+                },
+                thankYou: "\"Thank you for your hard work and dedication. Your efforts are appreciated!\"",
+                buttonText: "العربية / English",
+                finishDate: "Finish by: October 20, 2026"
             },
-            {
-                type: "learning", 
-                title: "📚 Express.js & Middleware Concepts Reference",
-                content: [
-                    "Express Setup: `const express = require('express')`, `const app = express()`",
-                    "Middleware: `app.use(middleware)`, `app.use('/route', middleware)`",
-                    "Routing: `app.get()`, `app.post()`, `app.put()`, `app.delete()`",
-                    "Request/Response: `req.params`, `req.body`, `res.json()`, `res.status()`",
-                    "File System: `fs.writeFileSync()`, `fs.readFileSync()` for JSON operations",
-                    "Environment Variables: `require('dotenv').config()`, `process.env.PORT`",
-                    "Morgan: `const morgan = require('morgan')`, `app.use(morgan('combined'))`",
-                    "Middleware Example: `const logger = (req, res, next) => { console.log(); next(); }`"
-                ]
-            }
-        ],
-        timer: {
-            title: "Time Remaining to Complete Task",
-            message: "Complete the task before the deadline! - Submissions are only accepted within the final six hours.",
-            days: "Days", 
-            hours: "Hours",
-            minutes: "Minutes", 
-            seconds: "Seconds"
-        },
-        thankYou: "\"Thank you for your hard work and dedication. Your efforts are appreciated!\"",
-        buttonText: "العربية / English",
-        finishDate: "Finish by: October 20, 2025"
-    },
-    ar: {
-        title: "المهمة 6: خادم إدارة المنتجات باستخدام Express.js",
-        subtitle: "أنشئ خادم Express.js مع middleware وهيكل ملفات وعمليات CRUD للمنتجات",
-        sections: [
-            {
-                type: "idea",
-                title: "💻 المهمة: \"خادم إدارة المنتجات باستخدام Express.js\"",
-                content: "ابنِ خادم Express.js كاملاً مع هيكل ملفات صحيح، middleware مخصص، عمليات CRUD للمنتجات، وتكامل نظام الملفات لحفظ البيانات."
-            },
-            {
-                type: "requirements",
-                title: "📝 المتطلبات",
-                content: [
-                    {
+            ar: {
+                title: "المهمة 6: خادم إدارة المنتجات باستخدام Express.js",
+                subtitle: "أنشئ خادم Express.js مع middleware وهيكل ملفات وعمليات CRUD للمنتجات",
+                sections: [{
+                    type: "idea",
+                    title: "💻 المهمة: \"خادم إدارة المنتجات باستخدام Express.js\"",
+                    content: "ابنِ خادم Express.js كاملاً مع هيكل ملفات صحيح، middleware مخصص، عمليات CRUD للمنتجات، وتكامل نظام الملفات لحفظ البيانات."
+                }, {
+                    type: "requirements",
+                    title: "📝 المتطلبات",
+                    content: [{
                         type: "list",
                         title: "متطلبات هيكل المشروع:",
                         items: [
@@ -528,13 +513,12 @@
                             "src/controllers/ - معالجات المسارات باستخدام نمط OOP",
                             "src/routes/ - تعريفات المسارات والنقاط الطرفية",
                             "src/middlewares/ - دوال middleware المخصصة",
-                            "src/models/ - نماذج البيانات وإدارة مصفوفة المنتجات", 
+                            "src/models/ - نماذج البيانات وإدارة مصفوفة المنتجات",
                             "src/config/ - ملفات الإعداد وتهيئة البيئة",
                             "src/utils/ - الدوال المساعدة والأدوات",
                             "app.js - الإعداد الرئيسي لتطبيق Express"
                         ]
-                    },
-                    {
+                    }, {
                         type: "list",
                         title: "الخادم وعمليات CRUD:",
                         items: [
@@ -542,14 +526,13 @@
                             "نفّذ عمليات CRUD كاملة للمنتجات (إنشاء، قراءة، تحديث، حذف)",
                             "GET /products - جلب جميع المنتجات",
                             "GET /products/:id - جلب منتج واحد بالمعرف",
-                            "POST /products - إنشاء منتج جديد", 
+                            "POST /products - إنشاء منتج جديد",
                             "PUT /products/:id - تحديث منتج موجود",
                             "DELETE /products/:id - حذف منتج",
                             "GET /products/export/json - تصدير جميع المنتجات إلى ملف JSON",
                             "أدر المنتجات باستخدام المصفوفة الأولية التالية:"
                         ]
-                    },
-                    {
+                    }, {
                         type: "output",
                         title: "المصفوفة الأولية للمنتجات:",
                         example: `const products = [
@@ -575,8 +558,7 @@
         description: "Mechanical gaming keyboard"
     }
 ];`
-                    },
-                    {
+                    }, {
                         type: "output",
                         title: "هيكل الملفات المتوقع:",
                         content: "يجب أن يكون لمشروعك الهيكل التالي:",
@@ -599,31 +581,29 @@
 ├── package.json
 ├── .env
 ├── .gitignore
-└── products.json (يتم إنشاؤه بالتصدير)`},
-                    {
+└── products.json (يتم إنشاؤه بالتصدير)`
+                    }, {
                         type: "list",
                         title: "متطلبات الـ Middleware:",
                         items: [
                             "ثبّت واستخدم morgan middleware لتسجيل طلبات HTTP",
                             "أنشئ middleware مخصصين:",
                             "Middleware مستوى التطبيق: مسجل طلبات يسجل التوقيت، الأسلوب، والرابط",
-                            "Middleware مستوى المسار: تحقق من وجود المنتج قبل عمليات التحديث أو الحذف", 
+                            "Middleware مستوى المسار: تحقق من وجود المنتج قبل عمليات التحديث أو الحذف",
                             "استخدم express.json() middleware لتحليل أجسام JSON"
                         ]
-                    },
-                    {
+                    }, {
                         type: "list",
                         title: "مواصفات النقاط الطرفية:",
                         items: [
                             "GET /products - إرجاع جميع المنتجات مع حالة 200",
-                            "GET /products/:id - إرجاع منتج محدد، 404 إذا لم يوجد", 
+                            "GET /products/:id - إرجاع منتج محدد، 404 إذا لم يوجد",
                             "POST /products - إنشاء منتج جديد (إنشاء معرف جديد)، إرجاع 201",
                             "PUT /products/:id - تحديث منتج موجود، 404 إذا لم يوجد",
                             "DELETE /products/:id - حذف منتج، 404 إذا لم يوجد",
                             "GET /products/export/json - تصدير جميع المنتجات إلى ملف products.json باستخدام وحدة fs، إرجاع رابط التحميل"
                         ]
-                    },
-                    {
+                    }, {
                         type: "list",
                         title: "البيئة والإعدادات:",
                         items: [
@@ -634,47 +614,44 @@
                             "`\"start\": \"node app.js\"`",
                             "`\"dev\": \"nodemon app.js\"`"
                         ]
-                    }
-                ]
-            },
-            {
-                type: "learning",
-                title: "📚 مرجع مفاهيم Express.js والـ Middleware",
-                content: [
-                    "إعداد Express: `const express = require('express')`, `const app = express()`",
-                    "الـ Middleware: `app.use(middleware)`, `app.use('/route', middleware)`",
-                    "التوجيه: `app.get()`, `app.post()`, `app.put()`, `app.delete()`",
-                    "الطلب/الاستجابة: `req.params`, `req.body`, `res.json()`, `res.status()`",
-                    "نظام الملفات: `fs.writeFileSync()`, `fs.readFileSync()` لعمليات JSON",
-                    "متغيرات البيئة: `require('dotenv').config()`, `process.env.PORT`",
-                    "Morgan: `const morgan = require('morgan')`, `app.use(morgan('combined'))`",
-                    "مثال على الـ Middleware: `const logger = (req, res, next) => { console.log(); next(); }`"
-                ]
+                    }]
+                }, {
+                    type: "learning",
+                    title: "📚 مرجع مفاهيم Express.js والـ Middleware",
+                    content: [
+                        "إعداد Express: `const express = require('express')`, `const app = express()`",
+                        "الـ Middleware: `app.use(middleware)`, `app.use('/route', middleware)`",
+                        "التوجيه: `app.get()`, `app.post()`, `app.put()`, `app.delete()`",
+                        "الطلب/الاستجابة: `req.params`, `req.body`, `res.json()`, `res.status()`",
+                        "نظام الملفات: `fs.writeFileSync()`, `fs.readFileSync()` لعمليات JSON",
+                        "متغيرات البيئة: `require('dotenv').config()`, `process.env.PORT`",
+                        "Morgan: `const morgan = require('morgan')`, `app.use(morgan('combined'))`",
+                        "مثال على الـ Middleware: `const logger = (req, res, next) => { console.log(); next(); }`"
+                    ]
+                }],
+                timer: {
+                    title: "الوقت المتبقي لإكمال المهمة",
+                    message: "أكمل المهمة قبل الموعد النهائي! - يتم قبول التسليم فقط في الساعات الست الأخيرة.",
+                    days: "أيام",
+                    hours: "ساعات",
+                    minutes: "دقائق",
+                    seconds: "ثواني"
+                },
+                thankYou: "\"شكرًا لجهودك الجادة وتفانيك. نقدر جهودك!\"",
+                buttonText: "English / العربية",
+                finishDate: "الانتهاء بحلول: 20 أكتوبر 2026"
             }
-        ],
-        timer: {
-            title: "الوقت المتبقي لإكمال المهمة",
-            message: "أكمل المهمة قبل الموعد النهائي! - يتم قبول التسليم فقط في الساعات الست الأخيرة.",
-            days: "أيام",
-            hours: "ساعات", 
-            minutes: "دقائق",
-            seconds: "ثواني"
-        },
-        thankYou: "\"شكرًا لجهودك الجادة وتفانيك. نقدر جهودك!\"",
-        buttonText: "English / العربية", 
-        finishDate: "الانتهاء بحلول: 20 أكتوبر 2025"
-    }
-};
+        };
 
         // Render content based on language
         function renderContent(lang) {
             const data = taskData[lang];
             const taskContent = document.getElementById('taskContent');
-            
+
             // Update page title and subtitle
             document.getElementById('title').textContent = data.title;
             document.getElementById('subtitle').textContent = data.subtitle;
-            
+
             // Update timer section
             document.getElementById('timer-title').textContent = data.timer.title;
             document.getElementById('timer-message').textContent = data.timer.message;
@@ -683,31 +660,31 @@
             document.getElementById('minutes-label').textContent = data.timer.minutes;
             document.getElementById('seconds-label').textContent = data.timer.seconds;
             document.getElementById('finish-date').textContent = data.finishDate;
-            
+
             // Update thank you message
             document.getElementById('thankYou').textContent = data.thankYou;
-            
+
             // Update button text
             document.getElementById('languageToggle').textContent = data.buttonText;
-            
+
             // Clear existing content
             taskContent.innerHTML = '';
-            
+
             // Render each section
             data.sections.forEach(section => {
                 const sectionEl = document.createElement('div');
                 sectionEl.className = 'section';
-                
+
                 if (section.type === 'requirements') {
                     sectionEl.classList.add('requirements');
                 } else if (section.type === 'bonus') {
                     sectionEl.classList.add('bonus');
                 }
-                
+
                 const titleEl = document.createElement('h2');
                 titleEl.textContent = section.title;
                 sectionEl.appendChild(titleEl);
-                
+
                 if (section.type === 'idea' || section.type === 'note') {
                     const contentEl = document.createElement('p');
                     contentEl.textContent = section.content;
@@ -717,7 +694,7 @@
                         const itemTitle = document.createElement('h3');
                         itemTitle.textContent = item.title;
                         sectionEl.appendChild(itemTitle);
-                        
+
                         if (item.type === 'list') {
                             const listEl = document.createElement('ul');
                             item.items.forEach(listItem => {
@@ -730,7 +707,7 @@
                             const contentEl = document.createElement('p');
                             contentEl.textContent = item.content;
                             sectionEl.appendChild(contentEl);
-                            
+
                             const exampleEl = document.createElement('div');
                             exampleEl.className = 'output-example';
                             exampleEl.textContent = item.example;
@@ -746,10 +723,10 @@
                     });
                     sectionEl.appendChild(listEl);
                 }
-                
+
                 taskContent.appendChild(sectionEl);
             });
-            
+
             // Set text direction based on language
             if (lang === 'ar') {
                 document.body.setAttribute('dir', 'rtl');
@@ -766,17 +743,17 @@
 
         // Timer functionality
         function startCountdown() {
-            // Set the date we're counting down to (September 27, 2025)
-            const countDownDate = new Date("Oct 20, 2025 23:59:59").getTime();
-            
+            // Set the date we're counting down to (September 27, 2026)
+            const countDownDate = new Date("Oct 20, 2026 23:59:59").getTime();
+
             // Update the countdown every 1 second
             const countdown = setInterval(() => {
                 // Get today's date and time
                 const now = new Date().getTime();
-                
+
                 // Find the distance between now and the countdown date
                 const distance = countDownDate - now;
-                
+
                 // If the countdown is over, write some text
                 if (distance < 0) {
                     clearInterval(countdown);
@@ -786,13 +763,13 @@
                     document.getElementById("seconds").textContent = "00";
                     return;
                 }
-                
+
                 // Time calculations for days, hours, minutes and seconds
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                
+
                 // Display the results
                 document.getElementById("days").textContent = days.toString().padStart(2, '0');
                 document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
@@ -805,10 +782,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Render English content by default
             renderContent('en');
-            
+
             // Start the countdown timer
             startCountdown();
-            
+
             // Language toggle functionality
             document.getElementById('languageToggle').addEventListener('click', function() {
                 const currentLang = document.body.getAttribute('dir') === 'rtl' ? 'ar' : 'en';
@@ -818,4 +795,5 @@
         });
     </script>
 </body>
+
 </html>

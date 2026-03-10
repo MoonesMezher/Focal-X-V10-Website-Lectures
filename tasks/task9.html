@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +28,7 @@
             flex-direction: column;
             align-items: center;
         }
-
+        
         .container {
             width: 100%;
             max-width: 1000px;
@@ -37,7 +38,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             margin: 20px 0;
         }
-
+        
         .coach {
             background-color: white;
             width: 80px;
@@ -67,11 +68,11 @@
             font-size: 1.1rem;
             opacity: 0.9;
         }
-
+        
         #title {
             padding-top: 20px;
         }
-
+        
         .language-toggle {
             position: absolute;
             top: 20px;
@@ -85,15 +86,15 @@
             font-weight: 600;
             transition: background 0.3s;
         }
-
+        
         .language-toggle:hover {
             background: #2980b9;
         }
-
+        
         .task-content {
             padding: 30px;
         }
-
+        
         .section {
             margin-bottom: 30px;
             padding: 20px;
@@ -101,32 +102,33 @@
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
-
+        
         h2 {
             color: #2c3e50;
             margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 2px solid #3498db;
         }
-
+        
         h3 {
             color: #2980b9;
             margin: 15px 0;
         }
-
+        
         p {
             margin-bottom: 15px;
         }
-
-        ul, ol {
+        
+        ul,
+        ol {
             margin-left: 20px;
             margin-bottom: 15px;
         }
-
+        
         li {
             margin-bottom: 8px;
         }
-
+        
         .code-block {
             background: #2c3e50;
             color: #ecf0f1;
@@ -138,17 +140,17 @@
             font-size: 0.9rem;
             line-height: 1.5;
         }
-
+        
         .requirements {
             background: #e8f4fc;
             border-left: 5px solid #3498db;
         }
-
+        
         .bonus {
             background: #fff3cd;
             border-left: 5px solid #ffc107;
         }
-
+        
         .output-example {
             background: #d4edda;
             border-left: 5px solid #28a745;
@@ -161,7 +163,7 @@
             direction: ltr !important;
             text-align: left !important;
         }
-
+        
         .timer-section {
             text-align: center;
             padding: 20px;
@@ -170,7 +172,7 @@
             margin-top: 30px;
             border-radius: 10px;
         }
-
+        
         .timer {
             font-size: 2rem;
             font-weight: bold;
@@ -179,30 +181,30 @@
             justify-content: center;
             gap: 15px;
         }
-
+        
         .timer-unit {
             background: rgba(255, 255, 255, 0.1);
             padding: 10px;
             border-radius: 5px;
             min-width: 80px;
         }
-
+        
         .timer-value {
             font-size: 2.5rem;
             display: block;
         }
-
+        
         .timer-label {
             font-size: 0.9rem;
             text-transform: uppercase;
             display: block;
         }
-
+        
         .finish-date {
             font-size: 1.2rem;
             margin-top: 10px;
         }
-
+        
         .thank-you {
             text-align: center;
             padding: 20px;
@@ -211,7 +213,7 @@
             border-top: 1px solid #dee2e6;
             margin-top: 30px;
         }
-
+        
         .footer {
             text-align: center;
             padding: 20px;
@@ -221,7 +223,7 @@
             max-width: 1000px;
             border-radius: 15px;
         }
-
+        
         .footer a {
             color: #3498db;
             text-decoration: none;
@@ -231,20 +233,18 @@
             padding: 0 !important;
             margin: 0 !important;
         }
-
+        
         .footer a:hover {
             text-decoration: underline;
         }
-
+        
         @media (max-width: 768px) {
             h1 {
                 font-size: 1.8rem;
             }
-            
             .task-content {
                 padding: 15px;
             }
-            
             .language-toggle {
                 position: relative;
                 top: 0;
@@ -253,16 +253,13 @@
                 display: block;
                 width: 100%;
             }
-            
             .timer {
                 font-size: 1.5rem;
                 flex-wrap: wrap;
             }
-            
             .timer-unit {
                 min-width: 70px;
             }
-            
             .timer-value {
                 font-size: 2rem;
             }
@@ -282,7 +279,7 @@
             margin: 20px 0;
         }
         
-        .code-comparison > div {
+        .code-comparison>div {
             flex: 1;
         }
         
@@ -301,6 +298,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
@@ -309,11 +307,11 @@
             <p class="subtitle" id="subtitle">Create a complete Express.js server with MongoDB integration, middleware, and CRUD operations for movies and genres.</p>
             <button class="language-toggle" id="languageToggle">العربية / English</button>
         </header>
-        
+
         <div class="task-content" id="taskContent">
             <!-- Content will be dynamically inserted here -->
         </div>
-        
+
         <div class="timer-section">
             <h3 id="timer-title">Time Remaining to Complete Task</h3>
             <div class="timer" id="timer">
@@ -334,37 +332,34 @@
                     <span class="timer-label" id="seconds-label">Seconds</span>
                 </div>
             </div>
-            <p class="finish-date" id="finish-date">Finish by: November 22, 2025</p>
+            <p class="finish-date" id="finish-date">Finish by: November 22, 2026</p>
             <p id="timer-message">Complete the task before the deadline!</p>
         </div>
-        
+
         <div class="thank-you" id="thankYou">
             "Thank you for your hard work and dedication. Your efforts are appreciated!"
         </div>
     </div>
-    
+
     <div class="footer">
-        <p>&copy; 2025 <a href="https://focal-x.com/" target="_blank">Focal X</a> - Node.js Bootcamp V10</p>
+        <p>&copy; 2026 <a href="https://focal-x.com/" target="_blank">Focal X</a> - Node.js Bootcamp V10</p>
     </div>
 
-        <script src="../reg.js"></script>
-<script>
-// Content data structure
-const taskData = {
-    en: {
-        title: "Task 9: Complete E-commerce Backend System",
-        subtitle: "Build a full-featured e-commerce backend with authentication, product management, orders, payments, and admin dashboard",
-        sections: [
-            {
-                type: "idea",
-                title: "💡 Task 9: \"Complete E-commerce Backend System\"",
-                content: "Develop a complete backend API for an e-commerce platform that allows users to browse products, manage shopping carts, place orders, make payments, and includes an admin panel for store management."
-            },
-            {
-                type: "requirements",
-                title: "📋 Project Requirements",
-                content: [
-                    {
+    <script src="../reg.js"></script>
+    <script>
+        // Content data structure
+        const taskData = {
+            en: {
+                title: "Task 9: Complete E-commerce Backend System",
+                subtitle: "Build a full-featured e-commerce backend with authentication, product management, orders, payments, and admin dashboard",
+                sections: [{
+                    type: "idea",
+                    title: "💡 Task 9: \"Complete E-commerce Backend System\"",
+                    content: "Develop a complete backend API for an e-commerce platform that allows users to browse products, manage shopping carts, place orders, make payments, and includes an admin panel for store management."
+                }, {
+                    type: "requirements",
+                    title: "📋 Project Requirements",
+                    content: [{
                         type: "list",
                         title: "System Story:",
                         items: [
@@ -378,8 +373,7 @@ const taskData = {
                             "Inventory management with stock tracking and low stock alerts",
                             "Password reset functionality via email with secure token validation"
                         ]
-                    },
-                    {
+                    }, {
                         type: "list",
                         title: "User Stories:",
                         items: [
@@ -397,8 +391,7 @@ const taskData = {
                             "As an admin, I want to see sales reports and analytics dashboard",
                             "As an admin, I want to manage user accounts and roles"
                         ]
-                    },
-                    {
+                    }, {
                         type: "list",
                         title: "Database Schemas Structure:",
                         items: [
@@ -413,8 +406,7 @@ const taskData = {
                             "Token Model: id, userId, token, type, expiresAt, createdAt",
                             "Address Model: street, city, state, zipCode, country, isDefault"
                         ]
-                    },
-                    {
+                    }, {
                         type: "list",
                         title: "Technical Requirements:",
                         items: [
@@ -431,8 +423,7 @@ const taskData = {
                             "Follow folder structure exactly as specified",
                             "Token model for password reset with expiration"
                         ]
-                    },
-                    {
+                    }, {
                         type: "list",
                         title: "Security Implementation Requirements:",
                         items: [
@@ -446,8 +437,7 @@ const taskData = {
                             "Token expiration for password reset (1 hour)",
                             "Token deletion after use"
                         ]
-                    },
-                    {
+                    }, {
                         type: "list",
                         title: "What Students Should Deliver:",
                         items: [
@@ -463,8 +453,7 @@ const taskData = {
                             "Email sending functionality for order confirmations and password reset",
                             "Password reset flow with email verification"
                         ]
-                    },
-                    {
+                    }, {
                         type: "output",
                         title: "Required API Endpoints (Minimum):",
                         content: "Implement at least these endpoints with proper validation and error handling:",
@@ -529,8 +518,7 @@ PUT    /api/users/:id/role    - Update user role (Admin only)
    - Authenticated user
    - Verifies current password
    - Updates to new password`
-                    },
-                    {
+                    }, {
                         type: "output",
                         title: "📝 Folder Structure (Must Follow Exactly):",
                         example: `├── src/
@@ -592,54 +580,48 @@ PUT    /api/users/:id/role    - Update user role (Admin only)
 ├── .env.example
 ├── .gitignore
 └── README.md`
-                    }
-                ]
+                    }]
+                }, {
+                    type: "learning",
+                    title: "📚 Technical Areas to Master",
+                    content: [
+                        "Full-stack authentication with JWT and HTTP-only cookies",
+                        "Password reset flow with email verification and token management",
+                        "File uploads with Multer and Cloudinary integration",
+                        "Transactional emails with Nodemailer and templates",
+                        "Advanced Mongoose operations with population and aggregation",
+                        "Security best practices implementation",
+                        "API deployment on Render with MongoDB Atlas",
+                        "Comprehensive error handling and validation",
+                        "Middleware architecture in Express.js",
+                        "Payment system integration concepts",
+                        "Admin dashboard and role-based access control",
+                        "Token-based authentication for password reset"
+                    ]
+                }],
+                timer: {
+                    title: "Time Remaining to Complete Task",
+                    message: "Complete the task before the deadline!",
+                    days: "Days",
+                    hours: "Hours",
+                    minutes: "Minutes",
+                    seconds: "Seconds"
+                },
+                thankYou: "\"Build secure, scalable, and production-ready backend systems with proper authentication flows!\"",
+                buttonText: "العربية / English",
+                finishDate: "Finish by: December 10, 2026"
             },
-            {
-                type: "learning",
-                title: "📚 Technical Areas to Master",
-                content: [
-                    "Full-stack authentication with JWT and HTTP-only cookies",
-                    "Password reset flow with email verification and token management",
-                    "File uploads with Multer and Cloudinary integration",
-                    "Transactional emails with Nodemailer and templates",
-                    "Advanced Mongoose operations with population and aggregation",
-                    "Security best practices implementation",
-                    "API deployment on Render with MongoDB Atlas",
-                    "Comprehensive error handling and validation",
-                    "Middleware architecture in Express.js",
-                    "Payment system integration concepts",
-                    "Admin dashboard and role-based access control",
-                    "Token-based authentication for password reset"
-                ]
-            }
-        ],
-        timer: {
-            title: "Time Remaining to Complete Task",
-            message: "Complete the task before the deadline!",
-            days: "Days",
-            hours: "Hours",
-            minutes: "Minutes",
-            seconds: "Seconds"
-        },
-        thankYou: "\"Build secure, scalable, and production-ready backend systems with proper authentication flows!\"",
-        buttonText: "العربية / English",
-        finishDate: "Finish by: December 10, 2025"
-    },
-    ar: {
-        title: "المهمة 9: نظام متكامل للخلفية لتطبيق التجارة الإلكترونية",
-        subtitle: "أنشئ نظام خلفية كامل للتجارة الإلكترونية يتضمن المصادقة، إدارة المنتجات، الطلبات، المدفوعات، ولوحة تحكم المدير",
-        sections: [
-            {
-                type: "idea",
-                title: "💡 المهمة 9: \"نظام متكامل للخلفية لتطبيق التجارة الإلكترونية\"",
-                content: "طور واجهة برمجة تطبيقات خلفية كاملة لمنصة تجارة إلكترونية تتيح للمستخدمين تصفح المنتجات، إدارة عربات التسوق، تقديم الطلبات، إجراء المدفوعات، وتتضمن لوحة تحكم لإدارة المتجر."
-            },
-            {
-                type: "requirements",
-                title: "📋 متطلبات المشروع",
-                content: [
-                    {
+            ar: {
+                title: "المهمة 9: نظام متكامل للخلفية لتطبيق التجارة الإلكترونية",
+                subtitle: "أنشئ نظام خلفية كامل للتجارة الإلكترونية يتضمن المصادقة، إدارة المنتجات، الطلبات، المدفوعات، ولوحة تحكم المدير",
+                sections: [{
+                    type: "idea",
+                    title: "💡 المهمة 9: \"نظام متكامل للخلفية لتطبيق التجارة الإلكترونية\"",
+                    content: "طور واجهة برمجة تطبيقات خلفية كاملة لمنصة تجارة إلكترونية تتيح للمستخدمين تصفح المنتجات، إدارة عربات التسوق، تقديم الطلبات، إجراء المدفوعات، وتتضمن لوحة تحكم لإدارة المتجر."
+                }, {
+                    type: "requirements",
+                    title: "📋 متطلبات المشروع",
+                    content: [{
                         type: "list",
                         title: "قصة النظام:",
                         items: [
@@ -653,8 +635,7 @@ PUT    /api/users/:id/role    - Update user role (Admin only)
                             "إدارة المخزون مع تتبع الكميات وتنبيهات نفاد المخزون",
                             "وظيفة إعادة تعيين كلمة المرور عبر البريد الإلكتروني مع التحقق الآمن من الرموز"
                         ]
-                    },
-                    {
+                    }, {
                         type: "list",
                         title: "قصص المستخدم:",
                         items: [
@@ -672,8 +653,7 @@ PUT    /api/users/:id/role    - Update user role (Admin only)
                             "كمدير، أريد رؤية تقارير المبيعات ولوحة التحليلات",
                             "كمدير، أريد إدارة حسابات المستخدمين والأدوار"
                         ]
-                    },
-                    {
+                    }, {
                         type: "list",
                         title: "هياكل نماذج قاعدة البيانات:",
                         items: [
@@ -688,8 +668,7 @@ PUT    /api/users/:id/role    - Update user role (Admin only)
                             "نموذج الرمز: id, userId, token, type, expiresAt, createdAt",
                             "نموذج العنوان: street, city, state, zipCode, country, isDefault"
                         ]
-                    },
-                    {
+                    }, {
                         type: "list",
                         title: "المتطلبات التقنية:",
                         items: [
@@ -706,8 +685,7 @@ PUT    /api/users/:id/role    - Update user role (Admin only)
                             "اتباع هيكل المجلدات تمامًا كما هو محدد",
                             "نموذج الرموز لإعادة تعيين كلمة المرور مع تاريخ انتهاء"
                         ]
-                    },
-                    {
+                    }, {
                         type: "list",
                         title: "متطلبات تنفيذ الأمان:",
                         items: [
@@ -721,8 +699,7 @@ PUT    /api/users/:id/role    - Update user role (Admin only)
                             "انتهاء صلاحية الرموز لإعادة تعيين كلمة المرور (ساعة واحدة)",
                             "حذف الرموز بعد الاستخدام"
                         ]
-                    },
-                    {
+                    }, {
                         type: "list",
                         title: "ما يجب على الطلاب تسليمه:",
                         items: [
@@ -738,8 +715,7 @@ PUT    /api/users/:id/role    - Update user role (Admin only)
                             "وظيفة إرسال البريد الإلكتروني لتأكيد الطلبات وإعادة تعيين كلمة المرور",
                             "سير عمل إعادة تعيين كلمة المرور مع التحقق عبر البريد الإلكتروني"
                         ]
-                    },
-                    {
+                    }, {
                         type: "output",
                         title: "نقاط نهاية API المطلوبة (الحد الأدنى):",
                         content: "قم بتنفيذ هذه النقاط على الأقل مع التحقق المناسب من الصحة ومعالجة الأخطاء:",
@@ -804,8 +780,7 @@ PUT    /api/users/:id/role    - تحديث دور المستخدم (للمدير
    - مستخدم مصادق عليه
    - يتحقق من كلمة المرور الحالية
    - يقوم بالتحديث إلى كلمة مرور جديدة`
-                    },
-                    {
+                    }, {
                         type: "output",
                         title: "📝 هيكل المجلدات (يجب اتباعه بالضبط):",
                         example: `├── src/
@@ -867,50 +842,47 @@ PUT    /api/users/:id/role    - تحديث دور المستخدم (للمدير
 ├── .env.example
 ├── .gitignore
 └── README.md`
-                    }
-                ]
-            },
-            {
-                type: "learning",
-                title: "📚 المجالات التقنية لإتقانها",
-                content: [
-                    "المصادقة الكاملة مع JWT وملفات تعريف الارتباط HTTP-only",
-                    "سير عمل إعادة تعيين كلمة المرور مع التحقق عبر البريد الإلكتروني وإدارة الرموز",
-                    "رفع الملفات مع Multer وتكامل Cloudinary",
-                    "رسائل البريد الإلكتروني مع Nodemailer والقوالب",
-                    "عمليات Mongoose المتقدمة مع التعبئة والتجميع",
-                    "تنفيذ أفضل ممارسات الأمان",
-                    "نشر API على Render مع MongoDB Atlas",
-                    "معالجة الأخطاء والتحقق من الصحة الشامل",
-                    "هندسة الـ Middleware في Express.js",
-                    "مفاهيم تكامل نظام المدفوعات",
-                    "لوحة تحكم المدير والتحكم في الوصول القائم على الأدوار",
-                    "المصادقة القائمة على الرموز لإعادة تعيين كلمة المرور"
-                ]
+                    }]
+                }, {
+                    type: "learning",
+                    title: "📚 المجالات التقنية لإتقانها",
+                    content: [
+                        "المصادقة الكاملة مع JWT وملفات تعريف الارتباط HTTP-only",
+                        "سير عمل إعادة تعيين كلمة المرور مع التحقق عبر البريد الإلكتروني وإدارة الرموز",
+                        "رفع الملفات مع Multer وتكامل Cloudinary",
+                        "رسائل البريد الإلكتروني مع Nodemailer والقوالب",
+                        "عمليات Mongoose المتقدمة مع التعبئة والتجميع",
+                        "تنفيذ أفضل ممارسات الأمان",
+                        "نشر API على Render مع MongoDB Atlas",
+                        "معالجة الأخطاء والتحقق من الصحة الشامل",
+                        "هندسة الـ Middleware في Express.js",
+                        "مفاهيم تكامل نظام المدفوعات",
+                        "لوحة تحكم المدير والتحكم في الوصول القائم على الأدوار",
+                        "المصادقة القائمة على الرموز لإعادة تعيين كلمة المرور"
+                    ]
+                }],
+                timer: {
+                    title: "الوقت المتبقي لإكمال المهمة",
+                    message: "أكمل المهمة قبل الموعد النهائي!",
+                    days: "أيام",
+                    hours: "ساعات",
+                    minutes: "دقائق",
+                    seconds: "ثواني"
+                },
+                thankYou: "\"ابنِ أنظمة خلفية آمنة وقابلة للتطوير وجاهزة للإنتاج مع سير عمل مصادقة صحيحة!\"",
+                buttonText: "English / العربية",
+                finishDate: "الانتهاء بحلول: 10 ديسمبر 2026"
             }
-        ],
-        timer: {
-            title: "الوقت المتبقي لإكمال المهمة",
-            message: "أكمل المهمة قبل الموعد النهائي!",
-            days: "أيام",
-            hours: "ساعات",
-            minutes: "دقائق",
-            seconds: "ثواني"
-        },
-        thankYou: "\"ابنِ أنظمة خلفية آمنة وقابلة للتطوير وجاهزة للإنتاج مع سير عمل مصادقة صحيحة!\"",
-        buttonText: "English / العربية",
-        finishDate: "الانتهاء بحلول: 10 ديسمبر 2025"
-    }
-};
+        };
 
-function renderContent(lang) {
+        function renderContent(lang) {
             const data = taskData[lang];
             const taskContent = document.getElementById('taskContent');
-            
+
             // Update page title and subtitle
             document.getElementById('title').textContent = data.title;
             document.getElementById('subtitle').textContent = data.subtitle;
-            
+
             // Update timer section
             document.getElementById('timer-title').textContent = data.timer.title;
             document.getElementById('timer-message').textContent = data.timer.message;
@@ -919,31 +891,31 @@ function renderContent(lang) {
             document.getElementById('minutes-label').textContent = data.timer.minutes;
             document.getElementById('seconds-label').textContent = data.timer.seconds;
             document.getElementById('finish-date').textContent = data.finishDate;
-            
+
             // Update thank you message
             document.getElementById('thankYou').textContent = data.thankYou;
-            
+
             // Update button text
             document.getElementById('languageToggle').textContent = data.buttonText;
-            
+
             // Clear existing content
             taskContent.innerHTML = '';
-            
+
             // Render each section
             data.sections.forEach(section => {
                 const sectionEl = document.createElement('div');
                 sectionEl.className = 'section';
-                
+
                 if (section.type === 'requirements') {
                     sectionEl.classList.add('requirements');
                 } else if (section.type === 'bonus') {
                     sectionEl.classList.add('bonus');
                 }
-                
+
                 const titleEl = document.createElement('h2');
                 titleEl.textContent = section.title;
                 sectionEl.appendChild(titleEl);
-                
+
                 if (section.type === 'idea' || section.type === 'note') {
                     const contentEl = document.createElement('p');
                     contentEl.textContent = section.content;
@@ -953,7 +925,7 @@ function renderContent(lang) {
                         const itemTitle = document.createElement('h3');
                         itemTitle.textContent = item.title;
                         sectionEl.appendChild(itemTitle);
-                        
+
                         if (item.type === 'list') {
                             const listEl = document.createElement('ul');
                             item.items.forEach(listItem => {
@@ -966,7 +938,7 @@ function renderContent(lang) {
                             const contentEl = document.createElement('p');
                             contentEl.textContent = item.content;
                             sectionEl.appendChild(contentEl);
-                            
+
                             const exampleEl = document.createElement('div');
                             exampleEl.className = 'output-example';
                             exampleEl.textContent = item.example;
@@ -982,10 +954,10 @@ function renderContent(lang) {
                     });
                     sectionEl.appendChild(listEl);
                 }
-                
+
                 taskContent.appendChild(sectionEl);
             });
-            
+
             // Set text direction based on language
             if (lang === 'ar') {
                 document.body.setAttribute('dir', 'rtl');
@@ -1002,17 +974,17 @@ function renderContent(lang) {
 
         // Timer functionality
         function startCountdown() {
-            // Set the date we're counting down to (September 27, 2025)
-            const countDownDate = new Date("Dec 10, 2025 23:59:59").getTime();
-            
+            // Set the date we're counting down to (September 27, 2026)
+            const countDownDate = new Date("Dec 10, 2026 23:59:59").getTime();
+
             // Update the countdown every 1 second
             const countdown = setInterval(() => {
                 // Get today's date and time
                 const now = new Date().getTime();
-                
+
                 // Find the distance between now and the countdown date
                 const distance = countDownDate - now;
-                
+
                 // If the countdown is over, write some text
                 if (distance < 0) {
                     clearInterval(countdown);
@@ -1022,13 +994,13 @@ function renderContent(lang) {
                     document.getElementById("seconds").textContent = "00";
                     return;
                 }
-                
+
                 // Time calculations for days, hours, minutes and seconds
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                
+
                 // Display the results
                 document.getElementById("days").textContent = days.toString().padStart(2, '0');
                 document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
@@ -1041,10 +1013,10 @@ function renderContent(lang) {
         document.addEventListener('DOMContentLoaded', function() {
             // Render English content by default
             renderContent('en');
-            
+
             // Start the countdown timer
             startCountdown();
-            
+
             // Language toggle functionality
             document.getElementById('languageToggle').addEventListener('click', function() {
                 const currentLang = document.body.getAttribute('dir') === 'rtl' ? 'ar' : 'en';
@@ -1054,4 +1026,5 @@ function renderContent(lang) {
         });
     </script>
 </body>
+
 </html>

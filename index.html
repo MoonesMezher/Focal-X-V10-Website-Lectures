@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
     <meta name="theme-color" content="#b21f1f">
     <link rel="stylesheet" href="./assets/index.css">
 </head>
+
 <body>
     <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
     <div class="container">
@@ -22,12 +24,12 @@
                 <a href="resources/index.html" target="_blank" rel="noopener noreferrer">Resources</a>
             </div>
         </header>
-        
+
         <div class="lectures-container">
             <h2>Available Lectures</h2>
-            
+
             <input type="text" class="search-box" placeholder="Search lectures..." id="searchInput">
-            
+
             <table class="lectures-table">
                 <thead>
                     <tr>
@@ -45,314 +47,313 @@
     </div>
 
     <footer class="footer">
-        <p>&copy; 2025 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Rights Reserved</p>
+        <p>&copy; 2026 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Rights Reserved</p>
     </footer>
 
     <script>
         // Lecture data array - Easy to update and maintain
-        const lectures = [
-            {
+        const lectures = [{
                 number: "00",
                 title: "Intro",
                 topics: "Course Topics",
                 status: "completed",
                 link: "#"
-            },
-            {
+            }, {
                 number: "01",
                 title: "Backend Concepts & API Theory",
                 topics: "What is Backend Development?, Client-Server Architecture, HTTP Protocol, APIs, REST, JSON, Middlewares",
                 status: "completed",
                 link: "lecture1.html"
             },
-       /*      {
-                number: "02",
-                title: "JavaScript Fundamentals 1",
-                topics: "Variables, Data Types, Scopes, Operators",
-                status: "completed",
-                link: "lecture2.html"
-            },
-            {
-                number: "03",
-                title: "JavaScript Fundamentals 2",
-                topics: "Functions, Loops",
-                status: "completed",
-                link: "lecture3.html"
-            },
-            {
-                number: "04",
-                title: "Advanced JavaScript 1",
-                topics: "Arrays, Mutate & Non-Mutate, Timers, Date",
-                status: "completed",
-                link: "lecture4.html"
-            },
-            {
-                number: "05",
-                title: "Advanced JavaScript 2",
-                topics: "Objects, Promises, Error Handling",
-                status: "completed",
-                link: "lecture5.html"
-            },
-            {
-                number: "06*",
-                title: "Solve Task 1",
-                topics: "Solve Task 1, Semicolons",
-                status: "completed",
-                link: "lecture6.html"
-            },
-            {
-                number: "07",
-                title: "Advanced JavaScript 3",
-                topics: "Promises, Async/Await, Event Loop, Regex",
-                status: "completed",
-                link: "lecture7.html"
-            },
-            {
-                number: "08",
-                title: "Advanced JavaScript 4",
-                topics: "Regex, ES6, Destructuring, OOP",
-                status: "completed",
-                link: "lecture8.html"
-            },
-            {
-                number: "09*",
-                title: "Solve Task 2",
-                topics: "Solve Task 2",
-                status: "completed",
-                link: "lecture9.html"
-            },
-            {
-                number: "10",
-                title: "TypeScript 1",
-                topics: "Intro, Types, Interfaces",
-                status: "completed",
-                link: "lecture10.html"
-            },
-            {
-                number: "11",
-                title: "TypeScript 2",
-                topics: "Interfaces, Type Aliases, Type Guards, Generics",
-                status: "completed",
-                link: "lecture11.html"
-            },
-            {
-                number: "12*",
-                title: "Solve Task 3",
-                topics: "Solve Task 3",
-                status: "completed",
-                link: "lecture12.html"
-            },
-            {
-                number: "13",
-                title: "Git & Github",
-                topics: "Git & Github",
-                status: "completed",
-                link: "lecture13.html"
-            },
-            {
-                number: "14",
-                title: "NodeJS",
-                topics: "Modules, File System, APIs",
-                status: "completed",
-                link: "lecture14.html"
-            },
-            {
-                number: "15*",
-                title: "Solve Task 4",
-                topics: "Solve Task 4",
-                status: "completed",
-                link: "lecture15.html"
-            },
-            {
-                number: "16",
-                title: "ExpressJS 1",
-                topics: "HTTP Module, ExpressJS",
-                status: "completed",
-                link: "lecture16.html"
-            },
-            {
-                number: "17",
-                title: "ExpressJS 2",
-                topics: "NPM, Middlewares, Folder Structure",
-                status: "completed",
-                link: "lecture17.html"
-            },
-            {
-                number: "18*",
-                title: "Solve Task 5",
-                topics: "Solve Task 5, Express Server Example",
-                status: "completed",
-                link: "lecture18.html"
-            },
-            {
-                number: "19",
-                title: "Postman & Databases",
-                topics: "Postman, PLop, Databases, Intro to MongoDB",
-                status: "completed",
-                link: "lecture19.html"
-            },
-            {
-                number: "20",
-                title: "MongoDB & Intro to Mongoose",
-                topics: "MongoDB, Mongoose",
-                status: "completed",
-                link: "lecture20.html"
-            },
-            {
-                number: "21",
-                title: "Mongoose 1",
-                topics: "Mongoose (Schema, Chaining, Populate)",
-                status: "completed",
-                link: "lecture21.html"
-            },
-            {
-                number: "22*",
-                title: "Solve Task 6",
-                topics: "Solve Task 6",
-                status: "completed",
-                link: "lecture22.html"
-            },
-            {
-                number: "23",
-                title: "Mongoose 2",
-                topics: "Mongoose (Relationships, Advanced Features)",
-                status: "completed",
-                link: "lecture23.html"
-            },
-            {
-                number: "24",
-                title: "Auth 1",
-                topics: "Authentication & Authorization, JWT, Cookies",
-                status: "completed",
-                link: "lecture24.html"
-            },
-            {
-                number: "25",
-                title: "Auth 2",
-                topics: "Password Security, Auth Endpoints",
-                status: "completed",
-                link: "lecture25.html"
-            },
-            {
-                number: "26",
-                title: "Auth 3",
-                topics: "Auth Endpoints, Auth Middleware",
-                status: "completed",
-                link: "lecture26.html"
-            },
-            {
-                number: "27",
-                title: "Security Practices",
-                topics: "Seeds, Security Practices",
-                status: "completed",
-                link: "lecture27.html"
-            },
-            {
-                number: "28",
-                title: "Advanced Security & Express Validation",
-                topics: "Argon2, XSS, Express Validator, Async Handler",
-                status: "completed",
-                link: "lecture28.html"
-            },
-            {
-                number: "29*",
-                title: "Solve Task 7",
-                topics: "Solve Task 7",
-                status: "completed",
-                link: "lecture29.html"
-            },
-            {
-                number: "30",
-                title: "File Management",
-                topics: "Multer & Cloudinary",
-                status: "completed",
-                link: "lecture30.html"
-            },
-            {
-                number: "31*",
-                title: "Solve Task 8",
-                topics: "Solve Task 8",
-                status: "completed",
-                link: "lecture31.html"
-            },
-            {
-                number: "32",
-                title: "Email & Deployment",
-                topics: "Email & Deployment",
-                status: "completed",
-                link: "lecture32.html"
-            },
-            {
-                number: "33",
-                title: "Full-Stack Application Demo",
-                topics: "Complete real-world application with frontend-backend integration",
-                status: "completed",
-                link: "lecture33.html"
-            },
-            {
-                number: "34",
-                title: "Intro to Docker",
-                topics: "Docker, Docker Compose, Dockerfile, Dockerizing Node.js/Express apps",
-                status: "completed",
-                link: "lecture34.html"
-            },
-            {
-                number: "35",
-                title: "Real-Time Communication in Node.js",
-                topics: "Events, WebSockets & Socket.IO",
-                status: "completed",
-                link: "lecture35.html"
-            },
-            {
-                number: "36",
-                title: "Socket.io",
-                topics: "Full Example, Next Steps",
-                status: "completed",
-                link: "lecture36.html"
-            }
-        */];
+            /*      {
+                     number: "02",
+                     title: "JavaScript Fundamentals 1",
+                     topics: "Variables, Data Types, Scopes, Operators",
+                     status: "completed",
+                     link: "lecture2.html"
+                 },
+                 {
+                     number: "03",
+                     title: "JavaScript Fundamentals 2",
+                     topics: "Functions, Loops",
+                     status: "completed",
+                     link: "lecture3.html"
+                 },
+                 {
+                     number: "04",
+                     title: "Advanced JavaScript 1",
+                     topics: "Arrays, Mutate & Non-Mutate, Timers, Date",
+                     status: "completed",
+                     link: "lecture4.html"
+                 },
+                 {
+                     number: "05",
+                     title: "Advanced JavaScript 2",
+                     topics: "Objects, Promises, Error Handling",
+                     status: "completed",
+                     link: "lecture5.html"
+                 },
+                 {
+                     number: "06*",
+                     title: "Solve Task 1",
+                     topics: "Solve Task 1, Semicolons",
+                     status: "completed",
+                     link: "lecture6.html"
+                 },
+                 {
+                     number: "07",
+                     title: "Advanced JavaScript 3",
+                     topics: "Promises, Async/Await, Event Loop, Regex",
+                     status: "completed",
+                     link: "lecture7.html"
+                 },
+                 {
+                     number: "08",
+                     title: "Advanced JavaScript 4",
+                     topics: "Regex, ES6, Destructuring, OOP",
+                     status: "completed",
+                     link: "lecture8.html"
+                 },
+                 {
+                     number: "09*",
+                     title: "Solve Task 2",
+                     topics: "Solve Task 2",
+                     status: "completed",
+                     link: "lecture9.html"
+                 },
+                 {
+                     number: "10",
+                     title: "TypeScript 1",
+                     topics: "Intro, Types, Interfaces",
+                     status: "completed",
+                     link: "lecture10.html"
+                 },
+                 {
+                     number: "11",
+                     title: "TypeScript 2",
+                     topics: "Interfaces, Type Aliases, Type Guards, Generics",
+                     status: "completed",
+                     link: "lecture11.html"
+                 },
+                 {
+                     number: "12*",
+                     title: "Solve Task 3",
+                     topics: "Solve Task 3",
+                     status: "completed",
+                     link: "lecture12.html"
+                 },
+                 {
+                     number: "13",
+                     title: "Git & Github",
+                     topics: "Git & Github",
+                     status: "completed",
+                     link: "lecture13.html"
+                 },
+                 {
+                     number: "14",
+                     title: "NodeJS",
+                     topics: "Modules, File System, APIs",
+                     status: "completed",
+                     link: "lecture14.html"
+                 },
+                 {
+                     number: "15*",
+                     title: "Solve Task 4",
+                     topics: "Solve Task 4",
+                     status: "completed",
+                     link: "lecture15.html"
+                 },
+                 {
+                     number: "16",
+                     title: "ExpressJS 1",
+                     topics: "HTTP Module, ExpressJS",
+                     status: "completed",
+                     link: "lecture16.html"
+                 },
+                 {
+                     number: "17",
+                     title: "ExpressJS 2",
+                     topics: "NPM, Middlewares, Folder Structure",
+                     status: "completed",
+                     link: "lecture17.html"
+                 },
+                 {
+                     number: "18*",
+                     title: "Solve Task 5",
+                     topics: "Solve Task 5, Express Server Example",
+                     status: "completed",
+                     link: "lecture18.html"
+                 },
+                 {
+                     number: "19",
+                     title: "Postman & Databases",
+                     topics: "Postman, PLop, Databases, Intro to MongoDB",
+                     status: "completed",
+                     link: "lecture19.html"
+                 },
+                 {
+                     number: "20",
+                     title: "MongoDB & Intro to Mongoose",
+                     topics: "MongoDB, Mongoose",
+                     status: "completed",
+                     link: "lecture20.html"
+                 },
+                 {
+                     number: "21",
+                     title: "Mongoose 1",
+                     topics: "Mongoose (Schema, Chaining, Populate)",
+                     status: "completed",
+                     link: "lecture21.html"
+                 },
+                 {
+                     number: "22*",
+                     title: "Solve Task 6",
+                     topics: "Solve Task 6",
+                     status: "completed",
+                     link: "lecture22.html"
+                 },
+                 {
+                     number: "23",
+                     title: "Mongoose 2",
+                     topics: "Mongoose (Relationships, Advanced Features)",
+                     status: "completed",
+                     link: "lecture23.html"
+                 },
+                 {
+                     number: "24",
+                     title: "Auth 1",
+                     topics: "Authentication & Authorization, JWT, Cookies",
+                     status: "completed",
+                     link: "lecture24.html"
+                 },
+                 {
+                     number: "25",
+                     title: "Auth 2",
+                     topics: "Password Security, Auth Endpoints",
+                     status: "completed",
+                     link: "lecture25.html"
+                 },
+                 {
+                     number: "26",
+                     title: "Auth 3",
+                     topics: "Auth Endpoints, Auth Middleware",
+                     status: "completed",
+                     link: "lecture26.html"
+                 },
+                 {
+                     number: "27",
+                     title: "Security Practices",
+                     topics: "Seeds, Security Practices",
+                     status: "completed",
+                     link: "lecture27.html"
+                 },
+                 {
+                     number: "28",
+                     title: "Advanced Security & Express Validation",
+                     topics: "Argon2, XSS, Express Validator, Async Handler",
+                     status: "completed",
+                     link: "lecture28.html"
+                 },
+                 {
+                     number: "29*",
+                     title: "Solve Task 7",
+                     topics: "Solve Task 7",
+                     status: "completed",
+                     link: "lecture29.html"
+                 },
+                 {
+                     number: "30",
+                     title: "File Management",
+                     topics: "Multer & Cloudinary",
+                     status: "completed",
+                     link: "lecture30.html"
+                 },
+                 {
+                     number: "31*",
+                     title: "Solve Task 8",
+                     topics: "Solve Task 8",
+                     status: "completed",
+                     link: "lecture31.html"
+                 },
+                 {
+                     number: "32",
+                     title: "Email & Deployment",
+                     topics: "Email & Deployment",
+                     status: "completed",
+                     link: "lecture32.html"
+                 },
+                 {
+                     number: "33",
+                     title: "Full-Stack Application Demo",
+                     topics: "Complete real-world application with frontend-backend integration",
+                     status: "completed",
+                     link: "lecture33.html"
+                 },
+                 {
+                     number: "34",
+                     title: "Intro to Docker",
+                     topics: "Docker, Docker Compose, Dockerfile, Dockerizing Node.js/Express apps",
+                     status: "completed",
+                     link: "lecture34.html"
+                 },
+                 {
+                     number: "35",
+                     title: "Real-Time Communication in Node.js",
+                     topics: "Events, WebSockets & Socket.IO",
+                     status: "completed",
+                     link: "lecture35.html"
+                 },
+                 {
+                     number: "36",
+                     title: "Socket.io",
+                     topics: "Full Example, Next Steps",
+                     status: "completed",
+                     link: "lecture36.html"
+                 }
+             */
+        ];
 
         // Function to generate lecture rows
         function generateLectureRows(lecturesArray) {
             const tableBody = document.getElementById('lectures-table-body');
             tableBody.innerHTML = ''; // Clear existing rows
-            
+
             for (let lecture of lecturesArray) {
                 const row = document.createElement('tr');
-                
+
                 // Set click event for the entire row
                 row.onclick = () => {
                     if (lecture.link && lecture.link !== '#') {
                         window.location.href = lecture.link;
                     }
                 };
-                
+
                 // Create table cells
                 const numberCell = document.createElement('td');
                 numberCell.textContent = lecture.number;
-                
+
                 const titleCell = document.createElement('td');
                 const titleLink = document.createElement('a');
                 titleLink.href = lecture.link;
                 titleLink.className = 'lecture-link';
                 titleLink.textContent = lecture.title;
                 titleCell.appendChild(titleLink);
-                
+
                 const topicsCell = document.createElement('td');
                 topicsCell.textContent = lecture.topics;
-                
+
                 const statusCell = document.createElement('td');
                 const statusBadge = document.createElement('span');
                 statusBadge.className = `status-badge status-${lecture.status}`;
                 statusBadge.textContent = lecture.status.charAt(0).toUpperCase() + lecture.status.slice(1);
                 statusCell.appendChild(statusBadge);
-                
+
                 // Append cells to row
                 row.appendChild(numberCell);
                 row.appendChild(titleCell);
                 row.appendChild(topicsCell);
                 row.appendChild(statusCell);
-                
+
                 // Append row to table body
                 tableBody.appendChild(row);
             }
@@ -366,10 +367,10 @@
             const searchText = this.value.toLowerCase();
             const filteredLectures = lectures.filter(lecture => {
                 return lecture.title.toLowerCase().includes(searchText) ||
-                       lecture.topics.toLowerCase().includes(searchText) ||
-                       lecture.number.toLowerCase().includes(searchText);
+                    lecture.topics.toLowerCase().includes(searchText) ||
+                    lecture.number.toLowerCase().includes(searchText);
             });
-            
+
             generateLectureRows(filteredLectures);
         });
 
@@ -383,7 +384,9 @@
         function updateLecture(lectureNumber, updatedData) {
             const index = lectures.findIndex(lecture => lecture.number === lectureNumber);
             if (index !== -1) {
-                lectures[index] = { ...lectures[index], ...updatedData };
+                lectures[index] = {...lectures[index],
+                    ...updatedData
+                };
                 generateLectureRows(lectures);
             }
         }
@@ -419,4 +422,5 @@
         */
     </script>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
     <link rel="shortcut icon" href="./logo.jpg" type="image/x-icon">
     <link rel="stylesheet" href="./assets/lecture.css">
 </head>
+
 <body>
     <div class="container">
         <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
@@ -18,14 +20,14 @@
             <h1 id="lecture-title">Focal X - Node.js Bootcamp</h1>
             <p class="subtitle" id="lecture-subtitle">JavaScript Fundamentals: Variables, Data Types, and More</p>
         </header>
-        
+
         <div class="content">
             <div class="lecture-content">
                 <h2>Lecture Content</h2>
                 <div id="tabs-container"></div>
                 <div id="tab-content-container"></div>
             </div>
-            
+
             <div class="interactive-section">
                 <h2>Interactive Questions & Tasks</h2>
                 <div id="questions-container"></div>
@@ -34,29 +36,28 @@
     </div>
 
     <footer class="footer">
-        <p>&copy; 2025 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
+        <p>&copy; 2026 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
     </footer>
 
-        <script src="./reg.js"></script>
-<script>
+    <script src="./reg.js"></script>
+    <script>
         // ==================== CONFIGURATION ====================
         // Update these arrays to change the content of your lecture
 
         // ==================== CONFIGURATION ====================
-// Update these arrays to change the content of your lecture
+        // Update these arrays to change the content of your lecture
 
-// Lecture metadata
-const lectureConfig = {
-    title: "Focal X V10 - Node.js Bootcamp",
-    subtitle: "Backend Concepts & API Theory"
-};
+        // Lecture metadata
+        const lectureConfig = {
+            title: "Focal X V10 - Node.js Bootcamp",
+            subtitle: "Backend Concepts & API Theory"
+        };
 
-// Lecture content organized by tabs
-const lectureContent = [
-    {
-        tabTitle: "What is Backend?",
-        title: "Backend Development Explained",
-        content: `// Backend Development: The "Server-Side" of Applications
+        // Lecture content organized by tabs
+        const lectureContent = [{
+            tabTitle: "What is Backend?",
+            title: "Backend Development Explained",
+            content: `// Backend Development: The "Server-Side" of Applications
 
 // Frontend (Client-Side)         Backend (Server-Side)
 // - What users see               - What users DON'T see
@@ -78,11 +79,10 @@ const lectureContent = [
 // Backend: User accounts, payment processing, order tracking, inventory management
 
 console.log("Welcome to Backend Development!");`
-    },
-    {
-        tabTitle: "Client-Server",
-        title: "Client-Server Architecture",
-        content: `// Client-Server Model: The Foundation of Web
+        }, {
+            tabTitle: "Client-Server",
+            title: "Client-Server Architecture",
+            content: `// Client-Server Model: The Foundation of Web
 
 // Client (Frontend)                  Server (Backend)
 // - Makes REQUESTS                    - Receives requests
@@ -114,11 +114,10 @@ console.log("Welcome to Backend Development!");`
 
 console.log("Client: I need data!");
 console.log("Server: Here's your data!");`
-    },
-    {
-        tabTitle: "HTTP Protocol",
-        title: "HTTP - The Language of the Web",
-        content: `// HTTP (HyperText Transfer Protocol)
+        }, {
+            tabTitle: "HTTP Protocol",
+            title: "HTTP - The Language of the Web",
+            content: `// HTTP (HyperText Transfer Protocol)
 // The foundation of data communication on the web
 
 // HTTP Methods (CRUD Operations):
@@ -157,11 +156,10 @@ console.log("Server: Here's your data!");`
 // - User-Agent: Client information
 
 console.log("HTTP: The language servers and clients speak!");`
-    },
-    {
-        tabTitle: "What are APIs?",
-        title: "APIs Explained Simply",
-        content: `// API = Application Programming Interface
+        }, {
+            tabTitle: "What are APIs?",
+            title: "APIs Explained Simply",
+            content: `// API = Application Programming Interface
 
 // Simple Definition:
 // A set of rules that allows different software applications to communicate.
@@ -201,11 +199,10 @@ console.log("HTTP: The language servers and clients speak!");`
 // }
 
 console.log("APIs: The bridges between applications!");`
-    },
-    {
-    tabTitle: "APIs & HTTP Methods",
-    title: "Understanding APIs and Web Communication",
-    content: `# API: Application Programming Interface
+        }, {
+            tabTitle: "APIs & HTTP Methods",
+            title: "Understanding APIs and Web Communication",
+            content: `# API: Application Programming Interface
 
 ## What is an API?
 - Like a waiter in a restaurant: You (the application) give your order to the waiter (the API) who delivers it to the kitchen (the server) and brings back the result
@@ -350,20 +347,19 @@ APIs are the communication bridge between user interface and server, working lik
 - Backend is the kitchen that prepares orders
 
 Every request has a method (GET, POST, PUT, DELETE) and every response has a status (200, 404, 500) that tells us the operation result.`,
-table: {
-    headers: ["Aspect", "Headers", "Body"],
-    rows: [
-        ["Purpose", "Metadata about the request", "Actual data"],
-        ["Content", "Data type, permissions","Products, users, orders"],
-        ["Usage", "Present in every request", "Only when needed"],
-        ["Life Example", "Delivery instructions, meal type","The actual meal"]
-    ]
-}
-},
-      {
-        tabTitle: "JSON Format",
-        title: "JSON - JavaScript Object Notation",
-        content: `// JSON = JavaScript Object Notation
+            table: {
+                headers: ["Aspect", "Headers", "Body"],
+                rows: [
+                    ["Purpose", "Metadata about the request", "Actual data"],
+                    ["Content", "Data type, permissions", "Products, users, orders"],
+                    ["Usage", "Present in every request", "Only when needed"],
+                    ["Life Example", "Delivery instructions, meal type", "The actual meal"]
+                ]
+            }
+        }, {
+            tabTitle: "JSON Format",
+            title: "JSON - JavaScript Object Notation",
+            content: `// JSON = JavaScript Object Notation
 // A lightweight data format for exchanging data
 
 // Why JSON?
@@ -420,11 +416,10 @@ console.log(parsedObject.name); // 'Moones'
 // No comments                  Can have comments
 
 console.log("JSON: The universal language for data exchange!");`
-    },
-    {
-        tabTitle: "Middlewares",
-        title: "Middleware - The Processing Layer",
-        content: `// Middleware: Software that sits between client and server
+        }, {
+            tabTitle: "Middlewares",
+            title: "Middleware - The Processing Layer",
+            content: `// Middleware: Software that sits between client and server
 
 // Simple Analogy:
 // Request → Security Check (Middleware) → Processing → Response
@@ -487,11 +482,10 @@ app.get('/api/users', (req, res) => {
 // - Security enhancement
 
 console.log("Middleware: The gatekeepers and processors of your app!");`
-    },
-    {
-        tabTitle: "API Lifecycle",
-        title: "Complete API Request-Response Flow",
-        content: `// Complete Journey of an API Request:
+        }, {
+            tabTitle: "API Lifecycle",
+            title: "Complete API Request-Response Flow",
+            content: `// Complete Journey of an API Request:
 
 // 1. Client Makes Request
 // Browser/App → GET https://api.example.com/users
@@ -551,137 +545,122 @@ console.log("Middleware: The gatekeepers and processors of your app!");`
 // - Browser DevTools (Network tab)
 
 console.log("API Flow: From request to response!");`
-    }
-];
+        }];
 
-// Questions and tasks
-const questions = [
-    {
-        type: "question",
-        question: "What is the primary responsibility of backend development?",
-        options: [
-            "Creating user interfaces",
-            "Managing business logic and data",
-            "Designing website layouts",
-            "Writing CSS styles"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "In the client-server model, which component makes requests?",
-        options: [
-            "Server",
-            "Client",
-            "Database",
-            "Middleware"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "Which HTTP status code means 'Resource Created Successfully'?",
-        options: [
-            "200 OK",
-            "201 Created",
-            "404 Not Found",
-            "500 Internal Server Error"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "What does REST stand for in RESTful APIs?",
-        options: [
-            "Rapid Efficient System Transfer",
-            "Representational State Transfer",
-            "Relational Entity Structure Type",
-            "Remote Endpoint Service Technology"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "Which HTTP method should be used to retrieve data from a server?",
-        options: [
-            "POST",
-            "PUT",
-            "GET",
-            "DELETE"
-        ],
-        correctIndex: 2
-    },
-    {
-        type: "question",
-        question: "What is the main purpose of middleware in a web application?",
-        options: [
-            "To style the user interface",
-            "To intercept and process requests before they reach route handlers",
-            "To store data in the database",
-            "To write HTML code"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "search-task",
-        title: "Research: HTTP Methods",
-        content: "Research the differences between PUT and PATCH HTTP methods. When would you use each one? Provide examples of each."
-    },
-    {
-        type: "question",
-        question: "Which of these is a valid JSON format?",
-        code: `Option A: { name: "Moones", age: 30 }
+        // Questions and tasks
+        const questions = [{
+            type: "question",
+            question: "What is the primary responsibility of backend development?",
+            options: [
+                "Creating user interfaces",
+                "Managing business logic and data",
+                "Designing website layouts",
+                "Writing CSS styles"
+            ],
+            correctIndex: 1
+        }, {
+            type: "question",
+            question: "In the client-server model, which component makes requests?",
+            options: [
+                "Server",
+                "Client",
+                "Database",
+                "Middleware"
+            ],
+            correctIndex: 1
+        }, {
+            type: "question",
+            question: "Which HTTP status code means 'Resource Created Successfully'?",
+            options: [
+                "200 OK",
+                "201 Created",
+                "404 Not Found",
+                "500 Internal Server Error"
+            ],
+            correctIndex: 1
+        }, {
+            type: "question",
+            question: "What does REST stand for in RESTful APIs?",
+            options: [
+                "Rapid Efficient System Transfer",
+                "Representational State Transfer",
+                "Relational Entity Structure Type",
+                "Remote Endpoint Service Technology"
+            ],
+            correctIndex: 1
+        }, {
+            type: "question",
+            question: "Which HTTP method should be used to retrieve data from a server?",
+            options: [
+                "POST",
+                "PUT",
+                "GET",
+                "DELETE"
+            ],
+            correctIndex: 2
+        }, {
+            type: "question",
+            question: "What is the main purpose of middleware in a web application?",
+            options: [
+                "To style the user interface",
+                "To intercept and process requests before they reach route handlers",
+                "To store data in the database",
+                "To write HTML code"
+            ],
+            correctIndex: 1
+        }, {
+            type: "search-task",
+            title: "Research: HTTP Methods",
+            content: "Research the differences between PUT and PATCH HTTP methods. When would you use each one? Provide examples of each."
+        }, {
+            type: "question",
+            question: "Which of these is a valid JSON format?",
+            code: `Option A: { name: "Moones", age: 30 }
 Option B: { "name": "Moones", "age": 30 }
 Option C: { 'name': 'Moones', 'age': 30 }
 Option D: name="Moones" age=30`,
-        options: [
-            "Option A",
-            "Option B",
-            "Option C",
-            "Option D"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "task",
-        title: "Client-Server Flow Diagram",
-        content: "Draw a simple diagram showing the client-server architecture flow. Label: Client, Server, Request, Response, Database, and Middleware."
-    },
-    {
-        type: "question",
-        question: "What is the purpose of the 'Content-Type' header in HTTP?",
-        options: [
-            "To authenticate the user",
-            "To specify the format of the data being sent",
-            "To track user sessions",
-            "To compress the response data"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "task",
-        title: "Real-World API Identification",
-        content: "Think of 3 real-world applications you use daily (like Facebook, WhatsApp, Uber). For each, identify: 1) What clients are used, 2) What backend APIs might be needed, 3) What data might be exchanged."
-    },
-    {
-        type: "question",
-        question: "In RESTful API design, what should endpoints use?",
-        options: [
-            "Verbs (like /getUsers, /createUser)",
-            "Nouns (like /users, /products)",
-            "Adjectives (like /active, /inactive)",
-            "Prepositions (like /with, /from)"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "task",
-        title: "Middleware Brainstorm",
-        content: "Imagine you're building an e-commerce API. List 5 different middleware functions you might need and what each would do (e.g., authentication middleware checks if user is logged in)."
-    }
-];
-
+            options: [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+            ],
+            correctIndex: 1
+        }, {
+            type: "task",
+            title: "Client-Server Flow Diagram",
+            content: "Draw a simple diagram showing the client-server architecture flow. Label: Client, Server, Request, Response, Database, and Middleware."
+        }, {
+            type: "question",
+            question: "What is the purpose of the 'Content-Type' header in HTTP?",
+            options: [
+                "To authenticate the user",
+                "To specify the format of the data being sent",
+                "To track user sessions",
+                "To compress the response data"
+            ],
+            correctIndex: 1
+        }, {
+            type: "task",
+            title: "Real-World API Identification",
+            content: "Think of 3 real-world applications you use daily (like Facebook, WhatsApp, Uber). For each, identify: 1) What clients are used, 2) What backend APIs might be needed, 3) What data might be exchanged."
+        }, {
+            type: "question",
+            question: "In RESTful API design, what should endpoints use?",
+            options: [
+                "Verbs (like /getUsers, /createUser)",
+                "Nouns (like /users, /products)",
+                "Adjectives (like /active, /inactive)",
+                "Prepositions (like /with, /from)"
+            ],
+            correctIndex: 1
+        }, {
+            type: "task",
+            title: "Middleware Brainstorm",
+            content: "Imagine you're building an e-commerce API. List 5 different middleware functions you might need and what each would do (e.g., authentication middleware checks if user is logged in)."
+        }];
     </script>
     <script src="./assets/lecture.js"></script>
 </body>
+
 </html>

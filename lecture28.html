@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <meta name="theme-color" content="#b21f1f">
     <link rel="stylesheet" href="./assets/lecture.css">
 </head>
+
 <body>
     <div class="container">
         <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
@@ -17,14 +19,14 @@
             <h1 id="lecture-title">Focal X - Node.js Bootcamp</h1>
             <p class="subtitle" id="lecture-subtitle">Node</p>
         </header>
-        
+
         <div class="content">
             <div class="lecture-content">
                 <h2>Lecture Content</h2>
                 <div id="tabs-container"></div>
                 <div id="tab-content-container"></div>
             </div>
-            
+
             <div class="interactive-section">
                 <h2>Interactive Questions & Tasks</h2>
                 <div id="questions-container"></div>
@@ -33,33 +35,31 @@
     </div>
 
     <footer class="footer">
-        <p>&copy; 2025 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
+        <p>&copy; 2026 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
     </footer>
 
-        <script src="./reg.js"></script>
-<script>
+    <script src="./reg.js"></script>
+    <script>
         // ==================== CONFIGURATION ====================
         // Update these arrays to change the content of your lecture
-        
-const lectureConfig = {
-    title: "Focal X - Node.js Bootcamp",
-    subtitle: "Advanced Security & Express Validation"
-};
 
-// Lecture content organized by tabs
-const lectureContent = [
-    {
-        tabTitle: "Last Lesson",
-        title: "Last Lesson",
-        content: `1- Create Superadmin by Seeds
+        const lectureConfig = {
+            title: "Focal X - Node.js Bootcamp",
+            subtitle: "Advanced Security & Express Validation"
+        };
+
+        // Lecture content organized by tabs
+        const lectureContent = [{
+            tabTitle: "Last Lesson",
+            title: "Last Lesson",
+            content: `1- Create Superadmin by Seeds
 2- Locked by Failed Login 
 3- Rate Limiter
 4- Security Practice (helmet, cors)`
-    },
-    {
-        tabTitle: "Security & Hashing",
-        title: "Advanced Security Practices",
-        content: `/*
+        }, {
+            tabTitle: "Security & Hashing",
+            title: "Advanced Security Practices",
+            content: `/*
 Modern Security Implementation:
 • Argon2 Password Hashing
 • XSS Protection
@@ -150,11 +150,10 @@ const xssSanitize = (req, res, next) => {
 };
 
 app.use(xssSanitize);`
-    },
-    {
-        tabTitle: "Data Validation",
-        title: "Express Validator & Sanitization",
-        content: `/*
+        }, {
+            tabTitle: "Data Validation",
+            title: "Express Validator & Sanitization",
+            content: `/*
 Data Validation & Sanitization:
 • Request validation with express-validator
 • Custom validation rules
@@ -288,11 +287,10 @@ router.get('/search',
     handleValidationErrors,
     userController.searchUsers
 );`
-    },
-    {
-        tabTitle: "Advanced Express",
-        title: "Production-Ready Express Applications",
-        content: `/*
+        }, {
+            tabTitle: "Advanced Express",
+            title: "Production-Ready Express Applications",
+            content: `/*
 Production Best Practices:
 • Environment configuration
 • Security headers
@@ -415,178 +413,168 @@ process.on('SIGTERM', () => {
         console.log('Process terminated');
     });
 });`
-    }
-];
+        }];
 
-// Updated Questions array aligned with new topics
-const questions = [
-    // Argon2 Hashing
-    {
-        type: "question",
-        question: "Why is Argon2 considered more secure than bcrypt for password hashing?",
-        options: [
-            "It's faster than bcrypt",
-            "It uses less memory",
-            "It's resistant to GPU and side-channel attacks",
-            "It produces shorter hash outputs"
-        ],
-        correctIndex: 2
-    },
-    {
-        type: "question",
-        question: "What does the 'argon2id' variant provide compared to other Argon2 variants?",
-        options: [
-            "Faster hashing speed",
-            "Hybrid resistance to both side-channel and GPU attacks",
-            "Smaller memory footprint",
-            "Better browser compatibility"
-        ],
-        correctIndex: 1
-    },
+        // Updated Questions array aligned with new topics
+        const questions = [
+            // Argon2 Hashing
+            {
+                type: "question",
+                question: "Why is Argon2 considered more secure than bcrypt for password hashing?",
+                options: [
+                    "It's faster than bcrypt",
+                    "It uses less memory",
+                    "It's resistant to GPU and side-channel attacks",
+                    "It produces shorter hash outputs"
+                ],
+                correctIndex: 2
+            }, {
+                type: "question",
+                question: "What does the 'argon2id' variant provide compared to other Argon2 variants?",
+                options: [
+                    "Faster hashing speed",
+                    "Hybrid resistance to both side-channel and GPU attacks",
+                    "Smaller memory footprint",
+                    "Better browser compatibility"
+                ],
+                correctIndex: 1
+            },
 
-    // XSS Protection
-    {
-        type: "question",
-        question: "What is the primary purpose of input sanitization in XSS protection?",
-        options: [
-            "To encrypt user input",
-            "To remove or neutralize malicious scripts from user input",
-            "To compress data for storage",
-            "To validate email formats"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "Which HTTP security header helps prevent XSS attacks by restricting script sources?",
-        options: [
-            "Content-Security-Policy",
-            "X-Frame-Options",
-            "Strict-Transport-Security",
-            "X-Content-Type-Options"
-        ],
-        correctIndex: 0
-    },
+            // XSS Protection
+            {
+                type: "question",
+                question: "What is the primary purpose of input sanitization in XSS protection?",
+                options: [
+                    "To encrypt user input",
+                    "To remove or neutralize malicious scripts from user input",
+                    "To compress data for storage",
+                    "To validate email formats"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "Which HTTP security header helps prevent XSS attacks by restricting script sources?",
+                options: [
+                    "Content-Security-Policy",
+                    "X-Frame-Options",
+                    "Strict-Transport-Security",
+                    "X-Content-Type-Options"
+                ],
+                correctIndex: 0
+            },
 
-    // Express Validator
-    {
-        type: "question",
-        question: "In express-validator, what's the difference between .trim() and .escape()?",
-        options: [
-            ".trim() removes whitespace, .escape() converts HTML entities",
-            ".trim() encrypts data, .escape() compresses it",
-            ".trim() validates format, .escape() checks length",
-            ".trim() converts to lowercase, .escape() removes special characters"
-        ],
-        correctIndex: 0
-    },
-    {
-        type: "question",
-        question: "How do you create a custom validation rule in express-validator?",
-        options: [
-            "Using .custom() method with a validation function",
-            "By extending the Validator class",
-            "Using .validateCustom() middleware",
-            "Through Joi schema integration"
-        ],
-        correctIndex: 0
-    },
+            // Express Validator
+            {
+                type: "question",
+                question: "In express-validator, what's the difference between .trim() and .escape()?",
+                options: [
+                    ".trim() removes whitespace, .escape() converts HTML entities",
+                    ".trim() encrypts data, .escape() compresses it",
+                    ".trim() validates format, .escape() checks length",
+                    ".trim() converts to lowercase, .escape() removes special characters"
+                ],
+                correctIndex: 0
+            }, {
+                type: "question",
+                question: "How do you create a custom validation rule in express-validator?",
+                options: [
+                    "Using .custom() method with a validation function",
+                    "By extending the Validator class",
+                    "Using .validateCustom() middleware",
+                    "Through Joi schema integration"
+                ],
+                correctIndex: 0
+            },
 
-    // File Upload Security
-    {
-        type: "question",
-        question: "What security risk does checking only file extension pose in file uploads?",
-        options: [
-            "It may allow malicious files with correct extensions",
-            "It slows down the upload process",
-            "It increases storage costs",
-            "It breaks image compression"
-        ],
-        correctIndex: 0
-    },
-    {
-        type: "question",
-        question: "Why should you process images through Cloudinary instead of storing them directly?",
-        options: [
-            "To add watermarks automatically",
-            "To prevent malicious file execution and optimize delivery",
-            "To reduce database size",
-            "To enable social media sharing"
-        ],
-        correctIndex: 1
-    },
+            // File Upload Security
+            {
+                type: "question",
+                question: "What security risk does checking only file extension pose in file uploads?",
+                options: [
+                    "It may allow malicious files with correct extensions",
+                    "It slows down the upload process",
+                    "It increases storage costs",
+                    "It breaks image compression"
+                ],
+                correctIndex: 0
+            }, {
+                type: "question",
+                question: "Why should you process images through Cloudinary instead of storing them directly?",
+                options: [
+                    "To add watermarks automatically",
+                    "To prevent malicious file execution and optimize delivery",
+                    "To reduce database size",
+                    "To enable social media sharing"
+                ],
+                correctIndex: 1
+            },
 
-    // Deployment & Email
-    {
-        type: "question",
-        question: "What is the main advantage of using app passwords with Gmail in Nodemailer?",
-        options: [
-            "Faster email delivery",
-            "Better security through 2FA compliance",
-            "Unlimited email sending",
-            "Automatic template generation"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "In Render deployment, why is binding to '0.0.0.0' important?",
-        options: [
-            "It enables HTTPS automatically",
-            "It allows connections from any network interface",
-            "It improves application performance",
-            "It reduces memory usage"
-        ],
-        correctIndex: 1
-    },
+            // Deployment & Email
+            {
+                type: "question",
+                question: "What is the main advantage of using app passwords with Gmail in Nodemailer?",
+                options: [
+                    "Faster email delivery",
+                    "Better security through 2FA compliance",
+                    "Unlimited email sending",
+                    "Automatic template generation"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "In Render deployment, why is binding to '0.0.0.0' important?",
+                options: [
+                    "It enables HTTPS automatically",
+                    "It allows connections from any network interface",
+                    "It improves application performance",
+                    "It reduces memory usage"
+                ],
+                correctIndex: 1
+            },
 
-    // Practical Implementation Tasks
-    {
-        type: "task",
-        title: "Secure Authentication System with Argon2",
-        content: "Implement a complete authentication system using Argon2 for password hashing. Include registration, login, password reset, and email verification with proper security measures and error handling."
-    },
-    {
-        type: "task",
-        title: "Advanced Data Validation System",
-        content: "Create a comprehensive validation system using express-validator with custom rules, conditional validation, async validators, and proper error response formatting for different data types."
-    },
-    {
-        type: "task",
-        title: "File Upload & Management Service",
-        content: "Build a secure file upload service with Multer and Cloudinary. Implement file type validation, size limits, image optimization, and secure file deletion with proper error handling."
-    },
+            // Practical Implementation Tasks
+            {
+                type: "task",
+                title: "Secure Authentication System with Argon2",
+                content: "Implement a complete authentication system using Argon2 for password hashing. Include registration, login, password reset, and email verification with proper security measures and error handling."
+            }, {
+                type: "task",
+                title: "Advanced Data Validation System",
+                content: "Create a comprehensive validation system using express-validator with custom rules, conditional validation, async validators, and proper error response formatting for different data types."
+            }, {
+                type: "task",
+                title: "File Upload & Management Service",
+                content: "Build a secure file upload service with Multer and Cloudinary. Implement file type validation, size limits, image optimization, and secure file deletion with proper error handling."
+            },
 
-    // Production Deployment Tasks
-    {
-        type: "task",
-        title: "Production Deployment Pipeline",
-        content: "Set up a complete production deployment on Render with MongoDB Atlas. Configure environment variables, health checks, logging, monitoring, and implement proper security headers and CORS policies."
-    },
-    {
-        type: "task",
-        title: "Email Service Integration",
-        content: "Implement a robust email service using Nodemailer with Gmail. Create email templates for verification, password reset, and notifications. Handle email failures gracefully and implement retry logic."
-    },
+            // Production Deployment Tasks
+            {
+                type: "task",
+                title: "Production Deployment Pipeline",
+                content: "Set up a complete production deployment on Render with MongoDB Atlas. Configure environment variables, health checks, logging, monitoring, and implement proper security headers and CORS policies."
+            }, {
+                type: "task",
+                title: "Email Service Integration",
+                content: "Implement a robust email service using Nodemailer with Gmail. Create email templates for verification, password reset, and notifications. Handle email failures gracefully and implement retry logic."
+            },
 
-    // Research & Analysis Tasks
-    {
-        type: "search-task",
-        title: "Research: Modern Hashing Algorithms",
-        content: "Research and compare modern hashing algorithms (Argon2, bcrypt, scrypt). Analyze their security features, performance characteristics, and suitability for different use cases in web applications."
-    },
-    {
-        type: "search-task",
-        title: "Research: Cloud File Storage Solutions",
-        content: "Research different cloud file storage providers (Cloudinary, AWS S3, Google Cloud Storage). Compare pricing, features, security, and integration complexity for Node.js applications."
-    },
-    {
-        type: "search-task",
-        title: "Research: Serverless Deployment Platforms",
-        content: "Research serverless deployment platforms (Render, Heroku, Railway, AWS). Compare pricing, scalability, features, and deployment workflows for Node.js applications with database integration."
-    }
-];
-
-</script><script src="./assets/lecture.js"></script>
+            // Research & Analysis Tasks
+            {
+                type: "search-task",
+                title: "Research: Modern Hashing Algorithms",
+                content: "Research and compare modern hashing algorithms (Argon2, bcrypt, scrypt). Analyze their security features, performance characteristics, and suitability for different use cases in web applications."
+            }, {
+                type: "search-task",
+                title: "Research: Cloud File Storage Solutions",
+                content: "Research different cloud file storage providers (Cloudinary, AWS S3, Google Cloud Storage). Compare pricing, features, security, and integration complexity for Node.js applications."
+            }, {
+                type: "search-task",
+                title: "Research: Serverless Deployment Platforms",
+                content: "Research serverless deployment platforms (Render, Heroku, Railway, AWS). Compare pricing, scalability, features, and deployment workflows for Node.js applications with database integration."
+            }
+        ];
+    </script>
+    <script src="./assets/lecture.js"></script>
 </body>
+
 </html>

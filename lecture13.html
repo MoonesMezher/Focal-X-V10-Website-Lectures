@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Focal X - Node.js Bootcamp: Lecture 13 </title><link rel="manifest" href="./manifest.json" />
+    <title>Focal X - Node.js Bootcamp: Lecture 13 </title>
+    <link rel="manifest" href="./manifest.json" />
     <link rel="apple-touch-icon" href="./logo.jpg">
     <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
     <meta name="theme-color" content="#b21f1f">
     <link rel="stylesheet" href="./assets/lecture.css">
 </head>
+
 <body>
     <div class="container">
         <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
@@ -16,14 +19,14 @@
             <h1 id="lecture-title">Focal X - Node.js Bootcamp</h1>
             <p class="subtitle" id="lecture-subtitle">Git & Github</p>
         </header>
-        
+
         <div class="content">
             <div class="lecture-content">
                 <h2>Lecture Content</h2>
                 <div id="tabs-container"></div>
                 <div id="tab-content-container"></div>
             </div>
-            
+
             <div class="interactive-section">
                 <h2>Interactive Questions & Tasks</h2>
                 <div id="questions-container"></div>
@@ -32,33 +35,31 @@
     </div>
 
     <footer class="footer">
-        <p>&copy; 2025 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
+        <p>&copy; 2026 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
     </footer>
 
-        <script src="./reg.js"></script>
-<script>
+    <script src="./reg.js"></script>
+    <script>
         // ==================== CONFIGURATION ====================
         // Update these arrays to change the content of your lecture
-        
+
         // Lecture metadata
         const lectureConfig = {
             title: "Focal X - Node.js Bootcamp",
             subtitle: "Git & Github"
         };
-        
+
         // Lecture content organized by tabs
-        const lectureContent = [
-    {
-        tabTitle: "Last Lesson",
-        title: "Last Lesson Recap",
-        content: `/*
+        const lectureContent = [{
+            tabTitle: "Last Lesson",
+            title: "Last Lesson Recap",
+            content: `/*
 1- Solve Task 3 (Very Important)
 */`
-    },
-                {
-        tabTitle: "Git Basics",
-        title: "What is Git?",
-        content: `- Git is distributed version control system => versions
+        }, {
+            tabTitle: "Git Basics",
+            title: "What is Git?",
+            content: `- Git is distributed version control system => versions
 - Git is free & open source
 - You can use git as GUI or CLI => (CLI recommended)
 
@@ -66,67 +67,63 @@ Developer life without git:
 - You can not track the edits and errors
 - Team work becomes very hard and takes long time
 - Imagine sending edits to the leader by emails`
-    },
-    {
-        tabTitle: "GitHub",
-        title: "What is GitHub?",
-        content: `- GitHub is a source (website) for dealing with projects
+        }, {
+            tabTitle: "GitHub",
+            title: "What is GitHub?",
+            content: `- GitHub is a source (website) for dealing with projects
 - GitHub is a store managed by git
 - There are other tools like GitLab, BitBucket
 - GitHub simplifies using git
 - You can use git without GitHub
 - GitHub can serve as a central server for the project`
-    },
-    {
-        tabTitle: "Terminal Basics",
-        title: "Terminals & Shells Fundamentals",
-        content: `Understanding Your Development Environment
+        }, {
+            tabTitle: "Terminal Basics",
+            title: "Terminals & Shells Fundamentals",
+            content: `Understanding Your Development Environment
 
 - Terminal: The window we type commands into
 - Shell: Runs inside the terminal to execute commands
 - CLI vs GUI: Command Line Interface vs Graphical User Interface`,
-        table: {
-            headers: ["System", "Terminal", "Shell"],
-            rows: [
-                ["Windows 11", "Windows Terminal", "PowerShell"],
-                ["Mac/Linux", "Terminal", "ZSH/BASH"],
-                ["Git Bash", "MinTTY", "BASH"],
-                ["WSL", "Windows Terminal", "BASH"]
-            ]
-        }
-    },
-    {
-        tabTitle: "CLI Commands",
-        title: "Command Line Essentials",
-        content: `Mastering the Command Line Interface
+            table: {
+                headers: ["System", "Terminal", "Shell"],
+                rows: [
+                    ["Windows 11", "Windows Terminal", "PowerShell"],
+                    ["Mac/Linux", "Terminal", "ZSH/BASH"],
+                    ["Git Bash", "MinTTY", "BASH"],
+                    ["WSL", "Windows Terminal", "BASH"]
+                ]
+            }
+        }, {
+            tabTitle: "CLI Commands",
+            title: "Command Line Essentials",
+            content: `Mastering the Command Line Interface
 
 - Flags: Start with - or --, change command behavior
 - Arguments: Additional information for commands
 - Paths: Absolute (full path) vs Relative (from current directory)`,
-        table: {
-            headers: ["Command", "Meaning", "Examples & Notes"],
-            rows: [
-                ["pwd", "Print working directory", "Shows current full path"],
-                ["ls", "List directory contents", "ls -a (show hidden), ls -l (detailed)"],
-                ["cd [path]", "Change directory", "cd .. (up), cd ~ (home), cd / (root)"],
-                ["mkdir", "Create directory", "mkdir project-folder"],
-                ["touch", "Create file", "touch index.html"],
-                ["cp", "Copy files/dirs", "cp file1 file2, cp -r dir1 dir2"],
-                ["mv", "Move/rename", "mv old.txt new.txt"],
-                ["rm", "Remove files", "rm file.txt, rm -r folder/"],
-                ["cat", "View file content", "cat README.md"],
-                ["notepad", "View file content in notepad", "notepad README.md"],
-                ["echo", "Print text", "echo 'Hello' > file.txt"],
-                ["grep", "Search text", "grep 'error' log.txt"],
-                ["find", "Find files", "find . -name '*.js'"],
-                ["clear", "Clear terminal", "Clears screen, history remains"]
-            ]
-        }
-    },
-    {
-        tabTitle: "Git Fundamentals",
-        title: "What is Git?",
-        content: `Understanding Version Control
+            table: {
+                headers: ["Command", "Meaning", "Examples & Notes"],
+                rows: [
+                    ["pwd", "Print working directory", "Shows current full path"],
+                    ["ls", "List directory contents", "ls -a (show hidden), ls -l (detailed)"],
+                    ["cd [path]", "Change directory", "cd .. (up), cd ~ (home), cd / (root)"],
+                    ["mkdir", "Create directory", "mkdir project-folder"],
+                    ["touch", "Create file", "touch index.html"],
+                    ["cp", "Copy files/dirs", "cp file1 file2, cp -r dir1 dir2"],
+                    ["mv", "Move/rename", "mv old.txt new.txt"],
+                    ["rm", "Remove files", "rm file.txt, rm -r folder/"],
+                    ["cat", "View file content", "cat README.md"],
+                    ["notepad", "View file content in notepad", "notepad README.md"],
+                    ["echo", "Print text", "echo 'Hello' > file.txt"],
+                    ["grep", "Search text", "grep 'error' log.txt"],
+                    ["find", "Find files", "find . -name '*.js'"],
+                    ["clear", "Clear terminal", "Clears screen, history remains"]
+                ]
+            }
+        }, {
+            tabTitle: "Git Fundamentals",
+            title: "What is Git?",
+            content: `Understanding Version Control
 
 - Git: Distributed Version Control System (DVCS)
 - Free & Open Source (Created by Linus Torvalds)
@@ -145,11 +142,10 @@ Without Git:
 - Manual file sharing (email, USB, cloud)
 - No reliable backup system
 - Difficulty in identifying when bugs were introduced`
-    },
-    {
-        tabTitle: "Git vs GitHub",
-        title: "GitHub & Alternatives",
-        content: `Git Hosting Platforms
+        }, {
+            tabTitle: "Git vs GitHub",
+            title: "GitHub & Alternatives",
+            content: `Git Hosting Platforms
 
 GitHub:
 - Cloud-based Git repository hosting
@@ -168,11 +164,10 @@ Key Differences:
 - GitHub: A service that hosts Git repositories
 - You can use Git without GitHub
 - GitHub enhances Git with collaboration features`
-    },
-    {
-        tabTitle: "Core Concepts",
-        title: "Git Core Concepts",
-        content: `Fundamental Git Building Blocks
+        }, {
+            tabTitle: "Core Concepts",
+            title: "Git Core Concepts",
+            content: `Fundamental Git Building Blocks
 
 Repository (Repo):
 - Container for your project and its history
@@ -200,11 +195,10 @@ Best Practices:
 - One branch per feature/task
 - Meaningful commit messages
 - Regular pushing to remote`
-    },
-    {
-        tabTitle: "Setup & Config",
-        title: "Git Setup & Configuration",
-        content: `Getting Started with Git
+        }, {
+            tabTitle: "Setup & Config",
+            title: "Git Setup & Configuration",
+            content: `Getting Started with Git
 
 Installation Steps:
 1. Create GitHub account (github.com)
@@ -231,11 +225,10 @@ Common Configurations:
 - core.autocrlf: Handle line endings (true for Windows)
 - merge.tool: Configure merge tool
 - alias: Create command shortcuts`
-    },
-    {
-        tabTitle: "Basic Commands",
-        title: "Essential Git Commands",
-        content: `Daily Git Command Toolkit
+        }, {
+            tabTitle: "Basic Commands",
+            title: "Essential Git Commands",
+            content: `Daily Git Command Toolkit
 
 Repository Operations:
 \`\`\`bash
@@ -267,11 +260,10 @@ git pull origin main       # Pull from remote
 git fetch                  # Download remote updates
 git remote -v              # Show remote repositories
 \`\`\` `
-    },
-    {
-        tabTitle: "Branching",
-        title: "Git Branching & Merging",
-        content: `Working with Branches
+        }, {
+            tabTitle: "Branching",
+            title: "Git Branching & Merging",
+            content: `Working with Branches
 
 Branch Operations:
 \`\`\`bash
@@ -299,11 +291,10 @@ Best Practices:
 - Keep branches focused and small
 - Regular merging with main
 - Delete merged branches`
-    },
-    {
-        tabTitle: "README & Markdown",
-        title: "README Files & Markdown",
-        content: `Project Documentation Essentials
+        }, {
+            tabTitle: "README & Markdown",
+            title: "README Files & Markdown",
+            content: `Project Documentation Essentials
 
 What is README.md?
 - Primary documentation file for projects
@@ -369,11 +360,10 @@ Best Practices:
 - Use screenshots/GIFs
 - Keep it updated
 - Multiple languages if needed`
-    },
-    {
-        tabTitle: "Gitignore",
-        title: "Gitignore Files",
-        content: `Ignoring Files in Git
+        }, {
+            tabTitle: "Gitignore",
+            title: "Gitignore Files",
+            content: `Ignoring Files in Git
 
 Purpose:
 - Exclude files from version control
@@ -418,11 +408,10 @@ Best Practices:
 - Exclude dependencies
 - Never commit secrets
 - Use templates from gitignore.io`
-    },
-             {
-                tabTitle: "Git Workflow",
-                title: "Git Workflow & Areas",
-                content: `Understanding Git's Architecture
+        }, {
+            tabTitle: "Git Workflow",
+            title: "Git Workflow & Areas",
+            content: `Understanding Git's Architecture
 
 Four Main Areas:
 
@@ -451,11 +440,10 @@ Typical Workflow:
 2. Stage changes with git add
 3. Commit changes with git commit
 4. Push changes with git push`
-    },
-    {
-        tabTitle: "Advanced Git",
-        title: "Advanced Git Techniques",
-        content: `Beyond the Basics
+        }, {
+            tabTitle: "Advanced Git",
+            title: "Advanced Git Techniques",
+            content: `Beyond the Basics
 
 Stashing Changes:
 \`\`\`bash
@@ -491,220 +479,204 @@ Advanced Tools:
 - git cherry-pick: Apply specific commits
 - git reflog: Recovery tool
 - git worktree: Multiple working directories`
-    }
-];
+        }];
 
-// Enhanced Questions and Tasks
-const questions = [
-    // Git Fundamentals
-    {
-        type: "question",
-        question: "What is the main purpose of Git?",
-        options: [
-            "A social media platform for developers",
-            "A distributed version control system",
-            "An alternative to email",
-            "A programming language"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "What is the key difference between Git and GitHub?",
-        options: [
-            "They are the same thing",
-            "Git is the tool, GitHub is a hosting service",
-            "GitHub is the tool, Git is the hosting service",
-            "They are completely unrelated"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "What does 'git commit' do?",
-        options: [
-            "Uploads changes to remote repository",
-            "Downloads changes from remote repository",
-            "Creates a checkpoint in local repository",
-            "Creates a new branch"
-        ],
-        correctIndex: 2
-    },
-    {
-        type: "question",
-        question: "What is the primary purpose of branching in Git?",
-        options: [
-            "To make the repository larger",
-            "To avoid conflicts and manage features separately",
-            "To delete old code",
-            "To improve internet speed"
-        ],
-        correctIndex: 1
-    },
-    
-    // CLI & Terminal
-    {
-        type: "question",
-        question: "Which command is used to list directory contents in Linux/Mac?",
-        options: [
-            "dir",
-            "list",
-            "ls",
-            "show"
-        ],
-        correctIndex: 2
-    },
-    {
-        type: "question",
-        question: "What does 'cd ..' command do?",
-        options: [
-            "Creates a new directory",
-            "Goes to home directory",
-            "Moves up one directory level",
-            "Shows current directory"
-        ],
-        correctIndex: 2
-    },
-    
-    // Git Commands
-    {
-        type: "question",
-        question: "Which command is used to download a repository from GitHub?",
-        options: [
-            "git init",
-            "git push",
-            "git clone",
-            "git commit"
-        ],
-        correctIndex: 2
-    },
-    {
-        type: "question",
-        question: "What does 'git status' show?",
-        options: [
-            "The commit history",
-            "The current branch and changes",
-            "Remote repository URL",
-            "Git version information"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "Which command stages all changes for commit?",
-        options: [
-            "git stage .",
-            "git add .",
-            "git commit all",
-            "git update ."
-        ],
-        correctIndex: 1
-    },
-    
-    // Branching & Merging
-    {
-        type: "question",
-        question: "How do you create and switch to a new branch?",
-        options: [
-            "git branch new-branch",
-            "git checkout new-branch",
-            "git checkout -b new-branch",
-            "git create new-branch"
-        ],
-        correctIndex: 2
-    },
-    {
-        type: "question",
-        question: "What is a 'fast-forward' merge?",
-        options: [
-            "A merge that creates a merge commit",
-            "A merge that moves branch pointer forward",
-            "A merge that deletes the branch",
-            "A merge that requires conflict resolution"
-        ],
-        correctIndex: 1
-    },
-    
-    // README & Markdown
-    {
-        type: "question",
-        question: "What is the primary purpose of a README.md file?",
-        options: [
-            "To store secret keys",
-            "To document the project",
-            "To compile the code",
-            "To run tests"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "Which Markdown syntax creates a level 2 heading?",
-        options: [
-            "# Heading",
-            "## Heading",
-            "### Heading",
-            "**Heading**"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "What does .gitignore file do?",
-        options: [
-            "Tracks all files in repository",
-            "Specifies files to ignore in Git",
-            "Contains Git configuration",
-            "Stores commit messages"
-        ],
-        correctIndex: 1
-    },
+        // Enhanced Questions and Tasks
+        const questions = [
+            // Git Fundamentals
+            {
+                type: "question",
+                question: "What is the main purpose of Git?",
+                options: [
+                    "A social media platform for developers",
+                    "A distributed version control system",
+                    "An alternative to email",
+                    "A programming language"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "What is the key difference between Git and GitHub?",
+                options: [
+                    "They are the same thing",
+                    "Git is the tool, GitHub is a hosting service",
+                    "GitHub is the tool, Git is the hosting service",
+                    "They are completely unrelated"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "What does 'git commit' do?",
+                options: [
+                    "Uploads changes to remote repository",
+                    "Downloads changes from remote repository",
+                    "Creates a checkpoint in local repository",
+                    "Creates a new branch"
+                ],
+                correctIndex: 2
+            }, {
+                type: "question",
+                question: "What is the primary purpose of branching in Git?",
+                options: [
+                    "To make the repository larger",
+                    "To avoid conflicts and manage features separately",
+                    "To delete old code",
+                    "To improve internet speed"
+                ],
+                correctIndex: 1
+            },
 
-    // Practical Tasks
-    {
-        type: "task",
-        title: "Setup Git Environment",
-        content: "Install Git on your machine and configure it with your name and email. Verify the installation by running 'git --version' and check configuration with 'git config --list'. Set up SSH keys for secure authentication with GitHub."
-    },
-    {
-        type: "task",
-        title: "Create Your First Repository",
-        content: "Create a new local repository using 'git init', add a comprehensive README.md file with proper Markdown formatting, make your first commit with a descriptive message, and push it to a new GitHub repository. Include sections for Installation, Usage, and Contributing in your README."
-    },
-    {
-        type: "task",
-        title: "Practice Branching Strategy",
-        content: "Create a new branch for a feature, make some changes, commit them, then merge the branch back to main. Practice resolving merge conflicts. Create at least three feature branches and practice different merge strategies (fast-forward, 3-way merge)."
-    },
-    {
-        type: "task",
-        title: "Create .gitignore File",
-        content: "Create a comprehensive .gitignore file for a web project. Include patterns for ignoring node_modules, environment variables, IDE files, build outputs, and OS-specific files. Test that your ignored files are not tracked by Git."
-    },
-    {
-        type: "task",
-        title: "Markdown Documentation",
-        content: "Create a detailed README.md file using advanced Markdown features: include a table, code blocks with syntax highlighting, task lists, links, images, and emojis. Make it professional and comprehensive for a hypothetical project."
-    },
-    {
-        type: "search-task",
-        title: "Research: Git Workflow Models",
-        content: "Research different Git workflow models like Git Flow, GitHub Flow, and GitLab Flow. Compare their advantages and use cases for different team sizes and project types. Create a presentation showing when to use each workflow."
-    },
-    {
-        type: "search-task",
-        title: "Explore: Advanced Git Commands",
-        content: "Research and practice advanced Git commands like 'git rebase', 'git stash', 'git cherry-pick', and 'git bisect'. Understand when and why to use each command. Create cheat sheets with practical examples."
-    },
-    {
-        type: "search-task",
-        title: "Study: Markdown Advanced Features",
-        content: "Research advanced Markdown features including Mermaid diagrams, mathematical formulas, footnotes, and custom HTML. Create a sample document demonstrating these features and their proper usage in technical documentation."
-    }
-];
-// ==================== TEMPLATE RENDERING ====================
+            // CLI & Terminal
+            {
+                type: "question",
+                question: "Which command is used to list directory contents in Linux/Mac?",
+                options: [
+                    "dir",
+                    "list",
+                    "ls",
+                    "show"
+                ],
+                correctIndex: 2
+            }, {
+                type: "question",
+                question: "What does 'cd ..' command do?",
+                options: [
+                    "Creates a new directory",
+                    "Goes to home directory",
+                    "Moves up one directory level",
+                    "Shows current directory"
+                ],
+                correctIndex: 2
+            },
+
+            // Git Commands
+            {
+                type: "question",
+                question: "Which command is used to download a repository from GitHub?",
+                options: [
+                    "git init",
+                    "git push",
+                    "git clone",
+                    "git commit"
+                ],
+                correctIndex: 2
+            }, {
+                type: "question",
+                question: "What does 'git status' show?",
+                options: [
+                    "The commit history",
+                    "The current branch and changes",
+                    "Remote repository URL",
+                    "Git version information"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "Which command stages all changes for commit?",
+                options: [
+                    "git stage .",
+                    "git add .",
+                    "git commit all",
+                    "git update ."
+                ],
+                correctIndex: 1
+            },
+
+            // Branching & Merging
+            {
+                type: "question",
+                question: "How do you create and switch to a new branch?",
+                options: [
+                    "git branch new-branch",
+                    "git checkout new-branch",
+                    "git checkout -b new-branch",
+                    "git create new-branch"
+                ],
+                correctIndex: 2
+            }, {
+                type: "question",
+                question: "What is a 'fast-forward' merge?",
+                options: [
+                    "A merge that creates a merge commit",
+                    "A merge that moves branch pointer forward",
+                    "A merge that deletes the branch",
+                    "A merge that requires conflict resolution"
+                ],
+                correctIndex: 1
+            },
+
+            // README & Markdown
+            {
+                type: "question",
+                question: "What is the primary purpose of a README.md file?",
+                options: [
+                    "To store secret keys",
+                    "To document the project",
+                    "To compile the code",
+                    "To run tests"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "Which Markdown syntax creates a level 2 heading?",
+                options: [
+                    "# Heading",
+                    "## Heading",
+                    "### Heading",
+                    "**Heading**"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "What does .gitignore file do?",
+                options: [
+                    "Tracks all files in repository",
+                    "Specifies files to ignore in Git",
+                    "Contains Git configuration",
+                    "Stores commit messages"
+                ],
+                correctIndex: 1
+            },
+
+            // Practical Tasks
+            {
+                type: "task",
+                title: "Setup Git Environment",
+                content: "Install Git on your machine and configure it with your name and email. Verify the installation by running 'git --version' and check configuration with 'git config --list'. Set up SSH keys for secure authentication with GitHub."
+            }, {
+                type: "task",
+                title: "Create Your First Repository",
+                content: "Create a new local repository using 'git init', add a comprehensive README.md file with proper Markdown formatting, make your first commit with a descriptive message, and push it to a new GitHub repository. Include sections for Installation, Usage, and Contributing in your README."
+            }, {
+                type: "task",
+                title: "Practice Branching Strategy",
+                content: "Create a new branch for a feature, make some changes, commit them, then merge the branch back to main. Practice resolving merge conflicts. Create at least three feature branches and practice different merge strategies (fast-forward, 3-way merge)."
+            }, {
+                type: "task",
+                title: "Create .gitignore File",
+                content: "Create a comprehensive .gitignore file for a web project. Include patterns for ignoring node_modules, environment variables, IDE files, build outputs, and OS-specific files. Test that your ignored files are not tracked by Git."
+            }, {
+                type: "task",
+                title: "Markdown Documentation",
+                content: "Create a detailed README.md file using advanced Markdown features: include a table, code blocks with syntax highlighting, task lists, links, images, and emojis. Make it professional and comprehensive for a hypothetical project."
+            }, {
+                type: "search-task",
+                title: "Research: Git Workflow Models",
+                content: "Research different Git workflow models like Git Flow, GitHub Flow, and GitLab Flow. Compare their advantages and use cases for different team sizes and project types. Create a presentation showing when to use each workflow."
+            }, {
+                type: "search-task",
+                title: "Explore: Advanced Git Commands",
+                content: "Research and practice advanced Git commands like 'git rebase', 'git stash', 'git cherry-pick', and 'git bisect'. Understand when and why to use each command. Create cheat sheets with practical examples."
+            }, {
+                type: "search-task",
+                title: "Study: Markdown Advanced Features",
+                content: "Research advanced Markdown features including Mermaid diagrams, mathematical formulas, footnotes, and custom HTML. Create a sample document demonstrating these features and their proper usage in technical documentation."
+            }
+        ];
+        // ==================== TEMPLATE RENDERING ====================
         // Functions to render the content - you don't need to modify these
-        
-        </script><script src="./assets/lecture.js"></script>
+    </script>
+    <script src="./assets/lecture.js"></script>
 </body>
+
 </html>

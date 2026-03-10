@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Focal X - Node.js Bootcamp: Lecture 3</title><link rel="manifest" href="./manifest.json" />
+    <title>Focal X - Node.js Bootcamp: Lecture 3</title>
+    <link rel="manifest" href="./manifest.json" />
     <link rel="apple-touch-icon" href="./logo.jpg">
     <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
     <meta name="theme-color" content="#b21f1f">
     <link rel="shortcut icon" href="./logo.jpg" type="image/x-icon">
     <link rel="stylesheet" href="./assets/lecture.css">
 </head>
+
 <body>
     <div class="container">
         <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
@@ -17,14 +20,14 @@
             <h1 id="lecture-title">Focal X - Node.js Bootcamp</h1>
             <p class="subtitle" id="lecture-subtitle">JavaScript Fundamentals: Functions, Loops</p>
         </header>
-        
+
         <div class="content">
             <div class="lecture-content">
                 <h2>Lecture Content</h2>
                 <div id="tabs-container"></div>
                 <div id="tab-content-container"></div>
             </div>
-            
+
             <div class="interactive-section">
                 <h2>Interactive Questions & Tasks</h2>
                 <div id="questions-container"></div>
@@ -33,26 +36,25 @@
     </div>
 
     <footer class="footer">
-        <p>&copy; 2025 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
+        <p>&copy; 2026 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
     </footer>
 
-        <script src="./reg.js"></script>
-<script>
+    <script src="./reg.js"></script>
+    <script>
         // ==================== CONFIGURATION ====================
         // Update these arrays to change the content of your lecture
-        
+
         // Lecture metadata
         const lectureConfig = {
             title: "Focal X V10 - Node.js Bootcamp",
             subtitle: "JavaScript Fundamentals: Functions, Loops"
         };
-        
+
         // Lecture content organized by tabs
-        const lectureContent = [
-            {
-                tabTitle: "Last Lesson",
-                title: "Last Lesson Concepts",
-                content: `/* 
+        const lectureContent = [{
+            tabTitle: "Last Lesson",
+            title: "Last Lesson Concepts",
+            content: `/* 
 1- intro to javascript
 2- setup vsc & nodejs
 3- varaibels declaration (const, var, let) 
@@ -61,11 +63,10 @@
 6- dealing with strings & numbers
 7- Math library
 */`
-            },
-            {
-                tabTitle: "Comments",
-                title: "JavaScript Comments",
-                content: `// Single-line comment
+        }, {
+            tabTitle: "Comments",
+            title: "JavaScript Comments",
+            content: `// Single-line comment
 
 /* 
  Multi-line comment
@@ -86,11 +87,10 @@ function greet(name) {
 // Good: track iteration count for processing queue
 
 console.log("Comments help document your code!");`
-            },
-            {
-                tabTitle: "CamelCase",
-                title: "CamelCase Naming Convention",
-                content: `// camelCase is the convention for naming variables and functions in JavaScript
+        }, {
+            tabTitle: "CamelCase",
+            title: "CamelCase Naming Convention",
+            content: `// camelCase is the convention for naming variables and functions in JavaScript
 // Start with lowercase, then capitalize each subsequent word
 
 // Good examples:
@@ -130,11 +130,10 @@ const MAX_USERS = 100;
 const API_BASE_URL = "https://api.example.com";
 
 console.log("Use camelCase for variables and functions in JavaScript!");`
-            },
-            {
-                tabTitle: "Truthy/Falsy",
-                title: "Truthy and Falsy Values",
-                content: `// Falsy values in JavaScript:
+        }, {
+            tabTitle: "Truthy/Falsy",
+            title: "Truthy and Falsy Values",
+            content: `// Falsy values in JavaScript:
 // false, 0, "" (empty string), null, undefined, NaN
 
 // Everything else is truthy
@@ -193,11 +192,10 @@ if (Object.keys(obj).length) {
 } else {
     console.log("Object is empty"); // This will execute
 }`
-            },
-            {
-                tabTitle: "Chaining in JS",
-                title: "Chaining in JS",
-                content: `// Chaining concept:
+        }, {
+            tabTitle: "Chaining in JS",
+            title: "Chaining in JS",
+            content: `// Chaining concept:
 const title = "bow";
 const t1 = title.toUpperCase();
 const t2 = t1.replace("O", "W");
@@ -205,11 +203,10 @@ console.log(t2); // BWW
 
 // Method chaining:
 console.log(title.toUpperCase().replace("O", "W")); // BWW`
-            },
-            {
-    tabTitle: "Conditions in JS",
-    title: "Conditional Statements in JavaScript",
-    content: `// if statement
+        }, {
+            tabTitle: "Conditions in JS",
+            title: "Conditional Statements in JavaScript",
+            content: `// if statement
 const age = 18;
 if (age >= 18) {
     console.log("You are an adult");
@@ -291,10 +288,10 @@ console.log(value); // default
 const person = { address: { city: "New York" } };
 console.log(person?.address?.city); // New York
 console.log(person?.contact?.phone); // undefined (no error)`
-},{
-                tabTitle: "Loops",
-                title: "Loops in JavaScript",
-                content: `// While loop
+        }, {
+            tabTitle: "Loops",
+            title: "Loops in JavaScript",
+            content: `// While loop
 let i = 0;
 while(i < 5) {
     console.log(i);
@@ -331,11 +328,10 @@ const person = {name: "Moones", age: 30, job: "Developer"};
 for (const key in person) {
     console.log(key + ": " + person[key]);
 }`
-            },
-            {
-                tabTitle: "Functions",
-                title: "Functions in JavaScript",
-                content: `// Function Declaration (hoisted)
+        }, {
+            tabTitle: "Functions",
+            title: "Functions in JavaScript",
+            content: `// Function Declaration (hoisted)
 console.log(greet("Moones")); // Works (hoisting)
 function greet(name) {
     return "Hello, " + name + "!";
@@ -391,96 +387,87 @@ function factorial(n) {
 }
 
 console.log(factorial(5)); // 120`
-            }
-            ];
-        
+        }];
+
         // Questions and tasks
-        const questions = [
-            {
-                type: "question",
-                question: "Which of these values is falsy in JavaScript?",
-                options: [
-                    "[] (empty array)",
-                    "{} (empty object)",
-                    "0 (zero)",
-                    "'false' (string)"
-                ],
-                correctIndex: 2
-            },
-            {
-                type: "question",
-                question: "What is the correct camelCase naming convention?",
-                options: [
-                    "first_name",
-                    "FirstName",
-                    "firstName",
-                    "first-name"
-                ],
-                correctIndex: 2
-            },
-            {
-                type: "question",
-                question: "Which loop guarantees at least one execution?",
-                options: [
-                    "for loop",
-                    "while loop",
-                    "do...while loop",
-                    "for...of loop"
-                ],
-                correctIndex: 2
-            },
-            {
-                type: "question",
-                question: "Which function type is hoisted in JavaScript?",
-                options: [
-                    "Arrow functions",
-                    "Function expressions",
-                    "Function declarations",
-                    "IIFE"
-                ],
-                correctIndex: 2
-            },
-            {
-                type: "question",
-                question: "Which array method does NOT mutate the original array?",
-                options: [
-                    "push()",
-                    "pop()",
-                    "splice()",
-                    "map()"
-                ],
-                correctIndex: 3
-            },
-            {
-                type: "question",
-                question: "What will be the output of this code?",
-                code: `console.log(0 == false);
+        const questions = [{
+            type: "question",
+            question: "Which of these values is falsy in JavaScript?",
+            options: [
+                "[] (empty array)",
+                "{} (empty object)",
+                "0 (zero)",
+                "'false' (string)"
+            ],
+            correctIndex: 2
+        }, {
+            type: "question",
+            question: "What is the correct camelCase naming convention?",
+            options: [
+                "first_name",
+                "FirstName",
+                "firstName",
+                "first-name"
+            ],
+            correctIndex: 2
+        }, {
+            type: "question",
+            question: "Which loop guarantees at least one execution?",
+            options: [
+                "for loop",
+                "while loop",
+                "do...while loop",
+                "for...of loop"
+            ],
+            correctIndex: 2
+        }, {
+            type: "question",
+            question: "Which function type is hoisted in JavaScript?",
+            options: [
+                "Arrow functions",
+                "Function expressions",
+                "Function declarations",
+                "IIFE"
+            ],
+            correctIndex: 2
+        }, {
+            type: "question",
+            question: "Which array method does NOT mutate the original array?",
+            options: [
+                "push()",
+                "pop()",
+                "splice()",
+                "map()"
+            ],
+            correctIndex: 3
+        }, {
+            type: "question",
+            question: "What will be the output of this code?",
+            code: `console.log(0 == false);
 console.log(0 === false);
 console.log("" == false);
 console.log("" === false);`,
-                options: [
-                    "true, false, true, false",
-                    "false, false, false, false",
-                    "true, true, true, true",
-                    "true, false, false, false"
-                ],
-                correctIndex: 0
-            },
-            {
-                type: "question",
-                question: "Which of these is a valid function declaration?",
-                options: [
-                    "function = myFunc() {}",
-                    "const myFunc = function() {}",
-                    "myFunc: function() {}",
-                    "def myFunc() {}"
-                ],
-                correctIndex: 1
-            },
-{
-    type: "question",
-    question: "What will this code output?",
-    code: `function createCounter() {
+            options: [
+                "true, false, true, false",
+                "false, false, false, false",
+                "true, true, true, true",
+                "true, false, false, false"
+            ],
+            correctIndex: 0
+        }, {
+            type: "question",
+            question: "Which of these is a valid function declaration?",
+            options: [
+                "function = myFunc() {}",
+                "const myFunc = function() {}",
+                "myFunc: function() {}",
+                "def myFunc() {}"
+            ],
+            correctIndex: 1
+        }, {
+            type: "question",
+            question: "What will this code output?",
+            code: `function createCounter() {
     let count = 0;
     return function() {
         count++;
@@ -490,35 +477,33 @@ console.log("" === false);`,
 const counter = createCounter();
 console.log(counter());
 console.log(counter());`,
-    options: [
-        "0, 1",
-        "1, 2",
-        "1, 1",
-        "undefined, undefined"
-    ],
-    correctIndex: 1
-},
-            {
-                type: "task",
-                title: "Coding Challenge: FizzBuzz",
-                content: "Write a program that prints numbers from 1 to 100. For multiples of 3, print 'Fizz' instead of the number. For multiples of 5, print 'Buzz'. For numbers which are multiples of both 3 and 5, print 'FizzBuzz'."
-            },
-            {
-                type: "search-task",
-                title: "Research: JavaScript Event Loop",
-                content: "Research how the JavaScript event loop works. How does it handle asynchronous operations? What are the roles of the call stack, callback queue, and microtask queue?"
-            },
-            {
-                type: "search-task",
-                title: "Research: ES6+ Features",
-                content: "Research the following ES6+ features: let/const, arrow functions, template literals, destructuring, spread/rest operators, and modules. Create examples for each."
-            }
-        ];
-        
+            options: [
+                "0, 1",
+                "1, 2",
+                "1, 1",
+                "undefined, undefined"
+            ],
+            correctIndex: 1
+        }, {
+            type: "task",
+            title: "Coding Challenge: FizzBuzz",
+            content: "Write a program that prints numbers from 1 to 100. For multiples of 3, print 'Fizz' instead of the number. For multiples of 5, print 'Buzz'. For numbers which are multiples of both 3 and 5, print 'FizzBuzz'."
+        }, {
+            type: "search-task",
+            title: "Research: JavaScript Event Loop",
+            content: "Research how the JavaScript event loop works. How does it handle asynchronous operations? What are the roles of the call stack, callback queue, and microtask queue?"
+        }, {
+            type: "search-task",
+            title: "Research: ES6+ Features",
+            content: "Research the following ES6+ features: let/const, arrow functions, template literals, destructuring, spread/rest operators, and modules. Create examples for each."
+        }];
+
         // ==================== TEMPLATE RENDERING ====================
         // Functions to render the content - you don't need to modify these
-        
+
         // Set lecture title and subtitle
-        </script><script src="./assets/lecture.js"></script>
+    </script>
+    <script src="./assets/lecture.js"></script>
 </body>
+
 </html>

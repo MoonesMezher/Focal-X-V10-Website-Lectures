@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Focal X - Node.js Bootcamp: Lecture 19 </title><link rel="manifest" href="./manifest.json" />
+    <title>Focal X - Node.js Bootcamp: Lecture 19 </title>
+    <link rel="manifest" href="./manifest.json" />
     <link rel="apple-touch-icon" href="./logo.jpg">
     <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
     <meta name="theme-color" content="#b21f1f">
     <link rel="stylesheet" href="./assets/lecture.css">
 </head>
+
 <body>
     <div class="container">
         <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
@@ -16,14 +19,14 @@
             <h1 id="lecture-title">Focal X - Node.js Bootcamp</h1>
             <p class="subtitle" id="lecture-subtitle">Node</p>
         </header>
-        
+
         <div class="content">
             <div class="lecture-content">
                 <h2>Lecture Content</h2>
                 <div id="tabs-container"></div>
                 <div id="tab-content-container"></div>
             </div>
-            
+
             <div class="interactive-section">
                 <h2>Interactive Questions & Tasks</h2>
                 <div id="questions-container"></div>
@@ -32,34 +35,32 @@
     </div>
 
     <footer class="footer">
-        <p>&copy; 2025 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
+        <p>&copy; 2026 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
     </footer>
 
-        <script src="./reg.js"></script>
-<script>
+    <script src="./reg.js"></script>
+    <script>
         // ==================== CONFIGURATION ====================
         // Update these arrays to change the content of your lecture
-        
+
         // Lecture metadata
         const lectureConfig = {
             title: "Focal X - Node.js Bootcamp",
             subtitle: "Postman, Plop, Databases, MongoDB"
         };
-        
-       // Lecture content organized by tabs
-const lectureContent = [
-    {
-        tabTitle: "Last Lesson",
-        title: "Last Lesson Recap",
-        content: `/*
+
+        // Lecture content organized by tabs
+        const lectureContent = [{
+                tabTitle: "Last Lesson",
+                title: "Last Lesson Recap",
+                content: `/*
 1- Solve Task 5
 2- Resturant Example
 */`
-    },
-    {
-        tabTitle: "CRUD Operations & Validation",
-        title: "Building Robust CRUD APIs",
-        content: `/*
+            }, {
+                tabTitle: "CRUD Operations & Validation",
+                title: "Building Robust CRUD APIs",
+                content: `/*
 Complete CRUD Implementation with:
 • Input validation
 • Error handling with try-catch
@@ -214,11 +215,10 @@ app.put('/api/users/:id', validateUser, async (req, res) => {
         });
     }
 });`
-    },
-    {
-    tabTitle: "Postman",
-    title: "Postman Setup & Usage",
-    content: `/*
+            }, {
+                tabTitle: "Postman",
+                title: "Postman Setup & Usage",
+                content: `/*
 Why Postman?
 • API Development & Testing
 • Automated Testing Collections
@@ -259,10 +259,11 @@ const baseUrl = pm.environment.get("base_url");
 pm.sendRequest(\`\${baseUrl}/api/users\`, function (err, response) {
     console.log(response.json());
 });
-*/`},{
-        tabTitle: "Plop.js",
-        title: "Plop.js - Code Generation",
-        content: `/*
+*/`
+            }, {
+                tabTitle: "Plop.js",
+                title: "Plop.js - Code Generation",
+                content: `/*
 Why Use Plop.js?
 • Consistent code structure
 • Time-saving automation
@@ -379,11 +380,10 @@ Benefits:
 • Team alignment
 */
 `
-    },
-    {
-        tabTitle: "Views & MVC Architecture",
-        title: "Server-Side Rendering with Express Templates",
-        content: `/*
+            }, {
+                tabTitle: "Views & MVC Architecture",
+                title: "Server-Side Rendering with Express Templates",
+                content: `/*
 MVC Architecture:
 • Model: Data & business logic (Database models)
 • View: Presentation layer (Templates)
@@ -550,11 +550,10 @@ app.get('/', (req, res) => {
 // • Consistent user experience
 // • Better performance on low-powered devices
 `
-    },
-    {
-        tabTitle: "Database Fundamentals",
-        title: "Database Systems",
-        content: `/*Why Databases? (vs Arrays/Objects):
+            }, {
+                tabTitle: "Database Fundamentals",
+                title: "Database Systems",
+                content: `/*Why Databases? (vs Arrays/Objects):
 | Aspect               | In-Memory Storage          | Database Storage            |
 |----------------------|----------------------------|----------------------------|
 | Persistence          | ❌ Lost on restart         | ✅ Permanent storage       |
@@ -577,11 +576,11 @@ const users = await User.find({
     age: { $gte: 18 },
     status: 'active'
 }).sort({ createdAt: -1 }).limit(50);
-*/`},
-    {
-        tabTitle: "SQL vs NoSQL",
-        title: "SQL vs NoSQL",
-        content: `/*
+*/`
+            }, {
+                tabTitle: "SQL vs NoSQL",
+                title: "SQL vs NoSQL",
+                content: `/*
 | Aspect               | SQL Databases              | NoSQL Databases            |
 |----------------------|----------------------------|----------------------------|
 | Data Structure       | Table-based (Rows/Columns) | Document/Key-Value/Graph   |
@@ -611,10 +610,11 @@ Modern Approach: Polyglot Persistence
 • Use NoSQL for content, logs, analytics
 • Use Redis for caching
 • Use Elasticsearch for search
-*/`},{
-    tabTitle: "MongoDB",
-    title: "MongoDB Introduction",
-    content: `/*MongoDB Features:
+*/`
+            }, {
+                tabTitle: "MongoDB",
+                title: "MongoDB Introduction",
+                content: `/*MongoDB Features:
 • Document-oriented NoSQL database
 • BSON format (Binary JSON - extended data types)
 • Horizontal scaling with sharding
@@ -650,11 +650,10 @@ Collection: [documents...] (similar to SQL table)
 Database: { collections... } (similar to SQL database)
 */
 `
-    },
-    {
-        tabTitle: "MongoDB Setup & Mongoose",
-        title: "Database Configuration with MongoDB & Mongoose ODM",
-        content: `/*
+            }, {
+                tabTitle: "MongoDB Setup & Mongoose",
+                title: "Database Configuration with MongoDB & Mongoose ODM",
+                content: `/*
 Option A: MongoDB Atlas (Cloud - Recommended for Production)
 1. Create account at https://www.mongodb.com/cloud/atlas
 2. Build a Cluster:
@@ -861,8 +860,8 @@ await User.findOneAndDelete({ email: 'bob@example.com' });
 
 module.exports = User;
 `
-    },
-    /* {
+            },
+            /* {
         tabTitle: "Advanced Express Features",
         title: "Production-Ready Express Applications",
         content: `/*
@@ -876,383 +875,368 @@ Production Best Practices:
 • Performance optimization
 */
 
-/* const cors = require('cors');
-const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
-const compression = require('compression');
+            /* const cors = require('cors');
+            const helmet = require('helmet');
+            const rateLimit = require('express-rate-limit');
+            const compression = require('compression');
 
-// Security middleware
-app.use(helmet({
-    contentSecurityPolicy: {
-        directives: {
-            defaultSrc: ["'self'"],
-            styleSrc: ["'self'", "'unsafe-inline'"],
-            scriptSrc: ["'self'"],
-            imgSrc: ["'self'", "data:", "https:"],
-        },
-    },
-    crossOriginEmbedderPolicy: false
-}));
+            // Security middleware
+            app.use(helmet({
+                contentSecurityPolicy: {
+                    directives: {
+                        defaultSrc: ["'self'"],
+                        styleSrc: ["'self'", "'unsafe-inline'"],
+                        scriptSrc: ["'self'"],
+                        imgSrc: ["'self'", "data:", "https:"],
+                    },
+                },
+                crossOriginEmbedderPolicy: false
+            }));
 
-// CORS configuration
-app.use(cors({
-    origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000'],
-    credentials: true
-}));
+            // CORS configuration
+            app.use(cors({
+                origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000'],
+                credentials: true
+            }));
 
-// Rate limiting
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // limit each IP to 100 requests per windowMs
-    message: {
-        error: 'Too many requests from this IP, please try again later.'
-    }
-});
-app.use('/api/', limiter);
-
-// Compression
-app.use(compression());
-
-// Environment-based configuration
-const config = {
-    development: {
-        port: 4000,
-        host: 'localhost',
-        logLevel: 'debug'
-    },
-    production: {
-        port: process.env.PORT || 80,
-        host: '0.0.0.0',
-        logLevel: 'warn'
-    }
-};
-
-const environment = process.env.NODE_ENV || 'development';
-const currentConfig = config[environment];
-
-// Advanced error handling
-class AppError extends Error {
-    constructor(message, statusCode) {
-        super(message);
-        this.statusCode = statusCode;
-        this.isOperational = true;
-        Error.captureStackTrace(this, this.constructor);
-    }
-}
-
-// Async error wrapper (avoid try-catch in every route)
-const asyncHandler = (fn) => (req, res, next) => {
-    Promise.resolve(fn(req, res, next)).catch(next);
-};
-
-// Example with async handler
-app.get('/api/async-users', asyncHandler(async (req, res) => {
-    // Simulate async operation
-    const users = await Promise.resolve([...users]);
-    res.json({ success: true, data: users });
-}));
-
-// Global error handler
-app.use((err, req, res, next) => {
-    err.statusCode = err.statusCode || 500;
-    err.status = err.status || 'error';
-
-    if (process.env.NODE_ENV === 'development') {
-        res.status(err.statusCode).json({
-            status: err.status,
-            error: err,
-            message: err.message,
-            stack: err.stack
-        });
-    } else {
-        // Production: don't leak error details
-        if (err.isOperational) {
-            res.status(err.statusCode).json({
-                status: err.status,
-                message: err.message
+            // Rate limiting
+            const limiter = rateLimit({
+                windowMs: 15 * 60 * 1000, // 15 minutes
+                max: 100, // limit each IP to 100 requests per windowMs
+                message: {
+                    error: 'Too many requests from this IP, please try again later.'
+                }
             });
-        } else {
-            console.error('ERROR 💥', err);
-            res.status(500).json({
-                status: 'error',
-                message: 'Something went wrong!'
+            app.use('/api/', limiter);
+
+            // Compression
+            app.use(compression());
+
+            // Environment-based configuration
+            const config = {
+                development: {
+                    port: 4000,
+                    host: 'localhost',
+                    logLevel: 'debug'
+                },
+                production: {
+                    port: process.env.PORT || 80,
+                    host: '0.0.0.0',
+                    logLevel: 'warn'
+                }
+            };
+
+            const environment = process.env.NODE_ENV || 'development';
+            const currentConfig = config[environment];
+
+            // Advanced error handling
+            class AppError extends Error {
+                constructor(message, statusCode) {
+                    super(message);
+                    this.statusCode = statusCode;
+                    this.isOperational = true;
+                    Error.captureStackTrace(this, this.constructor);
+                }
+            }
+
+            // Async error wrapper (avoid try-catch in every route)
+            const asyncHandler = (fn) => (req, res, next) => {
+                Promise.resolve(fn(req, res, next)).catch(next);
+            };
+
+            // Example with async handler
+            app.get('/api/async-users', asyncHandler(async (req, res) => {
+                // Simulate async operation
+                const users = await Promise.resolve([...users]);
+                res.json({ success: true, data: users });
+            }));
+
+            // Global error handler
+            app.use((err, req, res, next) => {
+                err.statusCode = err.statusCode || 500;
+                err.status = err.status || 'error';
+
+                if (process.env.NODE_ENV === 'development') {
+                    res.status(err.statusCode).json({
+                        status: err.status,
+                        error: err,
+                        message: err.message,
+                        stack: err.stack
+                    });
+                } else {
+                    // Production: don't leak error details
+                    if (err.isOperational) {
+                        res.status(err.statusCode).json({
+                            status: err.status,
+                            message: err.message
+                        });
+                    } else {
+                        console.error('ERROR 💥', err);
+                        res.status(500).json({
+                            status: 'error',
+                            message: 'Something went wrong!'
+                        });
+                    }
+                }
             });
-        }
-    }
-});
 
-// Graceful shutdown
-process.on('SIGTERM', () => {
-    console.log('SIGTERM received. Shutting down gracefully...');
-    server.close(() => {
-        console.log('Process terminated');
-    });
-});`
-    } */
-];
+            // Graceful shutdown
+            process.on('SIGTERM', () => {
+                console.log('SIGTERM received. Shutting down gracefully...');
+                server.close(() => {
+                    console.log('Process terminated');
+                });
+            });`
+                } */
+        ];
 
-// Enhanced Questions and Tasks with new content
-const questions = [
-    // Development Tools
-    {
-        type: "question",
-        question: "What is the primary purpose of using Postman in API development?",
-        options: [
-            "To write backend code faster",
-            "To test, document, and debug APIs with a graphical interface",
-            "To deploy applications to production",
-            "To generate database schemas automatically"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "Why is Plop.js typically installed as a devDependency?",
-        options: [
-            "Because it's only used during development for code generation",
-            "Because it's too large for production environments",
-            "Because it conflicts with Express.js in production",
-            "Because it requires special permissions to run"
-        ],
-        correctIndex: 0
-    },
-    {
-        type: "question",
-        question: "Which Postman feature allows you to store variables like base URLs and authentication tokens?",
-        options: [
-            "Collections",
-            "Environments",
-            "Workspaces", 
-            "Tests"
-        ],
-        correctIndex: 1
-    },
+        // Enhanced Questions and Tasks with new content
+        const questions = [
+            // Development Tools
+            {
+                type: "question",
+                question: "What is the primary purpose of using Postman in API development?",
+                options: [
+                    "To write backend code faster",
+                    "To test, document, and debug APIs with a graphical interface",
+                    "To deploy applications to production",
+                    "To generate database schemas automatically"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "Why is Plop.js typically installed as a devDependency?",
+                options: [
+                    "Because it's only used during development for code generation",
+                    "Because it's too large for production environments",
+                    "Because it conflicts with Express.js in production",
+                    "Because it requires special permissions to run"
+                ],
+                correctIndex: 0
+            }, {
+                type: "question",
+                question: "Which Postman feature allows you to store variables like base URLs and authentication tokens?",
+                options: [
+                    "Collections",
+                    "Environments",
+                    "Workspaces",
+                    "Tests"
+                ],
+                correctIndex: 1
+            },
 
-    // Views & MVC
-    {
-        type: "question",
-        question: "In the MVC architecture, what is the responsibility of the View layer?",
-        options: [
-            "Handle business logic and data processing",
-            "Manage database connections and queries",
-            "Present data to the user and handle user interface",
-            "Process HTTP requests and responses"
-        ],
-        correctIndex: 2
-    },
-    {
-        type: "question",
-        question: "Which Express method is used to serve static files like CSS and JavaScript?",
-        options: [
-            "app.set()",
-            "app.use() with express.static()",
-            "app.render()",
-            "app.sendFile()"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "What is the main advantage of using template engines like EJS over sending plain HTML?",
-        options: [
-            "They make websites load faster",
-            "They allow dynamic content rendering with JavaScript",
-            "They reduce the amount of CSS needed",
-            "They automatically optimize images"
-        ],
-        correctIndex: 1
-    },
+            // Views & MVC
+            {
+                type: "question",
+                question: "In the MVC architecture, what is the responsibility of the View layer?",
+                options: [
+                    "Handle business logic and data processing",
+                    "Manage database connections and queries",
+                    "Present data to the user and handle user interface",
+                    "Process HTTP requests and responses"
+                ],
+                correctIndex: 2
+            }, {
+                type: "question",
+                question: "Which Express method is used to serve static files like CSS and JavaScript?",
+                options: [
+                    "app.set()",
+                    "app.use() with express.static()",
+                    "app.render()",
+                    "app.sendFile()"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "What is the main advantage of using template engines like EJS over sending plain HTML?",
+                options: [
+                    "They make websites load faster",
+                    "They allow dynamic content rendering with JavaScript",
+                    "They reduce the amount of CSS needed",
+                    "They automatically optimize images"
+                ],
+                correctIndex: 1
+            },
 
-    // Database Fundamentals
-    {
-        type: "question",
-        question: "What is the key difference between SQL and NoSQL databases regarding schema?",
-        options: [
-            "SQL databases have flexible schemas, NoSQL have rigid schemas",
-            "SQL databases have rigid schemas, NoSQL have flexible schemas", 
-            "Both have exactly the same schema approach",
-            "NoSQL databases don't support any schema"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "In MongoDB, what is the equivalent of a 'table' in SQL databases?",
-        options: [
-            "Document",
-            "Collection",
-            "Database",
-            "Field"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "Which MongoDB feature allows distributing data across multiple servers for horizontal scaling?",
-        options: [
-            "Replication",
-            "Sharding",
-            "Indexing",
-            "Aggregation"
-        ],
-        correctIndex: 1
-    },
+            // Database Fundamentals
+            {
+                type: "question",
+                question: "What is the key difference between SQL and NoSQL databases regarding schema?",
+                options: [
+                    "SQL databases have flexible schemas, NoSQL have rigid schemas",
+                    "SQL databases have rigid schemas, NoSQL have flexible schemas",
+                    "Both have exactly the same schema approach",
+                    "NoSQL databases don't support any schema"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "In MongoDB, what is the equivalent of a 'table' in SQL databases?",
+                options: [
+                    "Document",
+                    "Collection",
+                    "Database",
+                    "Field"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "Which MongoDB feature allows distributing data across multiple servers for horizontal scaling?",
+                options: [
+                    "Replication",
+                    "Sharding",
+                    "Indexing",
+                    "Aggregation"
+                ],
+                correctIndex: 1
+            },
 
-    // Mongoose & ODM
-    {
-        type: "question",
-        question: "What is the purpose of Mongoose in a Node.js application?",
-        options: [
-            "To generate HTML templates",
-            "To provide an Object Data Modeling (ODM) library for MongoDB",
-            "To handle HTTP requests and routing",
-            "To compile Sass stylesheets"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "In Mongoose, what does the 'timestamps' option in a schema automatically add?",
-        options: [
-            "createdAt and updatedAt fields",
-            "id and _id fields", 
-            "version and revision fields",
-            "status and active fields"
-        ],
-        correctIndex: 0
-    },
-    {
-        type: "question",
-        question: "Which method is used in Mongoose to find a single document by its ID?",
-        options: [
-            "findOne()",
-            "findById()",
-            "find().byId()",
-            "getById()"
-        ],
-        correctIndex: 1
-    },
+            // Mongoose & ODM
+            {
+                type: "question",
+                question: "What is the purpose of Mongoose in a Node.js application?",
+                options: [
+                    "To generate HTML templates",
+                    "To provide an Object Data Modeling (ODM) library for MongoDB",
+                    "To handle HTTP requests and routing",
+                    "To compile Sass stylesheets"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "In Mongoose, what does the 'timestamps' option in a schema automatically add?",
+                options: [
+                    "createdAt and updatedAt fields",
+                    "id and _id fields",
+                    "version and revision fields",
+                    "status and active fields"
+                ],
+                correctIndex: 0
+            }, {
+                type: "question",
+                question: "Which method is used in Mongoose to find a single document by its ID?",
+                options: [
+                    "findOne()",
+                    "findById()",
+                    "find().byId()",
+                    "getById()"
+                ],
+                correctIndex: 1
+            },
 
-    // Project Structure & Organization
-    {
-        type: "question",
-        question: "What is the main benefit of organizing code into controllers, routes, and models?",
-        options: [
-            "It makes the code run faster",
-            "It improves code organization and separation of concerns",
-            "It reduces the number of files",
-            "It eliminates the need for documentation"
-        ],
-        correctIndex: 1
-    },
+            // Project Structure & Organization
+            {
+                type: "question",
+                question: "What is the main benefit of organizing code into controllers, routes, and models?",
+                options: [
+                    "It makes the code run faster",
+                    "It improves code organization and separation of concerns",
+                    "It reduces the number of files",
+                    "It eliminates the need for documentation"
+                ],
+                correctIndex: 1
+            },
 
-    // Middleware & Error Handling
-    {
-        type: "question",
-        question: "What is the purpose of using try-catch blocks in controller methods?",
-        options: [
-            "To make code run faster",
-            "To handle synchronous and asynchronous errors gracefully",
-            "To reduce code length",
-            "To automatically log all requests"
-        ],
-        correctIndex: 1
-    },
+            // Middleware & Error Handling
+            {
+                type: "question",
+                question: "What is the purpose of using try-catch blocks in controller methods?",
+                options: [
+                    "To make code run faster",
+                    "To handle synchronous and asynchronous errors gracefully",
+                    "To reduce code length",
+                    "To automatically log all requests"
+                ],
+                correctIndex: 1
+            },
 
-    // Practical Tasks - Development Tools
-    {
-        type: "task",
-        title: "Postman Collection Setup",
-        content: "Create a comprehensive Postman collection for testing a REST API. Include environments for development and production, write test scripts for each endpoint, create pre-request scripts for authentication, and document all API endpoints with examples and descriptions."
-    },
-    {
-        type: "task",
-        title: "Plop.js Code Generator",
-        content: "Set up Plop.js in your project and create generators for controllers, routes, models, and middleware. Each generator should include proper error handling, validation, and follow your project's coding standards. Test the generators by creating multiple components."
-    },
+            // Practical Tasks - Development Tools
+            {
+                type: "task",
+                title: "Postman Collection Setup",
+                content: "Create a comprehensive Postman collection for testing a REST API. Include environments for development and production, write test scripts for each endpoint, create pre-request scripts for authentication, and document all API endpoints with examples and descriptions."
+            }, {
+                type: "task",
+                title: "Plop.js Code Generator",
+                content: "Set up Plop.js in your project and create generators for controllers, routes, models, and middleware. Each generator should include proper error handling, validation, and follow your project's coding standards. Test the generators by creating multiple components."
+            },
 
-    // Practical Tasks - Views & MVC
-    {
-        type: "task",
-        title: "EJS Template Implementation",
-        content: "Create a complete EJS template structure for a blog application. Include layouts, partials for header/footer/navigation, and dynamic pages for home, blog posts, and user profiles. Implement conditionals, loops, and template inheritance. Add static file serving for CSS and JavaScript."
-    },
-    {
-        type: "task", 
-        title: "MVC Architecture Implementation",
-        content: "Build a complete MVC application with Express.js and EJS. Create models for users and posts, controllers to handle business logic, and views to render the data. Implement full CRUD operations and ensure proper separation of concerns between the layers."
-    },
+            // Practical Tasks - Views & MVC
+            {
+                type: "task",
+                title: "EJS Template Implementation",
+                content: "Create a complete EJS template structure for a blog application. Include layouts, partials for header/footer/navigation, and dynamic pages for home, blog posts, and user profiles. Implement conditionals, loops, and template inheritance. Add static file serving for CSS and JavaScript."
+            }, {
+                type: "task",
+                title: "MVC Architecture Implementation",
+                content: "Build a complete MVC application with Express.js and EJS. Create models for users and posts, controllers to handle business logic, and views to render the data. Implement full CRUD operations and ensure proper separation of concerns between the layers."
+            },
 
-    // Practical Tasks - Database & MongoDB
-    {
-        type: "task",
-        title: "MongoDB Atlas Setup & Connection",
-        content: "Set up a MongoDB Atlas cluster, configure database access and network security, establish connection from your Express application using Mongoose, and implement proper error handling for connection issues. Create environment variables for sensitive data."
-    },
-    {
-        type: "task",
-        title: "Mongoose Schema Design",
-        content: "Design and implement comprehensive Mongoose schemas for a e-commerce application including users, products, orders, and categories. Add validation, virtual properties, instance methods, static methods, and middleware. Create relationships between collections using references."
-    },
+            // Practical Tasks - Database & MongoDB
+            {
+                type: "task",
+                title: "MongoDB Atlas Setup & Connection",
+                content: "Set up a MongoDB Atlas cluster, configure database access and network security, establish connection from your Express application using Mongoose, and implement proper error handling for connection issues. Create environment variables for sensitive data."
+            }, {
+                type: "task",
+                title: "Mongoose Schema Design",
+                content: "Design and implement comprehensive Mongoose schemas for a e-commerce application including users, products, orders, and categories. Add validation, virtual properties, instance methods, static methods, and middleware. Create relationships between collections using references."
+            },
 
-    // Practical Tasks - Express.js
-    {
-        type: "task",
-        title: "Complete REST API Implementation",
-        content: "Build a complete REST API for a 'products' resource with full CRUD operations. Include input validation, proper HTTP status codes, error handling with try-catch, and implement filtering, sorting, and pagination for the GET endpoints."
-    },
-    {
-        type: "task", 
-        title: "API Security Implementation",
-        content: "Secure your Express application by implementing CORS, Helmet for security headers, input sanitization, and parameter validation. Add rate limiting and implement proper authentication using JWT tokens with environment variables for secrets."
-    },
+            // Practical Tasks - Express.js
+            {
+                type: "task",
+                title: "Complete REST API Implementation",
+                content: "Build a complete REST API for a 'products' resource with full CRUD operations. Include input validation, proper HTTP status codes, error handling with try-catch, and implement filtering, sorting, and pagination for the GET endpoints."
+            }, {
+                type: "task",
+                title: "API Security Implementation",
+                content: "Secure your Express application by implementing CORS, Helmet for security headers, input sanitization, and parameter validation. Add rate limiting and implement proper authentication using JWT tokens with environment variables for secrets."
+            },
 
-    // Search & Research Tasks
-    {
-        type: "search-task",
-        title: "Research: SQL vs NoSQL Deep Dive",
-        content: "Research and create a comprehensive comparison between SQL and NoSQL databases. Include performance benchmarks for different use cases, scalability considerations, consistency models, and real-world implementation examples. Create a decision framework for choosing between SQL and NoSQL."
-    },
-    {
-        type: "search-task",
-        title: "Research: Express.js Best Practices",
-        content: "Research and document Express.js best practices for production applications. Include topics like project structure, environment configuration, performance optimization, security practices, and deployment strategies. Create a checklist for production-ready Express applications."
-    },
-    {
-        type: "search-task",
-        title: "Advanced: API Testing Strategies",
-        content: "Research different API testing approaches and tools. Compare Postman, Thunder Client, Jest for API testing, and automated testing strategies. Create a comprehensive testing suite for an Express API including unit tests, integration tests, and end-to-end tests."
-    },
+            // Search & Research Tasks
+            {
+                type: "search-task",
+                title: "Research: SQL vs NoSQL Deep Dive",
+                content: "Research and create a comprehensive comparison between SQL and NoSQL databases. Include performance benchmarks for different use cases, scalability considerations, consistency models, and real-world implementation examples. Create a decision framework for choosing between SQL and NoSQL."
+            }, {
+                type: "search-task",
+                title: "Research: Express.js Best Practices",
+                content: "Research and document Express.js best practices for production applications. Include topics like project structure, environment configuration, performance optimization, security practices, and deployment strategies. Create a checklist for production-ready Express applications."
+            }, {
+                type: "search-task",
+                title: "Advanced: API Testing Strategies",
+                content: "Research different API testing approaches and tools. Compare Postman, Thunder Client, Jest for API testing, and automated testing strategies. Create a comprehensive testing suite for an Express API including unit tests, integration tests, and end-to-end tests."
+            },
 
-    // Debugging & Problem Solving
-    {
-        type: "task",
-        title: "Database Connection Debugging",
-        content: "Debug common MongoDB connection issues including authentication failures, network timeouts, and configuration problems. Implement proper connection error handling, retry logic, and connection status monitoring in your application."
-    },
-    {
-        type: "task",
-        title: "Template Engine Debugging",
-        content: "Identify and fix common EJS template issues including variable rendering problems, partial includes not working, conditional logic errors, and static file serving issues. Implement proper error boundaries and template validation."
-    },
-    {
-        type: "task",
-        title: "Performance Optimization",
-        content: "Analyze an existing Express application for performance bottlenecks. Implement compression, caching strategies, database optimization, and proper error handling. Use tools to monitor and improve application performance."
-    },
+            // Debugging & Problem Solving
+            {
+                type: "task",
+                title: "Database Connection Debugging",
+                content: "Debug common MongoDB connection issues including authentication failures, network timeouts, and configuration problems. Implement proper connection error handling, retry logic, and connection status monitoring in your application."
+            }, {
+                type: "task",
+                title: "Template Engine Debugging",
+                content: "Identify and fix common EJS template issues including variable rendering problems, partial includes not working, conditional logic errors, and static file serving issues. Implement proper error boundaries and template validation."
+            }, {
+                type: "task",
+                title: "Performance Optimization",
+                content: "Analyze an existing Express application for performance bottlenecks. Implement compression, caching strategies, database optimization, and proper error handling. Use tools to monitor and improve application performance."
+            },
 
-    // Integration Tasks
-    {
-        type: "task",
-        title: "Full Stack Integration Project",
-        content: "Build a complete full-stack application integrating all concepts: Express.js backend with MVC architecture, MongoDB database with Mongoose ODM, EJS templates for server-side rendering, and Postman for API testing. Implement user authentication, CRUD operations, and proper error handling throughout the stack."
-    },
-    {
-        type: "task",
-        title: "Production Deployment Preparation",
-        content: "Prepare your Express application for production deployment. Configure environment variables, set up logging, implement health check endpoints, configure reverse proxy settings, create Docker containers, and set up continuous integration/deployment pipelines."
-    }
-];      
-        </script><script src="./assets/lecture.js"></script>
+            // Integration Tasks
+            {
+                type: "task",
+                title: "Full Stack Integration Project",
+                content: "Build a complete full-stack application integrating all concepts: Express.js backend with MVC architecture, MongoDB database with Mongoose ODM, EJS templates for server-side rendering, and Postman for API testing. Implement user authentication, CRUD operations, and proper error handling throughout the stack."
+            }, {
+                type: "task",
+                title: "Production Deployment Preparation",
+                content: "Prepare your Express application for production deployment. Configure environment variables, set up logging, implement health check endpoints, configure reverse proxy settings, create Docker containers, and set up continuous integration/deployment pipelines."
+            }
+        ];
+    </script>
+    <script src="./assets/lecture.js"></script>
 </body>
+
 </html>

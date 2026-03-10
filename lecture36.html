@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <meta name="theme-color" content="#b21f1f">
     <link rel="stylesheet" href="./assets/lecture.css">
 </head>
+
 <body>
     <div class="container">
         <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
@@ -17,14 +19,14 @@
             <h1 id="lecture-title">Focal X - Node.js Bootcamp</h1>
             <p class="subtitle" id="lecture-subtitle">Node</p>
         </header>
-        
+
         <div class="content">
             <div class="lecture-content">
                 <h2>Lecture Content</h2>
                 <div id="tabs-container"></div>
                 <div id="tab-content-container"></div>
             </div>
-            
+
             <div class="interactive-section">
                 <h2>Interactive Questions & Tasks</h2>
                 <div id="questions-container"></div>
@@ -33,32 +35,30 @@
     </div>
 
     <footer class="footer">
-        <p>&copy; 2025 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
+        <p>&copy; 2026 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
     </footer>
 
-        <script src="./reg.js"></script>
-<script>
+    <script src="./reg.js"></script>
+    <script>
         // ==================== CONFIGURATION ====================
         // Update these arrays to change the content of your lecture
-        
-const lectureConfig = {
-    title: "Focal X - Node.js Bootcamp",
-    subtitle: "Socket.IO Example"
-};
 
-// Lecture content organized by tabs
-const lectureContent = [
-{
-    tabTitle: "Last Lesson",
-    title: "Last Lesson",
-    content: `1- Events
+        const lectureConfig = {
+            title: "Focal X - Node.js Bootcamp",
+            subtitle: "Socket.IO Example"
+        };
+
+        // Lecture content organized by tabs
+        const lectureContent = [{
+            tabTitle: "Last Lesson",
+            title: "Last Lesson",
+            content: `1- Events
 2- WebSocket
 3- Socket.io`
-}, 
-{
-        tabTitle: "Chat Application",
-        title: "Advanced Real-Time Chat Application",
-        content: `// ################## Advanced Real-Time Chat Application with React & Node.js (Socket.IO) ##########################
+        }, {
+            tabTitle: "Chat Application",
+            title: "Advanced Real-Time Chat Application",
+            content: `// ################## Advanced Real-Time Chat Application with React & Node.js (Socket.IO) ##########################
 
 /* 
 Let's build a full-featured chat application using:
@@ -197,11 +197,10 @@ socket.on('new-msg', (data) => {
 });
 
 */`
-    },
-    {
-        tabTitle: "Next Steps",
-        title: "What's Next?",
-        content: `// Final Lecture: What is the next?
+        }, {
+            tabTitle: "Next Steps",
+            title: "What's Next?",
+            content: `// Final Lecture: What is the next?
 
 // Advanced Backend Topics:
 // => Caching: Redis
@@ -242,153 +241,144 @@ socket.on('new-msg', (data) => {
 // => Build self-confidence
 
 // => Build community + Prepare your online presence (Social media)`
-    }
-];
+        }];
 
-const questions = [
-    // Events in Node.js
-    {
-        type: "question",
-        question: "What is the primary purpose of events in Node.js?",
-        options: [
-            "To enable synchronous operations",
-            "To enable event-driven architecture for decoupled components",
-            "To replace all callback functions",
-            "To improve database performance"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "What is the risk of overusing events in Node.js?",
-        options: [
-            "Memory leaks are guaranteed",
-            "It can lead to 'event spaghetti' making code hard to follow",
-            "Events are deprecated in modern Node.js",
-            "They block the event loop"
-        ],
-        correctIndex: 1
-    },
+        const questions = [
+            // Events in Node.js
+            {
+                type: "question",
+                question: "What is the primary purpose of events in Node.js?",
+                options: [
+                    "To enable synchronous operations",
+                    "To enable event-driven architecture for decoupled components",
+                    "To replace all callback functions",
+                    "To improve database performance"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "What is the risk of overusing events in Node.js?",
+                options: [
+                    "Memory leaks are guaranteed",
+                    "It can lead to 'event spaghetti' making code hard to follow",
+                    "Events are deprecated in modern Node.js",
+                    "They block the event loop"
+                ],
+                correctIndex: 1
+            },
 
-    // WebSockets
-    {
-        type: "question",
-        question: "What is the main advantage of WebSockets over HTTP for real-time applications?",
-        options: [
-            "Higher security",
-            "Persistent, bidirectional communication",
-            "Better compression",
-            "Built-in authentication"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "What does 'full-duplex communication' mean in WebSockets?",
-        options: [
-            "Data can only flow from client to server",
-            "Data can flow in both directions simultaneously",
-            "Multiple connections are required",
-            "Communication is encrypted by default"
-        ],
-        correctIndex: 1
-    },
+            // WebSockets
+            {
+                type: "question",
+                question: "What is the main advantage of WebSockets over HTTP for real-time applications?",
+                options: [
+                    "Higher security",
+                    "Persistent, bidirectional communication",
+                    "Better compression",
+                    "Built-in authentication"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "What does 'full-duplex communication' mean in WebSockets?",
+                options: [
+                    "Data can only flow from client to server",
+                    "Data can flow in both directions simultaneously",
+                    "Multiple connections are required",
+                    "Communication is encrypted by default"
+                ],
+                correctIndex: 1
+            },
 
-    // Socket.IO Features
-    {
-        type: "question",
-        question: "Which feature does Socket.IO provide that raw WebSockets don't?",
-        options: [
-            "Automatic reconnection",
-            "Better encryption",
-            "Smaller packet size",
-            "Built-in database"
-        ],
-        correctIndex: 0
-    },
-    {
-        type: "question",
-        question: "What is the purpose of Socket.IO's fallback mechanism?",
-        options: [
-            "To degrade to HTTP long-polling when WebSockets are unavailable",
-            "To switch to UDP for faster transmission",
-            "To use WebRTC when available",
-            "To compress data automatically"
-        ],
-        correctIndex: 0
-    },
+            // Socket.IO Features
+            {
+                type: "question",
+                question: "Which feature does Socket.IO provide that raw WebSockets don't?",
+                options: [
+                    "Automatic reconnection",
+                    "Better encryption",
+                    "Smaller packet size",
+                    "Built-in database"
+                ],
+                correctIndex: 0
+            }, {
+                type: "question",
+                question: "What is the purpose of Socket.IO's fallback mechanism?",
+                options: [
+                    "To degrade to HTTP long-polling when WebSockets are unavailable",
+                    "To switch to UDP for faster transmission",
+                    "To use WebRTC when available",
+                    "To compress data automatically"
+                ],
+                correctIndex: 0
+            },
 
-    // Rooms & Broadcasting
-    {
-        type: "question",
-        question: "How do you send a message to all clients in a specific room using Socket.IO?",
-        options: [
-            "socket.emitToRoom()",
-            "io.to(room).emit()",
-            "socket.broadcast.room()",
-            "room.sendAll()"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "What's the difference between socket.emit() and io.emit()?",
-        options: [
-            "socket.emit() sends to all, io.emit() sends to one",
-            "socket.emit() sends to current client, io.emit() sends to all connected clients",
-            "There's no difference",
-            "socket.emit() is for rooms only"
-        ],
-        correctIndex: 1
-    },
+            // Rooms & Broadcasting
+            {
+                type: "question",
+                question: "How do you send a message to all clients in a specific room using Socket.IO?",
+                options: [
+                    "socket.emitToRoom()",
+                    "io.to(room).emit()",
+                    "socket.broadcast.room()",
+                    "room.sendAll()"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "What's the difference between socket.emit() and io.emit()?",
+                options: [
+                    "socket.emit() sends to all, io.emit() sends to one",
+                    "socket.emit() sends to current client, io.emit() sends to all connected clients",
+                    "There's no difference",
+                    "socket.emit() is for rooms only"
+                ],
+                correctIndex: 1
+            },
 
-    // Implementation Tasks
-    {
-        type: "task",
-        title: "Event-Driven Task Scheduler",
-        content: "Build an event-driven task scheduler using Node.js EventEmitter. Implement features like task queuing, priority levels, and event logging for task completion/failure."
-    },
-    {
-        type: "task",
-        title: "Real-Time Collaborative Whiteboard",
-        content: "Create a real-time collaborative whiteboard using Socket.IO. Implement features like multiple rooms, drawing synchronization, user cursors, and undo/redo functionality."
-    },
-    {
-        type: "task",
-        title: "Live Auction System",
-        content: "Build a live auction system with real-time bidding. Implement features like countdown timers, bid notifications, room-based auctions, and automatic winner determination."
-    },
+            // Implementation Tasks
+            {
+                type: "task",
+                title: "Event-Driven Task Scheduler",
+                content: "Build an event-driven task scheduler using Node.js EventEmitter. Implement features like task queuing, priority levels, and event logging for task completion/failure."
+            }, {
+                type: "task",
+                title: "Real-Time Collaborative Whiteboard",
+                content: "Create a real-time collaborative whiteboard using Socket.IO. Implement features like multiple rooms, drawing synchronization, user cursors, and undo/redo functionality."
+            }, {
+                type: "task",
+                title: "Live Auction System",
+                content: "Build a live auction system with real-time bidding. Implement features like countdown timers, bid notifications, room-based auctions, and automatic winner determination."
+            },
 
-    // Production & Scaling Tasks
-    {
-        type: "task",
-        title: "Scalable Chat Application",
-        content: "Extend the chat application to support scaling across multiple Node.js processes. Implement Redis for shared session storage and message queuing between processes."
-    },
-    {
-        type: "task",
-        title: "Real-Time Analytics Dashboard",
-        content: "Build a dashboard that shows real-time user activity. Implement WebSocket connections to push updates, track active users, and display live statistics."
-    },
+            // Production & Scaling Tasks
+            {
+                type: "task",
+                title: "Scalable Chat Application",
+                content: "Extend the chat application to support scaling across multiple Node.js processes. Implement Redis for shared session storage and message queuing between processes."
+            }, {
+                type: "task",
+                title: "Real-Time Analytics Dashboard",
+                content: "Build a dashboard that shows real-time user activity. Implement WebSocket connections to push updates, track active users, and display live statistics."
+            },
 
-    // Research & Analysis Tasks
-    {
-        type: "search-task",
-        title: "Research: WebSocket Alternatives",
-        content: "Research and compare WebSocket alternatives (Server-Sent Events, WebRTC, MQTT). Analyze their use cases, pros/cons, and implementation complexity for different scenarios."
-    },
-    {
-        type: "search-task",
-        title: "Research: Scaling Real-Time Applications",
-        content: "Research strategies for scaling real-time applications. Compare solutions like Redis Pub/Sub, message brokers (RabbitMQ, Kafka), and load balancing techniques for WebSocket connections."
-    },
-    {
-        type: "search-task",
-        title: "Research: Real-Time Database Solutions",
-        content: "Research real-time database solutions (Firebase Realtime Database, Supabase, MongoDB Change Streams). Compare their features, pricing, and integration with Socket.IO applications."
-    }
-];
+            // Research & Analysis Tasks
+            {
+                type: "search-task",
+                title: "Research: WebSocket Alternatives",
+                content: "Research and compare WebSocket alternatives (Server-Sent Events, WebRTC, MQTT). Analyze their use cases, pros/cons, and implementation complexity for different scenarios."
+            }, {
+                type: "search-task",
+                title: "Research: Scaling Real-Time Applications",
+                content: "Research strategies for scaling real-time applications. Compare solutions like Redis Pub/Sub, message brokers (RabbitMQ, Kafka), and load balancing techniques for WebSocket connections."
+            }, {
+                type: "search-task",
+                title: "Research: Real-Time Database Solutions",
+                content: "Research real-time database solutions (Firebase Realtime Database, Supabase, MongoDB Change Streams). Compare their features, pricing, and integration with Socket.IO applications."
+            }
+        ];
     </script>
     <script src="./assets/lecture.js"></script>
 </body>
+
 </html>

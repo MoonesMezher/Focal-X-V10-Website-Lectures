@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Focal X - Node.js Bootcamp: Lecture 23 </title><link rel="manifest" href="./manifest.json" />
+    <title>Focal X - Node.js Bootcamp: Lecture 23 </title>
+    <link rel="manifest" href="./manifest.json" />
     <link rel="apple-touch-icon" href="./logo.jpg">
     <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
     <meta name="theme-color" content="#b21f1f">
     <link rel="stylesheet" href="./assets/lecture.css">
 </head>
+
 <body>
     <div class="container">
         <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
@@ -16,14 +19,14 @@
             <h1 id="lecture-title">Focal X - Node.js Bootcamp</h1>
             <p class="subtitle" id="lecture-subtitle">Node</p>
         </header>
-        
+
         <div class="content">
             <div class="lecture-content">
                 <h2>Lecture Content</h2>
                 <div id="tabs-container"></div>
                 <div id="tab-content-container"></div>
             </div>
-            
+
             <div class="interactive-section">
                 <h2>Interactive Questions & Tasks</h2>
                 <div id="questions-container"></div>
@@ -32,34 +35,32 @@
     </div>
 
     <footer class="footer">
-        <p>&copy; 2025 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
+        <p>&copy; 2026 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
     </footer>
 
-        <script src="./reg.js"></script>
-<script>
+    <script src="./reg.js"></script>
+    <script>
         // ==================== CONFIGURATION ====================
         // Update these arrays to change the content of your lecture
-        
+
         // Lecture metadata
         const lectureConfig = {
             title: "Focal X - Node.js Bootcamp",
             subtitle: "Mongoose (Advanced)"
         };
-        
-       // Lecture content organized by tabs
-const lectureContent = [
-    {
-        tabTitle: "Last Lesson",
-        title: "Last Lesson Recap",
-        content: `/*
+
+        // Lecture content organized by tabs
+        const lectureContent = [{
+            tabTitle: "Last Lesson",
+            title: "Last Lesson Recap",
+            content: `/*
 1- Solve Task 6
 2- Recap (Mongoose)
 */`
-    },
-    {
-        tabTitle: "Chaining & Pagination",
-        title: "Query Chaining, Pagination & Projection",
-        content: `// ## Mongoose Query Chaining & Pagination
+        }, {
+            tabTitle: "Chaining & Pagination",
+            title: "Query Chaining, Pagination & Projection",
+            content: `// ## Mongoose Query Chaining & Pagination
 
 // Basic Chaining Examples
 const users = await User.find()
@@ -105,11 +106,10 @@ const getPaginatedUsers = async (page = 1, limit = 10, filters = {}) => {
 // Usage
 const result = await getPaginatedUsers(1, 10, { role: 'user' });
 console.log(result.pagination); // { page: 1, limit: 10, total: 100, pages: 10 }`
-    },
-     {
-        tabTitle: "Relationships",
-        title: "MongoDB Relationships & Population",
-        content: `// ## MongoDB Relationships
+        }, {
+            tabTitle: "Relationships",
+            title: "MongoDB Relationships & Population",
+            content: `// ## MongoDB Relationships
 
 // 1. One-to-Many (Reference)
 const userSchema = new Schema({
@@ -170,11 +170,10 @@ const populatedUser = await User.findById(userId)
     .populate('posts')
     .populate('comments')
     .populate('likes');`
-    },
-   {
-        tabTitle: "Advanced Mongoose",
-        title: "Advanced Mongoose Features & Best Practices",
-        content: `// ## Advanced Mongoose Patterns
+        }, {
+            tabTitle: "Advanced Mongoose",
+            title: "Advanced Mongoose Features & Best Practices",
+            content: `// ## Advanced Mongoose Patterns
 
 // ## 1. Database Transactions
 
@@ -547,283 +546,269 @@ module.exports = {
     AdminUser,
     CustomerUser
 };`
-    },
-];
+        }, ];
 
-// Updated Questions array aligned with the new topics
-const questions = [
-    // MongoDB Setup
-    {
-        type: "question",
-        question: "What is the main advantage of using MongoDB Atlas over local MongoDB installation?",
-        options: [
-            "It's always free with unlimited storage",
-            "It provides automated backups, scaling, and managed infrastructure",
-            "It doesn't require any configuration",
-            "It only works with JavaScript applications"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "Which connection string format is used for MongoDB Atlas clusters?",
-        options: [
-            "mongodb://localhost:27017",
-            "mysql://username:password@host:port/database",
-            "mongodb+srv://username:password@cluster.mongodb.net/database",
-            "postgresql://user:pass@host/db"
-        ],
-        correctIndex: 2
-    },
+        // Updated Questions array aligned with the new topics
+        const questions = [
+            // MongoDB Setup
+            {
+                type: "question",
+                question: "What is the main advantage of using MongoDB Atlas over local MongoDB installation?",
+                options: [
+                    "It's always free with unlimited storage",
+                    "It provides automated backups, scaling, and managed infrastructure",
+                    "It doesn't require any configuration",
+                    "It only works with JavaScript applications"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "Which connection string format is used for MongoDB Atlas clusters?",
+                options: [
+                    "mongodb://localhost:27017",
+                    "mysql://username:password@host:port/database",
+                    "mongodb+srv://username:password@cluster.mongodb.net/database",
+                    "postgresql://user:pass@host/db"
+                ],
+                correctIndex: 2
+            },
 
-    // MongoDB Compass
-    {
-        type: "question",
-        question: "What is the primary purpose of MongoDB Compass?",
-        options: [
-            "To write Node.js application code",
-            "To provide a graphical interface for database management and query building",
-            "To deploy applications to production servers",
-            "To monitor server CPU and memory usage"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "Which feature in MongoDB Compass allows you to visually build aggregation pipelines?",
-        options: [
-            "Document Validation",
-            "Aggregation Pipeline Builder", 
-            "Index Manager",
-            "Schema Analyzer"
-        ],
-        correctIndex: 1
-    },
+            // MongoDB Compass
+            {
+                type: "question",
+                question: "What is the primary purpose of MongoDB Compass?",
+                options: [
+                    "To write Node.js application code",
+                    "To provide a graphical interface for database management and query building",
+                    "To deploy applications to production servers",
+                    "To monitor server CPU and memory usage"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "Which feature in MongoDB Compass allows you to visually build aggregation pipelines?",
+                options: [
+                    "Document Validation",
+                    "Aggregation Pipeline Builder",
+                    "Index Manager",
+                    "Schema Analyzer"
+                ],
+                correctIndex: 1
+            },
 
-    // Mongoose Basics
-    {
-        type: "question",
-        question: "What is Mongoose in the context of Node.js and MongoDB?",
-        options: [
-            "A template engine for rendering HTML",
-            "An Object Data Modeling (ODM) library that provides schema-based solution",
-            "A testing framework for JavaScript applications",
-            "A package manager for Node.js"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "Which Mongoose connection option controls the maximum number of sockets in the connection pool?",
-        options: [
-            "socketTimeoutMS",
-            "maxPoolSize",
-            "connectTimeoutMS", 
-            "serverSelectionTimeoutMS"
-        ],
-        correctIndex: 1
-    },
+            // Mongoose Basics
+            {
+                type: "question",
+                question: "What is Mongoose in the context of Node.js and MongoDB?",
+                options: [
+                    "A template engine for rendering HTML",
+                    "An Object Data Modeling (ODM) library that provides schema-based solution",
+                    "A testing framework for JavaScript applications",
+                    "A package manager for Node.js"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "Which Mongoose connection option controls the maximum number of sockets in the connection pool?",
+                options: [
+                    "socketTimeoutMS",
+                    "maxPoolSize",
+                    "connectTimeoutMS",
+                    "serverSelectionTimeoutMS"
+                ],
+                correctIndex: 1
+            },
 
-    // Mongoose Schemas
-    {
-        type: "question",
-        question: "What is the purpose of the 'timestamps' option in a Mongoose schema?",
-        options: [
-            "It automatically adds createdAt and updatedAt fields to documents",
-            "It creates indexes on all date fields",
-            "It validates that all dates are in the correct format",
-            "It converts all dates to UTC timezone"
-        ],
-        correctIndex: 0
-    },
-    {
-        type: "question",
-        question: "Which Mongoose feature allows you to create properties that are computed from other fields but not stored in the database?",
-        options: [
-            "Instance methods",
-            "Static methods",
-            "Virtual properties",
-            "Middleware hooks"
-        ],
-        correctIndex: 2
-    },
-    {
-        type: "question",
-        question: "What is the main purpose of Mongoose middleware (pre and post hooks)?",
-        options: [
-            "To create database indexes automatically",
-            "To execute logic before or after specific operations like save, find, etc.",
-            "To generate API documentation from schemas",
-            "To optimize database queries for better performance"
-        ],
-        correctIndex: 1
-    },
+            // Mongoose Schemas
+            {
+                type: "question",
+                question: "What is the purpose of the 'timestamps' option in a Mongoose schema?",
+                options: [
+                    "It automatically adds createdAt and updatedAt fields to documents",
+                    "It creates indexes on all date fields",
+                    "It validates that all dates are in the correct format",
+                    "It converts all dates to UTC timezone"
+                ],
+                correctIndex: 0
+            }, {
+                type: "question",
+                question: "Which Mongoose feature allows you to create properties that are computed from other fields but not stored in the database?",
+                options: [
+                    "Instance methods",
+                    "Static methods",
+                    "Virtual properties",
+                    "Middleware hooks"
+                ],
+                correctIndex: 2
+            }, {
+                type: "question",
+                question: "What is the main purpose of Mongoose middleware (pre and post hooks)?",
+                options: [
+                    "To create database indexes automatically",
+                    "To execute logic before or after specific operations like save, find, etc.",
+                    "To generate API documentation from schemas",
+                    "To optimize database queries for better performance"
+                ],
+                correctIndex: 1
+            },
 
-    // Mongoose CRUD
-    {
-        type: "question",
-        question: "What is the difference between findOne() and findById() in Mongoose?",
-        options: [
-            "findOne() is faster than findById()",
-            "findById() specifically searches by the _id field while findOne() can search by any field",
-            "findOne() returns an array while findById() returns a single document",
-            "There is no difference, they are aliases for the same method"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "Which method is used to update a document and return the updated version in a single operation?",
-        options: [
-            "updateOne()",
-            "updateMany()",
-            "findOneAndUpdate() with {new: true}",
-            "save() after modification"
-        ],
-        correctIndex: 2
-    },
-    {
-        type: "question",
-        question: "What is the purpose of the populate() method in Mongoose?",
-        options: [
-            "To fill a collection with sample data for testing",
-            "To replace document references with actual documents from other collections",
-            "To increase database performance by caching queries",
-            "To validate all documents in a collection"
-        ],
-        correctIndex: 1
-    },
+            // Mongoose CRUD
+            {
+                type: "question",
+                question: "What is the difference between findOne() and findById() in Mongoose?",
+                options: [
+                    "findOne() is faster than findById()",
+                    "findById() specifically searches by the _id field while findOne() can search by any field",
+                    "findOne() returns an array while findById() returns a single document",
+                    "There is no difference, they are aliases for the same method"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "Which method is used to update a document and return the updated version in a single operation?",
+                options: [
+                    "updateOne()",
+                    "updateMany()",
+                    "findOneAndUpdate() with {new: true}",
+                    "save() after modification"
+                ],
+                correctIndex: 2
+            }, {
+                type: "question",
+                question: "What is the purpose of the populate() method in Mongoose?",
+                options: [
+                    "To fill a collection with sample data for testing",
+                    "To replace document references with actual documents from other collections",
+                    "To increase database performance by caching queries",
+                    "To validate all documents in a collection"
+                ],
+                correctIndex: 1
+            },
 
-    // Advanced Mongoose
-    {
-        type: "question",
-        question: "What are Mongoose discriminators used for?",
-        options: [
-            "To distinguish between different error types",
-            "To create schema inheritance and model different types of documents in the same collection",
-            "To discriminate between valid and invalid queries",
-            "To create different database connections for different environments"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "Which Mongoose feature allows you to group multiple database operations into a single atomic transaction?",
-        options: [
-            "Aggregation pipelines",
-            "Middleware hooks",
-            "Sessions with transactions",
-            "Query builders"
-        ],
-        correctIndex: 2
-    },
-    {
-        type: "question",
-        question: "What is the purpose of the lean() method in Mongoose queries?",
-        options: [
-            "To make queries run faster by returning plain JavaScript objects instead of Mongoose documents",
-            "To reduce the memory usage of the Node.js application",
-            "To remove all validation from the query results",
-            "To automatically remove sensitive fields from returned documents"
-        ],
-        correctIndex: 0
-    },
+            // Advanced Mongoose
+            {
+                type: "question",
+                question: "What are Mongoose discriminators used for?",
+                options: [
+                    "To distinguish between different error types",
+                    "To create schema inheritance and model different types of documents in the same collection",
+                    "To discriminate between valid and invalid queries",
+                    "To create different database connections for different environments"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "Which Mongoose feature allows you to group multiple database operations into a single atomic transaction?",
+                options: [
+                    "Aggregation pipelines",
+                    "Middleware hooks",
+                    "Sessions with transactions",
+                    "Query builders"
+                ],
+                correctIndex: 2
+            }, {
+                type: "question",
+                question: "What is the purpose of the lean() method in Mongoose queries?",
+                options: [
+                    "To make queries run faster by returning plain JavaScript objects instead of Mongoose documents",
+                    "To reduce the memory usage of the Node.js application",
+                    "To remove all validation from the query results",
+                    "To automatically remove sensitive fields from returned documents"
+                ],
+                correctIndex: 0
+            },
 
-    // Advanced Express
-    {
-        type: "question",
-        question: "What is the main purpose of the Helmet.js middleware in Express applications?",
-        options: [
-            "To compress response bodies",
-            "To set various HTTP headers for security protection",
-            "To rate limit incoming requests",
-            "To handle CORS configuration"
-        ],
-        correctIndex: 1
-    },
-    {
-        type: "question",
-        question: "In Express error handling, what is the advantage of using asyncHandler?",
-        options: [
-            "It makes all routes run asynchronously by default",
-            "It automatically catches both synchronous and asynchronous errors in route handlers",
-            "It converts callback-based functions to promise-based ones",
-            "It adds retry logic for failed database operations"
-        ],
-        correctIndex: 1
-    },
+            // Advanced Express
+            {
+                type: "question",
+                question: "What is the main purpose of the Helmet.js middleware in Express applications?",
+                options: [
+                    "To compress response bodies",
+                    "To set various HTTP headers for security protection",
+                    "To rate limit incoming requests",
+                    "To handle CORS configuration"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "In Express error handling, what is the advantage of using asyncHandler?",
+                options: [
+                    "It makes all routes run asynchronously by default",
+                    "It automatically catches both synchronous and asynchronous errors in route handlers",
+                    "It converts callback-based functions to promise-based ones",
+                    "It adds retry logic for failed database operations"
+                ],
+                correctIndex: 1
+            },
 
-    // Practical Tasks - MongoDB & Tools
-    {
-        type: "task",
-        title: "MongoDB Atlas Cluster Setup",
-        content: "Create a MongoDB Atlas cluster, configure database access with proper security settings, set up network access rules, and test the connection. Create separate database users for development and production environments."
-    },
-    {
-        type: "task",
-        title: "MongoDB Compass Mastery",
-        content: "Use MongoDB Compass to explore your database, create and edit documents visually, build complex queries using the GUI, analyze query performance, create indexes, and use the aggregation pipeline builder. Export your database schema analysis."
-    },
+            // Practical Tasks - MongoDB & Tools
+            {
+                type: "task",
+                title: "MongoDB Atlas Cluster Setup",
+                content: "Create a MongoDB Atlas cluster, configure database access with proper security settings, set up network access rules, and test the connection. Create separate database users for development and production environments."
+            }, {
+                type: "task",
+                title: "MongoDB Compass Mastery",
+                content: "Use MongoDB Compass to explore your database, create and edit documents visually, build complex queries using the GUI, analyze query performance, create indexes, and use the aggregation pipeline builder. Export your database schema analysis."
+            },
 
-    // Practical Tasks - Mongoose Basics
-    {
-        type: "task",
-        title: "Mongoose Connection Management",
-        content: "Implement a robust database connection module with connection pooling, proper error handling, reconnection logic, and graceful shutdown. Add connection state monitoring and environment-specific configurations."
-    },
-    {
-        type: "task", 
-        title: "Advanced Schema Design",
-        content: "Design and implement comprehensive Mongoose schemas for a social media application including users, posts, comments, and reactions. Add proper validation, virtual properties, instance/static methods, and middleware hooks."
-    },
+            // Practical Tasks - Mongoose Basics
+            {
+                type: "task",
+                title: "Mongoose Connection Management",
+                content: "Implement a robust database connection module with connection pooling, proper error handling, reconnection logic, and graceful shutdown. Add connection state monitoring and environment-specific configurations."
+            }, {
+                type: "task",
+                title: "Advanced Schema Design",
+                content: "Design and implement comprehensive Mongoose schemas for a social media application including users, posts, comments, and reactions. Add proper validation, virtual properties, instance/static methods, and middleware hooks."
+            },
 
-    // Practical Tasks - Mongoose CRUD
-    {
-        type: "task",
-        title: "Complete CRUD API Implementation",
-        content: "Build a complete REST API with full CRUD operations using Mongoose. Implement filtering, sorting, pagination, population of related data, and proper error handling. Add transaction support for complex operations."
-    },
-    {
-        type: "task",
-        title: "Advanced Query Building",
-        content: "Create advanced Mongoose queries including aggregation pipelines, text search, geospatial queries, and complex filtering. Implement query performance optimization and indexing strategies."
-    },
+            // Practical Tasks - Mongoose CRUD
+            {
+                type: "task",
+                title: "Complete CRUD API Implementation",
+                content: "Build a complete REST API with full CRUD operations using Mongoose. Implement filtering, sorting, pagination, population of related data, and proper error handling. Add transaction support for complex operations."
+            }, {
+                type: "task",
+                title: "Advanced Query Building",
+                content: "Create advanced Mongoose queries including aggregation pipelines, text search, geospatial queries, and complex filtering. Implement query performance optimization and indexing strategies."
+            },
 
-    // Practical Tasks - Advanced Mongoose
-    {
-        type: "task",
-        title: "Mongoose Plugins & Middleware",
-        content: "Create reusable Mongoose plugins for common functionality like soft delete, audit logging, and data encryption. Implement advanced middleware patterns for cross-cutting concerns."
-    },
-    {
-        type: "task",
-        title: "Database Transactions & Change Streams",
-        content: "Implement complex database transactions for multi-document operations and set up change streams for real-time data updates. Create proper error handling and rollback mechanisms."
-    },
+            // Practical Tasks - Advanced Mongoose
+            {
+                type: "task",
+                title: "Mongoose Plugins & Middleware",
+                content: "Create reusable Mongoose plugins for common functionality like soft delete, audit logging, and data encryption. Implement advanced middleware patterns for cross-cutting concerns."
+            }, {
+                type: "task",
+                title: "Database Transactions & Change Streams",
+                content: "Implement complex database transactions for multi-document operations and set up change streams for real-time data updates. Create proper error handling and rollback mechanisms."
+            },
 
-    // Search & Research Tasks
-    {
-        type: "search-task",
-        title: "Research: Mongoose Performance Optimization",
-        content: "Research and document Mongoose performance optimization techniques including connection pooling, query optimization, indexing strategies, and memory management. Create performance benchmarks for different query patterns."
-    },
-    {
-        type: "search-task", 
-        title: "Research: MongoDB Best Practices",
-        content: "Research MongoDB best practices for schema design, indexing, aggregation pipelines, and data modeling. Compare different approaches for common use cases and create implementation guidelines."
-    },
+            // Search & Research Tasks
+            {
+                type: "search-task",
+                title: "Research: Mongoose Performance Optimization",
+                content: "Research and document Mongoose performance optimization techniques including connection pooling, query optimization, indexing strategies, and memory management. Create performance benchmarks for different query patterns."
+            }, {
+                type: "search-task",
+                title: "Research: MongoDB Best Practices",
+                content: "Research MongoDB best practices for schema design, indexing, aggregation pipelines, and data modeling. Compare different approaches for common use cases and create implementation guidelines."
+            },
 
-    // Integration & Production Tasks
-    {
-        type: "task",
-        title: "Full Stack Application Integration",
-        content: "Build a complete full-stack application integrating Express.js, Mongoose, and MongoDB Atlas. Implement user authentication, real-time features, proper error handling, and production-ready configurations."
-    },
-    {
-        type: "task",
-        title: "Production Deployment & Monitoring",
-        content: "Prepare your Mongoose/Express application for production deployment. Configure environment variables, set up monitoring, implement health checks, create backup strategies, and set up performance monitoring."
-    }
-];    </script><script src="./assets/lecture.js"></script>
+            // Integration & Production Tasks
+            {
+                type: "task",
+                title: "Full Stack Application Integration",
+                content: "Build a complete full-stack application integrating Express.js, Mongoose, and MongoDB Atlas. Implement user authentication, real-time features, proper error handling, and production-ready configurations."
+            }, {
+                type: "task",
+                title: "Production Deployment & Monitoring",
+                content: "Prepare your Mongoose/Express application for production deployment. Configure environment variables, set up monitoring, implement health checks, create backup strategies, and set up performance monitoring."
+            }
+        ];
+    </script>
+    <script src="./assets/lecture.js"></script>
 </body>
+
 </html>

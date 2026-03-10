@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Focal X - Node.js Bootcamp: Lecture 8 </title><link rel="manifest" href="./manifest.json" />
+    <title>Focal X - Node.js Bootcamp: Lecture 8 </title>
+    <link rel="manifest" href="./manifest.json" />
     <link rel="apple-touch-icon" href="./logo.jpg">
     <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
     <meta name="theme-color" content="#b21f1f">
     <link rel="stylesheet" href="./assets/lecture.css">
 </head>
+
 <body>
     <div class="container">
         <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
@@ -16,14 +19,14 @@
             <h1 id="lecture-title">Focal X - Node.js Bootcamp</h1>
             <p class="subtitle" id="lecture-subtitle">Advanced JavaScript: Regex, ES6, OOP</p>
         </header>
-        
+
         <div class="content">
             <div class="lecture-content">
                 <h2>Lecture Content</h2>
                 <div id="tabs-container"></div>
                 <div id="tab-content-container"></div>
             </div>
-            
+
             <div class="interactive-section">
                 <h2>Interactive Questions & Tasks</h2>
                 <div id="questions-container"></div>
@@ -32,75 +35,71 @@
     </div>
 
     <footer class="footer">
-        <p>&copy; 2025 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
+        <p>&copy; 2026 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
     </footer>
 
-        <script src="./reg.js"></script>
-<script>
+    <script src="./reg.js"></script>
+    <script>
         // ==================== CONFIGURATION ====================
         // Update these arrays to change the content of your lecture
-        
+
         // Lecture metadata
         const lectureConfig = {
             title: "Focal X - Node.js Bootcamp",
             subtitle: "Advanced JavaScript: Regex, ES6, OOP"
         };
-        
+
         // Lecture content organized by tabs
-        const lectureContent = [
-            {
-                tabTitle: "Last Lesson",
-                title: "Last Lesson Recap",
-                content: `/*
+        const lectureContent = [{
+            tabTitle: "Last Lesson",
+            title: "Last Lesson Recap",
+            content: `/*
 1- Asynchronous (Callbacks, Promises, Async/Await)
 2- Event Loop (Call Stack, Queue, Web API, Micro Task Queue)
 3- Regex
 */`
+        }, {
+            tabTitle: "Regex",
+            title: "Regular Expressions (Regex)",
+            content: `// Task: implement strong password pattern`,
+            table: {
+                headers: ["Pattern", "Description", "Example"],
+                rows: [
+                    ["\\d", "Match any digit ([0-9]).", "/\\d/ → \"5\" in \"a5\""],
+                    ["\\s", "Match whitespace (space, tab, etc.).", "/\\s/ → \" \""],
+                    ["\\w", "Match word character ([a-zA-Z0-9_]).", "/\\w+/ → \"hello\""],
+                    [".", "Match any character except newline.", "/a.c/ → \"abc\""],
+                    ["^", "Start of string/line.", "/^abc/ → \"abc\" at start"],
+                    ["$", "End of string/line.", "/xyz$/ → \"xyz\" at end"],
+                    ['[abc]', 'Match any of a, b, or c.', '/[aeiou]/ → "e"'],
+                    ['[^abc]', 'Match anything not a, b, or c.', '/[^0-9]/ → "a" in "a1"'],
+                    ['a|b', 'Match a or b.', '/yes|no/ → "yes"'],
+                    ['()', 'Capture group.', '/(\\d{2})-(\\d{2})/ → Groups in "12-34"'],
+                    ['{n}', 'Exact n repetitions.', '/\\d{3}/ → "123"'],
+                    ['{n,}', 'At least n repetitions.', '/\\d{2,}/ → "123"'],
+                    ['{n,m}', 'Between n and m repetitions.', '/\\d{2,4}/ → "123"'],
+                    ['"*"', 'Zero or more repetitions.', '/a"*"/ → "aaa"'],
+                    ['"+"', 'One or more repetitions.', '/a+/ → "aaa"'],
+                    ['"?"', 'Zero or one repetition.', '/a?/ → "a" or ""']
+                ]
+            }
+        }, {
+            tabTitle: "ES6",
+            title: "ES6 Features & Syntactic Sugar",
+            table: {
+                headers: ["Feature", "ES5 Way", "ES6 Syntactic Sugar"],
+                rows: [
+                    ["Classes", "Constructor functions + prototypes", "\`class\` keyword"],
+                    ["Arrow Functions", "\`function() { ... }.bind(this)\`", "\`() => { ... }\`"],
+                    ["Template Strings", "String concatenation", "\`Hello \${name}\`"],
+                    ["Destructuring", "Manual property assignment", "\`const { prop } = obj\`"],
+                ]
             },
-            {
-                tabTitle: "Regex",
-                title: "Regular Expressions (Regex)",
-                content: `// Task: implement strong password pattern`,
-table: {
-    headers: ["Pattern", "Description", "Example"],
-    rows: [
-        ["\\d","Match any digit ([0-9]).", "/\\d/ → \"5\" in \"a5\""],
-        ["\\s","Match whitespace (space, tab, etc.)." ,"/\\s/ → \" \""],
-        ["\\w", "Match word character ([a-zA-Z0-9_])." , "/\\w+/ → \"hello\""],
-        [".", "Match any character except newline.", "/a.c/ → \"abc\""],
-        ["^", "Start of string/line.", "/^abc/ → \"abc\" at start"],
-        ["$", "End of string/line.", "/xyz$/ → \"xyz\" at end"],
-        ['[abc]','Match any of a, b, or c.', '/[aeiou]/ → "e"'],
-        ['[^abc]', 'Match anything not a, b, or c.','/[^0-9]/ → "a" in "a1"'],
-        ['a|b','Match a or b.', '/yes|no/ → "yes"'],
-        ['()','Capture group.', '/(\\d{2})-(\\d{2})/ → Groups in "12-34"'],
-        ['{n}','Exact n repetitions.', '/\\d{3}/ → "123"'],
-        ['{n,}','At least n repetitions.', '/\\d{2,}/ → "123"'],
-        ['{n,m}','Between n and m repetitions.', '/\\d{2,4}/ → "123"'],
-        ['"*"','Zero or more repetitions.', '/a"*"/ → "aaa"'],
-        ['"+"','One or more repetitions.', '/a+/ → "aaa"'],
-        ['"?"','Zero or one repetition.', '/a?/ → "a" or ""']
-    ]
-}
-            },
-            {
-                tabTitle: "ES6",
-                title: "ES6 Features & Syntactic Sugar",
-                table: {
-                    headers: ["Feature", "ES5 Way", "ES6 Syntactic Sugar"],
-                    rows: [
-                        ["Classes", "Constructor functions + prototypes", "\`class\` keyword"],
-                        ["Arrow Functions", "\`function() { ... }.bind(this)\`", "\`() => { ... }\`"],
-                        ["Template Strings", "String concatenation", "\`Hello \${name}\`"],
-                        ["Destructuring", "Manual property assignment", "\`const { prop } = obj\`"],
-                    ]
-                },
-                content: `// ES6 introduced syntax that makes JavaScript more expressive while maintaining its core prototype-based nature.`
-            },
-            {
-                tabTitle: "Destructuring",
-                title: "Destructuring in JavaScript",
-                content: `// - Array: 
+            content: `// ES6 introduced syntax that makes JavaScript more expressive while maintaining its core prototype-based nature.`
+        }, {
+            tabTitle: "Destructuring",
+            title: "Destructuring in JavaScript",
+            content: `// - Array: 
 const arr = [1, 2, 3];
 const [a, b, c] = arr;
 const [first, ...rest] = arr;
@@ -120,11 +119,10 @@ console.log(x, a1); // 1
 console.log(y, b1); // 2
 console.log(z, o); // 3
 console.log(restObj); // { y: 2 } (when x is extracted)`
-            },
-            {
-                tabTitle: "OOP",
-                title: "Object-Oriented Programming in JavaScript",
-                content: `// What is OOP? (The Big Picture)
+        }, {
+            tabTitle: "OOP",
+            title: "Object-Oriented Programming in JavaScript",
+            content: `// What is OOP? (The Big Picture)
 // OOP (Object-Oriented Programming) is a programming paradigm, or a style of programming, 
 // that is based on the concept of "objects".
 
@@ -258,21 +256,20 @@ const createUser = (name, role) => {
 
 const admin = createUser("Bob", "admin");
 admin.logInfo();`,
-table: {
-    headers: ["Concept", "Real-World Meaning", "Code Meaning"],
-    rows: [
-        ["Class", "Blueprint, Recipe", "A template for creating objects"],
-        ["Object", "The actual thing", "An instance of a class"],
-        ["Property", "Adjective (What it is)", "Data / Variables"],
-        ["Method", "Verb (What it does)", "Functions / Behavior"],
-        ["new", "Build it!", "Creates a new object from the class"]
-    ]
-}
-            },
-            { 
-                tabTitle: "Multiple Inheritance",
-                title: "Multiple Inheritance in JavaScript",
-                content: `JavaScript does not support true multiple inheritance (inheriting from multiple parent classes):
+            table: {
+                headers: ["Concept", "Real-World Meaning", "Code Meaning"],
+                rows: [
+                    ["Class", "Blueprint, Recipe", "A template for creating objects"],
+                    ["Object", "The actual thing", "An instance of a class"],
+                    ["Property", "Adjective (What it is)", "Data / Variables"],
+                    ["Method", "Verb (What it does)", "Functions / Behavior"],
+                    ["new", "Build it!", "Creates a new object from the class"]
+                ]
+            }
+        }, {
+            tabTitle: "Multiple Inheritance",
+            title: "Multiple Inheritance in JavaScript",
+            content: `JavaScript does not support true multiple inheritance (inheriting from multiple parent classes):
 
 // -A. The Limitation:
 // class A { methodA() {} }
@@ -309,15 +306,13 @@ table: {
 //         this = { ...animalTraits, ...dogTraits };
 //     }
 // }`
-            }
-            ];
-        
+        }];
+
         // Questions and tasks
-        const questions = [
-                {
-        type: "question",
-        question: "What will this class output when instantiated?",
-        code: `class A {
+        const questions = [{
+            type: "question",
+            question: "What will this class output when instantiated?",
+            code: `class A {
     #value = 1;
     getValue() { return this.#value; }
 }
@@ -325,54 +320,50 @@ class B extends A {
     #value = 2;
 }
 console.log(new B().getValue());`,
-        options: [
-            "1",
-            "2",
-            "undefined",
-            "TypeError"
-        ],
-        correctIndex: 0
-    },
-            {
-                type: "question",
-                question: "What will be the output of this destructuring code?",
-                code: `const arr = [10, 20, 30, 40];
+            options: [
+                "1",
+                "2",
+                "undefined",
+                "TypeError"
+            ],
+            correctIndex: 0
+        }, {
+            type: "question",
+            question: "What will be the output of this destructuring code?",
+            code: `const arr = [10, 20, 30, 40];
 const [first, , third, ...rest] = arr;
 console.log(first, third, rest);`,
-                options: [
-                    "10 20 [30, 40]",
-                    "10 30 [40]",
-                    "10 30 []",
-                    "10 20 [40]"
-                ],
-                correctIndex: 1
-            },
-            {
-                type: "question",
-                question: "In object destructuring, what does the syntax 'const { x: a, y: b } = obj;' do?",
-                options: [
-                    "Creates new variables x and y from obj",
-                    "Creates new variables a and b assigned from obj.x and obj.y",
-                    "Renames obj to a and b",
-                    "Throws an error"
-                ],
-                correctIndex: 1
-            },
-            {
-                type: "question",
-                question: "Which of the following is NOT true about JavaScript classes?",
-                options: [
-                    "Classes are syntactic sugar over prototype-based inheritance",
-                    "Class methods are added to the prototype",
-                    "Private fields can be declared with a # prefix",
-                    "JavaScript supports multiple inheritance with classes"
-                ],
-                correctIndex: 3
-            },
-            {
-                type: "question",
-                question: "What will be the output of this code snippet?",
-                code: `class Animal {
+            options: [
+                "10 20 [30, 40]",
+                "10 30 [40]",
+                "10 30 []",
+                "10 20 [40]"
+            ],
+            correctIndex: 1
+        }, {
+            type: "question",
+            question: "In object destructuring, what does the syntax 'const { x: a, y: b } = obj;' do?",
+            options: [
+                "Creates new variables x and y from obj",
+                "Creates new variables a and b assigned from obj.x and obj.y",
+                "Renames obj to a and b",
+                "Throws an error"
+            ],
+            correctIndex: 1
+        }, {
+            type: "question",
+            question: "Which of the following is NOT true about JavaScript classes?",
+            options: [
+                "Classes are syntactic sugar over prototype-based inheritance",
+                "Class methods are added to the prototype",
+                "Private fields can be declared with a # prefix",
+                "JavaScript supports multiple inheritance with classes"
+            ],
+            correctIndex: 3
+        }, {
+            type: "question",
+            question: "What will be the output of this code snippet?",
+            code: `class Animal {
     makeSound() {
         console.log("Generic sound");
     }
@@ -384,61 +375,56 @@ class Dog extends Animal {
 }
 const dog = new Dog();
 dog.makeSound();`,
-                options: [
-                    "Generic sound",
-                    "Woof!",
-                    "Error",
-                    "undefined"
-                ],
-                correctIndex: 1
-            },
-            {
-                type: "question",
-                question: "What is the behavior of 'this' inside an arrow function compared to a regular function?",
-                options: [
-                    "'this' inside arrow functions refers to the global object",
-                    "'this' inside arrow functions is lexically inherited from the enclosing scope",
-                    "'this' inside arrow functions is undefined",
-                    "'this' inside arrow functions refers to the function itself"
-                ],
-                correctIndex: 1
-            },
-            {
-                type: "question",
-                question: "Why does JavaScript not support true multiple inheritance?",
-                options: [
-                    "Because of the diamond problem and single prototype chain limitation",
-                    "Because JavaScript is a compiled language",
-                    "Because classes are not supported in JavaScript",
-                    "Because JavaScript only supports functional programming"
-                ],
-                correctIndex: 0
-            },
-            {
-                type: "question",
-                question: "How can you simulate multiple inheritance in JavaScript?",
-                options: [
-                    "Using Mixins and Object.assign() to compose objects",
-                    "Using multiple extends keywords",
-                    "Using private fields",
-                    "Using async/await"
-                ],
-                correctIndex: 0
-            },
-            {
-                type: "task",
-                title: "Implement: Class with Private Fields and Methods",
-                content: "Create a class representing a bank account with private balance field, deposit and withdraw methods, and a getter for balance."
-            },
-            {
-                type: "search-task",
-                title: "Research: ES6 Features and Their Impact on JavaScript Development",
-                content: "Explore key ES6 features such as classes, arrow functions, template literals, destructuring, and how they improve JavaScript code."
-            }
-        ];
+            options: [
+                "Generic sound",
+                "Woof!",
+                "Error",
+                "undefined"
+            ],
+            correctIndex: 1
+        }, {
+            type: "question",
+            question: "What is the behavior of 'this' inside an arrow function compared to a regular function?",
+            options: [
+                "'this' inside arrow functions refers to the global object",
+                "'this' inside arrow functions is lexically inherited from the enclosing scope",
+                "'this' inside arrow functions is undefined",
+                "'this' inside arrow functions refers to the function itself"
+            ],
+            correctIndex: 1
+        }, {
+            type: "question",
+            question: "Why does JavaScript not support true multiple inheritance?",
+            options: [
+                "Because of the diamond problem and single prototype chain limitation",
+                "Because JavaScript is a compiled language",
+                "Because classes are not supported in JavaScript",
+                "Because JavaScript only supports functional programming"
+            ],
+            correctIndex: 0
+        }, {
+            type: "question",
+            question: "How can you simulate multiple inheritance in JavaScript?",
+            options: [
+                "Using Mixins and Object.assign() to compose objects",
+                "Using multiple extends keywords",
+                "Using private fields",
+                "Using async/await"
+            ],
+            correctIndex: 0
+        }, {
+            type: "task",
+            title: "Implement: Class with Private Fields and Methods",
+            content: "Create a class representing a bank account with private balance field, deposit and withdraw methods, and a getter for balance."
+        }, {
+            type: "search-task",
+            title: "Research: ES6 Features and Their Impact on JavaScript Development",
+            content: "Explore key ES6 features such as classes, arrow functions, template literals, destructuring, and how they improve JavaScript code."
+        }];
         // ==================== TEMPLATE RENDERING ====================
         // Functions to render the content - you don't need to modify these
-        
-        </script><script src="./assets/lecture.js"></script>
+    </script>
+    <script src="./assets/lecture.js"></script>
 </body>
+
 </html>
