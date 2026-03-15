@@ -51,7 +51,19 @@
         };
 
         // Lecture content organized by tabs
-        const lectureContent = [{
+        const lectureContent = [
+        {
+            tabTitle: "Last Lesson",
+            title: "Last Lesson Concepts",
+            content: `/* 
+1- Backend Development Explained
+2- HTTP - The Language of the Web
+3- Understanding APIs and Web Communication
+4- JSON - JavaScript Object Notation
+5- Middleware - The Processing Layer
+*/`
+        },
+        {
             tabTitle: "Intro to JS",
             title: "Introduction to JavaScript",
             content: `// JavaScript is a versatile programming language
@@ -265,34 +277,32 @@ console.log(Math.random() * 100); // generate random number between 0 and 100
 console.log(Math.trunc(100.52)); // get the int number
 console.log(Math.max(100, 60, 3600, 500)); // return the max number
 console.log(Math.min(100, 60, 3600, 500)); // return the min number`
-        }, {
-            tabTitle: "Strings",
-            title: "String Methods",
-            content: `const str = " Moones Mezher ";
-console.log(str);
-console.log(str.length);
-console.log(str[0]);
-// another way: console.log(str.charAt(0));
-console.log(str.indexOf("e"));
-console.log(str.trim());
-console.log(str.split(" "));
-console.log(str.toUpperCase());
-console.log(str.toLowerCase());
-console.log(str.includes("oo"));
-console.log(str.trimStart().repeat(5));
-console.log(str.startsWith(" M"));
-console.log(str.trim().slice(0, 4)); // select number of characters in title
-// EX:
-const title = "BMW model 2024 XJ LLLLLLLLLLLLLL"
-console.log(
-    (title.length > 10)
-    ? (title.slice(0, 10) + "...")
-    : (title)
-);
+        }, 
+         {
+            tabTitle: "Comments",
+            title: "JavaScript Comments",
+            content: `// Single-line comment
 
-// EX: moones MEZHER
-console.log(str.trim().split(" ")[0].toLowerCase(), str.trim().split(" ")[1].toUpperCase());`
-        }, ];
+/* 
+ Multi-line comment
+ This can span multiple lines
+*/
+
+/**
+ * JSDoc style comment
+ * @param {string} name - The name to greet
+ * @returns {string} A greeting message
+ */
+function greet(name) {
+    return "Hello, " + name;
+}
+
+// Good comments explain why, not what
+// Bad: increment i (obvious)
+// Good: track iteration count for processing queue
+
+console.log("Comments help document your code!");`
+        } ];
 
         // Questions and tasks
         const questions = [{
