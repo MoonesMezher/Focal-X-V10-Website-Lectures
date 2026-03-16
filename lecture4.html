@@ -54,13 +54,73 @@
                 tabTitle: "Last Lesson",
                 title: "Last Lesson Recap",
                 content: `/* 
-1- Comments
+1- Strings
 2- Truthy & Falsy values
 3- Loops (while, do while, for (normal - in - of))
 4- Break & Continue keys inside loops
 5- Functions
 */`
-            }, {
+            }, 
+            {
+            tabTitle: "Functions",
+            title: "Functions in JavaScript",
+            content: `// Function Declaration (hoisted)
+console.log(greet("Moones")); // Works (hoisting)
+function greet(name) {
+    return "Hello, " + name + "!";
+}
+
+// Function Expression (not hoisted)
+// console.log(greetExpr("Moones")); // Error (not hoisted)
+const greetExpr = function(name) {
+    return "Hello, " + name + "!";
+};
+console.log(greetExpr("Moones")); // Works
+
+// Arrow Function (not hoisted, lexical this)
+// console.log(greetArrow("Moones")); // Error (not hoisted)
+const greetArrow = (name) => {
+    return "Hello, " + name + "!";
+};
+console.log(greetArrow("Moones")); // Works
+
+// Arrow function with implicit return
+const add = (a, b) => a + b;
+console.log(add(5, 3)); // 8
+
+// Callback function example
+function processUserInput(callback) {
+    const name = "Moones";
+    callback(name);
+}
+
+processUserInput(function(name) {
+    console.log("Hello, " + name);
+});
+
+// IIFE (Immediately Invoked Function Expression)
+(function() {
+    console.log("This runs immediately!");
+})();
+
+// Higher-order function
+function multiplyBy(factor) {
+    return function(number) {
+        return number * factor;
+    };
+}
+
+const double = multiplyBy(2);
+console.log(double(5)); // 10
+
+// Recursive function
+function factorial(n) {
+    if (n === 0) return 1;
+    return n * factorial(n - 1);
+}
+
+console.log(factorial(5)); // 120`
+        }, {
                 tabTitle: "Arrays",
                 title: "Arrays in JavaScript",
                 content: `// Creating arrays

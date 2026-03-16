@@ -4,273 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 2: Student Grade Management System</title>
+    <title>Task 2: JavaScript Special Numbers Challenge</title>
     <link rel="manifest" href="../manifest.json" />
     <link rel="apple-touch-icon" href="../logo.jpg">
     <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
     <meta name="theme-color" content="#b21f1f">
     <link rel="shortcut icon" href="../logo.jpg" type="image/x-icon">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1000px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            margin: 20px 0;
-        }
-        
-        .coach {
-            background-color: white;
-            width: 80px;
-            border-radius: 0 0 50% 0;
-            color: black;
-            padding: 10px;
-            position: absolute;
-            left: 0;
-            top: 0;
-            z-index: 100;
-        }
-        
-        header {
-            background: #2c3e50;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-        }
-        
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-        }
-        
-        .subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-        
-        #title {
-            padding-top: 20px;
-        }
-        
-        .language-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background 0.3s;
-        }
-        
-        .language-toggle:hover {
-            background: #2980b9;
-        }
-        
-        .task-content {
-            padding: 30px;
-        }
-        
-        .section {
-            margin-bottom: 30px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        h2 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #3498db;
-        }
-        
-        h3 {
-            color: #2980b9;
-            margin: 15px 0;
-        }
-        
-        p {
-            margin-bottom: 15px;
-        }
-        
-        ul,
-        ol {
-            margin-left: 20px;
-            margin-bottom: 15px;
-        }
-        
-        li {
-            margin-bottom: 8px;
-        }
-        
-        .code-block {
-            background: #2c3e50;
-            color: #ecf0f1;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-            margin: 15px 0;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-        
-        .requirements {
-            background: #e8f4fc;
-            border-left: 5px solid #3498db;
-        }
-        
-        .bonus {
-            background: #fff3cd;
-            border-left: 5px solid #ffc107;
-        }
-        
-        .output-example {
-            background: #d4edda;
-            border-left: 5px solid #28a745;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 15px 0;
-            font-family: monospace;
-            white-space: pre;
-            overflow: auto;
-        }
-        
-        .timer-section {
-            text-align: center;
-            padding: 20px;
-            background: #2c3e50;
-            color: white;
-            margin-top: 30px;
-            border-radius: 10px;
-        }
-        
-        .timer {
-            font-size: 2rem;
-            font-weight: bold;
-            margin: 10px 0;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-        
-        .timer-unit {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px;
-            border-radius: 5px;
-            min-width: 80px;
-        }
-        
-        .timer-value {
-            font-size: 2.5rem;
-            display: block;
-        }
-        
-        .timer-label {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            display: block;
-        }
-        
-        .finish-date {
-            font-size: 1.2rem;
-            margin-top: 10px;
-        }
-        
-        .thank-you {
-            text-align: center;
-            padding: 20px;
-            font-style: italic;
-            color: #6c757d;
-            border-top: 1px solid #dee2e6;
-            margin-top: 30px;
-        }
-        
-        .footer {
-            text-align: center;
-            padding: 20px;
-            background: #2c3e50;
-            color: white;
-            width: 100%;
-            max-width: 1000px;
-            border-radius: 15px;
-        }
-        
-        .footer a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        
-        .footer p {
-            padding: 0 !important;
-            margin: 0 !important;
-        }
-        
-        .footer a:hover {
-            text-decoration: underline;
-        }
-        
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-            .task-content {
-                padding: 15px;
-            }
-            .language-toggle {
-                position: relative;
-                top: 0;
-                right: 0;
-                margin-bottom: 15px;
-                display: block;
-                width: 100%;
-            }
-            .timer {
-                font-size: 1.5rem;
-                flex-wrap: wrap;
-            }
-            .timer-unit {
-                min-width: 70px;
-            }
-            .timer-value {
-                font-size: 2rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/task.css">
 </head>
 
 <body>
     <div class="container">
         <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
         <header>
-            <h1 id="title">Task 1: Student Grade Management System</h1>
-            <p class="subtitle" id="subtitle">Node.js program to calculate employee salary with taxes, bonuses, and deductions</p>
+            <h1 id="title">Task 2: JavaScript Special Numbers Challenge</h1>
+            <p class="subtitle" id="subtitle">Use variables, loops, if/else, break, and continue to find special numbers</p>
             <button class="language-toggle" id="languageToggle">العربية / English</button>
         </header>
 
@@ -298,7 +46,7 @@
                     <span class="timer-label" id="seconds-label">Seconds</span>
                 </div>
             </div>
-            <p class="finish-date" id="finish-date">Finish by: September 13, 2026</p>
+            <p class="finish-date" id="finish-date">Finish by: March 21, 2026</p>
             <p id="timer-message">Complete the task before the deadline!</p>
         </div>
 
@@ -316,107 +64,38 @@
         // Content data structure
         const taskData = {
             en: {
-                title: "Task 2: Student Grade Management System",
-                subtitle: "A Comprehensive Node.js Application for Managing, Calculating, and Analyzing Student Academic Grades", // New longer subtitle
+                title: "Task 2: JavaScript Special Numbers Challenge",
+                subtitle: "Use variables, loops, if/else, break, and continue to find special numbers",
                 sections: [{
                     type: "idea",
-                    title: "💻 The Task: \"Student Grade Management System\"",
-                    content: "A simple Node.js program designed to handle and manage student grades efficiently."
+                    title: "💻 The Task: \"Special Numbers Challenge\"",
+                    content: "In this task you will NOT build many small exercises. Instead, you will solve one hard problem: search for \"special numbers\" inside a range using only what you learned in Lectures 2 and 3 (variables, numbers/Math, loops, if/else, break, continue)."
                 }, {
                     type: "requirements",
-                    title: "📝 Requirements",
+                    title: "🧠 One Problem: Find Special Numbers",
                     content: [{
-                        type: "list",
-                        title: "Rules:",
-                        items: [
-                            "Use `let` and `const` to declare variables, do not use `var`.",
-                            "Use arrays and objects for data structures.",
-                            "Implement `try` and `catch` blocks for error handling.",
-                            "Write helpful comments for each significant block of code.",
-                        ]
-                    }, {
                         type: "output",
-                        title: "Students Array:",
-                        content: "Create a `students` array containing 5 objects with the following structure:",
-                        example: `{ id: number, name: string, grades: [], avg: number, createdAt: Date }
-
-// Note 1: Each object must have a unique \`id\`.
-// Note 2: The \`createdAt\` value must be dynamically generated and represent the date the student was added.`
-                    }, {
-                        type: "list",
-                        title: "Add Grade Method:",
-                        items: [
-                            "`addGrade(studentId, grade)`",
-                            "Search for the student with the provided `studentId` and add the new grade to their record.",
-                            "Recalculate and update the grade average (`avg`) for this student.",
-                            "If the student does not exist → print 'Student Not Found'.",
-                            "If the grade is invalid → print 'Invalid Grade'.",
-                            "A valid grade must be a number between 0 and 100 (0 <= grade <= 100)."
-                        ]
-                    }, {
-                        type: "list",
-                        title: "Calculate GPA Method:",
-                        items: [
-                            "`calculateGPA()`",
-                            "Return a new array based on the student data.",
-                            "Each item in the new array must be an object like: `{ id, name, gpa, createdAt }`."
-                        ]
-                    }, {
-                        type: "list",
-                        title: "Get Student Details Method:",
-                        items: [
-                            "`getStudentInfo(studentId)`",
-                            "Search for the student with the provided `studentId`.",
-                            "If the student does not exist → print 'Student Not Found'.",
-                            "If the student exists → return an object: `{ name, grades, avg, createdAt }`.",
-                            "The `grades` array within the returned object must be sorted."
-                        ]
-                    }, {
-                        type: "list",
-                        title: "Update All Grades Method:",
-                        items: [
-                            "`updateAllGrades()`",
-                            "Remove any grade for any student that is less than or equal to 50 (grade <= 50).",
-                            "Recalculate and update the grade average (`avg`) for each affected student.",
-                            "This method should execute after a 2-second delay (using `setTimeout`)."
-                        ]
-                    }, {
-                        type: "list",
-                        title: "Remove Student Method:",
-                        items: [
-                            "`removeStudent(studentId)`", // Improved method name for clarity
-                            "Remove the student with the provided `studentId` from the array.",
-                            "If the student does not exist → print 'Student Not Found'."
-                        ]
-                    }, {
-                        type: "list",
-                        title: "Student State Method:",
-                        items: [
-                            "`getStudentState(studentId)`", // Improved method name
-                            "Search for the student with the provided `studentId`.",
-                            "If the student does not exist → print 'Student Not Found'.",
-                            "If (student 'avg' <= 60) → return 'Bad'.",
-                            "If (60 < student 'avg' <= 80) → return 'Good'.",
-                            "If (80 < student 'avg' <= 90) → return 'Very Good'.",
-                            "If (student 'avg' > 90) → return 'Excellent'.", // Changed "Super Good" to more common "Excellent"
-                            "This method should execute after a 1-second delay (using `setTimeout`)."
-                        ]
-                    }, {
-                        type: "list",
-                        title: "Count Students by State Method:",
-                        items: [
-                            "`countStudentsByState(state)`", // Improved method name
-                            "Count and return the number of students who have the specified academic `state`.",
-                            "If the provided state is invalid → return 'Invalid State'.",
-                            "Valid 'state' values are: ['Bad', 'Good', 'Very Good', 'Excellent'].",
-                            "This method must utilize the 'getStudentState' method.",
-                            "This method should execute after a 1-second delay (using `setTimeout`)."
-                        ]
-                    }, ]
-                }, ],
+                        title: "Problem Statement",
+                        content: "You must write a single JavaScript file that searches for special numbers between start and end using only variables, numeric operations, Math, loops, if/else, break, and continue. You are NOT allowed to use arrays, objects, or custom functions.",
+                        example: "let start = 1;\nlet end = 1000;\nlet maxFound = 15;\n\n// Your code here\n\n// A \"special number\" is a number that:\n// 1) Is between start and end (inclusive)\n// 2) Sum of its digits is divisible by 3\n// 3) Product of its digits is even\n// 4) Does not contain the digit 0\n\n// Requirements:\n// - Use a loop to go from start to end\n// - For each number, use another loop to process its digits using % 10 and Math.floor\n// - Use continue to skip numbers that contain 0, have odd product of digits,\n//   or digit-sum not divisible by 3\n// - Use break to stop when you have found maxFound special numbers\n// - For each special number, print: console.log(\"Special:\", currentNumber);\n// - At the end, print how many numbers you checked and how many you found, e.g.:\n//   console.log(\"Checked:\", checkedCount);\n//   console.log(\"Found:\", foundCount);\n\n// Rules:\n// - Do not change the initial values of start, end, maxFound\n// - Do not use arrays, objects, or custom functions\n// - You must use at least: one break, one continue, and one nested loop"
+                    }]
+                }, {
+                    type: "note",
+                    title: "📤 How to submit",
+                    content: "Put all your code in one file (e.g. task2.js) and send it in the tasks topic on the Telegram group. Your message must be named: #TASK2 - Your Name (example: #TASK2 - Moones Mezher)."
+                }, {
+                    type: "learning",
+                    title: "🔎 Targeted Learning Points",
+                    content: [
+                        "Use variables, numeric operations, and Math to analyse numbers.",
+                        "Use loops and nested loops to process ranges and digits.",
+                        "Use if/else, break, and continue to control complex logic.",
+                        "Practice solving a single hard problem using only Lectures 2 and 3 concepts."
+                    ]
+                }],
                 timer: {
                     title: "Time Remaining to Complete Task",
-                    message: "Complete the task before the deadline! - Submissions are only accepted within the final six hours.",
+                    message: "Complete the task before the deadline!",
                     days: "Days",
                     hours: "Hours",
                     minutes: "Minutes",
@@ -424,110 +103,41 @@
                 },
                 thankYou: "\"Thank you for your hard work and dedication. Your efforts are appreciated!\"",
                 buttonText: "العربية / English",
-                finishDate: "Finish by: September 20, 2026"
+                finishDate: "Finish by: March 21, 2026"
             },
             ar: {
-                title: "المهمة 2: نظام إدارة درجات الطلاب",
-                subtitle: "تطبيق Node.js شامل لإدارة وحساب وتحليل الدرجات الأكاديمية للطلاب", // Translated longer subtitle
+                title: "التاسك 2: تحدّي الأرقام المميّزة في JavaScript",
+                subtitle: "استخدم المتغيرات والحلقات و if/else و break و continue للبحث عن أرقام مميّزة",
                 sections: [{
                     type: "idea",
-                    title: "💻 المهمة: \"نظام إدارة درجات الطلاب\"",
-                    content: "برنامج Node.js بسيط مصمم للتعامل مع وإدارة درجات الطلاب بكفاءة."
+                    title: "💻 التـاسك: \"تحدّي الأرقام المميّزة\"",
+                    content: "في هذا التاسك لن تنشئ تمارين كثيرة، بل ستحل مشكلة واحدة صعبة: البحث عن \"أرقام مميّزة\" داخل مدى معيّن باستخدام ما تعلمته فقط في المحاضرتين 2 و 3 (المتغيرات، الأرقام و Math، الحلقات، if/else، break، continue)."
                 }, {
                     type: "requirements",
-                    title: "📝 المتطلبات",
+                    title: "🧠 مشكلة واحدة: إيجاد الأرقام المميّزة",
                     content: [{
-                        type: "list",
-                        title: "القواعد:",
-                        items: [
-                            "استخدم `let` و `const` لتعريف المتغيرات؛ لا تستخدم `var`.",
-                            "استخدم المصفوفات (Arrays) والكائنات (Objects) لهياكل البيانات.",
-                            "نفذ كتل `try` و `catch` للتعامل مع الأخطاء.",
-                            "اكتب تعليقات مفيدة لكل كتلة مهمة من الكود."
-                        ]
-                    }, {
                         type: "output",
-                        title: "مصفوفة الطلاب:",
-                        content: "أنشئ مصفوفة `students` تحتوي على 5 كائنات بالهيكل التالي:",
-                        example: `{ id: number, name: string, grades: [], avg: number, createdAt: Date }
-
-// ملاحظة 1: كل كائن يجب أن يحتوي على \`id\` فريد.
-// ملاحظة 2: قيمة \`createdAt\` يجب أن يتم توليدها ديناميكيًا وتمثل تاريخ إضافة الطالب.`
-                    }, {
-                        type: "list",
-                        title: "طريقة إضافة الدرجة:",
-                        items: [
-                            "`addGrade(studentId, grade)`",
-                            "ابحث عن الطالب الذي لديه `studentId` المعطاة وأضف الدرجة الجديدة إلى سجله.",
-                            "أعد حساب وتحديث متوسط الدرجات (`avg`) لهذا الطالب.",
-                            "إذا لم يوجد الطالب -> اطبع 'الطالب غير موجود'.",
-                            "إذا كانت الدرجة غير صالحة -> اطبع 'درجة غير صالحة'.",
-                            "الدرجة الصالحة يجب أن تكون رقمًا بين 0 و 100 (0 <= grade <= 100)."
-                        ]
-                    }, {
-                        type: "list",
-                        title: "طريقة حساب المعدل التراكمي (GPA):",
-                        items: [
-                            "`()calculateGPA`",
-                            "أعد مصفوفة جديدة بناءً على بيانات الطلاب.",
-                            "كل عنصر في المصفوفة الجديدة يجب أن يكون كائنًا مثل: `{ id, name, gpa, createdAt }`."
-                        ]
-                    }, {
-                        type: "list",
-                        title: "طريقة الحصول على تفاصيل الطالب:",
-                        items: [
-                            "`getStudentInfo(studentId)`",
-                            "ابحث عن الطالب الذي لديه `studentId` المعطاة.",
-                            "إذا لم يوجد الطالب -> اطبع 'الطالب غير موجود'.",
-                            "إذا وجد الطالب -> أعد كائنًا: `{ name, grades, avg, createdAt }`.",
-                            "مصفوفة `grades` داخل الكائن المعاد يجب أن تكون مرتبة."
-                        ]
-                    }, {
-                        type: "list",
-                        title: "طريقة تحديث كل الدرجات:",
-                        items: [
-                            "`()updateAllGrades`",
-                            "أزل أي درجة لأي طالب تكون أقل من أو تساوي 50 (grade <= 50).",
-                            "أعد حساب وتحديث متوسط الدرجات (`avg`) لكل طالب متأثر.",
-                            "هذه الطريقة يجب أن تنفذ بعد تأخير قدره ثانيتين (باستخدام `setTimeout`)."
-                        ]
-                    }, {
-                        type: "list",
-                        title: "طريقة إزالة الطالب:",
-                        items: [
-                            "`removeStudent(studentId)`",
-                            "أزل الطالب الذي لديه `studentId` المعطاة من المصفوفة.",
-                            "إذا لم يوجد الطالب -> اطبع 'الطالب غير موجود'."
-                        ]
-                    }, {
-                        type: "list",
-                        title: "طريقة الحالة الأكاديمية للطالب:",
-                        items: [
-                            "`getStudentState(studentId)`",
-                            "ابحث عن الطالب الذي لديه `studentId` المعطاة.",
-                            "إذا لم يوجد الطالب -> اطبع 'الطالب غير موجود'.",
-                            "إذا ( avg الطالب <= 60) -> أعد 'ضعيف'.",
-                            "إذا (60 < avg الطالب <= 80) -> أعد 'جيد'.",
-                            "إذا (80 < avg الطالب <= 90) -> أعد 'جيد جدًا'.",
-                            "إذا ( avg الطالب > 90) -> أعد 'ممتاز'.",
-                            "هذه الطريقة يجب أن تنفذ بعد تأخير قدره ثانية واحدة (باستخدام `setTimeout`)."
-                        ]
-                    }, {
-                        type: "list",
-                        title: "طريقة عد الطلاب حسب الحالة:",
-                        items: [
-                            "`countStudentsByState(state)`",
-                            "احسب وأعد عدد الطلاب الذين لديهم `state` أكاديمية محددة.",
-                            "إذا كانت الحالة المعطاة غير صالحة -> أعد 'حالة غير صالحة'.",
-                            "قيم 'state' الصالحة هي: ['ضعيف', 'جيد', 'جيد جدًا', 'ممتاز'].",
-                            "هذه الطريقة يجب أن تستخدم طريقة 'getStudentState'.",
-                            "هذه الطريقة يجب أن تنفذ بعد تأخير قدره ثانية واحدة (باستخدام `setTimeout`)."
-                        ]
-                    }, ]
-                }, ],
+                        title: "وصف المشكلة",
+                        content: "يجب عليك كتابة ملف JavaScript واحد يبحث عن الأرقام المميّزة بين start و end باستخدام المتغيرات، العمليات الحسابية، Math، الحلقات، if/else، break، و continue فقط. غير مسموح استعمال Arrays أو Objects أو Functions.",
+                        example: "let start = 1;\nlet end = 1000;\nlet maxFound = 15;\n\n// Your code here\n\n// الرقم \"المميّز\" هو رقم:\n// 1) بين start و end (شاملاً)\n// 2) مجموع أرقامه يقسم على 3 بدون باقٍ\n// 3) حاصل ضرب أرقامه عدد زوجي\n// 4) لا يحتوي على الرقم 0\n\n// المتطلبات:\n// - استخدم حلقة للمرور على الأرقام من start إلى end\n// - لكل رقم، استخدم حلقة داخلية لمعالجة الأرقام باستخدام % 10 و Math.floor\n// - استخدم continue لتجاوز الأرقام التي تحتوي 0 أو ناتج ضرب أرقامها فردي\n//   أو مجموع أرقامها لا يقسم على 3\n// - استخدم break لإيقاف الحلقة الرئيسية عند الوصول إلى maxFound من الأرقام المميّزة\n// - لكل رقم مميّز اطبع: console.log(\"Special:\", currentNumber);\n// - في النهاية اطبع عدد الأرقام التي تم فحصها وعدد الأرقام المميّزة، مثل:\n//   console.log(\"Checked:\", checkedCount);\n//   console.log(\"Found:\", foundCount);\n\n// القواعد:\n// - ممنوع تغيير القيم الابتدائية للمتغيرات start و end و maxFound\n// - ممنوع استخدام Arrays أو Objects أو Functions\n// - يجب استخدام: break واحدة على الأقل، continue واحدة على الأقل، وحلقة متداخلة واحدة على الأقل"
+                    }]
+                }, {
+                    type: "note",
+                    title: "📤 طريقة التسليم",
+                    content: "ضع كل الكود في ملف واحد (مثلاً task2.js) وأرسله في توبِك التاسكات في مجموعة التلغرام. يجب أن يكون اسم رسالتك: #TASK2 - اسمك (مثال: #TASK2 - Moones Mezher)."
+                }, {
+                    type: "learning",
+                    title: "🔎 النقاط المستهدفة في التعلم",
+                    content: [
+                        "استخدام المتغيرات والعمليات الحسابية و Math لتحليل الأرقام.",
+                        "استخدام الحلقات والحلقات المتداخلة لمعالجة مدى من الأرقام وأرقام كل عدد.",
+                        "استخدام if/else و break و continue للتحكم في منطق معقّد.",
+                        "التمرّن على حل مشكلة واحدة صعبة باستخدام مفاهيم المحاضرتين 2 و 3 فقط."
+                    ]
+                }],
                 timer: {
                     title: "الوقت المتبقي لإكمال المهمة",
-                    message: "أكمل المهمة قبل الموعد النهائي! - يتم قبول التسليم فقط في الساعات الست الأخيرة.",
+                    message: "أكمل المهمة قبل الموعد النهائي!",
                     days: "أيام",
                     hours: "ساعات",
                     minutes: "دقائق",
@@ -535,7 +145,7 @@
                 },
                 thankYou: "\"شكرًا لجهودك الجادة وتفانيك. نقدر جهودك!\"",
                 buttonText: "English / العربية",
-                finishDate: "الانتهاء بحلول: 20 سبتمبر 2026"
+                finishDate: "تاريخ الانتهاء: 21 مارس 2026"
             }
         };
 
@@ -600,13 +210,19 @@
                             });
                             sectionEl.appendChild(listEl);
                         } else if (item.type === 'output') {
+                            itemTitle.setAttribute('dir', 'ltr');
+                            itemTitle.style.textAlign = 'left';
                             const contentEl = document.createElement('p');
                             contentEl.textContent = item.content;
+                            contentEl.setAttribute('dir', 'ltr');
+                            contentEl.style.textAlign = 'left';
                             sectionEl.appendChild(contentEl);
 
                             const exampleEl = document.createElement('div');
                             exampleEl.className = 'output-example';
                             exampleEl.textContent = item.example;
+                            exampleEl.setAttribute('dir', 'ltr');
+                            exampleEl.style.textAlign = 'left';
                             sectionEl.appendChild(exampleEl);
                         }
                     });
@@ -639,8 +255,8 @@
 
         // Timer functionality
         function startCountdown() {
-            // Set the date we're counting down to (September 13, 2026)
-            const countDownDate = new Date("Sep 20, 2026 23:59:59").getTime();
+            // Set the date we're counting down to (March 21, 2026)
+            const countDownDate = new Date("Mar 21, 2026 23:59:59").getTime();
 
             // Update the countdown every 1 second
             const countdown = setInterval(() => {

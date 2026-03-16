@@ -246,13 +246,19 @@
                             });
                             sectionEl.appendChild(listEl);
                         } else if (item.type === 'output') {
+                            itemTitle.setAttribute('dir', 'ltr');
+                            itemTitle.style.textAlign = 'left';
                             const contentEl = document.createElement('p');
                             contentEl.textContent = item.content;
+                            contentEl.setAttribute('dir', 'ltr');
+                            contentEl.style.textAlign = 'left';
                             sectionEl.appendChild(contentEl);
 
                             const exampleEl = document.createElement('div');
                             exampleEl.className = 'output-example';
                             exampleEl.textContent = item.example;
+                            exampleEl.setAttribute('dir', 'ltr');
+                            exampleEl.style.textAlign = 'left';
                             sectionEl.appendChild(exampleEl);
                         }
                     });
