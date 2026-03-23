@@ -46,22 +46,21 @@
         // Lecture metadata
         const lectureConfig = {
             title: "Focal X V10 - Node.js Bootcamp",
-            subtitle: "Arrays & Advanced JavaScript: Timers, Date"
+            subtitle: "Functions & Arrays"
         };
 
         // Lecture content organized by tabs
         const lectureContent = [{
-                tabTitle: "Last Lesson",
-                title: "Last Lesson Recap",
-                content: `/* 
+            tabTitle: "Last Lesson",
+            title: "Last Lesson Recap",
+            content: `/* 
 1- Strings
 2- Truthy & Falsy values
 3- Loops (while, do while, for (normal - in - of))
 4- Break & Continue keys inside loops
 5- Functions
 */`
-            }, 
-            {
+        }, {
             tabTitle: "Functions",
             title: "Functions in JavaScript",
             content: `// Function Declaration (hoisted)
@@ -121,9 +120,9 @@ function factorial(n) {
 
 console.log(factorial(5)); // 120`
         }, {
-                tabTitle: "Arrays",
-                title: "Arrays in JavaScript",
-                content: `// Creating arrays
+            tabTitle: "Arrays",
+            title: "Arrays in JavaScript",
+            content: `// Creating arrays
 const fruits = ["apple", "banana", "orange"];
 const numbers = [1, 2, 3, 4, 5];
 const mixed = [1, "hello", true, null];
@@ -172,10 +171,10 @@ const result = [1, 2, 3, 4, 5]
     .reduce((acc, n) => acc + n, 0);
     
 console.log(result); // 24 ( (3+4+5) * 2 )`
-            }, {
-                tabTitle: "Mutate vs Not Mutate",
-                title: "Mutating vs Non-Mutating Operations in JavaScript",
-                content: `// MUTATING METHODS (change the original array)
+        }, {
+            tabTitle: "Mutate vs Not Mutate",
+            title: "Mutating vs Non-Mutating Operations in JavaScript",
+            content: `// MUTATING METHODS (change the original array)
 
 // push() - adds to end
 const arr1 = [1, 2, 3];
@@ -249,73 +248,7 @@ const obj2 = { a: 1, b: 2 };
 const newObj = { ...obj2, c: 3 };
 console.log(obj2); // { a: 1, b: 2 } (unchanged)
 console.log(newObj); // { a: 1, b: 2, c: 3 }`
-            },
-
-            {
-                tabTitle: "Timers",
-                title: "setInterval & setTimeout",
-                content: `// setInterval(function, time); => time in ms
-let i = 1;
-const interval = setInterval(() => {
-    console.log("Hi from inside setInterval callback function", i);
-    i++;
-}, 1000); // each 1000 ms == 1 s => run the callback function
-
-// setTimeout(function, time); => time in ms
-setTimeout(() => {
-    console.log("Hi from inside setTimeout callback function");
-}, 1000); // after 1000 ms == 1 s => run the callback function
-
-// pause set interval
-setTimeout(() => {
-    clearInterval(interval);
-}, 3000);
-
-// Timer example:
-let seconds = 10;
-let remaining = seconds;
-
-// Create interval
-const timer = setInterval(() => {
-    remaining--;
-    
-    const minutes = Math.floor(remaining / 60);
-    const seconds = remaining % 60;
-    const timeString = \`\${(minutes).toString()}:\${String(seconds)}\`;
-    
-    process.stdout.write(\`\\rTime remaining: \${timeString}\`);
-    
-    if (remaining <= 0) {
-        clearInterval(timer);
-        console.log("\\n\\nTimer complete! 🎉");
-        process.exit();
-    }
-}, 1000);`
-            }, {
-                tabTitle: "Date Object",
-                title: "Working with Dates in JavaScript",
-                content: `const date = new Date();
-
-console.log(typeof date); // object
-console.log(date); // current date and time
-console.log(date.getTime()); // milliseconds since epoch
-console.log(date.getFullYear()); // current year
-console.log(date.getMonth() + 1); // current month (0-indexed)
-console.log(date.getDay()); // day of the week (0 = Sunday)
-
-const date2 = new Date("Mar 8, 2020");
-
-console.log(date2); 
-console.log(date2.getTime());
-console.log(date2.getFullYear());
-console.log(date2.getMonth() + 1); 
-console.log(date2.getDay()); 
-
-// Formatting dates
-const formattedDate = \`\${date2.getFullYear()}-\${(date2.getMonth() + 1).toString().padStart(2, '0')}-\${date2.getDate().toString().padStart(2, '0')}\`;
-console.log(formattedDate); // 2020-03-08`
-            },
-        ];
+        }, ];
 
         // Questions and tasks
         const questions = [{
@@ -411,26 +344,6 @@ const result = numbers.reduce((acc, curr) => acc + curr, 0) / numbers.length;`,
             correctIndex: 1
         }, {
             type: "question",
-            question: "What is the main difference between setInterval and setTimeout?",
-            options: [
-                "setInterval runs once after a delay, setTimeout runs repeatedly",
-                "setTimeout runs once after a delay, setInterval runs repeatedly",
-                "They are identical in functionality",
-                "setInterval is for intervals, setTimeout is for timeouts"
-            ],
-            correctIndex: 1
-        }, {
-            type: "question",
-            question: "Which method would you use to get the current year from a Date object?",
-            options: [
-                "date.getYear()",
-                "date.getFullYear()",
-                "date.currentYear()",
-                "date.year()"
-            ],
-            correctIndex: 1
-        }, {
-            type: "question",
             question: "Which method creates a new array with the results of calling a function on every element?",
             options: [
                 "array.forEach()",
@@ -439,10 +352,6 @@ const result = numbers.reduce((acc, curr) => acc + curr, 0) / numbers.length;`,
                 "array.reduce()"
             ],
             correctIndex: 1
-        }, {
-            type: "task",
-            title: "Coding Challenge: Create a Countdown Timer",
-            content: "Create a countdown timer that starts from 10 minutes and displays the remaining time in MM:SS format. Update the display every second and show an alert when the timer reaches zero."
         }, {
             type: "task",
             title: "Practice: Array Manipulation",

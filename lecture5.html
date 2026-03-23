@@ -53,12 +53,76 @@
             tabTitle: "Last Lesson",
             title: "Last Lesson Recap",
             content: `/*
-1- Arrays 
-2- Mutate & Not-Mutate methods
-3- SetTimeout & SetInterval
-4- Date in JavaScript 
+1- Functions
+2- Arrays 
+3- Mutate & Not-Mutate methods
 */`
-        }, {
+        }, 
+            {
+                tabTitle: "Timers",
+                title: "setInterval & setTimeout",
+                content: `// setInterval(function, time); => time in ms
+let i = 1;
+const interval = setInterval(() => {
+    console.log("Hi from inside setInterval callback function", i);
+    i++;
+}, 1000); // each 1000 ms == 1 s => run the callback function
+
+// setTimeout(function, time); => time in ms
+setTimeout(() => {
+    console.log("Hi from inside setTimeout callback function");
+}, 1000); // after 1000 ms == 1 s => run the callback function
+
+// pause set interval
+setTimeout(() => {
+    clearInterval(interval);
+}, 3000);
+
+// Timer example:
+let seconds = 10;
+let remaining = seconds;
+
+// Create interval
+const timer = setInterval(() => {
+    remaining--;
+    
+    const minutes = Math.floor(remaining / 60);
+    const seconds = remaining % 60;
+    const timeString = \`\${(minutes).toString()}:\${String(seconds)}\`;
+    
+    process.stdout.write(\`\\rTime remaining: \${timeString}\`);
+    
+    if (remaining <= 0) {
+        clearInterval(timer);
+        console.log("\\n\\nTimer complete! 🎉");
+        process.exit();
+    }
+}, 1000);`
+            }, {
+                tabTitle: "Date Object",
+                title: "Working with Dates in JavaScript",
+                content: `const date = new Date();
+
+console.log(typeof date); // object
+console.log(date); // current date and time
+console.log(date.getTime()); // milliseconds since epoch
+console.log(date.getFullYear()); // current year
+console.log(date.getMonth() + 1); // current month (0-indexed)
+console.log(date.getDay()); // day of the week (0 = Sunday)
+
+const date2 = new Date("Mar 8, 2020");
+
+console.log(date2); 
+console.log(date2.getTime());
+console.log(date2.getFullYear());
+console.log(date2.getMonth() + 1); 
+console.log(date2.getDay()); 
+
+// Formatting dates
+const formattedDate = \`\${date2.getFullYear()}-\${(date2.getMonth() + 1).toString().padStart(2, '0')}-\${date2.getDate().toString().padStart(2, '0')}\`;
+console.log(formattedDate); // 2020-03-08`
+            }, 
+            {
             tabTitle: "Map & Set",
             title: "Map and Set Data Structures",
             content: `// A Map stores key-value pairs and preserves insertion order
@@ -135,7 +199,9 @@ set.forEach((val) => {
 // - Clear
 set.clear();
 console.log(set); // Set(0) {}`
-        }, {
+        }, 
+        
+{
             tabTitle: "Objects",
             title: "JavaScript Objects",
             content: `// Objects group related properties/behaviors
@@ -222,7 +288,8 @@ const user = {
 
 // Optional chaining (ES2020)
 console.log(person?.address?.zipCode ?? "Unknown"); // "Unknown"`
-        }, {
+        }, 
+        ,{
             tabTitle: "Error Handling",
             title: "try...catch for Error Handling",
             content: `// Use try...catch to handle errors gracefully
@@ -447,6 +514,26 @@ Promise.all([promise1, promise2, promise3])
                 "Handles promise rejection"
             ],
             correctIndex: 0
+        },  {
+            type: "question",
+            question: "What is the main difference between setInterval and setTimeout?",
+            options: [
+                "setInterval runs once after a delay, setTimeout runs repeatedly",
+                "setTimeout runs once after a delay, setInterval runs repeatedly",
+                "They are identical in functionality",
+                "setInterval is for intervals, setTimeout is for timeouts"
+            ],
+            correctIndex: 1
+        }, {
+            type: "question",
+            question: "Which method would you use to get the current year from a Date object?",
+            options: [
+                "date.getYear()",
+                "date.getFullYear()",
+                "date.currentYear()",
+                "date.year()"
+            ],
+            correctIndex: 1
         }, {
             type: "question",
             question: "Which method would you use to make an object immutable?",

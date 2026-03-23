@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 3: Product Management System</title>
+    <title>Task 3: TrendPulse Social Feed Analyzer</title>
     <link rel="manifest" href="../manifest.json" />
     <link rel="apple-touch-icon" href="../logo.jpg">
     <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
@@ -271,8 +271,8 @@
     <div class="container">
         <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
         <header>
-            <h1 id="title">Task 3: Product Management System</h1>
-            <p class="subtitle" id="subtitle">Build a product management system using Classes, Objects, Inheritance, Encapsulation, and Regex</p>
+            <h1 id="title">Task 3: TrendPulse Social Feed Analyzer</h1>
+            <p class="subtitle" id="subtitle">Hard story challenge to recap Lectures 2, 3, and 4 (especially arrays, Date, and timers)</p>
             <button class="language-toggle" id="languageToggle">العربية / English</button>
         </header>
 
@@ -300,7 +300,7 @@
                     <span class="timer-label" id="seconds-label">Seconds</span>
                 </div>
             </div>
-            <p class="finish-date" id="finish-date">Finish by: September 13, 2026</p>
+            <p class="finish-date" id="finish-date">Finish by: March 28, 2026</p>
             <p id="timer-message">Complete the task before the deadline!</p>
         </div>
 
@@ -318,88 +318,197 @@
         // Content data structure
         const taskData = {
             en: {
-                title: "Task 3: Product Management System",
-                subtitle: "Build a comprehensive product management system using Classes, Objects, Inheritance, Encapsulation, and Regex validation",
+                title: "Task 3: TrendPulse Social Feed Analyzer",
+                subtitle: "Hard story challenge to recap Lectures 2, 3, and 4 (especially arrays, Date, and timers)",
                 sections: [{
                     type: "idea",
-                    title: "💻 The Task: \"Product Management System\"",
-                    content: "Build a robust product management system using Object-Oriented Programming principles including Classes, Objects, Inheritance, Encapsulation, and Regex validation."
+                    title: "Story Context: TrendPulse Startup",
+                    content: "You are a backend intern at TrendPulse, a social media startup. Your team receives raw post data from many creators every minute. Management wants one JavaScript script that cleans data, validates posts, calculates engagement scores, ranks the feed, extracts trends, and prints a final moderation report. Your mission is to build this in one coherent flow."
                 }, {
                     type: "requirements",
-                    title: "📝 Requirements",
+                    title: "Core Rules",
                     content: [{
                         type: "list",
-                        title: "Rules:",
+                        title: "Constraints (must follow):",
                         items: [
-                            "Use `let` and `const` to declare variables, do not use `var`.",
-                            "Use classes as ES6 way.",
-                            "Implement validation using regular expressions where appropriate.",
-                            "Write helpful comments for each significant block of code.",
+                            "Use `let` and `const` (no `var`).",
+                            "You must use arrays heavily (Lecture 4 focus).",
+                            "You must demonstrate both mutating and non-mutating array operations, then explain the difference in comments.",
+                            "You must use strings, coercion, conditions, loops, and functions from Lectures 2 and 3.",
+                            "You must design function-based workflow around one shared posts array.",
+                            "No external libraries."
                         ]
                     }, {
                         type: "output",
-                        title: "Product Class Structure:",
-                        content: "Create a base `Product` class with the following properties and methods:",
-                        example: `class Product {
-    constructor(id, name, price, category, sku) {
-        // Properties with encapsulation
-        this._id = id;
-        this._name = name;
-        this._price = price;
-        this._category = category;
-        this._sku = sku;
-        this._createdAt = new Date();
-        this._isActive = true;
-    }
-    
-    // Getters and setters with validation
-    // Methods: updatePrice(), deactivate(), etc.
-}`
+                        title: "Starter Data (you may extend it)",
+                        content: "Use this sample dataset (or a richer one) as your raw feed input.",
+                        example: `const rawPosts = [
+  { id: "p1", author: "  Mira  ", content: "JS Arrays are amazing! #javascript #coding", likes: "120", shares: 18, comments: 40, createdAt: "2026-03-27T09:30:00Z" },
+  { id: "p2", author: "rami", content: "  check this out #Coding  ", likes: 75, shares: "11", comments: "13", createdAt: "2026-03-28T06:10:00Z" },
+  { id: "p3", author: "SARA", content: "", likes: "22", shares: 2, comments: 1, createdAt: "invalid-date" },
+  { id: "p4", author: "leo", content: "Node + Date + Timers #nodejs #javascript", likes: "210", shares: "35", comments: 70, createdAt: "2026-03-28T08:50:00Z" },
+  { id: "p5", author: "Mira", content: "  #coding tips for loops and conditions  ", likes: "95", shares: 20, comments: "25", createdAt: "2026-03-28T07:40:00Z" }
+];`
+                    }]
+                }, {
+                    type: "requirements",
+                    title: "Linked Hard Subtasks (complete in order)",
+                    content: [{
+                        type: "output",
+                        title: "1) Data normalization pipeline",
+                        content: "Normalize text fields, coerce engagement fields to numbers, and return clean post objects.",
+                        example: `function normalizePost(post) {
+  // your code
+}
+
+// Input
+const post = { author: "  Mira  ", content: "  Hello #JS  ", likes: "120", shares: "8", comments: "15" };
+
+// Predicted output
+// { author: "mira", content: "hello #js", likes: 120, shares: 8, comments: 15 }`
                     }, {
-                        type: "list",
-                        title: "Inheritance Implementation:",
-                        items: [
-                            "Create an array called `products` it has produtcs as object from Product class",
-                            "Create specialized classes that inherit from `Product`: `ElectronicsProduct`, `ClothingProduct`, `BookProduct`",
-                            "Each specialized class should have additional properties specific to its category",
-                            "Override methods where necessary using polymorphism",
-                            "Use `super()` keyword in constructors properly"
-                        ]
+                        type: "output",
+                        title: "2) Validation gate",
+                        content: "Reject invalid posts using conditions and keep a reason for each rejection.",
+                        example: `function isPostValid(post) {
+  // your code
+}
+
+// Input
+const post = { id: "p3", content: "", likes: 22, shares: 2, comments: 1 };
+
+// Predicted output
+// false (reason: empty content)`
                     }, {
-                        type: "list",
-                        title: "ProductManager Class:",
-                        items: [
-                            "`addProduct(productData)` - Add new product with validation",
-                            "`findProductById(productId)` - Find product by ID using regex validation",
-                            "`updateProductPrice(productId, newPrice)` - Update price with validation",
-                            "`filterProductsByCategory(category)` - Filter products by category",
-                            "`getProductsByPriceRange(minPrice, maxPrice)` - Get products within price range",
-                            "`removeProduct(productId)` - Remove product (soft delete)"
-                        ]
+                        type: "output",
+                        title: "3) Engagement score model",
+                        content: "Calculate engagement score with a weighted formula and safe handling of missing values.",
+                        example: `function calculateEngagementScore(post) {
+  // your code
+}
+
+// Input
+const post = { likes: 100, shares: 20, comments: 10 };
+
+// Predicted output
+// 180`
                     }, {
-                        type: "list",
-                        title: "Regex Validation Methods:",
-                        items: [
-                            "Validate product ID format (e.g., 'PROD-001')",
-                            "Validate SKU format (e.g., 'SKU-ABC-123')",
-                            "Validate price format (positive numbers only)",
-                            "Validate email for supplier information",
-                            "Validate product name (alphanumeric with spaces)"
-                        ]
+                        type: "output",
+                        title: "4) Mutate vs non-mutate array track (Lecture 4 emphasis)",
+                        content: "Create two flows: one mutates original array and one keeps original intact.",
+                        example: `function mutateFeed(posts) {
+  // mutating methods
+}
+
+function cloneAndTransformFeed(posts) {
+  // non-mutating methods
+}
+
+// Input
+const posts = [{ id: "p1", score: 20 }, { id: "p2", score: 50 }];
+
+// Predicted output
+// mutateFeed changes original order
+// cloneAndTransformFeed keeps original order unchanged`
                     }, {
-                        type: "list",
-                        title: "Search and Filter Methods:",
-                        items: [
-                            "`searchProducts(keyword)` - Search by name or description",
-                            "`sortProductsByPrice(order)` - Sort ascending/descending",
-                            "`getActiveProducts()` - Get only active products",
-                            "`getProductsCreatedAfter(date)` - Filter by creation date"
-                        ]
-                    }, ]
+                        type: "output",
+                        title: "5) Feed ranking and tie-breakers",
+                        content: "Sort by score descending, then id ascending as deterministic tie-breaker.",
+                        example: `function rankPosts(posts) {
+  // your code
+}
+
+// Input
+const posts = [
+  { id: "p2", score: 100 },
+  { id: "p1", score: 100 }
+];
+
+// Predicted output order
+// ["p1", "p2"]`
+                    }, {
+                        type: "output",
+                        title: "6) Hashtag trend extraction",
+                        content: "Extract hashtags, count frequencies, and return top N trends.",
+                        example: `function extractTopHashtags(posts, limit) {
+  // your code
+}
+
+// Input
+const posts = [{ content: "#js #node" }, { content: "#js #arrays" }];
+
+// Predicted output
+// [{ tag: "#js", count: 2 }, { tag: "#node", count: 1 }, { tag: "#arrays", count: 1 }]`
+                    }, {
+                        type: "output",
+                        title: "7) Required function architecture",
+                        content: "Implement and call: addPost, updatePost, deletePost, getPostById, searchPosts, getTopPosts, getStats.",
+                        example: `function addPost(posts, newPost) {
+  // your code
+}
+function updatePost(posts, postId, updates) {
+  // your code
+}
+function deletePost(posts, postId) {
+  // your code
+}
+function getPostById(posts, postId) {
+  // your code
+}
+function searchPosts(posts, keyword) {
+  // your code
+}
+function getTopPosts(posts, limit) {
+  // your code
+}
+function getStats(posts) {
+  // your code
+}
+
+// Input
+let posts = [{ id: "p1", author: "mira", content: "hello", likes: 10, shares: 2, comments: 1 }];
+const newPost = { id: "p2", author: "mira", content: "hello", likes: 10, shares: 2, comments: 1 };
+const updates = { likes: 15 };
+
+// Predicted output
+// addPost(posts, newPost) => posts.length: 1 -> 2
+// updatePost(posts, "p2", updates) => likes for p2 becomes 15
+// getPostById(posts, "p2") => returns post object with id "p2"
+// searchPosts(posts, "hello") => returns matching posts
+// getTopPosts(posts, 1) => returns one highest-scored post
+// getStats(posts) => returns summary object (count, avgScore, topId)
+// deletePost(posts, "p1") => posts no longer contains id "p1"`
+                    }, {
+                        type: "output",
+                        title: "8) Final moderation summary",
+                        content: "Print a clear final report with accepted/rejected counts, top posts, top hashtag, and average score.",
+                        example: `function buildSummaryReport(validPosts, rejectedPosts) {
+  // your code
+}
+
+// Input
+// validPosts.length = 4, rejectedPosts.length = 1
+
+// Predicted output
+// Accepted: 4 | Rejected: 1 | TopTag: #js | AvgScore: <number>`
+                    }]
+                }, {
+                    type: "note",
+                    title: "Submission",
+                    content: "Submit one JavaScript file (`task3.js`) in the tasks topic on Telegram. Message format: `#TASK3 - Your Name`. Include short inline comments explaining key logic decisions and the mutate vs non-mutate comparison."
+                }, {
+                    type: "learning",
+                    title: "Targeted Learning Recap",
+                    content: [
+                        "Lecture 2: data types, coercion, numbers, Math methods.",
+                        "Lecture 3: string handling, truthy/falsy checks, conditions, loops, function decomposition.",
+                        "Lecture 4: deep array processing and mutate vs non-mutate behavior.",
+                        "Real-world thinking: transforming messy raw data into reliable ranked outputs."
+                    ]
                 }],
                 timer: {
                     title: "Time Remaining to Complete Task",
-                    message: "Complete the task before the deadline! - Submissions are only accepted within the final six hours.",
+                    message: "Complete the task before the deadline!",
                     days: "Days",
                     hours: "Hours",
                     minutes: "Minutes",
@@ -407,91 +516,200 @@
                 },
                 thankYou: "\"Thank you for your hard work and dedication. Your efforts are appreciated!\"",
                 buttonText: "العربية / English",
-                finishDate: "Finish by: September 27, 2026"
+                finishDate: "Finish by: March 28, 2026"
             },
             ar: {
-                title: "المهمة 3: نظام إدارة المنتجات",
-                subtitle: "بناء نظام شامل لإدارة المنتجات باستخدام الفئات، الكائنات، التوريث، التغليف، والتعبيرات النمطية",
+                title: "المهمة 3: محلل TrendPulse لتغذية السوشيال ميديا",
+                subtitle: "تحدٍّ قصصي صعب لمراجعة المحاضرات 2 و3 و4 (خصوصًا المصفوفات و Date والمؤقتات)",
                 sections: [{
                     type: "idea",
-                    title: "💻 المهمة: \"نظام إدارة المنتجات\"",
-                    content: "بناء نظام متكامل لإدارة المنتجات باستخدام مبادئ البرمجة كائنية التوجه بما في ذلك الفئات، الكائنات، التوريث، التغليف، والتحقق باستخدام التعبيرات النمطية."
+                    title: "سياق القصة: شركة TrendPulse",
+                    content: "أنت متدرب Backend في شركة TrendPulse الناشئة. الفريق يستقبل بيانات منشورات خام من صناع محتوى كل دقيقة. الإدارة تريد سكربت JavaScript واحد ينظّف البيانات، يتحقق من صحتها، يحسب نقاط التفاعل، يرتّب التغذية، يستخرج الترندات، ويطبع تقرير إشراف نهائي. مهمتك تنفيذ هذا التدفق كاملًا."
                 }, {
                     type: "requirements",
-                    title: "📝 المتطلبات",
+                    title: "القواعد الأساسية",
                     content: [{
                         type: "list",
-                        title: "القواعد:",
+                        title: "القيود (يجب الالتزام بها):",
                         items: [
-                            "استخدم `let` و `const` لتعريف المتغيرات؛ لا تستخدم `var`.",
-                            "استخدم الفئات (Classes) بالطريقة ES6.",
-                            "نفذ التحقق من الصحة باستخدام التعبيرات النمطية حيثما يكون ذلك مناسبًا.",
-                            "اكتب تعليقات مفيدة لكل كتلة مهمة من الكود.",
+                            "استخدم `let` و `const` فقط (بدون `var`).",
+                            "يجب الاعتماد بشكل واضح على المصفوفات (تركيز المحاضرة 4).",
+                            "يجب إظهار عمليات mutating و non-mutating على المصفوفات ثم شرح الفرق بالتعليقات.",
+                            "يجب استخدام النصوص، التحويل (coercion)، الشروط، الحلقات، وأساسيات الدوال من المحاضرتين 2 و3.",
+                            "يجب بناء تدفق يعتمد على دوال تعمل فوق مصفوفة منشورات واحدة.",
+                            "ممنوع استخدام أي مكتبات خارجية."
                         ]
                     }, {
                         type: "output",
-                        title: "هيكل الفئة الأساسية للمنتج:",
-                        content: "أنشئ فئة أساسية `Product` بالخصائص والطرق التالية:",
-                        example: `class Product {
-    constructor(id, name, price, category, sku) {
-        // الخصائص مع التغليف
-        this._id = id;
-        this._name = name;
-        this._price = price;
-        this._category = category;
-        this._sku = sku;
-        this._createdAt = new Date();
-        this._isActive = true;
-    }
-    
-    // وسائل الحصول والتعديل مع التحقق
-    // الطرق: updatePrice(), deactivate(), etc.
-}`
+                        title: "بيانات البداية (يمكنك توسيعها)",
+                        content: "استخدم مجموعة البيانات التالية (أو نسخة أغنى منها) كمدخل خام للتغذية:",
+                        example: `const rawPosts = [
+  { id: "p1", author: "  Mira  ", content: "JS Arrays are amazing! #javascript #coding", likes: "120", shares: 18, comments: 40, createdAt: "2026-03-27T09:30:00Z" },
+  { id: "p2", author: "rami", content: "  check this out #Coding  ", likes: 75, shares: "11", comments: "13", createdAt: "2026-03-28T06:10:00Z" },
+  { id: "p3", author: "SARA", content: "", likes: "22", shares: 2, comments: 1, createdAt: "invalid-date" },
+  { id: "p4", author: "leo", content: "Node + Date + Timers #nodejs #javascript", likes: "210", shares: "35", comments: 70, createdAt: "2026-03-28T08:50:00Z" },
+  { id: "p5", author: "Mira", content: "  #coding tips for loops and conditions  ", likes: "95", shares: 20, comments: "25", createdAt: "2026-03-28T07:40:00Z" }
+];`
+                    }]
+                }, {
+                    type: "requirements",
+                    title: "المهام الصعبة المرتبطة (نفّذها بالترتيب)",
+                    content: [{
+                        type: "output",
+                        title: "1) مسار توحيد البيانات (Normalization)",
+                        content: "وحّد النصوص وحوّل قيم التفاعل إلى أرقام ثم أعد منشورًا نظيفًا.",
+                        example: `function normalizePost(post) {
+  // your code
+}
+
+// Input
+const post = { author: "  Mira  ", content: "  Hello #JS  ", likes: "120", shares: "8", comments: "15" };
+
+// Predicted output
+// { author: "mira", content: "hello #js", likes: 120, shares: 8, comments: 15 }`
                     }, {
-                        type: "list",
-                        title: "تنفيذ التوريث:",
-                        items: [
-                            "قم بإنشاء مصفوفة تدعى products تمثل مصفوفة منتجات وهي عبارة عن object",
-                            "أنشئ فئات متخصصة ترث من `Product`: `ElectronicsProduct`, `ClothingProduct`, `BookProduct`",
-                            "يجب أن يكون لكل فئة متخصصة خصائص إضافية تناسب فئتها",
-                            "أعد كتابة الطرق حيثما يكون ذلك ضروريًا باستخدام تعدد الأشكال",
-                            "استخدم كلمة `()super` في المنشئات بشكل صحيح"
-                        ]
+                        type: "output",
+                        title: "2) بوابة التحقق (Validation Gate)",
+                        content: "تحقق من صحة المنشور وارجع false عند وجود خطأ مع سبب واضح.",
+                        example: `function isPostValid(post) {
+  // your code
+}
+
+// Input
+const post = { id: "p3", content: "", likes: 22, shares: 2, comments: 1 };
+
+// Predicted output
+// false (reason: empty content)`
                     }, {
-                        type: "list",
-                        title: "فئة مدير المنتجات:",
-                        items: [
-                            "`addProduct(productData)` - إضافة منتج جديد مع التحقق",
-                            "`findProductById(productId)` - البحث عن المنتج بالمعرف باستخدام التعبيرات النمطية",
-                            "`updateProductPrice(productId, newPrice)` - تحديث السعر مع التحقق",
-                            "`filterProductsByCategory(category)` - تصفية المنتجات حسب الفئة",
-                            "`getProductsByPriceRange(minPrice, maxPrice)` - الحصول على المنتجات ضمن نطاق سعري",
-                            "`removeProduct(productId)` - إزالة المنتج (حذف ناعم)"
-                        ]
+                        type: "output",
+                        title: "3) نموذج نقاط التفاعل",
+                        content: "احسب نقاط التفاعل بمعادلة موزونة وتعامل مع القيم الناقصة.",
+                        example: `function calculateEngagementScore(post) {
+  // your code
+}
+
+// Input
+const post = { likes: 100, shares: 20, comments: 10 };
+
+// Predicted output
+// 180`
                     }, {
-                        type: "list",
-                        title: "طرق التحقق باستخدام التعبيرات النمطية:",
-                        items: [
-                            "التحقق من تنسيق معرف المنتج (مثال: 'PROD-001')",
-                            "التحقق من تنسيق SKU (مثال: 'SKU-ABC-123')",
-                            "التحقق من تنسيق السعر (أرقام موجبة فقط)",
-                            "التحقق من البريد الإلكتروني لمعلومات المورد",
-                            "التحقق من اسم المنتج (أحرف وأرقام مع مسافات)"
-                        ]
+                        type: "output",
+                        title: "4) مسار المصفوفات: mutate vs non-mutate (تركيز المحاضرة 4)",
+                        content: "أنشئ مسارين: واحد يغيّر المصفوفة الأصلية وواحد يحافظ عليها بدون تغيير.",
+                        example: `function mutateFeed(posts) {
+  // mutating methods
+}
+
+function cloneAndTransformFeed(posts) {
+  // non-mutating methods
+}
+
+// Input
+const posts = [{ id: "p1", score: 20 }, { id: "p2", score: 50 }];
+
+// Predicted output
+// mutateFeed changes original order
+// cloneAndTransformFeed keeps original order unchanged`
                     }, {
-                        type: "list",
-                        title: "طرق البحث والتصفية:",
-                        items: [
-                            "`searchProducts(keyword)` - البحث بالاسم أو الوصف",
-                            "`sortProductsByPrice(order)` - ترتيب تصاعدي/تنازلي",
-                            "`()getActiveProducts` - الحصول على المنتجات النشطة فقط",
-                            "`getProductsCreatedAfter(date)` - التصفية حسب تاريخ الإنشاء"
-                        ]
-                    }, ]
-                }, ],
+                        type: "output",
+                        title: "5) ترتيب التغذية وكسر التعادل",
+                        content: "رتّب حسب النقاط تنازليًا، ثم حسب المعرّف تصاعديًا كقاعدة حسم ثابتة.",
+                        example: `function rankPosts(posts) {
+  // your code
+}
+
+// Input
+const posts = [
+  { id: "p2", score: 100 },
+  { id: "p1", score: 100 }
+];
+
+// Predicted output order
+// ["p1", "p2"]`
+                    }, {
+                        type: "output",
+                        title: "6) استخراج ترند الهاشتاغات",
+                        content: "استخرج الهاشتاغات واحسب تكرارها ثم أعد أعلى N ترندات.",
+                        example: `function extractTopHashtags(posts, limit) {
+  // your code
+}
+
+// Input
+const posts = [{ content: "#js #node" }, { content: "#js #arrays" }];
+
+// Predicted output
+// [{ tag: "#js", count: 2 }, { tag: "#node", count: 1 }, { tag: "#arrays", count: 1 }]`
+                    }, {
+                        type: "output",
+                        title: "7) هيكل الدوال المطلوب",
+                        content: "نفّذ واستعمل الدوال المطلوبة وكلها تعمل على نفس مصفوفة posts.",
+                        example: `function addPost(posts, newPost) {
+  // your code
+}
+function updatePost(posts, postId, updates) {
+  // your code
+}
+function deletePost(posts, postId) {
+  // your code
+}
+function getPostById(posts, postId) {
+  // your code
+}
+function searchPosts(posts, keyword) {
+  // your code
+}
+function getTopPosts(posts, limit) {
+  // your code
+}
+function getStats(posts) {
+  // your code
+}
+
+// Input
+let posts = [{ id: "p1", author: "mira", content: "hello", likes: 10, shares: 2, comments: 1 }];
+const newPost = { id: "p2", author: "mira", content: "hello", likes: 10, shares: 2, comments: 1 };
+const updates = { likes: 15 };
+
+// Predicted output
+// addPost(posts, newPost) => posts.length: 1 -> 2
+// updatePost(posts, "p2", updates) => likes of p2 becomes 15
+// getPostById(posts, "p2") => returns post object with id "p2"
+// searchPosts(posts, "hello") => returns matching posts
+// getTopPosts(posts, 1) => returns one highest-scored post
+// getStats(posts) => returns summary object (count, avgScore, topId)
+// deletePost(posts, "p1") => posts no longer contains id "p1"`
+                    }, {
+                        type: "output",
+                        title: "8) ملخص الإشراف النهائي",
+                        content: "ابنِ تقريرًا نهائيًا واضحًا يتضمن الإحصاءات الرئيسية ومخرجات الترتيب.",
+                        example: `function buildSummaryReport(validPosts, rejectedPosts) {
+  // your code
+}
+
+// Input
+// validPosts.length = 4, rejectedPosts.length = 1
+
+// Predicted output
+// Accepted: 4 | Rejected: 1 | TopTag: #js | AvgScore: <number>`
+                    }]
+                }, {
+                    type: "note",
+                    title: "التسليم",
+                    content: "سلّم ملف JavaScript واحد (`task3.js`) في توبك التاسكات على التلغرام. صيغة الرسالة: `#TASK3 - اسمك`. أضف تعليقات قصيرة تشرح قراراتك المهمة وخاصة فرق mutate و non-mutate."
+                }, {
+                    type: "learning",
+                    title: "ملخص نقاط التعلّم المستهدفة",
+                    content: [
+                        "المحاضرة 2: أنواع البيانات، التحويل (coercion)، الأرقام ودوال Math.",
+                        "المحاضرة 3: معالجة النصوص، truthy/falsy، الشروط، الحلقات، وتقسيم المنطق عبر الدوال.",
+                        "المحاضرة 4: معالجة المصفوفات بعمق وفرق mutate/non-mutate.",
+                        "تفكير واقعي: تحويل بيانات خام فوضوية إلى نتائج مرتبة وموثوقة."
+                    ]
+                }],
                 timer: {
                     title: "الوقت المتبقي لإكمال المهمة",
-                    message: "أكمل المهمة قبل الموعد النهائي! - يتم قبول التسليم فقط في الساعات الست الأخيرة.",
+                    message: "أكمل المهمة قبل الموعد النهائي!",
                     days: "أيام",
                     hours: "ساعات",
                     minutes: "دقائق",
@@ -499,7 +717,7 @@
                 },
                 thankYou: "\"شكرًا لجهودك الجادة وتفانيك. نقدر جهودك!\"",
                 buttonText: "English / العربية",
-                finishDate: "الانتهاء بحلول: 27 سبتمبر 2026"
+                finishDate: "الانتهاء بحلول: 28 مارس 2026"
             }
         };
         // Render content based on language
@@ -602,8 +820,8 @@
 
         // Timer functionality
         function startCountdown() {
-            // Set the date we're counting down to (September 13, 2026)
-            const countDownDate = new Date("Sep 27, 2026 23:59:59").getTime();
+            // Set the date we're counting down to (March 28, 2026)
+            const countDownDate = new Date("Mar 28, 2026 23:59:59").getTime();
 
             // Update the countdown every 1 second
             const countdown = setInterval(() => {
