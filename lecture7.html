@@ -57,7 +57,78 @@
 1- Solve Task 1
 2- Semicolons (ASI)
 */`
-        }, {
+        }, 
+        {
+            tabTitle: "Promises",
+            title: "JavaScript Promises",
+            content: `// Promises represent the eventual completion of an asynchronous operation
+
+// Creating a promise
+const promise = new Promise((resolve, reject) => {
+    // Simulate complex code
+    for(let i = 0; i < 1_000_000_000; i++) {}
+    
+    const data = Math.random();
+    
+    if(data < 0.5) {
+        resolve(data); // Success
+    } else {
+        reject("Error"); // Failure
+    }
+});
+
+// Using .then() and .catch()
+promise
+    .then((data) => {
+        console.log(data);
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+    .finally(() => {
+        console.log("Completed");
+    });
+
+// Converting to async/await
+const app = async () => {
+    try {
+        const data = await promise;
+        console.log("Success:", data);
+    } catch (error) {
+        console.log("Error:", error);
+    }
+};
+app();
+
+// Real-world example: API call simulation
+function fetchUserData() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const success = Math.random() > 0.3;
+            if (success) {
+                resolve({ name: "Alice", age: 30 });
+            } else {
+                reject("Failed to fetch user data");
+            }
+        }, 2000);
+    });
+}
+
+// Using the promise
+fetchUserData()
+    .then(user => console.log("User:", user))
+    .catch(error => console.error("Error:", error));
+
+// Using Promise.all() with arrays
+const promise1 = Promise.resolve(3);
+const promise2 = new Promise((resolve) => setTimeout(resolve, 100, 'foo'));
+const promise3 = fetchUserData();
+
+Promise.all([promise1, promise2, promise3])
+    .then(values => console.log(values))
+    .catch(error => console.error(error));`
+        },
+        {
             table: {
                 headers: ["", "Description"],
                 rows: [

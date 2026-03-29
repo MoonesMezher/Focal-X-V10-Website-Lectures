@@ -58,6 +58,95 @@
 3- Mutate & Not-Mutate methods
 */`
         }, 
+            
+{
+            tabTitle: "Objects",
+            title: "JavaScript Objects",
+            content: `// Objects group related properties/behaviors
+const person = {
+    name: "Alice",
+    age: 30,
+    isStudent: true,
+    subjects: ["Math", "Programming"],
+    address: {
+        city: "Paris",
+        country: "France"
+    },
+    greet: function() {
+        return \`Hello, my name is \${this.name}\`;
+    }
+};
+
+// Accessing data (two ways)
+console.log(person.name); // Alice
+console.log(person["name"]); // Alice
+
+const prop = "age";
+console.log(person[prop]); // 30
+
+console.log(person.address.city); // Paris
+console.log(person.greet()); // Hello, my name is Alice
+
+// Object Operations:
+// Add Property
+person.job = "Developer";
+
+// Delete Property
+delete person.isStudent;
+
+// Modify Property
+person.age = 31;
+
+// Check if Property Exists
+console.log("name" in person); // true
+
+// Object Methods:
+console.log(Object.keys(person)); // ["name", "age", "subjects", "address", "greet", "job"]
+console.log(Object.values(person)); // ["Alice", 31, Array(2), {…}, ƒ, "Developer"]
+console.log(Object.entries(person)); // Array of [key, value] pairs
+
+// Object.assign() (merge)
+const car = { brand: "Toyota" };
+const updatedCar = Object.assign({}, car, { model: "Camry", year: 2023 });
+console.log(updatedCar); // { brand: "Toyota", model: "Camry", year: 2023 }
+
+// Object.freeze()
+Object.freeze(car);
+car.brand = "Honda"; // Fails silently in non-strict mode
+console.log(car.brand); // "Toyota"
+
+// Iterating Over Objects:
+// for...in loop
+for (const key in person) {
+    console.log(\`\${key}: \${person[key]}\`);
+}
+
+// Object.entries() + forEach
+Object.entries(person).forEach(([key, value]) => {
+    console.log(\`\${key} -> \${value}\`);
+});
+
+// Transforming Objects:
+// Spread operator
+const updatedPerson = { ...person, age: 31 };
+
+// Destructuring
+const { name: personName, address: { city } } = person;
+console.log(personName, city); // "Alice Paris"
+
+// Deep copy
+const personClone = JSON.parse(JSON.stringify(person));
+
+// Dynamic property names
+const propName = "email";
+const user = {
+    [propName]: "alice@example.com",
+    [\`\${propName}-verified\`]: true
+};
+
+// Optional chaining (ES2020)
+console.log(person?.address?.zipCode ?? "Unknown"); // "Unknown"`
+        }, 
             {
                 tabTitle: "Timers",
                 title: "setInterval & setTimeout",
@@ -200,96 +289,7 @@ set.forEach((val) => {
 set.clear();
 console.log(set); // Set(0) {}`
         }, 
-        
-{
-            tabTitle: "Objects",
-            title: "JavaScript Objects",
-            content: `// Objects group related properties/behaviors
-const person = {
-    name: "Alice",
-    age: 30,
-    isStudent: true,
-    subjects: ["Math", "Programming"],
-    address: {
-        city: "Paris",
-        country: "France"
-    },
-    greet: function() {
-        return \`Hello, my name is \${this.name}\`;
-    }
-};
-
-// Accessing data (two ways)
-console.log(person.name); // Alice
-console.log(person["name"]); // Alice
-
-const prop = "age";
-console.log(person[prop]); // 30
-
-console.log(person.address.city); // Paris
-console.log(person.greet()); // Hello, my name is Alice
-
-// Object Operations:
-// Add Property
-person.job = "Developer";
-
-// Delete Property
-delete person.isStudent;
-
-// Modify Property
-person.age = 31;
-
-// Check if Property Exists
-console.log("name" in person); // true
-
-// Object Methods:
-console.log(Object.keys(person)); // ["name", "age", "subjects", "address", "greet", "job"]
-console.log(Object.values(person)); // ["Alice", 31, Array(2), {…}, ƒ, "Developer"]
-console.log(Object.entries(person)); // Array of [key, value] pairs
-
-// Object.assign() (merge)
-const car = { brand: "Toyota" };
-const updatedCar = Object.assign({}, car, { model: "Camry", year: 2023 });
-console.log(updatedCar); // { brand: "Toyota", model: "Camry", year: 2023 }
-
-// Object.freeze()
-Object.freeze(car);
-car.brand = "Honda"; // Fails silently in non-strict mode
-console.log(car.brand); // "Toyota"
-
-// Iterating Over Objects:
-// for...in loop
-for (const key in person) {
-    console.log(\`\${key}: \${person[key]}\`);
-}
-
-// Object.entries() + forEach
-Object.entries(person).forEach(([key, value]) => {
-    console.log(\`\${key} -> \${value}\`);
-});
-
-// Transforming Objects:
-// Spread operator
-const updatedPerson = { ...person, age: 31 };
-
-// Destructuring
-const { name: personName, address: { city } } = person;
-console.log(personName, city); // "Alice Paris"
-
-// Deep copy
-const personClone = JSON.parse(JSON.stringify(person));
-
-// Dynamic property names
-const propName = "email";
-const user = {
-    [propName]: "alice@example.com",
-    [\`\${propName}-verified\`]: true
-};
-
-// Optional chaining (ES2020)
-console.log(person?.address?.zipCode ?? "Unknown"); // "Unknown"`
-        }, 
-        ,{
+     {
             tabTitle: "Error Handling",
             title: "try...catch for Error Handling",
             content: `// Use try...catch to handle errors gracefully
@@ -392,76 +392,8 @@ console.log(message); // "Yes"
 // | ??       | Nullish Coalescing  | Right-hand if left is null/undefined | 0 ?? 5 → 0             |  
 // | ?.       | Optional Chaining   | undefined if path is nullish      | user?.address?.city → safe |  
 // | ? :      | Ternary             | Value based on condition          | isValid ? "Yes" : "No"     |`
-        }, {
-            tabTitle: "Promises",
-            title: "JavaScript Promises",
-            content: `// Promises represent the eventual completion of an asynchronous operation
-
-// Creating a promise
-const promise = new Promise((resolve, reject) => {
-    // Simulate complex code
-    for(let i = 0; i < 1_000_000_000; i++) {}
-    
-    const data = Math.random();
-    
-    if(data < 0.5) {
-        resolve(data); // Success
-    } else {
-        reject("Error"); // Failure
-    }
-});
-
-// Using .then() and .catch()
-promise
-    .then((data) => {
-        console.log(data);
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-    .finally(() => {
-        console.log("Completed");
-    });
-
-// Converting to async/await
-const app = async () => {
-    try {
-        const data = await promise;
-        console.log("Success:", data);
-    } catch (error) {
-        console.log("Error:", error);
-    }
-};
-app();
-
-// Real-world example: API call simulation
-function fetchUserData() {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            const success = Math.random() > 0.3;
-            if (success) {
-                resolve({ name: "Alice", age: 30 });
-            } else {
-                reject("Failed to fetch user data");
-            }
-        }, 2000);
-    });
-}
-
-// Using the promise
-fetchUserData()
-    .then(user => console.log("User:", user))
-    .catch(error => console.error("Error:", error));
-
-// Using Promise.all() with arrays
-const promise1 = Promise.resolve(3);
-const promise2 = new Promise((resolve) => setTimeout(resolve, 100, 'foo'));
-const promise3 = fetchUserData();
-
-Promise.all([promise1, promise2, promise3])
-    .then(values => console.log(values))
-    .catch(error => console.error(error));`
-        }];
+        }
+        ];
 
         // Questions and tasks
         const questions = [{
