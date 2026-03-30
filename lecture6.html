@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Focal X - Node.js Bootcamp: Lecture 6 </title>
+    <title>Focal X - Node.js Bootcamp: Lecture 7 </title>
     <link rel="manifest" href="./manifest.json" />
     <link rel="apple-touch-icon" href="./logo.jpg">
     <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
@@ -17,7 +17,7 @@
         <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
         <header>
             <h1 id="lecture-title">Focal X - Node.js Bootcamp</h1>
-            <p class="subtitle" id="lecture-subtitle">Solve Task 1</p>
+            <p class="subtitle" id="lecture-subtitle">Advanced JavaScript: Promises, Event Loop, Regex</p>
         </header>
 
         <div class="content">
@@ -46,7 +46,7 @@
         // Lecture metadata
         const lectureConfig = {
             title: "Focal X - Node.js Bootcamp",
-            subtitle: "Solve Task 1"
+            subtitle: "Advanced JavaScript: Promises, Async/Await, Event Loop, Regex"
         };
 
         // Lecture content organized by tabs
@@ -58,114 +58,381 @@
 2- Maps & Sets (Serach)
 3- Error Handling
 4- Operators in JS
-5- Intro to Promises
 */`
-        }, {
-            tabTitle: "Solve Task",
-            title: "Solve Task (Employee Salary Calculator)",
-            content: `const calculateOvertimePay = (hours) => {
-    return hours * 5;
-} 
+        }, 
+        {
+            tabTitle: "Promises",
+            title: "JavaScript Promises",
+            content: `// Promises represent the eventual completion of an asynchronous operation
 
-const calculateGrossSalary = (baseSalary, overtime, bonus) => {
-    return baseSalary + overtime + bonus;
-} 
-
-const calculateTax = (amount, taxPercent) => {
-    return taxPercent * Math.pow(10, -2) * amount;
-} 
-
-const calculateNetSalary = (gross, tax, deduction) => {
-    return gross - tax - deduction;
-} 
-
-const conditions = (tax, bouns, netSalary) => {
-    if(tax > 20) {
-        console.log("High tax rate");
-    } 
-
-    if(bouns > 500) {
-        console.log("Exceptional bonus 🎉");
+// Creating a promise
+const promise = new Promise((resolve, reject) => {
+    // Simulate complex code
+    for(let i = 0; i < 1_000_000_000; i++) {}
+    
+    const data = Math.random();
+    
+    if(data < 0.5) {
+        resolve(data); // Success
+    } else {
+        reject("Error"); // Failure
     }
+});
 
-    if(netSalary < 1000) {
-        console.log("Low salary");
+// Using .then() and .catch()
+promise
+    .then((data) => {
+        console.log(data);
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+    .finally(() => {
+        console.log("Completed");
+    });
+
+// Converting to async/await
+const app = async () => {
+    try {
+        const data = await promise;
+        console.log("Success:", data);
+    } catch (error) {
+        console.log("Error:", error);
     }
-} 
+};
+app();
 
-const display = (
-    employeeName,
-    jobTitle,
-    baseSalary,
-    overtimeHours,
-    monthlyBonus,
-    deduction,
-    taxPercentage
-) => {
-    const overtimePay = calculateOvertimePay(overtimeHours);
-
-    const gross = calculateGrossSalary(baseSalary, overtimePay, monthlyBonus);
-
-    const tax = calculateTax(gross, taxPercentage);
-
-    const netSalary = calculateNetSalary(gross, tax, deduction);
-
-    const output = \`===============================
-Monthly Employee Salary Report
-===============================
-Name:           \${employeeName}
-Job Title:      \${jobTitle}
-Base Salary:    \${baseSalary}$
-Overtime:       \${overtimeHours} hours \${overtimePay}$
-Bonus:          \${monthlyBonus}$
-Deductions:     \${deduction}$
-Tax (\${taxPercentage}%):      \${tax}$
--------------------------------
-Net Salary:     \${netSalary}$
-===============================\`;
-
-    console.log(output);
-
-    conditions(tax, monthlyBonus, netSalary)
+// Real-world example: API call simulation
+function fetchUserData() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const success = Math.random() > 0.3;
+            if (success) {
+                resolve({ name: "Alice", age: 30 });
+            } else {
+                reject("Failed to fetch user data");
+            }
+        }, 2000);
+    });
 }
 
-const employeeName = "Moones Mezher";
-const jobTitle = "Web Developer";
-const baseSalary = 2000;
-const overtimeHours = 5;
-const monthlyBonus = 10;
-const deduction = 5;
-const taxPercentage = 10;
+// Using the promise
+fetchUserData()
+    .then(user => console.log("User:", user))
+    .catch(error => console.error("Error:", error));
 
-display(
-    employeeName,
-    jobTitle,
-    baseSalary,
-    overtimeHours,
-    monthlyBonus,
-    deduction,
-    taxPercentage
-)`
+// Using Promise.all() with arrays
+const promise1 = Promise.resolve(3);
+const promise2 = new Promise((resolve) => setTimeout(resolve, 100, 'foo'));
+const promise3 = fetchUserData();
+
+Promise.all([promise1, promise2, promise3])
+    .then(values => console.log(values))
+    .catch(error => console.error(error));`
+        },
+        {
+            table: {
+                headers: ["", "Description"],
+                rows: [
+                    ["Synchronous", "Executes line by line consecutively in a sequental manner, code that waites for an operation to complete"],
+                    ["Asynchronous", "Allows multiple operations to be perfomed consecutively without waiting, handled with: Callbacks, Promises, Async/Await"],
+                ]
+            },
+            tabTitle: "Asynchronous",
+            title: "JavaScript Asynchronous",
+            content: `// Synchronous: Executes line by line consecutively in a sequental manner
+// Code that waites for an operation to complete
+
+// Asynchronous: Allows multiple operations to be perfomed consecutively without waiting
+// Handled with: Callbacks, Promises, Async/Await
+
+// Promises represent the eventual completion of an asynchronous operation
+
+// Promise => an object that  mNGES ASYNC operations
+// "I promise to return a value"
+// PENDING -> RESOLVED or REJECTED
+// Form: new Promise((resolve, reject) => { async code })
+
+// Creating a promise
+const promise = new Promise((resolve, reject) => {
+    // Simulate complex code
+    for(let i = 0; i < 1_000_000_000; i++) {}
+    
+    const data = Math.random();
+    
+    if(data < 0.5) {
+        resolve(data); // Success
+    } else {
+        reject("Error"); // Failure
+    }
+});
+
+// Using .then() and .catch()
+promise
+    .then((data) => {
+        console.log(data);
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+    .finally(() => {
+        console.log("Completed");
+    });
+
+// Chores Example: (Callback Hell -> Promise)
+1. Walk The Dog
+2. Clean The Kitchen
+3. Take Out The Trash
+
+// Converting to async/await 
+
+// Async/Await -> Special Keys in JavaScript, allows you write async code in a sync manner
+
+// Async -> makes a function return a promise
+// Await -> makes an async function wait for a promise 
+
+const app = async () => {
+    try {
+        const data = await promise;
+        console.log("Success:", data);
+    } catch (error) {
+        console.log("Error:", error);
+    }
+};
+app();
+
+// Real-world example: API call simulation
+function fetchUserData() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const success = Math.random() > 0.3;
+            if (success) {
+                resolve({ name: "Alice", age: 30 });
+            } else {
+                reject("Failed to fetch user data");
+            }
+        }, 2000);
+    });
+}
+
+// Using the promise
+fetchUserData()
+    .then(user => console.log("User:", user))
+    .catch(error => console.error("Error:", error));
+
+// Using Promise.all() with arrays
+const promise1 = Promise.resolve(3);
+const promise2 = new Promise((resolve) => setTimeout(resolve, 100, 'foo'));
+const promise3 = fetchUserData();
+
+Promise.all([promise1, promise2, promise3])
+    .then(values => console.log(values))
+    .catch(error => console.error(error));`
         }, {
-            tabTitle: "Semicolons",
-            title: "Semicolons in JavaScript",
-            content: `// in JavaScript, semicolons are technically optional because
-the language has a feature called: \`Automatic Semicolon Insertion (ASI)\`.
+            tabTitle: "Event Loop",
+            title: "JavaScript Event Loop",
+            content: `// Question: who is know about this concept?
 
-// ASI does not always guess correctly.`
-        }];
+/*
+- Node is not a framework, it is a runtime. => interpreter.
+=> there are a huge deffrince between framework and library and runtime.
+- JS on browser BY V8 Engine => 2008: JS on server = node js
+
+Question: who is know the deffrince between Compiler & Intrpreter?
+
+- Compiler Vs. Interpreter:
+=> code => compile => machine code => output
+=> code => interprete => output
+
+=> Node js is a runtime and is not a compiler.
+
+- 1- Node js is single threaded (line by line) => one thread is work
+- 2- Node.js uses libuv for async I/O (not truly single-threaded)
+
+- Event loop check each time on (Task Queue & Microtask Queue) then => execute if the Call stack is empty. 
+- Microtask Queue > Task Queue
+*/
+
+// Call stack => output
+console.log("1");
+
+// Call stack add it to => Web APIs then => execute the callback in Task Queue => output
+setTimeout(() => {
+    console.log("2");
+}, 0) 
+
+// Call stack add it to => Web APIs then => execute the callback in Microtask Queue => output
+Promise.resolve()
+.then(() => {
+    console.log("3");
+})
+
+// Call stack => output
+console.log("4");
+
+// Output order: 1, 4, 3, 2`
+        }, {
+            tabTitle: "Regex",
+            title: "Regular Expressions (Regex)",
+            content: `// Question: who is know about this concept?
+
+/*
+- Is => A Regular Expression (RegEx) is a sequence of characters defining a search pattern. It is used for:
+    - Validating input (e.g., emails, passwords). => like emails in websites
+    - Searching/Extracting specific text from strings.
+    - Replacing parts of strings.
+*/
+
+const regex = /hello/; // another way: 
+console.log(regex.test('hello')); // true
+console.log(regex.test('hello world')); // true
+
+// Ex: smart search in websites
+const colors = ["red", "green", "yellow", "black", "white"];
+
+function search(key) {
+    return colors.filter(e => e === key);
+}
+
+function smartSearch(key) {
+    const regex = new RegExp(\`.*\${key}.*\`, 'i');   
+    return colors.filter(e => e.match(regex));
+}
+
+console.log(search("re")); // []
+console.log(smartSearch("re")); // ["red", "green"]
+
+// - Real World Example:
+const emailRegex = /^[\\w.-]+@[\\w.-]+\\.\\w{2,}$/;
+console.log(emailRegex.test('user@example.com')); // true
+console.log(emailRegex.test('userexample.com')); // false`,
+            table: {
+                headers: ["Pattern", "Description", "Example"],
+                rows: [
+                    ["\\d", "Match any digit ([0-9]).", "/\\d/ → \"5\" in \"a5\""],
+                    ["\\s", "Match whitespace (space, tab, etc.).", "/\\s/ → \" \""],
+                    ["\\w", "Match word character ([a-zA-Z0-9_]).", "/\\w+/ → \"hello\""],
+                    [".", "Match any character except newline.", "/a.c/ → \"abc\""],
+                    ["^", "Start of string/line.", "/^abc/ → \"abc\" at start"],
+                    ["$", "End of string/line.", "/xyz$/ → \"xyz\" at end"],
+                    ['[abc]', 'Match any of a, b, or c.', '/[aeiou]/ → "e"'],
+                    ['[^abc]', 'Match anything not a, b, or c.', '/[^0-9]/ → "a" in "a1"'],
+                    ['a|b', 'Match a or b.', '/yes|no/ → "yes"'],
+                    ['()', 'Capture group.', '/(\\d{2})-(\\d{2})/ → Groups in "12-34"'],
+                    ['{n}', 'Exact n repetitions.', '/\\d{3}/ → "123"'],
+                    ['{n,}', 'At least n repetitions.', '/\\d{2,}/ → "123"'],
+                    ['{n,m}', 'Between n and m repetitions.', '/\\d{2,4}/ → "123"'],
+                    ['"*"', 'Zero or more repetitions.', '/a"*"/ → "aaa"'],
+                    ['"+"', 'One or more repetitions.', '/a+/ → "aaa"'],
+                    ['"?"', 'Zero or one repetition.', '/a?/ → "a" or ""']
+                ]
+            }
+        }, ];
 
         // Questions and tasks
         const questions = [{
-            type: "search-task",
-            title: "Research: JavaScript Event Loop",
-            content: "Research how the JavaScript event loop works with setTimeout and setInterval. How do these functions interact with the call stack and task queue?"
+            type: "question",
+            question: "What is the main difference between synchronous and asynchronous JavaScript execution?",
+            options: [
+                "Synchronous executes code line by line waiting for each operation to complete, asynchronous allows multiple operations without waiting.",
+                "Synchronous allows multiple operations without waiting, asynchronous executes line by line.",
+                "Synchronous uses callbacks, asynchronous uses promises.",
+                "Synchronous is faster than asynchronous."
+            ],
+            correctIndex: 0
+        }, {
+            type: "question",
+            question: "Given the following promise code, what will be logged if Math.random() returns 0.7?",
+            code: `const promise = new Promise((resolve, reject) => {
+    const data = 0.7;
+    if(data < 0.5) {
+        resolve(data);
+    } else {
+        reject("Error");
+    }
+});
+promise
+    .then(data => console.log("Success:", data))
+    .catch(err => console.log("Failure:", err))
+    .finally(() => console.log("Completed"));`,
+            options: [
+                "Success: 0.7\nCompleted",
+                "Failure: Error\nCompleted",
+                "Completed\nSuccess: 0.7",
+                "Completed\nFailure: Error"
+            ],
+            correctIndex: 1
+        }, {
+            type: "question",
+            question: "In the JavaScript event loop, which queue has higher priority and is processed first?",
+            options: [
+                "Task Queue",
+                "Microtask Queue",
+                "Call Stack",
+                "Web APIs"
+            ],
+            correctIndex: 1
+        }, {
+            type: "question",
+            question: "What will be the output order of the following code snippet?",
+            code: `console.log("Start");
+setTimeout(() => console.log("Timeout"), 0);
+Promise.resolve().then(() => console.log("Promise"));
+console.log("End");`,
+            options: [
+                "Start, Timeout, Promise, End",
+                "Start, End, Timeout, Promise",
+                "Start, End, Promise, Timeout",
+                "Start, Promise, End, Timeout"
+            ],
+            correctIndex: 2
+        }, {
+            type: "question",
+            question: "What is the primary difference between Promise.all() and Promise.allSettled()?",
+            options: [
+                "all() settles when all promises complete, allSettled() when first promise completes",
+                "all() rejects if any promise rejects, allSettled() always resolves with all outcomes",
+                "all() works only with arrays, allSettled() works with any iterable",
+                "all() executes promises sequentially, allSettled() executes in parallel"
+            ],
+            correctIndex: 1
+        }, {
+            type: "question",
+            question: "Which regex pattern correctly matches a string that starts with 'abc' and ends with 'xyz'?",
+            options: [
+                "/^abc.*xyz$/",
+                "/abc.*xyz/",
+                "/^abc.*xyz/",
+                "/abc.*xyz$/"
+            ],
+            correctIndex: 0
+        }, {
+            type: "question",
+            question: "What does the regex quantifier {2,4} mean?",
+            options: [
+                "Match exactly 2 or 4 repetitions",
+                "Match between 2 and 4 repetitions",
+                "Match at least 2 repetitions",
+                "Match zero or more repetitions"
+            ],
+            correctIndex: 1
+        }, {
+            type: "task",
+            title: "Implement: Async/Await with Error Handling",
+            content: "Write an async function that fetches user data from a simulated API (use setTimeout and Promise). Handle success and failure cases using try/catch."
+        }, {
+            type: "task",
+            title: "Implement: Regex for Password Validation",
+            content: "Create a regex pattern that validates passwords with at least 8 characters, including uppercase, lowercase, digits, and special characters."
         }, {
             type: "search-task",
-            title: "Research: Promise Methods",
-            content: "Research the differences between Promise.all(), Promise.race(), Promise.allSettled(), and Promise.any(). Create examples demonstrating each method's behavior."
+            title: "Research: Differences Between Callbacks, Promises, and Async/Await",
+            content: "Explain the differences, advantages, and disadvantages of callbacks, promises, and async/await in JavaScript asynchronous programming."
+        }, {
+            type: "search-task",
+            title: "Research: Event Loop and Microtasks vs Macrotasks",
+            content: "Investigate how the JavaScript event loop handles microtasks and macrotasks, and how this affects the execution order of asynchronous code."
         }, ];
-
         // ==================== TEMPLATE RENDERING ====================
         // Functions to render the content - you don't need to modify these
     </script>
