@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focal X - Node.js Bootcamp: Lecture 7 </title>
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="apple-touch-icon" href="./logo.jpg">
+    <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
+    <meta name="theme-color" content="#b21f1f">
+    <link rel="stylesheet" href="./assets/lecture.css">
+</head>
+
+<body>
+    <div class="container">
+        <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
+        <header>
+            <h1 id="lecture-title">Focal X - Node.js Bootcamp</h1>
+            <p class="subtitle" id="lecture-subtitle">Solve Task 1</p>
+        </header>
+
+        <div class="content">
+            <div class="lecture-content">
+                <h2>Lecture Content</h2>
+                <div id="tabs-container"></div>
+                <div id="tab-content-container"></div>
+            </div>
+
+            <div class="interactive-section">
+                <h2>Interactive Questions & Tasks</h2>
+                <div id="questions-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
+    </footer>
+
+    <script src="./reg.js"></script>
+    <script>
+        // ==================== CONFIGURATION ====================
+        // Update these arrays to change the content of your lecture
+
+        // Lecture metadata
+        const lectureConfig = {
+            title: "Focal X - Node.js Bootcamp",
+            subtitle: "Solve Task 3"
+        };
+
+        // Lecture content organized by tabs
+        const lectureContent = [{
+                tabTitle: "Solve Task",
+                title: "Solve Task (TrendPulse Social Feed Analyzer)",
+                content: `// inputs
+let rawPosts = [
+    { 
+        id: "p1", // most important value in each object
+        author: "  Mira  ", 
+        content: "JS Arrays are amazing! #javascript #coding", 
+        likes: "120", 
+        shares: 18, 
+        comments: 40, 
+        createdAt: "2026-03-27T09:30:00Z" 
+    },
+    { id: "p2", author: "rami", content: "  check this out #Coding  ", likes: 75, shares: "11", comments: "13", createdAt: "2026-03-28T06:10:00Z" },
+    { id: "p3", author: "SARA", content: "", likes: "22", shares: 2, comments: 1, createdAt: "invalid-date" },
+    { id: "p4", author: "leo", content: "Node + Date + Timers #nodejs #javascript", likes: "210", shares: "35", comments: 70, createdAt: "2026-03-28T08:50:00Z" },
+    { id: "p5", author: "Mira", content: "  #coding tips for loops and conditions  ", likes: "95", shares: 20, comments: "25", createdAt: "2026-03-28T07:40:00Z" }
+];
+
+// 1
+function normalizePost(post) {
+    return { 
+        id: post.id, 
+        author: post.author.trim().toLowerCase(), 
+        content: post.content.trim().toLowerCase(), 
+        likes: +post.likes, 
+        shares: +post.shares, 
+        comments: +post.comments, 
+        createdAt: post.createdAt
+    };
+}
+
+// 2
+function isPostValid(post) { 
+    if(!post.content || post.content.trim() === "") {
+        return { status: false, reason: "Invalid \`content\` value" } 
+    } else if(typeof(post.likes) !== "number" || post.likes < 0) {
+        return { status: false, reason: "Invalid \`likes\` value" } 
+    } else if(typeof(post.shares) !== "number" || post.shares < 0) {
+        return { status: false, reason: "Invalid \`shares\` value" } 
+    } else if(typeof(post.comments) !== "number" || post.comments < 0) {
+        return { status: false, reason: "Invalid \`comments\` value" } 
+    }
+
+    return { status: true, reason: "" } // { status, reason } 
+}
+
+// 3
+function calculateEngagementScore(post) {
+    // shares (3) > comments (2) > likes (1)
+    // shares * 3 + comments * 2 + likes
+
+    return (
+        ((+post.likes || 0) * 1) 
+        + ((+post.comments || 0) * 2) 
+        + ((+post.shares || 0) * 3)
+    )
+}
+
+// 4
+function mutateFeed(posts) {
+    // mutating methods
+    posts.sort((a, b) => +b.likes - +a.likes);
+
+    return posts;
+}
+
+function cloneAndTransformFeed(posts) {
+    // non-mutating methods
+    const newPosts = posts.slice();
+    newPosts.sort((a, b) => +b.likes - +a.likes)
+
+    return newPosts;
+}
+
+// 5
+function rankPosts(posts) {
+    // score -> id
+    const newPosts = posts.slice();
+
+    newPosts.sort((a, b) => {
+        if(a.score !== b.score) {
+            return b.score - a.score
+        }
+        return a.id.localeCompare(b.id)
+    })
+
+    return newPosts;
+}
+
+// 6
+function extractTopHashtags(posts, limit = 10) {
+    // posts
+    const newPosts = posts.map(post => {
+        return post.content.split(" ").filter(e => e.startsWith("#"))
+    });
+    
+    const output = []; // { title: "#", count: 0 }
+
+    newPosts.forEach(post => {
+        post.forEach(pp => {
+            const targetHashtag = output.find(e => e.title === pp);
+            if(targetHashtag) {
+                targetHashtag.count += 1;
+            } else {
+                output.push({ title: pp, count: 1 })
+            }
+        })
+    });
+
+    output.sort((a, b) => b.count - a.count)
+
+    return output.slice(0, limit);
+    // slice(0, limit)
+}
+
+// 7
+function addPost(posts, newPost) {
+    // your code
+    if(!isPostValid(newPost).status) {
+        console.log("INVALID");
+    }
+
+    posts.push(newPost);
+}
+function updatePost(posts, postId, updates) {
+    // your code
+    const post = posts.find(p => p.id === postId);
+
+    if(!post) return "404"
+
+    Object.assign(post, updates)
+}
+function deletePost(posts, postId) {
+    // your code
+    const post = posts.find(p => p.id === postId);
+
+    if(!post) return "404";
+
+    posts = posts.filter(p => p.id !== postId)
+}
+function getPostById(posts, postId) {
+    // your code
+    const post = posts.find(p => p.id === postId);
+
+    if(!post) return "404"
+
+    return post 
+}
+function searchPosts(posts, keyword) {
+    // your code
+    return posts.filter(p => p.title.includes(keyword.toLowerCase()))
+}
+function getTopPosts(posts, limit) {
+    // your code
+    posts.sort((a, b) => b.score - a.score);
+
+    return posts.slice(0, limit);
+}
+function getStats(posts) {
+    //  your code
+    const totalScore = posts.reduce((a, b) => a + b.score, 0);
+
+    const avg = totalScore / posts.length;
+
+    return {
+        count: posts.length, 
+        avgScore: avg, 
+        topId: getTopPosts(posts, 1)[0].id
+    }
+}
+
+const cleanPosts = rawPosts.map(post => normalizePost(post));
+const scoredPosts = cleanPosts.map(post => ({ 
+    ...post, 
+    score: calculateEngagementScore(post) 
+}))
+
+// 8
+function buildSummaryReport(validPosts, rejectedPosts) {
+    // your code
+    return { 
+        accepted: validPosts, 
+        rejected: rejectedPosts, 
+        topTag: extractTopHashtags(scoredPosts)[0].title, 
+        avgScore: getStats(scoredPosts).avgScore 
+    }
+    // Accepted: 4 | Rejected: 1 | TopTag: #js | AvgScore: <number>
+}
+
+// Input
+// validPosts.length = 4, rejectedPosts.length = 1
+
+function testAllPosts() {
+    /* rawPosts.forEach(post => {
+        console.log(
+            normalizePost(post)
+        );
+    }) */
+    /* console.log(
+        rawPosts.map(post => isPostValid(post))
+    ); */
+
+    /* console.log(
+        rawPosts.map(post => calculateEngagementScore(post))
+    ); */
+
+    /* console.log(
+        mutateFeed(cleanPosts)
+    ); */
+
+    /* console.log(
+        cloneAndTransformFeed(cleanPosts)
+    ); */
+
+    /* console.log(
+        rankPosts(
+            scoredPosts
+        )
+    ); */
+
+    /* console.log(
+        extractTopHashtags(cleanPosts, 2)
+    ); */
+
+    console.log(
+        buildSummaryReport(
+            cleanPosts.filter(p => isPostValid(p).status).length,
+            cleanPosts.filter(p => !isPostValid(p).status).length
+        )
+    );
+}
+
+testAllPosts()`
+            }
+        ];
+
+        // Questions and tasks
+        const questions = [{
+            type: "search-task",
+            title: "Research: JavaScript Event Loop",
+            content: "Research how the JavaScript event loop works with setTimeout and setInterval. How do these functions interact with the call stack and task queue?"
+        }, {
+            type: "search-task",
+            title: "Research: Promise Methods",
+            content: "Research the differences between Promise.all(), Promise.race(), Promise.allSettled(), and Promise.any(). Create examples demonstrating each method's behavior."
+        }, ];
+
+        // ==================== TEMPLATE RENDERING ====================
+        // Functions to render the content - you don't need to modify these
+    </script>
+    <script src="./assets/lecture.js"></script>
+</body>
+
+</html>
