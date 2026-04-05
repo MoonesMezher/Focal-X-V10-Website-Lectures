@@ -46,7 +46,7 @@
         // Lecture metadata
         const lectureConfig = {
             title: "Focal X - Node.js Bootcamp",
-            subtitle: "Advanced JavaScript: Regex, ES6, OOP"
+            subtitle: "Advanced JavaScript: ES6, OOP"
         };
 
         // Lecture content organized by tabs
@@ -54,36 +54,10 @@
             tabTitle: "Last Lesson",
             title: "Last Lesson Recap",
             content: `/*
-1- Asynchronous (Callbacks, Promises, Async/Await)
-2- Event Loop (Call Stack, Queue, Web API, Micro Task Queue)
-3- Regex
+1- Solve Task 3
 */`
-        }, {
-            tabTitle: "Regex",
-            title: "Regular Expressions (Regex)",
-            content: `// Task: implement strong password pattern`,
-            table: {
-                headers: ["Pattern", "Description", "Example"],
-                rows: [
-                    ["\\d", "Match any digit ([0-9]).", "/\\d/ → \"5\" in \"a5\""],
-                    ["\\s", "Match whitespace (space, tab, etc.).", "/\\s/ → \" \""],
-                    ["\\w", "Match word character ([a-zA-Z0-9_]).", "/\\w+/ → \"hello\""],
-                    [".", "Match any character except newline.", "/a.c/ → \"abc\""],
-                    ["^", "Start of string/line.", "/^abc/ → \"abc\" at start"],
-                    ["$", "End of string/line.", "/xyz$/ → \"xyz\" at end"],
-                    ['[abc]', 'Match any of a, b, or c.', '/[aeiou]/ → "e"'],
-                    ['[^abc]', 'Match anything not a, b, or c.', '/[^0-9]/ → "a" in "a1"'],
-                    ['a|b', 'Match a or b.', '/yes|no/ → "yes"'],
-                    ['()', 'Capture group.', '/(\\d{2})-(\\d{2})/ → Groups in "12-34"'],
-                    ['{n}', 'Exact n repetitions.', '/\\d{3}/ → "123"'],
-                    ['{n,}', 'At least n repetitions.', '/\\d{2,}/ → "123"'],
-                    ['{n,m}', 'Between n and m repetitions.', '/\\d{2,4}/ → "123"'],
-                    ['"*"', 'Zero or more repetitions.', '/a"*"/ → "aaa"'],
-                    ['"+"', 'One or more repetitions.', '/a+/ → "aaa"'],
-                    ['"?"', 'Zero or one repetition.', '/a?/ → "a" or ""']
-                ]
-            }
-        }, {
+        }, 
+        {
             tabTitle: "ES6",
             title: "ES6 Features & Syntactic Sugar",
             table: {
@@ -306,7 +280,83 @@ admin.logInfo();`,
 //         this = { ...animalTraits, ...dogTraits };
 //     }
 // }`
-        }];
+        },
+        {
+            tabTitle: "Exercise",
+            title: "Exercise",
+            content: `const books = [
+    { id: 1, title: "The Great Gatsby", author: "Fitzgerald", price: 12, stock: 5 },
+    { id: 2, title: "1984", author: "Orwell", price: 10, stock: 0 },
+    { id: 3, title: "Moby Dick", author: "Melville", price: 15, stock: 3 },
+    { id: 4, title: "Pride and Prejudice", author: "Austen", price: 8, stock: 7 },
+    { id: 5, title: "The Hobbit", author: "Tolkien", price: 14, stock: 0 }
+];
+
+/* 1) getBookById(id)
+Return the book object that matches the given id. */
+const getBookById = id => {
+    return books.find(e => e.id === id);
+}
+
+/* 2) getBooksByAuthor(authorName)
+Return an array of all books written by the given author. */
+const getBooksByAuthor = authorName => {
+    return books.filter(e => e.author === authorName)
+}
+
+/* 3) getInStockBooks()
+Return an array of books where stock is greater than 0. */
+const getInStockBooks = () => {
+    return books.filter(e => e.stock > 0)
+}
+
+/* 4) getCheapestBook()
+Return the book with the lowest price. */
+const getCheapestBook = () => {
+    return books.reduce((a, b) => a.price < b.price? a: b, books[0]);
+}
+
+// (a, b) => {}
+// a = books[0], b = { id, price }
+// a.price < b.price? a: b
+
+/* 5) getAveragePrice()
+Return the average price of all books (as a number). */
+const getAveragePrice = () => {
+    // avg = total / count
+    const total = books.reduce((a, b) => a + b.price);
+    const count = books.length;
+    return total / count;
+}
+
+/* 6) applyDiscount(discountPercent)
+Return a new array of books with a new property salePrice = original price minus discount percent.
+Example: applyDiscount(10) reduces each price by 10%. */
+const applyDiscount = discountPercent => {
+    return books.map(e => {
+        return {
+            ...e,
+            salePrice: e.price * (1 - (discountPercent / 100))
+        }
+    })
+}
+
+/* 7) getBookTitles()
+Return an array containing only the titles of all books. */
+const getBookTitles = () => {
+    return books.map(e => e.title);
+};
+
+/* 8) getTotalStockValue()
+Return the total value of all stock (sum of price * stock for every book). */
+const getTotalStockValue = () => {
+    return books
+        .map(e => e.price * e.stock) // [num, ...]
+        .reduce((a, b) => a + b); // num
+}`
+        }
+        
+];
 
         // Questions and tasks
         const questions = [{
