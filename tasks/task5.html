@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 5: Git Branching and Module Management</title>
+    <title>Task 5: ShelfStack Library (JS + TypeScript)</title>
     <link rel="manifest" href="../manifest.json" />
     <link rel="apple-touch-icon" href="../logo.jpg">
     <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
@@ -127,18 +127,6 @@
         
         li {
             margin-bottom: 8px;
-        }
-        
-        .code-block {
-            background: #2c3e50;
-            color: #ecf0f1;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-            margin: 15px 0;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-            line-height: 1.5;
         }
         
         .requirements {
@@ -264,38 +252,6 @@
                 font-size: 2rem;
             }
         }
-        
-        .typescript-feature {
-            background: #f0f8ff;
-            border-left: 5px solid #3178c6;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 5px;
-        }
-        
-        .code-comparison {
-            display: flex;
-            gap: 20px;
-            margin: 20px 0;
-        }
-        
-        .code-comparison>div {
-            flex: 1;
-        }
-        
-        .js-code {
-            border-left: 3px solid #f7df1e;
-        }
-        
-        .ts-code {
-            border-left: 3px solid #3178c6;
-        }
-        
-        @media (max-width: 768px) {
-            .code-comparison {
-                flex-direction: column;
-            }
-        }
     </style>
 </head>
 
@@ -303,13 +259,12 @@
     <div class="container">
         <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
         <header>
-            <h1 id="title">Task 5: Git Branching and Module Management</h1>
-            <p class="subtitle" id="subtitle">Create a JavaScript project with multiple files, implement Git branching strategy, and set up proper GitHub workflow with module imports and Git ignore rules.</p>
+            <h1 id="title">Task 5: ShelfStack Library (JS + TypeScript)</h1>
+            <p class="subtitle" id="subtitle">Easy two-step task: small library in JavaScript (classes + destructuring), then the same idea in TypeScript (types + interfaces).</p>
             <button class="language-toggle" id="languageToggle">العربية / English</button>
         </header>
 
         <div class="task-content" id="taskContent">
-            <!-- Content will be dynamically inserted here -->
         </div>
 
         <div class="timer-section">
@@ -332,7 +287,7 @@
                     <span class="timer-label" id="seconds-label">Seconds</span>
                 </div>
             </div>
-            <p class="finish-date" id="finish-date">Finish by: September 27, 2026</p>
+            <p class="finish-date" id="finish-date">Finish by: April 11, 2026</p>
             <p id="timer-message">Complete the task before the deadline!</p>
         </div>
 
@@ -347,88 +302,122 @@
 
     <script src="../reg.js"></script>
     <script>
-        // Content data structure
         const taskData = {
             en: {
-                title: "Task 4: Git Branching and Module Management",
-                subtitle: "Create a JavaScript project with multiple files, Git branches, and proper GitHub workflow",
+                title: "Task 5: ShelfStack Library (JS + TypeScript)",
+                subtitle: "Easy two-step task: small library in JavaScript (classes + destructuring), then the same idea in TypeScript (types + interfaces).",
                 sections: [{
                     type: "idea",
-                    title: "💻 The Task: \"Git Branching and Module Management\"",
-                    content: "Create a JavaScript project with multiple files, implement Git branching strategy, and set up proper GitHub workflow with module imports and Git ignore rules."
+                    title: "Story: ShelfStack Community Library",
+                    content: "You build a very small library app. Part A is plain JavaScript: a few classes and destructuring. Part B is the same books/loans idea written in TypeScript with simple interfaces. Keep your solution short; focus on clarity, not extra features."
                 }, {
                     type: "requirements",
-                    title: "📝 Requirements",
+                    title: "Rules (simple)",
                     content: [{
                         type: "list",
-                        title: "Project Structure Requirements:",
+                        title: "What to use",
                         items: [
-                            "Create a project with 4 JavaScript files: mul.js, add.js, index.js, and secret.js",
-                            "mul.js should export a multiplication function",
-                            "add.js should export an addition function",
-                            "index.js should import and use both functions from mul.js and add.js",
-                            "secret.js should contain sensitive information and be ignored by Git"
+                            "Lecture 8: classes, `extends`, `super`, one overridden method, at least one `#` private field, one `static` method, object and array destructuring.",
+                            "Lecture 9: install TypeScript, `tsc --init`, one or two `.ts` files, `interface` and `type`, typed functions. Do **not** use `any`."
                         ]
                     }, {
                         type: "list",
-                        title: "Git & GitHub Workflow:",
+                        title: "Skip (not part of this task)",
                         items: [
-                            "Initialize Git repository in your project folder",
-                            "Create a branch for the 'add' feature and commit add.js there",
-                            "Create a separate branch for the 'mul' feature and commit mul.js there",
-                            "Merge both branches into main branch",
-                            "Create .gitignore file and add secret.js to it",
-                            "Create README.md with simple documentation",
-                            "Push the entire project to GitHub"
-                        ]
-                    }, {
-                        type: "output",
-                        title: "Expected File Structure:",
-                        content: "Your project should have the following structure:",
-                        example: `project-folder/
-├── add.js           (developed in add-branch)
-├── mul.js           (developed in mul-branch) 
-├── index.js         (imports and uses both functions)
-├── secret.js        (ignored by Git)
-├── .gitignore       (includes secret.js)
-└── README.md        (project documentation)`
-                    }, {
-                        type: "list",
-                        title: "GitHub Account Setup Guide:",
-                        items: [
-                            "Go to github.com and create a new account if you don't have one",
-                            "Verify your email address",
-                            "Install Git on your computer from git-scm.com",
-                            "Configure Git with your name and email:",
-                            "`git config --global user.name 'Your Name'`",
-                            "`git config --global user.email 'your-email@example.com'`",
-                        ]
-                    }, {
-                        type: "list",
-                        title: "Expected Code Implementation:",
-                        items: [
-                            "add.js should export a function that takes two numbers and returns their sum",
-                            "mul.js should export a function that takes two numbers and returns their product",
-                            "index.js should import both functions and demonstrate their usage",
-                            "secret.js should contain any sensitive data (API keys, passwords, etc.)",
-                            ".gitignore should properly exclude secret.js from version control"
+                            "Multiple inheritance / mixins (Lecture 8 tab).",
+                            "TypeScript advanced lessons: generics `<T>`, tagged unions, advanced type-guard homework, \"Advanced Topics\" extras."
                         ]
                     }]
                 }, {
+                    type: "requirements",
+                    title: "Part A — JavaScript file `part-a.js`",
+                    content: [{
+                        type: "list",
+                        title: "Classes (only these four)",
+                        items: [
+                            "`LibraryItem`: fields `id`, `title`, `isAvailable`; methods `describe()` and simple `borrow()` / `returnItem()` (or similar names) that flip `isAvailable`.",
+                            "`Book extends LibraryItem`: add `isbn` and `author` (strings). Override `describe()` to mention book details.",
+                            "`Member`: one private number field like `#balance` (or `#creditCents`), plus `deposit(n)` and `getBalance()`.",
+                            "`LibraryCatalog`: stores books in an array; `addItem(book)`; **static** method e.g. `nextId()` or `makeId(prefix)`; `registerLoan({ memberId, itemId })` — the parameter must use **object destructuring** in the function signature; `snapshotStats()` returns `{ total, available }` (counts of books)."
+                        ]
+                    }, {
+                        type: "list",
+                        title: "Destructuring (three small proofs)",
+                        items: [
+                            "In `registerLoan`, write the parameter as `{ memberId, itemId }`.",
+                            "At the end of the file, call `snapshotStats()` and write: `const { total, available } = catalog.snapshotStats();`",
+                            "Use **array destructuring** once, e.g. `const [a, b] = [\"b1\", \"b2\"];` before adding two books (or another simple line in your demo)."
+                        ]
+                    }, {
+                        type: "list",
+                        title: "End of file",
+                        items: [
+                            "A short demo: create a catalog, add 1–2 books, call `registerLoan`, print `describe()` for one book, print `total` and `available`."
+                        ]
+                    }, {
+                        type: "output",
+                        title: "Part A — minimal example",
+                        content: "Your code should look roughly like this (you may rename, but keep the ideas):",
+                        example: `const cat = new LibraryCatalog();
+cat.addItem(new Book({ id: "b1", title: "Clean Code", isbn: "978-0132350884", author: "Martin" }));
+cat.registerLoan({ memberId: "m1", itemId: "b1" });
+
+const { total, available } = cat.snapshotStats();
+// total is number of books; available is how many are not on loan`
+                    }]
+                }, {
+                    type: "requirements",
+                    title: "Part B — TypeScript folder `shelfstack-ts/`",
+                    content: [{
+                        type: "list",
+                        title: "Setup",
+                        items: [
+                            "Create `shelfstack-ts/` with `tsconfig.json` (`npx tsc --init`).",
+                            "Put all TypeScript in `src/` — **one file is enough** (`library.ts`) or two files if you prefer (`types.ts` + `helpers.ts`).",
+                            "Run `npx tsc` and make sure `.js` files appear in `dist/` (or your `outDir`)."
+                        ]
+                    }, {
+                        type: "list",
+                        title: "Types only (keep it small)",
+                        items: [
+                            "`type BookId = string` (or skip `type` and use `string` in interfaces — both OK).",
+                            "`interface Book { id: string; title: string; isbn: string; author: string; }`",
+                            "`interface Loan { id: string; bookId: string; memberId: string; }`",
+                            "Optional: add `readonly` on one field if you want (e.g. `readonly id: string` on `Book`)."
+                        ]
+                    }, {
+                        type: "list",
+                        title: "Two typed functions",
+                        items: [
+                            "`function addBook(list: Book[], book: Book): Book[]` — return a **new** array with the book added (do not use `any`).",
+                            "`function findByIsbn(list: Book[], isbn: string): Book | undefined` — return the book or `undefined`."
+                        ]
+                    }, {
+                        type: "output",
+                        title: "Part B — folder example",
+                        content: "Simple layout:",
+                        example: `shelfstack-ts/
+  tsconfig.json
+  src/
+    library.ts   // interfaces + addBook + findByIsbn + small demo comments
+  dist/          // after tsc`
+                    }]
+                }, {
+                    type: "note",
+                    title: "Submission",
+                    content: "Telegram tasks thread: send `part-a.js` and a zip of `shelfstack-ts` (or a link if your class uses Git). First line of your message: `#TASK5 - Your Full Name`."
+                }, {
                     type: "learning",
-                    title: "📚 Git & GitHub Concepts Reference",
+                    title: "Learning recap",
                     content: [
-                        "Git Basics: `git init`, `git add .`, `git commit -m 'message'`, `git status`",
-                        "Branching: `git branch branch-name`, `git checkout branch-name`, `git checkout -b new-branch`",
-                        "Merging: `git merge branch-name` (while on target branch)",
-                        "Remote: `git remote add origin url`, `git push -u origin main`",
-                        ".gitignore: Patterns to exclude files from tracking",
-                        "Module Exports: `module.exports = functionName` and `const imported = require('./file')`"
+                        "Lecture 8: classes, inheritance, private `#`, `static`, destructuring.",
+                        "Lecture 9: interfaces, typed functions, compile with `tsc`.",
+                        "Same mini-domain twice: behavior in JS, then types in TS."
                     ]
                 }],
                 timer: {
                     title: "Time Remaining to Complete Task",
-                    message: "Complete the task before the deadline! - Submissions are only accepted within the final six hours.",
+                    message: "Complete the task before the deadline!",
                     days: "Days",
                     hours: "Hours",
                     minutes: "Minutes",
@@ -436,88 +425,123 @@
                 },
                 thankYou: "\"Thank you for your hard work and dedication. Your efforts are appreciated!\"",
                 buttonText: "العربية / English",
-                finishDate: "Finish by: October 11, 2026"
+                finishDate: "Finish by: April 11, 2026"
             },
             ar: {
-                title: "المهمة 4: إدارة الفروع في Git ووحدات المشروع",
-                subtitle: "أنشئ مشروع جافاسكريبت متعدد الملفات مع فروع Git وسير عمل GitHub صحيح",
+                title: "المهمة 5: مكتبة ShelfStack (جافاسكريبت + TypeScript)",
+                subtitle: "مهمة بخطوتين وبسيطة: مكتبة صغيرة بجافاسكريبت (أصناف + تفكيك)، ثم نفس الفكرة بـ TypeScript (أنواع وواجهات).",
                 sections: [{
                     type: "idea",
-                    title: "💻 المهمة: \"إدارة الفروع في Git ووحدات المشروع\"",
-                    content: "أنشئ مشروع جافاسكريبت متعدد الملفات، نفّذ استراتيجية فروع Git، وأنشئ سير عمل GitHub صحيح مع استيراد الوحدات وقواعد Git ignore."
+                    title: "القصة: مكتبة ShelfStack المجتمعية",
+                    content: "تبني تطبيق مكتبة بسيط جدًا. الجزء أ بجافاسكريبت العادي: عدّة أصناف وتفكيك. الجزء ب يعيد نفس فكرة الكتب والإعارات بـ TypeScript بواجهات بسيطة. اجعل الحل قصيرًا وركز على الوضوح لا على ميزات إضافية."
                 }, {
                     type: "requirements",
-                    title: "📝 المتطلبات",
+                    title: "قواعد (مبسّطة)",
                     content: [{
                         type: "list",
-                        title: "متطلبات هيكل المشروع:",
+                        title: "ما تستخدمه",
                         items: [
-                            "أنشئ مشروعاً بـ 4 ملفات جافاسكريبت: mul.js, add.js, index.js, و secret.js",
-                            "يجب أن يصدر mul.js دالة الضرب",
-                            "يجب أن يصدر add.js دالة الجمع",
-                            "يجب أن يستورد index.js ويستخدم الدالتين من mul.js و add.js",
-                            "يجب أن يحتوي secret.js على معلومات حساسة ويتم تجاهله بواسطة Git"
+                            "المحاضرة 8: أصناف، `extends`، `super`، تجاوز دالة واحدة، حقل خاص `#` واحد على الأقل، دالة `static` واحدة، تفكيك كائن ومصفوفة.",
+                            "المحاضرة 9: تثبيت TypeScript، `tsc --init`، ملف أو ملفان `.ts`، `interface` و`type`، دوال مُعلّمة. **لا** تستخدم `any`."
                         ]
                     }, {
                         type: "list",
-                        title: "سير عمل Git و GitHub:",
+                        title: "تجاهل هذا (ليس من المهمة)",
                         items: [
-                            "ابدأ مستودع Git في مجلد مشروعك",
-                            "أنشئ فرعاً لميزة 'add' وأضف add.js هناك",
-                            "أنشئ فرعاً منفصلاً لميزة 'mul' وأضف mul.js هناك",
-                            "ادمج كلا الفرعين في الفرع الرئيسي",
-                            "أنشئ ملف .gitignore وأضف secret.js إليه",
-                            "أنشئ README.md بوثائق بسيطة",
-                            "ادفع المشروع بأكمله إلى GitHub"
-                        ]
-                    }, {
-                        type: "output",
-                        title: "هيكل الملفات المتوقع:",
-                        content: "يجب أن يكون لمشروعك الهيكل التالي:",
-                        example: `project-folder/
-├── add.js           (مطور في فرع add)
-├── mul.js           (مطور في فرع mul)
-├── index.js         (يستورد ويستخدم الدالتين)
-├── secret.js        (مهمل بواسطة Git)
-├── .gitignore       (يتضمن secret.js)
-└── README.md        (وثائق المشروع)`
-                    }, {
-                        type: "list",
-                        title: "دليل إعداد حساب GitHub:",
-                        items: [
-                            "اذهب إلى github.com وأنشئ حساباً جديداً إذا لم يكن لديك",
-                            "تحقق من عنوان بريدك الإلكتروني",
-                            "ثبّت Git على حاسوبك من git-scm.com",
-                            "اضبط Git باسمك وبريدك الإلكتروني:",
-                            "`git config --global user.name 'اسمك'`",
-                            "`git config --global user.email 'بريدك@example.com'`",
-                        ]
-                    }, {
-                        type: "list",
-                        title: "التنفيذ المتوقع للكود:",
-                        items: [
-                            "يجب أن يصدر add.js دالة تأخذ رقمين وتعيد مجموعهما",
-                            "يجب أن يصدر mul.js دالة تأخذ رقمين وتعيد حاصل ضربهما",
-                            "يجب أن يستورد index.js كلا الدالتين ويظهر استخدامهما",
-                            "يجب أن يحتوي secret.js على أي بيانات حساسة (مفاتيح API، كلمات مرور، إلخ)",
-                            "يجب أن يستبعد .gitignore ملف secret.js بشكل صحيح من التحكم بالإصدارات"
+                            "الوراثة المتعددة / mixins (تبويب المحاضرة 8).",
+                            "دروس TypeScript المتقدمة: أنواع عامة `<T>`، اتحاد موسوم، واجبات حراس أنواع متقدمة، مواضيع \"Advanced Topics\"."
                         ]
                     }]
                 }, {
+                    type: "requirements",
+                    title: "الجزء أ — ملف JavaScript `part-a.js`",
+                    content: [{
+                        type: "list",
+                        title: "أصناف (هذه الأربعة فقط)",
+                        items: [
+                            "`LibraryItem`: حقول `id`، `title`، `isAvailable`؛ دوال `describe()` و`borrow()` / `returnItem()` (أو أسماء قريبة) تغيّر `isAvailable`.",
+                            "`Book extends LibraryItem`: أضف `isbn` و`author` كنصوص. تجاوز `describe()` لذكر تفاصيل الكتاب.",
+                            "`Member`: حقل رقم خاص واحد مثل `#balance` (أو `#creditCents`) مع `deposit(n)` و`getBalance()`.",
+                            "`LibraryCatalog`: يخزن الكتب في مصفوفة؛ `addItem(book)`؛ دالة **ثابتة** مثل `nextId()` أو `makeId(prefix)`؛ `registerLoan({ memberId, itemId })` — المعامل يُكتب **بتفكيك كائن**؛ `snapshotStats()` تُرجع `{ total, available }` (عدد الكتب)."
+                        ]
+                    }, {
+                        type: "list",
+                        title: "التفكيك (ثلاثة إثباتات بسيطة)",
+                        items: [
+                            "في `registerLoan` اكتب المعامل `{ memberId, itemId }`.",
+                            "في نهاية الملف استدعِ `snapshotStats()` واكتب: `const { total, available } = catalog.snapshotStats();`",
+                            "استخدم **تفكيك مصفوفة** مرة مثل `const [a, b] = [\"b1\", \"b2\"];` قبل إضافة كتابين (أو سطر بسيط في العرض)."
+                        ]
+                    }, {
+                        type: "list",
+                        title: "نهاية الملف",
+                        items: [
+                            "عرض قصير: أنشئ فهرسًا، أضف كتابًا أو اثنين، نفّذ `registerLoan`، اطبع `describe()` لكتاب واحد، اطبع `total` و`available`."
+                        ]
+                    }, {
+                        type: "output",
+                        title: "الجزء أ — مثال بسيط",
+                        content: "يجب أن يبدو الكود تقريبًا هكذا (يمكن تغيير الأسماء مع بقاء الفكرة):",
+                        example: `const cat = new LibraryCatalog();
+cat.addItem(new Book({ id: "b1", title: "Clean Code", isbn: "978-0132350884", author: "Martin" }));
+cat.registerLoan({ memberId: "m1", itemId: "b1" });
+
+const { total, available } = cat.snapshotStats();
+// total = عدد الكتب؛ available = غير المعارة`
+                    }]
+                }, {
+                    type: "requirements",
+                    title: "الجزء ب — مجلد TypeScript `shelfstack-ts/`",
+                    content: [{
+                        type: "list",
+                        title: "الإعداد",
+                        items: [
+                            "أنشئ `shelfstack-ts/` مع `tsconfig.json` (`npx tsc --init`).",
+                            "ضع كل TypeScript في `src/` — **ملف واحد يكفي** (`library.ts`) أو ملفان إن أحببت.",
+                            "شغّل `npx tsc` وتأكد أن ملفات `.js` تظهر في `dist/` (أو `outDir`)."
+                        ]
+                    }, {
+                        type: "list",
+                        title: "أنواع فقط (بسيطة)",
+                        items: [
+                            "`type BookId = string` (أو استخدم `string` مباشرة في الواجهات — الاثنان مقبول).",
+                            "`interface Book { id: string; title: string; isbn: string; author: string; }`",
+                            "`interface Loan { id: string; bookId: string; memberId: string; }`",
+                            "اختياري: أضف `readonly` على حقل واحد (مثل `readonly id: string` على `Book`)."
+                        ]
+                    }, {
+                        type: "list",
+                        title: "دالتان فقط",
+                        items: [
+                            "`function addBook(list: Book[], book: Book): Book[]` — أعد **مصفوفة جديدة** مع إضافة الكتاب (دون `any`).",
+                            "`function findByIsbn(list: Book[], isbn: string): Book | undefined` — أعد الكتاب أو `undefined`."
+                        ]
+                    }, {
+                        type: "output",
+                        title: "الجزء ب — مثال للمجلد",
+                        content: "هيكل بسيط:",
+                        example: `shelfstack-ts/
+  tsconfig.json
+  src/
+    library.ts   // الواجهات + addBook + findByIsbn + تعليقات قصيرة
+  dist/          // بعد tsc`
+                    }]
+                }, {
+                    type: "note",
+                    title: "التسليم",
+                    content: "ردّة تاسكات التلغرام: أرسل `part-a.js` وضغط مجلد `shelfstack-ts` (أو رابط إن طلبت الدورة Git). السطر الأول: `#TASK5 - اسمك الكامل`."
+                }, {
                     type: "learning",
-                    title: "📚 مرجع مفاهيم Git و GitHub",
+                    title: "ملخص التعلّم",
                     content: [
-                        "أساسيات Git: `git init`, `git add .`, `git commit -m 'رسالة'`, `git status`",
-                        "الفروع: `git branch اسم-الفرع`, `git checkout اسم-الفرع`, `git checkout -b فرع-جديد`",
-                        "الدمج: `git merge اسم-الفرع` (أثناء التواجد في الفرع الهدف)",
-                        "الخوادم البعيدة: `git remote add origin الرابط`, `git push -u origin main`",
-                        ".gitignore: أنماط لاستبعاد الملفات من التتبع",
-                        "تصدير الوحدات: `module.exports = اسم_الدالة` و `const مستورد = require('./ملف')`"
+                        "المحاضرة 8: أصناف، وراثة، `#` خاص، `static`، تفكيك.",
+                        "المحاضرة 9: واجهات، دوال مُعلّمة، تجميع بـ`tsc`.",
+                        "نفس المجال الصغير مرتين: سلوك في JS ثم أنواع في TS."
                     ]
                 }],
                 timer: {
                     title: "الوقت المتبقي لإكمال المهمة",
-                    message: "أكمل المهمة قبل الموعد النهائي! - يتم قبول التسليم فقط في الساعات الست الأخيرة.",
+                    message: "أكمل المهمة قبل الموعد النهائي!",
                     days: "أيام",
                     hours: "ساعات",
                     minutes: "دقائق",
@@ -525,20 +549,17 @@
                 },
                 thankYou: "\"شكرًا لجهودك الجادة وتفانيك. نقدر جهودك!\"",
                 buttonText: "English / العربية",
-                finishDate: "الانتهاء بحلول: 11 أكتوبر 2026"
+                finishDate: "الانتهاء بحلول: 11 أبريل 2026"
             }
         };
 
-        // Render content based on language
         function renderContent(lang) {
             const data = taskData[lang];
             const taskContent = document.getElementById('taskContent');
 
-            // Update page title and subtitle
             document.getElementById('title').textContent = data.title;
             document.getElementById('subtitle').textContent = data.subtitle;
 
-            // Update timer section
             document.getElementById('timer-title').textContent = data.timer.title;
             document.getElementById('timer-message').textContent = data.timer.message;
             document.getElementById('days-label').textContent = data.timer.days;
@@ -547,16 +568,12 @@
             document.getElementById('seconds-label').textContent = data.timer.seconds;
             document.getElementById('finish-date').textContent = data.finishDate;
 
-            // Update thank you message
             document.getElementById('thankYou').textContent = data.thankYou;
 
-            // Update button text
             document.getElementById('languageToggle').textContent = data.buttonText;
 
-            // Clear existing content
             taskContent.innerHTML = '';
 
-            // Render each section
             data.sections.forEach(section => {
                 const sectionEl = document.createElement('div');
                 sectionEl.className = 'section';
@@ -590,13 +607,19 @@
                             });
                             sectionEl.appendChild(listEl);
                         } else if (item.type === 'output') {
+                            itemTitle.setAttribute('dir', 'ltr');
+                            itemTitle.style.textAlign = 'left';
                             const contentEl = document.createElement('p');
                             contentEl.textContent = item.content;
+                            contentEl.setAttribute('dir', 'ltr');
+                            contentEl.style.textAlign = 'left';
                             sectionEl.appendChild(contentEl);
 
                             const exampleEl = document.createElement('div');
                             exampleEl.className = 'output-example';
                             exampleEl.textContent = item.example;
+                            exampleEl.setAttribute('dir', 'ltr');
+                            exampleEl.style.textAlign = 'left';
                             sectionEl.appendChild(exampleEl);
                         }
                     });
@@ -613,7 +636,6 @@
                 taskContent.appendChild(sectionEl);
             });
 
-            // Set text direction based on language
             if (lang === 'ar') {
                 document.body.setAttribute('dir', 'rtl');
                 document.querySelectorAll('.section').forEach(section => {
@@ -627,20 +649,13 @@
             }
         }
 
-        // Timer functionality
         function startCountdown() {
-            // Set the date we're counting down to (September 27, 2026)
-            const countDownDate = new Date("Oct 11, 2026 23:59:59").getTime();
+            const countDownDate = new Date("Apr 11, 2026 23:59:59").getTime();
 
-            // Update the countdown every 1 second
             const countdown = setInterval(() => {
-                // Get today's date and time
                 const now = new Date().getTime();
-
-                // Find the distance between now and the countdown date
                 const distance = countDownDate - now;
 
-                // If the countdown is over, write some text
                 if (distance < 0) {
                     clearInterval(countdown);
                     document.getElementById("days").textContent = "00";
@@ -650,13 +665,11 @@
                     return;
                 }
 
-                // Time calculations for days, hours, minutes and seconds
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                // Display the results
                 document.getElementById("days").textContent = days.toString().padStart(2, '0');
                 document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
                 document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
@@ -664,15 +677,10 @@
             }, 1000);
         }
 
-        // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
-            // Render English content by default
             renderContent('en');
-
-            // Start the countdown timer
             startCountdown();
 
-            // Language toggle functionality
             document.getElementById('languageToggle').addEventListener('click', function() {
                 const currentLang = document.body.getAttribute('dir') === 'rtl' ? 'ar' : 'en';
                 const newLang = currentLang === 'en' ? 'ar' : 'en';
