@@ -17,7 +17,7 @@
         <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
         <header>
             <h1 id="lecture-title">Focal X - Node.js Bootcamp</h1>
-            <p class="subtitle" id="lecture-subtitle">TypeScript & Git</p>
+            <p class="subtitle" id="lecture-subtitle">Git & Github</p>
         </header>
 
         <div class="content">
@@ -46,7 +46,7 @@
         // Lecture metadata
         const lectureConfig = {
             title: "Focal X - Node.js Bootcamp",
-            subtitle: "TypeScript & Git"
+            subtitle: "Git & Github"
         };
 
         // Lecture content organized by tabs
@@ -54,326 +54,453 @@
             tabTitle: "Last Lesson",
             title: "Last Lesson Recap",
             content: `/*
-1- TypeScript Info
-2- Data Types
-3- Tubles
-4- Interfaces
+1- Git
+2- Github
+3- Command Line & Terminal
+4- Setup
+5- Git Workflow
+6- Branching
 */`
         }, {
-            tabTitle: "Interfaces",
-            title: "Interfaces in TypeScript",
-            content: `interface Author {
-    name: string;
-    age: number;
-}
+            tabTitle: "README & Markdown",
+            title: "README Files & Markdown",
+            content: `Project Documentation Essentials
 
-type x = Author
+What is README.md?
+- Primary documentation file for projects
+- First thing users see in your repository
+- Written in Markdown (.md extension)
+- Auto-rendered by GitHub/GitLab
 
-const mario: Author = {
-    name: "Mario",
-    age: 10
-}
+Why README is Crucial:
+- Project overview and purpose
+- Installation instructions
+- Usage examples
+- Contribution guidelines
+- License information
 
-interface Post {
-    title?: string;
-    body: string;
-    readonly tags: string[];
-    createdAt: Date;
-    author: Author;
-    print(): void
-}
+Markdown Basics:
+\`\`\`markdown
+# Heading 1
+## Heading 2
+### Heading 3
 
-const post: Post = {
-    title: "s",
-    body: "ss",
-    tags: ["sss"],
-    createdAt: new Date(),
-    author: {
-        name: "ss",
-        age: 10
-    },
-    print: () => {
-        console.log("SS")
-    }
-}
+**Bold Text**
+*Italic Text*
+~~Strikethrough~~
 
-// 1- NOTE: prop?: type; => optional property => this means that the property may or may not be present in the object.
-// 2- NOTE: readonly prop: type; => readonly property => this means the property cannot be modified after the object is created.
-// 3- NOTE: prop(): type; => method as property
-// 4- NOTE: you can create a new interface that extends an existing one. This allows you to build on top of existing structures.
+- List item 1
+- List item 2
 
-interface FeaturedPost extends Post {
-    featured: boolean; // New property
-} 
+1. Numbered item 1
+2. Numbered item 2
 
-// 5- NOTE: you can define interfaces that can be indexed with a specific type. 
-This is useful for objects that have dynamic keys.
+[Link Text](https://example.com)
+![Image Alt](image.jpg)
 
-interface StringArray {
-    [index: number]: string; // Index signature
-}
+\`Inline Code\`
 
-let myArray: StringArray = ["Hello", "World"];
+\`\`\`
+Code Block
+\`\`\`
 
-// 6- NOTE: you can combine multiple interfaces using intersection types.
-interface Post {
-    title: string;
-    body: string;
-}
+> Blockquote
+\`\`\`
 
-interface Author {
-    name: string;
-}
+Advanced Markdown:
+- Tables with | syntax
+- Task lists with - [ ] 
+- Emoji with :emoji_name:
+- Mathematical formulas
+- Mermaid diagrams
 
-type PostWithAuthor = Post & Author;
+README Structure:
+1. Project Title & Badges
+2. Project Description
+3. Installation
+4. Usage
+5. Features
+6. Contributing
+7. License
+8. Contact
 
-// 7- NOTE: classes can implement interfaces, ensuring that they adhere 
-// to the defined structure.
-
-const post1: Post = {
-    title: "post-1",
-    body: "ffffffffffffffffffffffff",
-    tags: ["a", "b", "c", "d", "e", "f"],
-    createdAt: new Date(),
-    author: mario
-}
-
-function getAuthor(post: Post): Author {
-    return post.author;
-}
-
-console.log(getAuthor(post1));
-
-const posts: Post[] = [];
-
-// Error
-posts.push("s");
-
-posts.push(post1);`
+Best Practices:
+- Write clear, concise documentation
+- Include code examples
+- Use screenshots/GIFs
+- Keep it updated
+- Multiple languages if needed`
         }, {
-            tabTitle: "Type Aliases",
-            title: "Type Aliases in TypeScript",
-            content: `// NOTE: add letter "T" to each type alias to make it clear
+            tabTitle: "Gitignore",
+            title: "Gitignore Files",
+            content: `Ignoring Files in Git
 
-type Color = string;
+Purpose:
+- Exclude files from version control
+- Prevent committing sensitive data
+- Avoid unnecessary binary files
+- Keep repository clean and focused
 
-const colorOne: Color = "black";
+Common Ignored Files:
+\`\`\`
+# Dependencies
+node_modules/
+vendor/
+*.jar
 
-type Post = {
-    title: string,
-    body: string
-}
+# Environment variables
+.env
+.config
 
-const post1: Post = {
-    title: "post-1",
-    body: "ffff"
-}
+# OS files
+.DS_Store
+Thumbs.db
 
-// NOTE: Post type does not match Post variable
+# IDE files
+.vscode/
+.idea/
+*.swp
 
-const Post: Post = {
-    title: "post-1",
-    body: "ffff"
-}`
+# Build outputs
+/dist
+/build
+*.exe
+\`\`\`
+
+Usage:
+- Create .gitignore in root directory
+- One pattern per line
+- Supports wildcards (*) and directories (/)
+- Can have global .gitignore for all projects
+
+Best Practices:
+- Ignore OS-specific files
+- Exclude dependencies
+- Never commit secrets
+- Use templates from gitignore.io`
         }, {
-            tabTitle: "Union Types",
-            title: "Union Types in TypeScript",
-            content: `type Email = string | null;
+            tabTitle: "Git Workflow",
+            title: "Git Workflow & Areas",
+            content: `Understanding Git's Architecture
 
-let adminEmail: Email = null; // inital email
+Four Main Areas:
 
-// when admin login
-adminEmail = "admin@admin.com";
+1. Working Directory
+- Your actual project files
+- Where you make changes
+- Untracked by Git initially
 
-// when admin logout
-adminEmail = null;
+2. Staging Area (Index)
+- Prepares changes for commit
+- Selective inclusion of changes
+- Intermediate between working directory and repository
 
-function getAdminEmail(email: Email): number {
-    /* 
-        you can not use string methods here because the value can be null 
-        so you will be ensure use somthing fit all types
+3. Local Repository
+- Complete project history
+- All commits and branches
+- Stores metadata in .git folder
 
-        error => return email.length;
-    */
-    return email?.length || 0;
-}`
+4. Remote Repository
+- Shared repository (GitHub, etc.)
+- Collaboration point for teams
+- Backup and distribution center
+
+Typical Workflow:
+1. Modify files in Working Directory
+2. Stage changes with git add
+3. Commit changes with git commit
+4. Push changes with git push`
         }, {
-            tabTitle: "Type Guards",
-            title: "Type Guards in TypeScript",
-            content: `type Id = string | number;
+            tabTitle: "Advanced Git",
+            title: "Advanced Git Techniques",
+            content: `Beyond the Basics
 
-function swapId(id: Id): Id {
-    // error
-    return parseInt(id);
+Stashing Changes:
+\`\`\`bash
+git stash                  # Temporarily save changes
+git stash list            # List stashes
+git stash pop             # Restore latest stash
+git stash apply           # Apply without removing
+\`\`\`
 
-    // typescript knows everything here
-    if(typeof id === "number") {
-        return id.toString();
-    } else {
-        return parseInt(id);
-    }
-}`
-        }, {
-            tabTitle: "Tagged Interfaces",
-            title: "Tagged Interfaces in TypeScript",
-            content: `interface Post {
-    type: "post"
-    id: number
-    title: string
-    body: string
-}
+Undoing Changes:
+\`\`\`bash
+git reset --soft [commit]  # Keep changes staged
+git reset --mixed [commit] # Keep changes unstaged
+git reset --hard [commit]  # Discard all changes
+git revert [commit]        # Create undo commit
+\`\`\`
 
-interface Author {
-    type: "author"
-    id: number
-    name: string
-    age: number
-}
+Rebasing:
+\`\`\`bash
+git rebase main           # Reapply commits on main
+git rebase -i [commit]    # Interactive rebase
+\`\`\`
 
-type PostOrAuthor = Post | Author;
+Tagging:
+\`\`\`bash
+git tag v1.0.0           # Create lightweight tag
+git tag -a v1.0.0 -m "Release"  # Annotated tag
+git push --tags          # Push tags to remote
+\`\`\`
 
-function test(val: PostOrAuthor): void {
-    // you can get the same properties to each interface like val.id
-    console.log(val.id);
-
-    if(val.type === 'author') {
-        console.log(val.name, val.age);
-    } else {
-        console.log(val.title, val.body);
-    }
-}
-
-let author: PostOrAuthor = {
-    type: "post",
-    id: 1,
-    title: "ss",
-    body: "OO"
-}
-
-test(author);`
-        }, {
-            tabTitle: "Generics",
-            title: "Generics in TypeScript",
+Advanced Tools:
+- git bisect: Binary search for bugs
+- git cherry-pick: Apply specific commits
+- git reflog: Recovery tool
+- git worktree: Multiple working directories`
+        },
+        {
+            tabTitle: "Node.js Introduction",
+            title: "Node.js Fundamentals",
             content: `/*
-Generics provide a way to create reusable 
-components that can work with any data type. 
-They allow you to define a type variable that can be 
-replaced with a specific type when the component is used.
+- Node is not a framework, it is a runtime. => interpreter.
+- Compiler Vs. Interpreter:
+=> code => compile => machine code => output
+=> code => interprete => output
+
+=> Node js runtime and is not a compiler.
+
+- JS on browser BY V8 Engine => 2008: JS on server = node js
+
+- Node js is single threaded (line by line) => one thread is work
+*/`
+        }, {
+            tabTitle: "Node.js Globals",
+            title: "Global Variables in Node.js",
+            content: `/* 
+- No window in node js (because no browser) like browser (it has a window & DOM)
+- node js has filesystem but in browser it does not has filesystem 
+- global variables => anywhere in your application you can access them
+
+Key Global Variables:
+
+1. __dirname => path to current working directory
+2. __filename => file name
+3. require => method to use modules in common.js
+4. module => info about current module
+5. process => info about env where the program is being executed
+
+Examples:
+console.log(__dirname);
+console.log(__filename.split('\\\\')[__filename.split('\\\\').length - 1]);
+console.log(process.env.OS);
+process.stdout.write('Hi');
+*/`
+        }, {
+            tabTitle: "Node.js Modules",
+            title: "Modules System in Node.js",
+            content: `// Question: have i write all my app code in one file? => answer: yes & no
+
+// Common.js => each file is module (by default) and you can change it from package.json => "type": "module"
+
+/*
+Module Export/Import Pattern:
+
+file: x.js
+    const x = 1;
+    module.exports = x;
+
+file: log.js
+    const x = require('./x');
+    console.log(x);
 */
 
-function identity<S>(arg: S): void {
-    console.log(arg);
-}
-
-identity<string>("s");
-identity<number>(10);
-
-identity<boolean>(true);
-identity<number>(10);`
+Core Built-in Modules:
+- OS Module
+- Path Module  
+- FS Module
+- HTTP Module
+- And many more...`
         }, {
-            tabTitle: "Advanced  Topics",
-            title: "Advanced Topics in TypeScript",
-            content: `// 1. Enums
-// 2. Mapping
-// 3. Conditional Types
-// 4. Utility Types
-// 5. Intersection Types
-// 6. Namespaces
-// 7. Abstract Classes`
-        }, ];
+            tabTitle: "OS & Path Modules",
+            title: "Operating System and Path Utilities",
+            content: `// OS Module
+const os = require('os');
 
-        // Questions and tasks
-        const questions = [{
-            type: "question",
-            question: "What is the main difference between interface and type alias?",
-            options: [
-                "Interfaces can be extended, type aliases cannot",
-                "Type aliases are more performant",
-                "Interfaces only work with objects, type aliases work with primitives",
-                "No significant difference"
-            ],
-            correctIndex: 0
-        }, {
-            type: "question",
-            question: "What does the 'readonly' modifier do in an interface?",
-            options: [
-                "Makes the property optional",
-                "Prevents modification after initialization",
-                "Hides the property from other classes",
-                "Makes the property private"
-            ],
-            correctIndex: 1
-        }, {
-            type: "question",
-            question: "What is a type guard in TypeScript?",
-            options: [
-                "A function that checks types at runtime",
-                "A way to protect against null values",
-                "A security feature for types",
-                "A compiler optimization"
-            ],
-            correctIndex: 0
-        }, {
-            type: "question",
-            question: "What will this TypeScript code output?",
-            code: `type Id = string | number;
+const currentOS = {
+    platform: os.platform(),
+    name: os.type(),
+    hostname: os.hostname(),
+    version: os.version(),
+    userInfo: os.userInfo(),
+    release: os.release(),
+    arch: os.arch(),
+    loadavg: os.loadavg(),
+    tmpdir: os.tmpdir(),
+    networkInterfaces: os.networkInterfaces(),
+};
 
-function processId(id: Id): string {
-    if (typeof id === "number") {
-        return id.toString();
+// Path Module
+const path = require('path');
+
+const uri = "C:\\\\Users\\\\97150\\\\OneDrive/Desktop/Focal/Ass Coach/Node 8/course/code"
+console.log(path.normalize(uri));
+console.log(path.sep)
+console.log(path.join(uri));
+console.log(path.basename(uri));
+console.log(path.resolve(uri));`
+        }, {
+            tabTitle: "FS Module",
+            title: "File System Operations",
+            content: `const fs = require('fs');
+const filePath = 'main.js';
+const data = 'const x = 1;\\n// console.log(x);';
+
+// Synchronous Methods
+fs.writeFileSync(filePath, data, 'utf8');
+const content = fs.readFileSync(filePath, 'utf-8');
+fs.unlinkSync("main.txt");
+
+// Asynchronous Methods (Callback)
+fs.writeFile('', 'hello world', (err, res) => {
+    if(err) {
+        console.log(err);
+        return;
     }
-    return id.toUpperCase();
-}
+    console.log(res)
+});
 
-console.log(processId(123));`,
-            options: [
-                "123",
-                "123 (as string)",
-                "Error - type error",
-                "undefined"
-            ],
-            correctIndex: 1
-        }, {
-            type: "question",
-            question: "What are generics used for in TypeScript?",
-            options: [
-                "To create reusable components that work with multiple types",
-                "To generate random data",
-                "To make code more generic",
-                "To handle generic errors"
-            ],
-            correctIndex: 0
-        }, {
-            type: "question",
-            question: "What is discriminated union (tagged interface) used for?",
-            options: [
-                "To discriminate between different union members",
-                "To create union types with a common property",
-                "To tag interfaces for better performance",
-                "Both A and B"
-            ],
-            correctIndex: 3
-        }, {
-            type: "task",
-            title: "Setup Git Environment",
-            content: "Install Git on your machine and configure it with your name and email. Verify the installation by running 'git --version' and check configuration with 'git config --list'."
-        }, {
-            type: "task",
-            title: "Implement: TypeScript Interface for User",
-            content: "Create an interface for a User object with properties: id (number), name (string), email (string), and optional phone (string). Include a method getFullName() that returns string."
-        }, {
-            type: "task",
-            title: "Implement: Generic Function",
-            content: "Write a generic function called 'identity' that takes a parameter of type T and returns the same value. Test it with string, number, and boolean types."
-        }, {
-            type: "task",
-            title: "Implement: Type Guard Function",
-            content: "Create a type guard function called 'isString' that checks if a value is a string. Use it in a function that processes string | number types."
-        }, {
-            type: "search-task",
-            title: "Research: TypeScript Utility Types",
-            content: "Explore TypeScript utility types like Partial, Required, Pick, and Omit. How do they help in type manipulation and what are their use cases?"
-        }, ];
+fs.readFile('main.js', 'utf8', (err, res) => {
+    if(err) {
+        console.log(err);
+        return;
+    }
+    console.log(res)
+});`}];
+
+        // Enhanced Questions and Tasks
+        const questions = [
+            // Node.js Fundamentals
+            {
+                type: "question",
+                question: "What is Node.js?",
+                options: [
+                    "A web browser",
+                    "A JavaScript framework",
+                    "A JavaScript runtime environment",
+                    "A database system"
+                ],
+                correctIndex: 2
+            }, {
+                type: "question",
+                question: "What is the main difference between a compiler and an interpreter?",
+                options: [
+                    "Compilers are faster than interpreters",
+                    "Compilers generate machine code, interpreters execute code directly",
+                    "Interpreters are only for JavaScript",
+                    "There is no difference"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "Which of these is NOT a global variable in Node.js?",
+                options: [
+                    "__dirname",
+                    "__filename",
+                    "window",
+                    "process"
+                ],
+                correctIndex: 2
+            }, {
+                type: "question",
+                question: "What does the __dirname global variable contain?",
+                options: [
+                    "The name of the current file",
+                    "The path to the current working directory",
+                    "The process environment variables",
+                    "The Node.js version"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "Which method is used to import modules in CommonJS?",
+                options: [
+                    "import",
+                    "include",
+                    "require",
+                    "load"
+                ],
+                correctIndex: 2
+            }, {
+                type: "question",
+                question: "What is the purpose of the 'module' global in Node.js?",
+                options: [
+                    "To manage database connections",
+                    "To provide information about the current module",
+                    "To create HTTP servers",
+                    "To handle file operations"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "Which module would you use to get information about the operating system?",
+                options: [
+                    "fs module",
+                    "path module",
+                    "os module",
+                    "http module"
+                ],
+                correctIndex: 2
+            }, {
+                type: "question",
+                question: "What does the path.normalize() method do?",
+                options: [
+                    "Creates a new directory",
+                    "Normalizes a path string by resolving '..' and '.' segments",
+                    "Checks if a path exists",
+                    "Converts relative path to absolute path"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "Which method is synchronous in the fs module?",
+                options: [
+                    "fs.readFile()",
+                    "fs.writeFile()",
+                    "fs.readFileSync()",
+                    "All of the above"
+                ],
+                correctIndex: 2
+            }, {
+                type: "question",
+                question: "In a REST API, which HTTP method is typically used for creating new resources?",
+                options: [
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "DELETE"
+                ],
+                correctIndex: 1
+            },
+
+            // Practical Tasks - Node.js
+            {
+                type: "task",
+                title: "Node.js Environment Setup",
+                content: "Install Node.js on your machine and verify the installation using 'node -v' and 'npm -v'. Explore the Node.js REPL by running 'node' in your terminal and practice basic JavaScript operations."
+            }, {
+                type: "task",
+                title: "Global Variables Exploration",
+                content: "Create a script that demonstrates all Node.js global variables. Log __dirname, __filename, process.env, and explore the module object. Create a function that uses process.stdout.write instead of console.log."
+            }, {
+                type: "task",
+                title: "Module System Implementation",
+                content: "Create a multi-file application using CommonJS modules. Create at least 3 modules that export different types of data (variables, functions, objects) and import them in a main file. Experiment with both default and named exports."
+            }, {
+                type: "task",
+                title: "OS and Path Module Practice",
+                content: "Write a script that collects system information using the os module and displays it in a formatted way. Then, create path manipulation functions that normalize, join, and resolve different path strings. Handle both Windows and Unix-style paths."
+            }, {
+                type: "task",
+                title: "File System Operations",
+                content: "Create a file management script that can create, read, update, and delete files using both synchronous and asynchronous methods. Implement error handling for file operations and create a backup system that copies files to a backup directory."
+            }, {
+                type: "search-task",
+                title: "Explore: npm Ecosystem",
+                content: "Research the npm ecosystem and popular packages. Learn about package.json structure, semantic versioning, and best practices for dependency management. Create a sample project with multiple dependencies and scripts."
+            }
+        ]; // ==================== TEMPLATE RENDERING ====================
         // ==================== TEMPLATE RENDERING ====================
         // Functions to render the content - you don't need to modify these
     </script>

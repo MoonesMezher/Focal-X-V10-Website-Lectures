@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Focal X - Node.js Bootcamp: Lecture 13 </title>
+    <title>Focal X - Node.js Bootcamp: Lecture 10 </title>
     <link rel="manifest" href="./manifest.json" />
     <link rel="apple-touch-icon" href="./logo.jpg">
     <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
@@ -54,7 +54,7 @@
             tabTitle: "Last Lesson",
             title: "Last Lesson Recap",
             content: `/*
-1- Solve Task 3 (Very Important)
+1- TypeScript
 */`
         }, {
             tabTitle: "Git Basics",
@@ -291,195 +291,8 @@ Best Practices:
 - Keep branches focused and small
 - Regular merging with main
 - Delete merged branches`
-        }, {
-            tabTitle: "README & Markdown",
-            title: "README Files & Markdown",
-            content: `Project Documentation Essentials
-
-What is README.md?
-- Primary documentation file for projects
-- First thing users see in your repository
-- Written in Markdown (.md extension)
-- Auto-rendered by GitHub/GitLab
-
-Why README is Crucial:
-- Project overview and purpose
-- Installation instructions
-- Usage examples
-- Contribution guidelines
-- License information
-
-Markdown Basics:
-\`\`\`markdown
-# Heading 1
-## Heading 2
-### Heading 3
-
-**Bold Text**
-*Italic Text*
-~~Strikethrough~~
-
-- List item 1
-- List item 2
-
-1. Numbered item 1
-2. Numbered item 2
-
-[Link Text](https://example.com)
-![Image Alt](image.jpg)
-
-\`Inline Code\`
-
-\`\`\`
-Code Block
-\`\`\`
-
-> Blockquote
-\`\`\`
-
-Advanced Markdown:
-- Tables with | syntax
-- Task lists with - [ ] 
-- Emoji with :emoji_name:
-- Mathematical formulas
-- Mermaid diagrams
-
-README Structure:
-1. Project Title & Badges
-2. Project Description
-3. Installation
-4. Usage
-5. Features
-6. Contributing
-7. License
-8. Contact
-
-Best Practices:
-- Write clear, concise documentation
-- Include code examples
-- Use screenshots/GIFs
-- Keep it updated
-- Multiple languages if needed`
-        }, {
-            tabTitle: "Gitignore",
-            title: "Gitignore Files",
-            content: `Ignoring Files in Git
-
-Purpose:
-- Exclude files from version control
-- Prevent committing sensitive data
-- Avoid unnecessary binary files
-- Keep repository clean and focused
-
-Common Ignored Files:
-\`\`\`
-# Dependencies
-node_modules/
-vendor/
-*.jar
-
-# Environment variables
-.env
-.config
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# IDE files
-.vscode/
-.idea/
-*.swp
-
-# Build outputs
-/dist
-/build
-*.exe
-\`\`\`
-
-Usage:
-- Create .gitignore in root directory
-- One pattern per line
-- Supports wildcards (*) and directories (/)
-- Can have global .gitignore for all projects
-
-Best Practices:
-- Ignore OS-specific files
-- Exclude dependencies
-- Never commit secrets
-- Use templates from gitignore.io`
-        }, {
-            tabTitle: "Git Workflow",
-            title: "Git Workflow & Areas",
-            content: `Understanding Git's Architecture
-
-Four Main Areas:
-
-1. Working Directory
-- Your actual project files
-- Where you make changes
-- Untracked by Git initially
-
-2. Staging Area (Index)
-- Prepares changes for commit
-- Selective inclusion of changes
-- Intermediate between working directory and repository
-
-3. Local Repository
-- Complete project history
-- All commits and branches
-- Stores metadata in .git folder
-
-4. Remote Repository
-- Shared repository (GitHub, etc.)
-- Collaboration point for teams
-- Backup and distribution center
-
-Typical Workflow:
-1. Modify files in Working Directory
-2. Stage changes with git add
-3. Commit changes with git commit
-4. Push changes with git push`
-        }, {
-            tabTitle: "Advanced Git",
-            title: "Advanced Git Techniques",
-            content: `Beyond the Basics
-
-Stashing Changes:
-\`\`\`bash
-git stash                  # Temporarily save changes
-git stash list            # List stashes
-git stash pop             # Restore latest stash
-git stash apply           # Apply without removing
-\`\`\`
-
-Undoing Changes:
-\`\`\`bash
-git reset --soft [commit]  # Keep changes staged
-git reset --mixed [commit] # Keep changes unstaged
-git reset --hard [commit]  # Discard all changes
-git revert [commit]        # Create undo commit
-\`\`\`
-
-Rebasing:
-\`\`\`bash
-git rebase main           # Reapply commits on main
-git rebase -i [commit]    # Interactive rebase
-\`\`\`
-
-Tagging:
-\`\`\`bash
-git tag v1.0.0           # Create lightweight tag
-git tag -a v1.0.0 -m "Release"  # Annotated tag
-git push --tags          # Push tags to remote
-\`\`\`
-
-Advanced Tools:
-- git bisect: Binary search for bugs
-- git cherry-pick: Apply specific commits
-- git reflog: Recovery tool
-- git worktree: Multiple working directories`
-        }];
+        }
+        ];
 
         // Enhanced Questions and Tasks
         const questions = [
