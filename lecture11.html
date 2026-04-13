@@ -367,7 +367,44 @@ fs.readFile('main.js', 'utf8', (err, res) => {
         return;
     }
     console.log(res)
-});`}];
+});`},
+{
+            tabTitle: "HTTP Module",
+            title: "Creating Web Servers with HTTP",
+            content: `const http = require('http');
+
+// Basic Server
+const server = http.createServer((req, res) => {
+    if(req.method === 'GET') {
+        if(req.url === '/') {
+            return res.end("Hello, world!");
+        } else if (req.url === '/hello') {
+            return res.end("Hello, Twice");
+        }
+        return res.end('<p>Oops!</p><a href="/">Go To Home</a>');
+    } 
+});
+
+// REST API Implementation
+let data = [
+    { id: 1, name: "moones", age: 21 },
+    { id: 2, name: "rami", age: 31 },
+    { id: 3, name: "fares", age: 25 }
+];
+
+// CRUD Operations:
+// GET    /api/users       # Get all users
+// POST   /api/users       # Create new user  
+// GET    /api/users/{id}  # Get single user
+// PUT    /api/users/{id}  # Update user
+// DELETE /api/users/{id}  # Delete user
+
+const PORT = 4000;
+const HOSTNAME = '127.0.0.1';
+server.listen(PORT, HOSTNAME, () => {
+    console.log('App is listening on port \${PORT} successfully');
+});`
+        },];
 
         // Enhanced Questions and Tasks
         const questions = [

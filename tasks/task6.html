@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 6: Express.js Product Management Server</title>
+    <title>Task 6: Git & GitHub — Publish Task 4 & Task 5</title>
     <link rel="manifest" href="../manifest.json" />
     <link rel="apple-touch-icon" href="../logo.jpg">
     <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
@@ -303,8 +303,8 @@
     <div class="container">
         <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
         <header>
-            <h1 id="title">Task 5: Git Branching and Module Management</h1>
-            <p class="subtitle" id="subtitle">Create a JavaScript project with multiple files, implement Git branching strategy, and set up proper GitHub workflow with module imports and Git ignore rules.</p>
+            <h1 id="title">Task 6: Git & GitHub — Publish Task 4 & Task 5</h1>
+            <p class="subtitle" id="subtitle">Push Task 4 (TrendPulse) to a public GitHub repository, and Task 5 (ShelfStack) to a second public repository with separate JavaScript and TypeScript branches.</p>
             <button class="language-toggle" id="languageToggle">العربية / English</button>
         </header>
 
@@ -332,7 +332,7 @@
                     <span class="timer-label" id="seconds-label">Seconds</span>
                 </div>
             </div>
-            <p class="finish-date" id="finish-date">Finish by: September 27, 2026</p>
+            <p class="finish-date" id="finish-date">Finish by: April 18, 2026</p>
             <p id="timer-message">Complete the task before the deadline!</p>
         </div>
 
@@ -350,142 +350,67 @@
         // Content data structure
         const taskData = {
             en: {
-                title: "Task 6: Express.js Product Management Server",
-                subtitle: "Create an Express.js server with middleware, file structure, and CRUD operations for products",
+                title: "Task 6: Git & GitHub — Publish Task 4 & Task 5",
+                subtitle: "Push Task 4 (TrendPulse) to a public GitHub repository, and Task 5 (ShelfStack) to a second public repository with separate JavaScript and TypeScript branches.",
                 sections: [{
                     type: "idea",
-                    title: "💻 The Task: \"Express.js Product Management Server\"",
-                    content: "Build a complete Express.js server with proper file structure, custom middlewares, CRUD operations for products, and file system integration for data persistence."
+                    title: "💻 The Task: \"Git & GitHub — Two Repositories\"",
+                    content: "You will publish your previous work on GitHub: Task 4 goes to one public repository. Task 5 goes to a different public repository that uses two branches—one for the JavaScript solution and one for the TypeScript solution."
                 }, {
                     type: "requirements",
                     title: "📝 Requirements",
                     content: [{
                         type: "list",
-                        title: "Project Structure Requirements:",
+                        title: "Part A — Task 4 (TrendPulse) on a public repository:",
                         items: [
-                            "Create a project with the following folder structure:",
-                            "src/controllers/ - Route handlers using OOP style",
-                            "src/routes/ - Route definitions and endpoints",
-                            "src/middlewares/ - Custom middleware functions",
-                            "src/models/ - Data models and product array management",
-                            "src/config/ - Configuration files and environment setup",
-                            "src/utils/ - Utility functions and helpers",
-                            "app.js - Main Express application setup"
+                            "Create a new GitHub repository and set its visibility to <strong>Public</strong>.",
+                            "Push your complete Task 4 (TrendPulse) solution: source code, meaningful commit history, and a README that briefly describes the project and how to run it.",
+                            "Include a proper <code>.gitignore</code> for Node.js (e.g. exclude <code>node_modules</code>, environment files, and build artifacts as appropriate).",
+                            "The default branch must contain the full, working project."
                         ]
                     }, {
                         type: "list",
-                        title: "Server & CRUD Operations:",
+                        title: "Part B — Task 5 (ShelfStack) on a second repository (two branches):",
                         items: [
-                            "Create an Express server with all necessary dependencies",
-                            "Implement full CRUD operations for products (Create, Read, Update, Delete)",
-                            "GET /products - Retrieve all products",
-                            "GET /products/:id - Retrieve single product by ID",
-                            "POST /products - Create new product",
-                            "PUT /products/:id - Update existing product",
-                            "DELETE /products/:id - Delete product",
-                            "GET /products/export/json - Export all products to JSON file",
-                            "Manage products using the following initial array:"
+                            "Create a <strong>separate</strong>, <strong>public</strong> GitHub repository for Task 5 (ShelfStack Library). It must not be the same repo as Task 4.",
+                            "Use <strong>two branches</strong> in this repository:",
+                            "One branch (e.g. <code>javascript</code> or <code>main</code> with the JS stack only) contains the <strong>complete JavaScript</strong> implementation of ShelfStack.",
+                            "A second branch (e.g. <code>typescript</code>) contains the <strong>complete TypeScript</strong> implementation (include <code>tsconfig.json</code>, source files, and scripts; ignore <code>node_modules</code> and build output per your <code>.gitignore</code>).",
+                            "Push <strong>both</strong> branches to GitHub so they are visible in the repo’s branch list.",
+                            "On the default branch, add a README that explains both branches: names, which stack each branch uses, and how to install and run each version."
+                        ]
+                    }, {
+                        type: "list",
+                        title: "Submission:",
+                        items: [
+                            "Submit the HTTPS URL of the Task 4 public repository.",
+                            "Submit the HTTPS URL of the Task 5 public repository.",
+                            "Ensure both repos stay public, are accessible without special access, and branches for Task 5 are pushed before the deadline."
                         ]
                     }, {
                         type: "output",
-                        title: "Initial Products Array:",
-                        example: `const products = [
-    {
-        id: 1,
-        name: "Laptop",
-        price: 999.99,
-        category: "Electronics",
-        description: "High-performance laptop for programming"
-    },
-    {
-        id: 2, 
-        name: "Mouse",
-        price: 29.99,
-        category: "Electronics",
-        description: "Wireless computer mouse"
-    },
-    {
-        id: 3,
-        name: "Keyboard",
-        price: 79.99,
-        category: "Electronics", 
-        description: "Mechanical gaming keyboard"
-    }
-];`
-                    }, {
-                        type: "output",
-                        title: "Expected File Structure:",
-                        content: "Your project should have the following structure:",
-                        example: `project-folder/
-├── src/
-│   ├── controllers/
-│   │   └── product.controller.js
-│   ├── routes/
-│   │   └── product.routes.js
-│   ├── middlewares/
-│   │   ├── app.middleware.js
-│   │   └── route.middleware.js
-│   ├── models/
-│   │   └── product.js
-│   ├── config/
-│   │   └── serverConfig.js
-│   └── utils/
-│       └── fileUtils.js
-├── app.js
-├── package.json
-├── .env
-├── .gitignore
-└── products.json (generated by export)`
-                    }, {
-                        type: "list",
-                        title: "Middleware Requirements:",
-                        items: [
-                            "Install and use morgan middleware for HTTP request logging",
-                            "Create two custom middlewares:",
-                            "Application-level middleware: Request logger that logs timestamp, method, and URL",
-                            "Route-level middleware: Product validation that checks if product exists before update/delete operations",
-                            "Use express.json() middleware for parsing JSON bodies"
-                        ]
-                    }, {
-                        type: "list",
-                        title: "API Endpoints Specification:",
-                        items: [
-                            "GET /products - Return all products with status 200",
-                            "GET /products/:id - Return specific product, 404 if not found",
-                            "POST /products - Create new product (generate new ID), return 201",
-                            "PUT /products/:id - Update existing product, 404 if not found",
-                            "DELETE /products/:id - Delete product, 404 if not found",
-                            "GET /products/export/json - Export all products to products.json file using fs module, return download link"
-                        ]
-                    }, {
-                        type: "list",
-                        title: "Environment & Configuration:",
-                        items: [
-                            "Create .env file with PORT variable (e.g., PORT=3000)",
-                            "Create .gitignore file to exclude node_modules, .env, and generated JSON files",
-                            "Install and configure nodemon as dev dependency",
-                            "Add start and dev scripts to package.json:",
-                            "`\"start\": \"node app.js\"`",
-                            "`\"dev\": \"nodemon app.js\"`"
-                        ]
+                        title: "Example branch layout (Task 5 repo):",
+                        content: "Names are suggestions; use clear, consistent branch names and document them in the README.",
+                        example: `your-shelfstack-repo/
+  Branch: javascript  → full ShelfStack solution in JavaScript
+  Branch: typescript → full ShelfStack solution in TypeScript
+
+README (default branch): how to checkout each branch and run the project`
                     }]
                 }, {
                     type: "learning",
-                    title: "📚 Express.js & Middleware Concepts Reference",
+                    title: "📚 Git & GitHub quick reference",
                     content: [
-                        "Express Setup: `const express = require('express')`, `const app = express()`",
-                        "Middleware: `app.use(middleware)`, `app.use('/route', middleware)`",
-                        "Routing: `app.get()`, `app.post()`, `app.put()`, `app.delete()`",
-                        "Request/Response: `req.params`, `req.body`, `res.json()`, `res.status()`",
-                        "File System: `fs.writeFileSync()`, `fs.readFileSync()` for JSON operations",
-                        "Environment Variables: `require('dotenv').config()`, `process.env.PORT`",
-                        "Morgan: `const morgan = require('morgan')`, `app.use(morgan('combined'))`",
-                        "Middleware Example: `const logger = (req, res, next) => { console.log(); next(); }`"
+                        "Create branch: `git checkout -b branch-name` (or `git switch -c branch-name`)",
+                        "Push branch: `git push -u origin branch-name`",
+                        "List branches: `git branch -a`",
+                        "Remote: `git remote add origin <url>` then `git push -u origin main`",
+                        "Public repo: GitHub → New repository → Visibility → Public"
                     ]
                 }],
                 timer: {
                     title: "Time Remaining to Complete Task",
-                    message: "Complete the task before the deadline! - Submissions are only accepted within the final six hours.",
+                    message: "Complete the task before the deadline!",
                     days: "Days",
                     hours: "Hours",
                     minutes: "Minutes",
@@ -493,145 +418,70 @@
                 },
                 thankYou: "\"Thank you for your hard work and dedication. Your efforts are appreciated!\"",
                 buttonText: "العربية / English",
-                finishDate: "Finish by: October 20, 2026"
+                finishDate: "Finish by: April 18, 2026"
             },
             ar: {
-                title: "المهمة 6: خادم إدارة المنتجات باستخدام Express.js",
-                subtitle: "أنشئ خادم Express.js مع middleware وهيكل ملفات وعمليات CRUD للمنتجات",
+                title: "المهمة 6: Git وGitHub — رفع المهمة 4 والمهمة 5",
+                subtitle: "ارفع مهمة TrendPulse (المهمة 4) إلى مستودع عام على GitHub، ومهمة ShelfStack (المهمة 5) إلى مستودع عام آخر يضم فرعين: أحدهما لحل JavaScript والآخر لحل TypeScript.",
                 sections: [{
                     type: "idea",
-                    title: "💻 المهمة: \"خادم إدارة المنتجات باستخدام Express.js\"",
-                    content: "ابنِ خادم Express.js كاملاً مع هيكل ملفات صحيح، middleware مخصص، عمليات CRUD للمنتجات، وتكامل نظام الملفات لحفظ البيانات."
+                    title: "💻 المهمة: \"Git وGitHub — مستودعان\"",
+                    content: "ستنشر أعمالك السابقة على GitHub: المهمة 4 في مستودع عام. المهمة 5 في مستودع عام مختلف يستخدم فرعين—فرع لحل JavaScript وفرع لحل TypeScript."
                 }, {
                     type: "requirements",
                     title: "📝 المتطلبات",
                     content: [{
                         type: "list",
-                        title: "متطلبات هيكل المشروع:",
+                        title: "الجزء أ — المهمة 4 (TrendPulse) في مستودع عام:",
                         items: [
-                            "أنشئ مشروعاً بهيكل المجلدات التالي:",
-                            "src/controllers/ - معالجات المسارات باستخدام نمط OOP",
-                            "src/routes/ - تعريفات المسارات والنقاط الطرفية",
-                            "src/middlewares/ - دوال middleware المخصصة",
-                            "src/models/ - نماذج البيانات وإدارة مصفوفة المنتجات",
-                            "src/config/ - ملفات الإعداد وتهيئة البيئة",
-                            "src/utils/ - الدوال المساعدة والأدوات",
-                            "app.js - الإعداد الرئيسي لتطبيق Express"
+                            "أنشئ مستودعاً جديداً على GitHub واضبط <strong>الخصوصية على Public (عام)</strong>.",
+                            "ارفع حل المهمة 4 (TrendPulse) كاملاً: الشيفرة، سجلّ commits واضح، وملف README يصف المشروع باختصار وكيفية تشغيله.",
+                            "أضف <code>.gitignore</code> مناسباً لـ Node.js (مثلاً استبعاد <code>node_modules</code> وملفات البيئة ومخرجات البناء حسب الحاجة).",
+                            "يجب أن يحتوي الفرع الافتراضي على المشروع كاملاً وجاهزاً للتشغيل."
                         ]
                     }, {
                         type: "list",
-                        title: "الخادم وعمليات CRUD:",
+                        title: "الجزء ب — المهمة 5 (ShelfStack) في مستودع ثانٍ (فرعان):",
                         items: [
-                            "أنشئ خادم Express مع جميع التبعيات اللازمة",
-                            "نفّذ عمليات CRUD كاملة للمنتجات (إنشاء، قراءة، تحديث، حذف)",
-                            "GET /products - جلب جميع المنتجات",
-                            "GET /products/:id - جلب منتج واحد بالمعرف",
-                            "POST /products - إنشاء منتج جديد",
-                            "PUT /products/:id - تحديث منتج موجود",
-                            "DELETE /products/:id - حذف منتج",
-                            "GET /products/export/json - تصدير جميع المنتجات إلى ملف JSON",
-                            "أدر المنتجات باستخدام المصفوفة الأولية التالية:"
+                            "أنشئ <strong>مستودعاً منفصلاً وعاماً</strong> على GitHub للمهمة 5 (ShelfStack). يجب ألا يكون نفس مستودع المهمة 4.",
+                            "استخدم <strong>فرعين</strong> في هذا المستودع:",
+                            "فرع واحد (مثلاً <code>javascript</code> أو <code>main</code> يحوي حصراً JavaScript) يحتوي على <strong>تنفيذ ShelfStack كاملاً بـ JavaScript</strong>.",
+                            "فرع ثانٍ (مثلاً <code>typescript</code>) يحتوي على <strong>تنفيذ ShelfStack كاملاً بـ TypeScript</strong> (يشمل <code>tsconfig.json</code> وملفات المصدر والسكريبتات؛ استبعاد <code>node_modules</code> ومخرجات البناء حسب <code>.gitignore</code>).",
+                            "ادفع <strong>كلا الفرعين</strong> إلى GitHub بحيث يظهران في قائمة الفروع.",
+                            "على الفرع الافتراضي، أضف README يشرح الفرعين: الأسماء، أي مكدس يستخدم كل فرع، وكيفية التثبيت والتشغيل لكل نسخة."
+                        ]
+                    }, {
+                        type: "list",
+                        title: "التسليم:",
+                        items: [
+                            "سلّم رابط HTTPS لمستودع المهمة 4 العام.",
+                            "سلّم رابط HTTPS لمستودع المهمة 5 العام.",
+                            "تأكد أن المستودعين يبقيان عامّين ومتاحين دون صلاحيات خاصة، وأن فروع المهمة 5 مرفوعة قبل الموعد النهائي."
                         ]
                     }, {
                         type: "output",
-                        title: "المصفوفة الأولية للمنتجات:",
-                        example: `const products = [
-    {
-        id: 1,
-        name: "Laptop",
-        price: 999.99,
-        category: "Electronics",
-        description: "High-performance laptop for programming"
-    },
-    {
-        id: 2, 
-        name: "Mouse",
-        price: 29.99,
-        category: "Electronics",
-        description: "Wireless computer mouse"
-    },
-    {
-        id: 3,
-        name: "Keyboard",
-        price: 79.99,
-        category: "Electronics", 
-        description: "Mechanical gaming keyboard"
-    }
-];`
-                    }, {
-                        type: "output",
-                        title: "هيكل الملفات المتوقع:",
-                        content: "يجب أن يكون لمشروعك الهيكل التالي:",
-                        example: `project-folder/
-├── src/
-│   ├── controllers/
-│   │   └── product.controller.js
-│   ├── routes/
-│   │   └── product.routes.js
-│   ├── middlewares/
-│   │   ├── app.middleware.js
-│   │   └── route.middleware.js
-│   ├── models/
-│   │   └── product.js
-│   ├── config/
-│   │   └── serverConfig.js
-│   └── utils/
-│       └── fileUtils.js
-├── app.js
-├── package.json
-├── .env
-├── .gitignore
-└── products.json (يتم إنشاؤه بالتصدير)`
-                    }, {
-                        type: "list",
-                        title: "متطلبات الـ Middleware:",
-                        items: [
-                            "ثبّت واستخدم morgan middleware لتسجيل طلبات HTTP",
-                            "أنشئ middleware مخصصين:",
-                            "Middleware مستوى التطبيق: مسجل طلبات يسجل التوقيت، الأسلوب، والرابط",
-                            "Middleware مستوى المسار: تحقق من وجود المنتج قبل عمليات التحديث أو الحذف",
-                            "استخدم express.json() middleware لتحليل أجسام JSON"
-                        ]
-                    }, {
-                        type: "list",
-                        title: "مواصفات النقاط الطرفية:",
-                        items: [
-                            "GET /products - إرجاع جميع المنتجات مع حالة 200",
-                            "GET /products/:id - إرجاع منتج محدد، 404 إذا لم يوجد",
-                            "POST /products - إنشاء منتج جديد (إنشاء معرف جديد)، إرجاع 201",
-                            "PUT /products/:id - تحديث منتج موجود، 404 إذا لم يوجد",
-                            "DELETE /products/:id - حذف منتج، 404 إذا لم يوجد",
-                            "GET /products/export/json - تصدير جميع المنتجات إلى ملف products.json باستخدام وحدة fs، إرجاع رابط التحميل"
-                        ]
-                    }, {
-                        type: "list",
-                        title: "البيئة والإعدادات:",
-                        items: [
-                            "أنشئ ملف .env بمتغير PORT (مثال: PORT=3000)",
-                            "أنشئ ملف .gitignore لاستبعاد node_modules و .env وملفات JSON المُنشأة",
-                            "ثبّت وضبّط nodemon كتبعية تطوير",
-                            "أضف سكريبتات start و dev إلى package.json:",
-                            "`\"start\": \"node app.js\"`",
-                            "`\"dev\": \"nodemon app.js\"`"
-                        ]
+                        title: "مثال على تخطيط الفروع (مستودع المهمة 5):",
+                        content: "الأسماء اقتراحية؛ استخدم أسماء فرع واضحة وثبّتها في README.",
+                        example: `your-shelfstack-repo/
+  الفرع: javascript  → حل ShelfStack كامل بـ JavaScript
+  الفرع: typescript → حل ShelfStack كامل بـ TypeScript
+
+README (الفرع الافتراضي): كيفية الانتقال لكل فرع وتشغيل المشروع`
                     }]
                 }, {
                     type: "learning",
-                    title: "📚 مرجع مفاهيم Express.js والـ Middleware",
+                    title: "📚 مرجع سريع لـ Git وGitHub",
                     content: [
-                        "إعداد Express: `const express = require('express')`, `const app = express()`",
-                        "الـ Middleware: `app.use(middleware)`, `app.use('/route', middleware)`",
-                        "التوجيه: `app.get()`, `app.post()`, `app.put()`, `app.delete()`",
-                        "الطلب/الاستجابة: `req.params`, `req.body`, `res.json()`, `res.status()`",
-                        "نظام الملفات: `fs.writeFileSync()`, `fs.readFileSync()` لعمليات JSON",
-                        "متغيرات البيئة: `require('dotenv').config()`, `process.env.PORT`",
-                        "Morgan: `const morgan = require('morgan')`, `app.use(morgan('combined'))`",
-                        "مثال على الـ Middleware: `const logger = (req, res, next) => { console.log(); next(); }`"
+                        "إنشاء فرع: `git checkout -b اسم-الفرع` (أو `git switch -c اسم-الفرع`)",
+                        "رفع فرع: `git push -u origin اسم-الفرع`",
+                        "عرض الفروع: `git branch -a`",
+                        "الربط البعيد: `git remote add origin <url>` ثم `git push -u origin main`",
+                        "مستودع عام: GitHub → New repository → Visibility → Public"
                     ]
                 }],
                 timer: {
                     title: "الوقت المتبقي لإكمال المهمة",
-                    message: "أكمل المهمة قبل الموعد النهائي! - يتم قبول التسليم فقط في الساعات الست الأخيرة.",
+                    message: "أكمل المهمة قبل الموعد النهائي!",
                     days: "أيام",
                     hours: "ساعات",
                     minutes: "دقائق",
@@ -639,7 +489,7 @@
                 },
                 thankYou: "\"شكرًا لجهودك الجادة وتفانيك. نقدر جهودك!\"",
                 buttonText: "English / العربية",
-                finishDate: "الانتهاء بحلول: 20 أكتوبر 2026"
+                finishDate: "الانتهاء بحلول: 18 أبريل 2026"
             }
         };
 
@@ -743,8 +593,8 @@
 
         // Timer functionality
         function startCountdown() {
-            // Set the date we're counting down to (September 27, 2026)
-            const countDownDate = new Date("Oct 20, 2026 23:59:59").getTime();
+            // Deadline: April 18, 2026 end of day
+            const countDownDate = new Date("Apr 18, 2026 23:59:59").getTime();
 
             // Update the countdown every 1 second
             const countdown = setInterval(() => {
