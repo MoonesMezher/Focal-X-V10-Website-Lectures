@@ -54,9 +54,8 @@
             tabTitle: "Last Lesson",
             title: "Last Lesson Recap",
             content: `/*
-1- HTTP Module
-2- ExpressJS Setup
-3- ExpressJS Routing
+1- ExpressJS Setup
+2- ExpressJS Routing
 */`
         }, {
             tabTitle: "Development Tools & Environment",
@@ -298,107 +297,7 @@ app.use('*', (req, res) => {
 // 2. Morgan: npm install morgan
 const morgan = require('morgan');
 app.use(morgan('dev')); // Pre-configured logging formats`
-        }, {
-            tabTitle: "Project Structure & Organization",
-            title: "Scalable Express Application Architecture",
-            content: `/*
-Recommended Project Structure:
-src/
-  ├── controllers/     # Route handlers (OOP style)
-  ├── routes/         # Route definitions
-  ├── middlewares/    # Custom middleware functions
-  ├── models/         # Data models and schemas
-  ├── config/         # Configuration files
-  ├── utils/          # Utility functions
-  └── app.js          # Express app setup
-
-Benefits:
-• Better code organization
-• Easier maintenance
-• Separation of concerns
-• Team collaboration
-• Testing simplicity
-*/
-
-// Example of OOP Controller with try-catch
-class UserController {
-    async getAllUsers(req, res) {
-        try {
-            // Business logic here
-            const users = await UserModel.findAll();
-            res.json({
-                success: true,
-                count: users.length,
-                data: users
-            });
-        } catch (error) {
-            console.error('Get users error:', error);
-            res.status(500).json({
-                success: false,
-                error: 'Failed to fetch users'
-            });
-        }
-    }
-
-    async createUser(req, res) {
-        try {
-            const { name, email, age } = req.body;
-            
-            // Validation
-            if (!name || !email) {
-                return res.status(400).json({
-                    success: false,
-                    error: 'Name and email are required'
-                });
-            }
-
-            const newUser = await UserModel.create({ name, email, age });
-            
-            res.status(201).json({
-                success: true,
-                message: 'User created successfully',
-                data: newUser
-            });
-        } catch (error) {
-            console.error('Create user error:', error);
-            res.status(500).json({
-                success: false,
-                error: 'Failed to create user'
-            });
-        }
-    }
-}
-
-// Route definition example (routes/users.js)
-const express = require('express');
-const router = express.Router();
-const userController = new UserController();
-
-router.get('/', userController.getAllUsers.bind(userController));
-router.post('/', userController.createUser.bind(userController));
-
-module.exports = router;
-
-// Main app.js structure
-const express = require('express');
-const app = express();
-
-// Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Routes
-app.use('/api/users', require('./src/routes/users'));
-app.use('/api/products', require('./src/routes/products'));
-
-// Error handling middleware
-app.use(require('./src/middlewares/errorHandler'));
-
-module.exports = app;
-
-// Using plop.js for code generation (devDependencies)
-// Why in devDependencies? Only used during development, not in production`
-        }, ];
+        },  ];
 
         // Enhanced Questions and Tasks with new content
         const questions = [
