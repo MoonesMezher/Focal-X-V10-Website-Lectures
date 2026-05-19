@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Focal X - Node.js Bootcamp: Lecture 23 </title>
+    <title>Focal X - Node.js Bootcamp: Lecture 21 </title>
     <link rel="manifest" href="./manifest.json" />
     <link rel="apple-touch-icon" href="./logo.jpg">
     <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
@@ -46,7 +46,7 @@
         // Lecture metadata
         const lectureConfig = {
             title: "Focal X - Node.js Bootcamp",
-            subtitle: "Mongoose (Advanced)"
+            subtitle: "Database Design"
         };
 
         // Lecture content organized by tabs
@@ -54,498 +54,128 @@
             tabTitle: "Last Lesson",
             title: "Last Lesson Recap",
             content: `/*
-1- Solve Task 6
-2- Recap (Mongoose)
+1- Relationships
+2- One to one
+3- One to many
+4- Many to many
 */`
         }, {
-            tabTitle: "Chaining & Pagination",
-            title: "Query Chaining, Pagination & Projection",
-            content: `// ## Mongoose Query Chaining & Pagination
+            tabTitle: "System design (example)",
+            title: "From system design to database design — food ordering example",
+            content: `This tab is one worked example. It shows how professional teams move from business needs to a document database shape — without writing application code.
 
-// Basic Chaining Examples
-const users = await User.find()
-  .where('age').gte(18)
-  .where('isActive').equals(true)
-  .select('name email age')  // Projection - include only these fields
-  .sort({ createdAt: -1 })   // Sort by newest first
-  .skip(10)                  // Pagination - skip first 10
-  .limit(5);                 // Pagination - get 5 documents
+## Part 1 — How system design starts (real life)
 
-// Projection - Include/Exclude fields
-User.find().select('name email -_id');        // Include name, email, exclude _id
-User.find().select('-password -__v');         // Exclude sensitive fields
+In most real projects, nobody hands you a finished database on day one.
 
-// Counting documents
-const count = await User.countDocuments({ age: { $gt: 18 } });
-const activeCount = await User.countDocuments({ isActive: true });
+• Product or the client describes **what the system must do** (requirements, user stories, screens).
+• You, as a backend developer, **translate that into data**: what to store, how pieces connect, and which fields exist only to support rules or workflows.
 
-// Complete Pagination Function
-const getPaginatedUsers = async (page = 1, limit = 10, filters = {}) => {
-    const skip = (page - 1) * limit;
-    
-    const [data, total] = await Promise.all([
-        User.find(filters)
-            .select('-password')
-            .sort({ createdAt: -1 })
-            .skip(skip)
-            .limit(limit),
-        User.countDocuments(filters)
-    ]);
-    
-    return {
-        data,
-        pagination: {
-            page,
-            limit,
-            total,
-            pages: Math.ceil(total / limit)
-        }
-    };
-};
+That translation is **database / data modeling** (for MongoDB: collections, documents, references between documents).
 
-// Usage
-const result = await getPaginatedUsers(1, 10, { role: 'user' });
-console.log(result.pagination); // { page: 1, limit: 10, total: 100, pages: 10 }`
-        }, {
-            tabTitle: "Relationships",
-            title: "MongoDB Relationships & Population",
-            content: `// ## MongoDB Relationships
+### A practical way to begin
 
-// 1. One-to-Many (Reference)
-const userSchema = new Schema({
-    name: String,
-    posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }] // Array of references
-});
+1. **List actors** — Who uses the system? (customer, restaurant owner, driver, admin.)
+2. **List main actions** — What do they do? (browse menu, place order, update delivery status.)
+3. **Find the nouns** — Each important noun often becomes a **collection** (User, Restaurant, Category, Dish, Order…).
+4. **Draw relationships** — One restaurant has many categories; one category has many dishes; one customer places many orders.
+5. **Name fields by role** — Not every field is “business data.” Some fields exist only to **link** documents; others exist to **solve a problem** (availability, sorting, security).
 
-const postSchema = new Schema({
-    title: String,
-    author: { type: Schema.Types.ObjectId, ref: 'User' }, // Single reference
-    content: String
-});
+Only after this do you implement schemas in Mongoose (or another layer). The design document comes first; code follows.
 
-// 2. Embedding (One-to-Few)
-const userWithAddressSchema = new Schema({
-    name: String,
-    addresses: [{  // Embedded array
-        street: String,
-        city: String,
-        country: String,
-        isPrimary: Boolean
-    }]
-});
+---
 
-// 3. Junction Model (Many-to-Many)
-const orderSchema = new Schema({
-    user: { type: Schema.Types.ObjectId, ref: 'User' },
-    products: [{
-        product: { type: Schema.Types.ObjectId, ref: 'Product' },
-        quantity: Number,
-        price: Number
-    }]
-});
+## Part 2 — Three kinds of fields (think before you code)
 
-// ## Population Examples
+When you design a collection, classify each field:
 
-// Basic population
-const user = await User.findById(userId).populate('posts');
+| Kind | Purpose | Examples |
+|------|---------|----------|
+| **Data fields** | Store real-world facts shown to users or used in logic | name, price, address, phone, description |
+| **Relationship fields** | Point to another document (foreign key / reference) | restaurantId on a Category, categoryId on a Dish |
+| **Problem-solving fields** | Support rules, performance, security, or UX — not always visible on screen | hashed password, accountType, isAvailable, sortOrder, averageRating, createdAt |
 
-// Selective population
-const userWithPosts = await User.findById(userId)
-    .populate('posts', 'title createdAt')  // Only get title and createdAt
-    .populate('department', 'name');
+If you mix these mentally, you avoid giant nested blobs (e.g. embedding every dish inside a restaurant) and you avoid missing fields the app needs later (e.g. driver location for dispatch).
 
-// Nested population
-const postWithAuthor = await Post.findById(postId)
-    .populate({
-        path: 'author',
-        select: 'name email',
-        populate: {
-            path: 'department',
-            select: 'name'
-        }
-    });
+---
 
-// Multiple populations
-const populatedUser = await User.findById(userId)
-    .populate('posts')
-    .populate('comments')
-    .populate('likes');`
-        }, {
-            tabTitle: "Advanced Mongoose",
-            title: "Advanced Mongoose Features & Best Practices",
-            content: `// ## Advanced Mongoose Patterns
+## Part 3 — Example system: food ordering app
 
-// ## 1. Database Transactions
+Below is a **sample** document-database design for a food-ordering platform. Collection names are in English; field lists are descriptive only (no code).
 
-const transferOwnership = async (fromUserId, toUserId, assetId) => {
-    const session = await mongoose.startSession();
-    
-    try {
-        session.startTransaction();
-        
-        // Remove asset from current owner
-        const fromUser = await User.findByIdAndUpdate(
-            fromUserId,
-            { $pull: { assets: assetId } },
-            { session, new: true }
-        );
-        
-        // Add asset to new owner
-        const toUser = await User.findByIdAndUpdate(
-            toUserId,
-            { $push: { assets: assetId } },
-            { session, new: true }
-        );
-        
-        // Update asset ownership
-        const asset = await Asset.findByIdAndUpdate(
-            assetId,
-            { owner: toUserId },
-            { session, new: true }
-        );
-        
-        await session.commitTransaction();
-        
-        return { fromUser, toUser, asset };
-    } catch (error) {
-        await session.abortTransaction();
-        throw error;
-    } finally {
-        session.endSession();
-    }
-};
+### Collection: Users
 
-// ## 2. Advanced Middleware Patterns
+**Purpose:** Everyone who signs in — customers, restaurant accounts, drivers.
 
-const advancedUserSchema = new Schema({
-    // ... schema fields
-}, {
-    timestamps: true
-});
+**Data fields:** unique id, full name, phone, email, createdAt.
 
-// Conditional middleware
-advancedUserSchema.pre('save', function(next) {
-    if (this.isModified('email')) {
-        this.emailVerified = false;
-        this.verificationToken = generateToken();
-    }
-    next();
-});
+**Problem-solving fields:** password (stored hashed only), accountType (customer | restaurant | driver).
 
-// Async middleware
-advancedUserSchema.pre('save', async function(next) {
-    if (this.isModified('password')) {
-        this.password = await bcrypt.hash(this.password, 12);
-    }
-    next();
-});
+**Type-specific data / problem-solving:**
+• Customer — default delivery address (used at checkout).
+• Driver — current location (longitude, latitude), availability status (available | busy).
+• Restaurant account — link to the Restaurants collection via id (relationship); restaurant-specific profile lives in Restaurants, not duplicated inside User.
 
-// Error handling in middleware
-advancedUserSchema.post('save', function(error, doc, next) {
-    if (error.name === 'MongoError' && error.code === 11000) {
-        next(new Error('Duplicate key error'));
-    } else {
-        next(error);
-    }
-});
+---
 
-// ## 3. Plugins System
+### Collection: Restaurants
 
-// Reusable plugin for soft delete
-function softDeletePlugin(schema) {
-    schema.add({
-        isDeleted: {
-            type: Boolean,
-            default: false,
-            select: false
-        },
-        deletedAt: Date
-    });
-    
-    // Exclude deleted documents by default
-    schema.pre(/^find/, function(next) {
-        if (!this.getOptions().includeDeleted) {
-            this.where({ isDeleted: { $ne: true } });
-        }
-        next();
-    });
-    
-    // Soft delete method
-    schema.methods.softDelete = function() {
-        this.isDeleted = true;
-        this.deletedAt = new Date();
-        return this.save();
-    };
-    
-    // Restore method
-    schema.methods.restore = function() {
-        this.isDeleted = false;
-        this.deletedAt = undefined;
-        return this.save();
-    };
-    
-    // Static method to find including deleted
-    schema.statics.findIncludingDeleted = function(conditions) {
-        return this.find(conditions).setOptions({ includeDeleted: true });
-    };
-}
+**Purpose:** One document per restaurant brand/location.
 
-// Apply plugin to schema
-advancedUserSchema.plugin(softDeletePlugin);
+**Data fields:** unique id, name, short description, cover image URL, text address, geo coordinates, opening hours (structured text or object for days/times), registeredAt.
 
-// ## 4. Advanced Validation
+**Problem-solving fields:** averageRating (decimal, updated when reviews exist — avoids recalculating on every browse).
 
-const advancedValidationSchema = new Schema({
-    username: {
-        type: String,
-        required: true,
-        validate: {
-            validator: async function(username) {
-                // Async validation - check if username is unique
-                const user = await this.constructor.findOne({ username });
-                return !user || this._id.equals(user._id);
-            },
-            message: 'Username already exists'
-        }
-    },
-    password: {
-        type: String,
-        validate: {
-            validator: function(password) {
-                return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$/.test(password);
-            },
-            message: 'Password must contain uppercase, lowercase, number, and be at least 8 characters'
-        }
-    },
-    birthDate: {
-        type: Date,
-        validate: {
-            validator: function(date) {
-                return date < new Date();
-            },
-            message: 'Birth date cannot be in the future'
-        }
-    }
-});
+**Design note:** Categories and dishes are **not** embedded here. They live in their own collections and link back with **relationship fields** (easier updates, clearer ownership).
 
-// ## 5. Discriminators (Schema Inheritance)
+---
 
-const optionsSchema = new Schema({
-    settings: Schema.Types.Mixed,
-    preferences: Schema.Types.Mixed
-}, { discriminatorKey: 'userType' });
+### Collection: Categories
 
-const BaseUser = mongoose.model('BaseUser', optionsSchema);
+**Purpose:** Menu sections per restaurant (e.g. Pizza, Drinks).
 
-// Admin user discriminator
-const AdminUser = BaseUser.discriminator('AdminUser', new Schema({
-    permissions: [String],
-    adminLevel: {
-        type: String,
-        enum: ['super', 'normal', 'limited']
-    }
-}));
+**Data fields:** unique id, name, short description.
 
-// Customer user discriminator
-const CustomerUser = BaseUser.discriminator('CustomerUser', new Schema({
-    subscription: String,
-    loyaltyPoints: Number
-}));
+**Relationship fields:** restaurantId (each category belongs to exactly one restaurant).
 
-// ## 6. Advanced Query Building
+**Problem-solving fields:** displayOrder (controls sort order on the menu screen).
 
-class UserQueryBuilder {
-    constructor() {
-        this.query = User.find();
-    }
-    
-    active() {
-        this.query = this.query.where('isActive').equals(true);
-        return this;
-    }
-    
-    withRole(role) {
-        this.query = this.query.where('role').equals(role);
-        return this;
-    }
-    
-    createdAfter(date) {
-        this.query = this.query.where('createdAt').gte(date);
-        return this;
-    }
-    
-    withTags(tags) {
-        this.query = this.query.where('tags').in(tags);
-        return this;
-    }
-    
-    paginate(page = 1, limit = 10) {
-        const skip = (page - 1) * limit;
-        this.query = this.query.skip(skip).limit(limit);
-        return this;
-    }
-    
-    sort(field, direction = 'asc') {
-        const sortOrder = direction === 'desc' ? -1 : 1;
-        this.query = this.query.sort({ [field]: sortOrder });
-        return this;
-    }
-    
-    async execute() {
-        return await this.query.exec();
-    }
-}
+**Relationship rule:** One restaurant → many categories.
 
-// Usage
-const users = await new UserQueryBuilder()
-    .active()
-    .withRole('admin')
-    .createdAfter(new Date('2023-01-01'))
-    .paginate(1, 20)
-    .sort('createdAt', 'desc')
-    .execute();
+---
 
-// ## 7. Performance Optimization
+### Collection: Dishes
 
-const performanceOptimizedSchema = new Schema({
-    // Schema with performance considerations
-    email: { type: String, index: true },
-    role: { type: String, index: true },
-    createdAt: { type: Date, index: true }
-});
+**Purpose:** Items customers add to a cart.
 
-// Compound indexes for common query patterns
-performanceOptimizedSchema.index({ role: 1, createdAt: -1 });
-performanceOptimizedSchema.index({ isActive: 1, lastLogin: -1 });
+**Data fields:** unique id, name, short description, price, image URL.
 
-// Partial indexes
-performanceOptimizedSchema.index(
-    { email: 1 },
-    { 
-        partialFilterExpression: { 
-            email: { $exists: true } 
-        } 
-    }
-);
+**Relationship fields:** categoryId (each dish belongs to one category).
 
-// ## 8. Advanced Aggregation
+**Problem-solving fields:** prepTimeMinutes (kitchen / ETA logic), isAvailable (hide sold-out items without deleting), updatedAt.
 
-const getUserStatistics = async () => {
-    return await User.aggregate([
-        {
-            $facet: {
-                // Total statistics
-                totalStats: [
-                    {
-                        $group: {
-                            _id: null,
-                            totalUsers: { $sum: 1 },
-                            averageAge: { $avg: '$age' },
-                            activeUsers: {
-                                $sum: { $cond: ['$isActive', 1, 0] }
-                            }
-                        }
-                    }
-                ],
-                
-                // Role distribution
-                roleDistribution: [
-                    {
-                        $group: {
-                            _id: '$role',
-                            count: { $sum: 1 },
-                            averageAge: { $avg: '$age' }
-                        }
-                    },
-                    { $sort: { count: -1 } }
-                ],
-                
-                // Monthly signups
-                monthlySignups: [
-                    {
-                        $group: {
-                            _id: {
-                                year: { $year: '$createdAt' },
-                                month: { $month: '$createdAt' }
-                            },
-                            signups: { $sum: 1 }
-                        }
-                    },
-                    { $sort: { '_id.year': 1, '_id.month': 1 } }
-                ],
-                
-                // Age groups
-                ageGroups: [
-                    {
-                        $bucket: {
-                            groupBy: '$age',
-                            boundaries: [18, 25, 35, 45, 55, 65, 120],
-                            default: 'Other',
-                            output: {
-                                count: { $sum: 1 },
-                                users: { $push: '$name' }
-                            }
-                        }
-                    }
-                ]
-            }
-        }
-    ]);
-};
+**Relationship rule:** One category → many dishes.
 
-// ## 9. Change Streams (Real-time updates)
+---
 
-const setupUserChangeStream = () => {
-    const changeStream = User.watch();
-    
-    changeStream.on('change', (change) => {
-        console.log('Change detected:', change);
-        
-        // Handle different operation types
-        switch (change.operationType) {
-            case 'insert':
-                console.log('New user created:', change.fullDocument);
-                break;
-            case 'update':
-                console.log('User updated:', change.documentKey);
-                break;
-            case 'delete':
-                console.log('User deleted:', change.documentKey);
-                break;
-        }
-    });
-    
-    changeStream.on('error', (error) => {
-        console.error('Change stream error:', error);
-    });
-    
-    return changeStream;
-};
+### Example relationship map (this project only)
 
-// ## 10. Best Practices Summary
+Users (restaurant) ──references──> Restaurants
+Restaurants ──one-to-many──> Categories (via restaurantId)
+Categories ──one-to-many──> Dishes (via categoryId)
 
-/*
-Production Best Practices:
-1. Always use connection pooling
-2. Implement proper error handling
-3. Use transactions for multiple operations
-4. Create indexes for frequent queries
-5. Monitor query performance
-6. Use lean() for read-only operations
-7. Implement proper validation
-8. Use middleware for cross-cutting concerns
-9. Monitor memory usage with large datasets
-10. Implement proper logging and monitoring
-*/
+Later you would add Orders, OrderItems, payments, etc. using the same process: requirements first, then collections, then data / relationship / problem-solving fields.
 
-module.exports = {
-    transferOwnership,
-    UserQueryBuilder,
-    getUserStatistics,
-    setupUserChangeStream,
-    AdminUser,
-    CustomerUser
-};`
+---
+
+## Part 4 — What you implement after the design
+
+1. Create Mongoose schemas that match the field types above (validation, enums, refs).
+2. Use references + populate (or separate queries) instead of duplicating large trees.
+3. Add indexes on relationship fields you query often (restaurantId, categoryId).
+4. Keep revisiting the design when requirements change — that is normal in real products.
+
+**Takeaway:** The database is part of system design. You are expected to design it from requirements, not wait for a ready-made schema.`
         }, ];
 
         // Updated Questions array aligned with the new topics
