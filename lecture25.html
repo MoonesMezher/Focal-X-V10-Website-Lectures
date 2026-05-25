@@ -108,6 +108,275 @@ const passwordService = {
     }
 };`
         }, {
+            tabTitle: "Cookie Security",
+            title: "Secure Cookie Management & Sessions",
+            content: `// ###################### COOKIE SECURITY CONFIGURATION ##############################
+
+const cookieParser = require('cookie-parser');
+
+// Initialize cookie parser middleware
+app.use(cookieParser());
+
+// Secure cookie configuration
+const cookieConfig = {
+    httpOnly: true,        // Prevent XSS attacks - JavaScript cannot access
+    secure: process.env.NODE_ENV === 'production', // HTTPS only in production
+    sameSite: 'strict',    // CSRF protection - 'strict', 'lax', or 'none'
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days for refresh token
+    path: '/',             // Available across the entire app
+    domain: process.env.COOKIE_DOMAIN || undefined // Specify domain if needed
+};
+
+const accessTokenCookieConfig = {
+    ...cookieConfig,
+    maxAge: 15 * 60 * 1000 // 15 minutes for access token
+};
+
+// ###################### COOKIE ATTRIBUTES EXPLAINED ##############################
+
+/*
+httpOnly: true
+• Prevents JavaScript access to cookies
+• Critical for protecting against XSS attacks
+• Cookies can only be sent to server
+
+secure: true (production only)
+• Cookies only sent over HTTPS
+• Prevents man-in-the-middle attacks
+• Always true in production, false in development
+
+sameSite: 'strict'
+• Prevents CSRF attacks
+• 'strict': No cross-site requests
+• 'lax': Allows some safe cross-site requests
+• 'none': Allows all cross-site requests (requires secure: true)
+
+maxAge: milliseconds
+• Automatic cookie expiration
+• Better than 'expires' for modern browsers
+• Automatically cleaned up by browser
+
+path: '/'
+• Which paths can access the cookie
+• '/' means entire domain
+• '/api' would restrict to API routes only
+*/
+
+// ###################### COOKIE MANAGEMENT FUNCTIONS ##############################
+
+const cookieService = {
+    setAccessToken(res, token) {
+        res.cookie('accessToken', token, accessTokenCookieConfig);
+    },
+
+    setRefreshToken(res, token) {
+        res.cookie('refreshToken', token, cookieConfig);
+    },
+
+    clearTokens(res) {
+        res.clearCookie('accessToken');
+        res.clearCookie('refreshToken');
+    },
+
+    getAccessToken(req) {
+        return req.cookies.accessToken;
+    },
+
+    getRefreshToken(req) {
+        return req.cookies.refreshToken;
+    },
+
+    // For cross-domain scenarios (microservices)
+    setCrossDomainToken(res, token, domain) {
+        res.cookie('serviceToken', token, {
+            ...cookieConfig,
+            domain: domain,
+            sameSite: 'none',
+            secure: true
+        });
+    }
+};
+
+// ###################### COOKIE-BASED AUTH ENDPOINTS ##############################
+
+// Login endpoint with secure cookies
+app.post('/api/auth/login', asyncHandler(async (req, res) => {
+    const { email, password } = req.body;
+
+    // Validate input
+    if (!email || !password) {
+        throw new AppError('Email and password are required', 400);
+    }
+
+    // Find user and verify credentials
+    const user = await User.findOne({ email }).select('+password');
+    if (!user || !(await passwordService.verifyPassword(password, user.password))) {
+        throw new AppError('Invalid credentials', 401);
+    }
+
+    // Generate tokens
+    const tokenPayload = {
+        id: user._id,
+        email: user.email,
+        role: user.role
+    };
+
+    const accessToken = tokenService.generateAccessToken(tokenPayload);
+    const refreshToken = tokenService.generateRefreshToken(tokenPayload);
+
+    // Store refresh token in database for rotation
+    await RefreshToken.create({
+        token: refreshToken,
+        userId: user._id,
+        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+    });
+
+    // Set secure cookies
+    cookieService.setAccessToken(res, accessToken);
+    cookieService.setRefreshToken(res, refreshToken);
+
+    // Update user last login
+    user.lastLogin = new Date();
+    await user.save();
+
+    res.json({
+        success: true,
+        data: {
+            user: {
+                id: user._id,
+                email: user.email,
+                name: user.name,
+                role: user.role
+            }
+        }
+    });
+}));
+
+// Logout endpoint with token cleanup
+app.post('/api/auth/logout', asyncHandler(async (req, res) => {
+    const refreshToken = cookieService.getRefreshToken(req);
+
+    // Revoke refresh token from database
+    if (refreshToken) {
+        await RefreshToken.findOneAndUpdate(
+            { token: refreshToken },
+            { isRevoked: true, revokedAt: new Date() }
+        );
+    }
+
+    // Clear cookies
+    cookieService.clearTokens(res);
+
+    res.json({
+        success: true,
+        message: 'Logged out successfully'
+    });
+}));
+
+// Refresh token endpoint
+app.post('/api/auth/refresh', asyncHandler(async (req, res) => {
+    const refreshToken = cookieService.getRefreshToken(req);
+    
+    if (!refreshToken) {
+        throw new AppError('Refresh token required', 401);
+    }
+
+    // Verify refresh token and check database
+    const decoded = tokenService.verifyRefreshToken(refreshToken);
+    const storedToken = await RefreshToken.findOne({ 
+        token: refreshToken, 
+        userId: decoded.id 
+    });
+
+    if (!storedToken || storedToken.isRevoked) {
+        throw new AppError('Invalid refresh token', 401);
+    }
+
+    // Generate new tokens
+    const tokenPayload = {
+        id: decoded.id,
+        email: decoded.email,
+        role: decoded.role
+    };
+
+    const newAccessToken = tokenService.generateAccessToken(tokenPayload);
+    const newRefreshToken = tokenService.generateRefreshToken(tokenPayload);
+
+    // Token rotation: revoke old, store new
+    await RefreshToken.findByIdAndUpdate(storedToken._id, { 
+        isRevoked: true,
+        revokedAt: new Date()
+    });
+    
+    await RefreshToken.create({
+        token: newRefreshToken,
+        userId: decoded.id,
+        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+    });
+
+    // Set new cookies
+    cookieService.setAccessToken(res, newAccessToken);
+    cookieService.setRefreshToken(res, newRefreshToken);
+
+    res.json({
+        success: true,
+        message: 'Tokens refreshed successfully'
+    });
+}));
+
+// ###################### CSRF PROTECTION ##############################
+
+/*
+Since we're using SameSite cookies, CSRF risk is reduced.
+For additional protection, consider:
+
+1. CSRF Tokens:
+   const csrf = require('csurf');
+   app.use(csrf({ cookie: true }));
+
+2. Double Submit Cookie Pattern:
+   - Server sends CSRF token in separate cookie
+   - Client includes token in header for state-changing requests
+
+3. Additional Headers:
+   app.use((req, res, next) => {
+     res.setHeader('X-Content-Type-Options', 'nosniff');
+     res.setHeader('X-Frame-Options', 'DENY');
+     res.setHeader('X-XSS-Protection', '1; mode=block');
+     next();
+   });
+*/
+
+// ###################### COOKIE SECURITY AUDIT ##############################
+
+const cookieSecurity = {
+    auditCookies(req) {
+        const cookies = req.cookies;
+        const securityReport = {};
+
+        for (const [name, value] of Object.entries(cookies)) {
+            securityReport[name] = {
+                hasHttpOnly: false, // We can't detect this from server-side
+                hasSecure: req.secure, // Assuming secure cookies only sent over HTTPS
+                length: value.length,
+                isJWT: value.split('.').length === 3 // Basic JWT detection
+            };
+        }
+
+        return securityReport;
+    },
+
+    validateCookieSecurity(res) {
+        // In real implementation, you'd check response headers
+        const securityHeaders = res.getHeaders();
+        return {
+            hasSecureFlag: securityHeaders['set-cookie']?.some(cookie => cookie.includes('Secure')),
+            hasHttpOnly: securityHeaders['set-cookie']?.some(cookie => cookie.includes('HttpOnly')),
+            hasSameSite: securityHeaders['set-cookie']?.some(cookie => cookie.includes('SameSite'))
+        };
+    }
+};`
+        }, {
             tabTitle: "Auth Endpoints",
             title: "Auth Endpoints",
             content: `// ###################### COOKIE-BASED AUTH ENDPOINTS ##############################

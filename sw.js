@@ -1,5 +1,5 @@
-const SITE_STATIC_CACHE_NAME = "pwa-cache-v20";
-const SITE_DYNAMIC_CACHE_NAME = "pwa-cache-dynamic-v20";
+const SITE_STATIC_CACHE_NAME = "pwa-cache-v21";
+const SITE_DYNAMIC_CACHE_NAME = "pwa-cache-dynamic-v21";
 
 const assets = [
     "/",
@@ -10,7 +10,7 @@ const assets = [
     "/tables/index.html",
     "/resources/index.html",
     "manifest.json"
-]
+];
 
 self.addEventListener("install", event => {
     event.waitUntil(
@@ -35,7 +35,7 @@ self.addEventListener("activate", event => {
             );
         })
     );
-})
+});
 
 self.addEventListener("fetch", event => {
     event.respondWith(
