@@ -46,7 +46,7 @@
         // Lecture metadata
         const lectureConfig = {
             title: "Focal X - Node.js Bootcamp",
-            subtitle: "Authentication & Authorization"
+            subtitle: "Seeds & Security Practices"
         };
 
         // Lecture content organized by tabs
@@ -54,511 +54,369 @@
             tabTitle: "Last Lesson",
             title: "Last Lesson Recap",
             content: `/*
-1- Authentication & Authorization Fundamentals
-2- JWT Tokens & Implementation
-3- Secure Cookie Management 
+1- Auth Middlewares (Auth, Role)
+2- Cookies
+3- Rate Limiter
 */`
-        }, {
-            tabTitle: "Password Security",
-            title: "Password Security",
-            content: `// ###################### PASSWORD SECURITY ##############################
-Hashing vs Encryption - Key Difference:
-- Hashing: One-way function (cannot be reversed)
-
-- Encryption: Two-way function (can be decrypted with key)
-
-=> Passwords should always be HASHED, never encrypted.
-
-=> There are many Hashing algorithms but Argon2 is the current winner of the Password Hashing 
-Competition and is considered the most secure option for modern applications.
-
-const bcrypt = require('bcryptjs');
-
-const passwordService = {
-    async hashPassword(password) {
-        const saltRounds = 12; // Modern standard (was 10 previously)
-        return await bcrypt.hash(password, saltRounds);
-    },
-
-    async verifyPassword(password, hashedPassword) {
-        return await bcrypt.compare(password, hashedPassword);
-    },
-
-    validatePasswordStrength(password) {
-        const minLength = 8;
-        const hasUpperCase = /[A-Z]/.test(password);
-        const hasLowerCase = /[a-z]/.test(password);
-        const hasNumbers = /\d/.test(password);
-        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-
-        if (password.length < minLength) {
-            throw new Error('Password must be at least 8 characters long');
-        }
-        if (!hasUpperCase || !hasLowerCase) {
-            throw new Error('Password must contain both uppercase and lowercase letters');
-        }
-        if (!hasNumbers) {
-            throw new Error('Password must contain at least one number');
-        }
-        if (!hasSpecialChar) {
-            throw new Error('Password must contain at least one special character');
-        }
-
-        return true;
-    }
-};`
-        }, {
-            tabTitle: "Cookie Security",
-            title: "Secure Cookie Management & Sessions",
-            content: `// ###################### COOKIE SECURITY CONFIGURATION ##############################
-
-const cookieParser = require('cookie-parser');
-
-// Initialize cookie parser middleware
-app.use(cookieParser());
-
-// Secure cookie configuration
-const cookieConfig = {
-    httpOnly: true,        // Prevent XSS attacks - JavaScript cannot access
-    secure: process.env.NODE_ENV === 'production', // HTTPS only in production
-    sameSite: 'strict',    // CSRF protection - 'strict', 'lax', or 'none'
-    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days for refresh token
-    path: '/',             // Available across the entire app
-    domain: process.env.COOKIE_DOMAIN || undefined // Specify domain if needed
-};
-
-const accessTokenCookieConfig = {
-    ...cookieConfig,
-    maxAge: 15 * 60 * 1000 // 15 minutes for access token
-};
-
-// ###################### COOKIE ATTRIBUTES EXPLAINED ##############################
-
-/*
-httpOnly: true
-• Prevents JavaScript access to cookies
-• Critical for protecting against XSS attacks
-• Cookies can only be sent to server
-
-secure: true (production only)
-• Cookies only sent over HTTPS
-• Prevents man-in-the-middle attacks
-• Always true in production, false in development
-
-sameSite: 'strict'
-• Prevents CSRF attacks
-• 'strict': No cross-site requests
-• 'lax': Allows some safe cross-site requests
-• 'none': Allows all cross-site requests (requires secure: true)
-
-maxAge: milliseconds
-• Automatic cookie expiration
-• Better than 'expires' for modern browsers
-• Automatically cleaned up by browser
-
-path: '/'
-• Which paths can access the cookie
-• '/' means entire domain
-• '/api' would restrict to API routes only
+        },  
+        {
+            tabTitle: "Security & Hashing",
+            title: "Advanced Security Practices",
+            content: `/*
+Modern Security Implementation:
+• Argon2 Password Hashing
+• XSS Protection
+• Data Validation & Sanitization
+• Secure File Uploads
 */
 
-// ###################### COOKIE MANAGEMENT FUNCTIONS ##############################
+// ===== ARGON2 HASHING IMPLEMENTATION =====
+const argon2 = require('argon2');
 
-const cookieService = {
-    setAccessToken(res, token) {
-        res.cookie('accessToken', token, accessTokenCookieConfig);
-    },
+class PasswordService {
+    // Hash password with Argon2 (modern & secure)
+    static async hashPassword(password) {
+        try {
+            return await argon2.hash(password, {
+                type: argon2.argon2id,
+                memoryCost: 2 ** 16, // 64MB
+                timeCost: 3,
+                parallelism: 1,
+                hashLength: 32
+            });
+        } catch (error) {
+            throw new Error('Password hashing failed');
+        }
+    }
 
-    setRefreshToken(res, token) {
-        res.cookie('refreshToken', token, cookieConfig);
-    },
+    // Verify password against hash
+    static async verifyPassword(hash, password) {
+        try {
+            return await argon2.verify(hash, password);
+        } catch (error) {
+            throw new Error('Password verification failed');
+        }
+    }
+}
 
-    clearTokens(res) {
-        res.clearCookie('accessToken');
-        res.clearCookie('refreshToken');
-    },
+// Usage in auth controller
+const registerUser = async (userData) => {
+    const hashedPassword = await PasswordService.hashPassword(userData.password);
+    
+    return await User.create({
+        ...userData,
+        password: hashedPassword
+    });
+};
 
-    getAccessToken(req) {
-        return req.cookies.accessToken;
-    },
+const loginUser = async (email, password) => {
+    const user = await User.findOne({ email });
+    if (!user) return false;
 
-    getRefreshToken(req) {
-        return req.cookies.refreshToken;
-    },
+    const isValid = await PasswordService.verifyPassword(user.password, password);
+    return isValid ? user : false;
+};
 
-    // For cross-domain scenarios (microservices)
-    setCrossDomainToken(res, token, domain) {
-        res.cookie('serviceToken', token, {
-            ...cookieConfig,
-            domain: domain,
-            sameSite: 'none',
-            secure: true
+// ===== XSS PROTECTION =====
+const xss = require('xss');
+
+// XSS sanitization function
+const sanitizeInput = (input) => {
+    if (typeof input === 'string') {
+        return xss(input, {
+            whiteList: {}, // empty means remove all tags
+            stripIgnoreTag: true,
+            stripIgnoreTagBody: ['script', 'style']
+        }).trim();
+    }
+    return input;
+};
+
+// Middleware to sanitize all incoming data
+const xssSanitize = (req, res, next) => {
+    if (req.body) {
+        Object.keys(req.body).forEach(key => {
+            req.body[key] = sanitizeInput(req.body[key]);
         });
     }
+    if (req.query) {
+        Object.keys(req.query).forEach(key => {
+            req.query[key] = sanitizeInput(req.query[key]);
+        });
+    }
+    if (req.params) {
+        Object.keys(req.params).forEach(key => {
+            req.params[key] = sanitizeInput(req.params[key]);
+        });
+    }
+    next();
 };
 
-// ###################### COOKIE-BASED AUTH ENDPOINTS ##############################
-
-// Login endpoint with secure cookies
-app.post('/api/auth/login', asyncHandler(async (req, res) => {
-    const { email, password } = req.body;
-
-    // Validate input
-    if (!email || !password) {
-        throw new AppError('Email and password are required', 400);
-    }
-
-    // Find user and verify credentials
-    const user = await User.findOne({ email }).select('+password');
-    if (!user || !(await passwordService.verifyPassword(password, user.password))) {
-        throw new AppError('Invalid credentials', 401);
-    }
-
-    // Generate tokens
-    const tokenPayload = {
-        id: user._id,
-        email: user.email,
-        role: user.role
-    };
-
-    const accessToken = tokenService.generateAccessToken(tokenPayload);
-    const refreshToken = tokenService.generateRefreshToken(tokenPayload);
-
-    // Store refresh token in database for rotation
-    await RefreshToken.create({
-        token: refreshToken,
-        userId: user._id,
-        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-    });
-
-    // Set secure cookies
-    cookieService.setAccessToken(res, accessToken);
-    cookieService.setRefreshToken(res, refreshToken);
-
-    // Update user last login
-    user.lastLogin = new Date();
-    await user.save();
-
-    res.json({
-        success: true,
-        data: {
-            user: {
-                id: user._id,
-                email: user.email,
-                name: user.name,
-                role: user.role
-            }
-        }
-    });
-}));
-
-// Logout endpoint with token cleanup
-app.post('/api/auth/logout', asyncHandler(async (req, res) => {
-    const refreshToken = cookieService.getRefreshToken(req);
-
-    // Revoke refresh token from database
-    if (refreshToken) {
-        await RefreshToken.findOneAndUpdate(
-            { token: refreshToken },
-            { isRevoked: true, revokedAt: new Date() }
-        );
-    }
-
-    // Clear cookies
-    cookieService.clearTokens(res);
-
-    res.json({
-        success: true,
-        message: 'Logged out successfully'
-    });
-}));
-
-// Refresh token endpoint
-app.post('/api/auth/refresh', asyncHandler(async (req, res) => {
-    const refreshToken = cookieService.getRefreshToken(req);
-    
-    if (!refreshToken) {
-        throw new AppError('Refresh token required', 401);
-    }
-
-    // Verify refresh token and check database
-    const decoded = tokenService.verifyRefreshToken(refreshToken);
-    const storedToken = await RefreshToken.findOne({ 
-        token: refreshToken, 
-        userId: decoded.id 
-    });
-
-    if (!storedToken || storedToken.isRevoked) {
-        throw new AppError('Invalid refresh token', 401);
-    }
-
-    // Generate new tokens
-    const tokenPayload = {
-        id: decoded.id,
-        email: decoded.email,
-        role: decoded.role
-    };
-
-    const newAccessToken = tokenService.generateAccessToken(tokenPayload);
-    const newRefreshToken = tokenService.generateRefreshToken(tokenPayload);
-
-    // Token rotation: revoke old, store new
-    await RefreshToken.findByIdAndUpdate(storedToken._id, { 
-        isRevoked: true,
-        revokedAt: new Date()
-    });
-    
-    await RefreshToken.create({
-        token: newRefreshToken,
-        userId: decoded.id,
-        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-    });
-
-    // Set new cookies
-    cookieService.setAccessToken(res, newAccessToken);
-    cookieService.setRefreshToken(res, newRefreshToken);
-
-    res.json({
-        success: true,
-        message: 'Tokens refreshed successfully'
-    });
-}));
-
-// ###################### CSRF PROTECTION ##############################
-
-/*
-Since we're using SameSite cookies, CSRF risk is reduced.
-For additional protection, consider:
-
-1. CSRF Tokens:
-   const csrf = require('csurf');
-   app.use(csrf({ cookie: true }));
-
-2. Double Submit Cookie Pattern:
-   - Server sends CSRF token in separate cookie
-   - Client includes token in header for state-changing requests
-
-3. Additional Headers:
-   app.use((req, res, next) => {
-     res.setHeader('X-Content-Type-Options', 'nosniff');
-     res.setHeader('X-Frame-Options', 'DENY');
-     res.setHeader('X-XSS-Protection', '1; mode=block');
-     next();
-   });
-*/
-
-// ###################### COOKIE SECURITY AUDIT ##############################
-
-const cookieSecurity = {
-    auditCookies(req) {
-        const cookies = req.cookies;
-        const securityReport = {};
-
-        for (const [name, value] of Object.entries(cookies)) {
-            securityReport[name] = {
-                hasHttpOnly: false, // We can't detect this from server-side
-                hasSecure: req.secure, // Assuming secure cookies only sent over HTTPS
-                length: value.length,
-                isJWT: value.split('.').length === 3 // Basic JWT detection
-            };
-        }
-
-        return securityReport;
-    },
-
-    validateCookieSecurity(res) {
-        // In real implementation, you'd check response headers
-        const securityHeaders = res.getHeaders();
-        return {
-            hasSecureFlag: securityHeaders['set-cookie']?.some(cookie => cookie.includes('Secure')),
-            hasHttpOnly: securityHeaders['set-cookie']?.some(cookie => cookie.includes('HttpOnly')),
-            hasSameSite: securityHeaders['set-cookie']?.some(cookie => cookie.includes('SameSite'))
-        };
-    }
-};`
+app.use(xssSanitize);`
         }, {
-            tabTitle: "Auth Endpoints",
-            title: "Auth Endpoints",
-            content: `// ###################### COOKIE-BASED AUTH ENDPOINTS ##############################
-
-// Login endpoint with secure cookies
-app.post('/api/auth/login', asyncHandler(async (req, res) => {
-    const { email, password } = req.body;
-
-    // Validate input
-    if (!email || !password) {
-        throw new AppError('Email and password are required', 400);
-    }
-
-    // Find user and verify credentials
-    const user = await User.findOne({ email }).select('+password');
-    if (!user || !(await passwordService.verifyPassword(password, user.password))) {
-        throw new AppError('Invalid credentials', 401);
-    }
-
-    // Generate tokens
-    const tokenPayload = {
-        id: user._id,
-        email: user.email,
-        role: user.role
-    };
-
-    const accessToken = tokenService.generateAccessToken(tokenPayload);
-    const refreshToken = tokenService.generateRefreshToken(tokenPayload);
-
-    // Store refresh token in database for rotation
-    await RefreshToken.create({
-        token: refreshToken,
-        userId: user._id,
-        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-    });
-
-    // Set secure cookies
-    cookieService.setAccessToken(res, accessToken);
-    cookieService.setRefreshToken(res, refreshToken);
-
-    // Update user last login
-    user.lastLogin = new Date();
-    await user.save();
-
-    res.json({
-        success: true,
-        data: {
-            user: {
-                id: user._id,
-                email: user.email,
-                name: user.name,
-                role: user.role
-            }
-        }
-    });
-}));
-
-// Logout endpoint with token cleanup
-app.post('/api/auth/logout', asyncHandler(async (req, res) => {
-    const refreshToken = cookieService.getRefreshToken(req);
-
-    // Revoke refresh token from database
-    if (refreshToken) {
-        await RefreshToken.findOneAndUpdate(
-            { token: refreshToken },
-            { isRevoked: true, revokedAt: new Date() }
-        );
-    }
-
-    // Clear cookies
-    cookieService.clearTokens(res);
-
-    res.json({
-        success: true,
-        message: 'Logged out successfully'
-    });
-}));
-
-// Refresh token endpoint
-app.post('/api/auth/refresh', asyncHandler(async (req, res) => {
-    const refreshToken = cookieService.getRefreshToken(req);
-    
-    if (!refreshToken) {
-        throw new AppError('Refresh token required', 401);
-    }
-
-    // Verify refresh token and check database
-    const decoded = tokenService.verifyRefreshToken(refreshToken);
-    const storedToken = await RefreshToken.findOne({ 
-        token: refreshToken, 
-        userId: decoded.id 
-    });
-
-    if (!storedToken || storedToken.isRevoked) {
-        throw new AppError('Invalid refresh token', 401);
-    }
-
-    // Generate new tokens
-    const tokenPayload = {
-        id: decoded.id,
-        email: decoded.email,
-        role: decoded.role
-    };
-
-    const newAccessToken = tokenService.generateAccessToken(tokenPayload);
-    const newRefreshToken = tokenService.generateRefreshToken(tokenPayload);
-
-    // Token rotation: revoke old, store new
-    await RefreshToken.findByIdAndUpdate(storedToken._id, { 
-        isRevoked: true,
-        revokedAt: new Date()
-    });
-    
-    await RefreshToken.create({
-        token: newRefreshToken,
-        userId: decoded.id,
-        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-    });
-
-    // Set new cookies
-    cookieService.setAccessToken(res, newAccessToken);
-    cookieService.setRefreshToken(res, newRefreshToken);
-
-    res.json({
-        success: true,
-        message: 'Tokens refreshed successfully'
-    });
-}));
-
-// ###################### CSRF PROTECTION ##############################
-
-/*
-Since we're using SameSite cookies, CSRF risk is reduced.
-For additional protection, consider:
-
-1. CSRF Tokens:
-   const csrf = require('csurf');
-   app.use(csrf({ cookie: true }));
-
-2. Double Submit Cookie Pattern:
-   - Server sends CSRF token in separate cookie
-   - Client includes token in header for state-changing requests
-
-3. Additional Headers:
-   app.use((req, res, next) => {
-     res.setHeader('X-Content-Type-Options', 'nosniff');
-     res.setHeader('X-Frame-Options', 'DENY');
-     res.setHeader('X-XSS-Protection', '1; mode=block');
-     next();
-   });
+            tabTitle: "Data Validation",
+            title: "Express Validator & Sanitization",
+            content: `/*
+Data Validation & Sanitization:
+• Request validation with express-validator
+• Custom validation rules
+• Optional fields handling
+• Input sanitization
 */
 
-// ###################### COOKIE SECURITY AUDIT ##############################
+// src/validation/userValidation.js
+const { body, param, query, validationResult } = require('express-validator');
+const User = require('../models/User');
 
-const cookieSecurity = {
-    auditCookies(req) {
-        const cookies = req.cookies;
-        const securityReport = {};
-
-        for (const [name, value] of Object.entries(cookies)) {
-            securityReport[name] = {
-                hasHttpOnly: false, // We can't detect this from server-side
-                hasSecure: req.secure, // Assuming secure cookies only sent over HTTPS
-                length: value.length,
-                isJWT: value.split('.').length === 3 // Basic JWT detection
-            };
-        }
-
-        return securityReport;
-    },
-
-    validateCookieSecurity(res) {
-        // In real implementation, you'd check response headers
-        const securityHeaders = res.getHeaders();
-        return {
-            hasSecureFlag: securityHeaders['set-cookie']?.some(cookie => cookie.includes('Secure')),
-            hasHttpOnly: securityHeaders['set-cookie']?.some(cookie => cookie.includes('HttpOnly')),
-            hasSameSite: securityHeaders['set-cookie']?.some(cookie => cookie.includes('SameSite'))
-        };
+// Custom validation functions
+const isStrongPassword = (value) => {
+    if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}/.test(value)) {
+        throw new Error('Password must contain uppercase, lowercase, number, special character, and be at least 8 characters long');
     }
-};`
-        }, ];
+    return true;
+};
+
+const isEmailAvailable = async (email) => {
+    const user = await User.findOne({ email });
+    if (user) {
+        throw new Error('Email is already registered');
+    }
+    return true;
+};
+
+// User registration validation schema
+const validateUserRegistration = [
+    body('email')
+        .isEmail().normalizeEmail()
+        .withMessage('Please provide a valid email')
+        .custom(isEmailAvailable),
+
+    body('password')
+        .isLength({ min: 8 }).withMessage('Password must be at least 8 characters')
+        .custom(isStrongPassword),
+
+    body('username')
+        .optional() // Optional field
+        .isAlphanumeric().withMessage('Username must be alphanumeric')
+        .isLength({ min: 3, max: 30 }).withMessage('Username must be between 3-30 characters')
+        .trim(),
+
+    body('phone')
+        .optional()
+        .isMobilePhone().withMessage('Please provide a valid phone number'),
+
+    body('role')
+        .optional()
+        .isIn(['user', 'admin', 'moderator']).withMessage('Invalid role specified')
+];
+
+// User update validation (different rules for updates)
+const validateUserUpdate = [
+    body('email')
+        .optional()
+        .isEmail().normalizeEmail()
+        .withMessage('Please provide a valid email'),
+
+    body('username')
+        .optional()
+        .isAlphanumeric().withMessage('Username must be alphanumeric')
+        .isLength({ min: 3, max: 30 }).withMessage('Username must be between 3-30 characters')
+        .trim(),
+
+    body('profile.bio')
+        .optional()
+        .isLength({ max: 500 }).withMessage('Bio cannot exceed 500 characters')
+        .escape() // HTML escape for safety
+];
+
+// ID parameter validation
+const validateObjectId = [
+    param('id')
+        .isMongoId().withMessage('Invalid ID format')
+        .escape()
+];
+
+// Search query validation
+const validateSearchQuery = [
+    query('q')
+        .optional()
+        .isLength({ min: 1, max: 50 }).withMessage('Search query must be between 1-50 characters')
+        .trim().escape(),
+
+    query('page')
+        .optional()
+        .isInt({ min: 1 }).withMessage('Page must be a positive integer')
+        .toInt(),
+
+    query('limit')
+        .optional()
+        .isInt({ min: 1, max: 100 }).withMessage('Limit must be between 1-100')
+        .toInt()
+];
+
+// Validation middleware
+const handleValidationErrors = (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({
+            success: false,
+            message: 'Validation failed',
+            errors: errors.array().map(err => ({
+                field: err.path,
+                message: err.msg,
+                value: err.value
+            }))
+        });
+    }
+    next();
+};
+
+// Usage in routes
+router.post('/register', 
+    validateUserRegistration, 
+    handleValidationErrors,
+    userController.register
+);
+
+router.put('/users/:id',
+    validateObjectId,
+    validateUserUpdate,
+    handleValidationErrors, 
+    userController.updateUser
+);
+
+router.get('/search',
+    validateSearchQuery,
+    handleValidationErrors,
+    userController.searchUsers
+);`
+        }, {
+            tabTitle: "Advanced Express",
+            title: "Production-Ready Express Applications",
+            content: `/*
+Production Best Practices:
+• Environment configuration
+• Security headers
+• Rate limiting
+• Request sanitization
+• Proper error handling
+• Logging
+• Performance optimization
+*/
+
+const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const compression = require('compression');
+
+// Security middleware
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            styleSrc: ["'self'", "'unsafe-inline'"],
+            scriptSrc: ["'self'"],
+            imgSrc: ["'self'", "data:", "https:"],
+        },
+    },
+    crossOriginEmbedderPolicy: false
+}));
+
+// CORS configuration
+app.use(cors({
+    origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000'],
+    credentials: true
+}));
+
+// Rate limiting
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+    message: {
+        error: 'Too many requests from this IP, please try again later.'
+    }
+});
+app.use('/api/', limiter);
+
+// Compression
+app.use(compression());
+
+// Environment-based configuration
+const config = {
+    development: {
+        port: 4000,
+        host: 'localhost',
+        logLevel: 'debug'
+    },
+    production: {
+        port: process.env.PORT || 80,
+        host: '0.0.0.0',
+        logLevel: 'warn'
+    }
+};
+
+const environment = process.env.NODE_ENV || 'development';
+const currentConfig = config[environment];
+
+// Advanced error handling
+class AppError extends Error {
+    constructor(message, statusCode) {
+        super(message);
+        this.statusCode = statusCode;
+        this.isOperational = true;
+        Error.captureStackTrace(this, this.constructor);
+    }
+}
+
+// Async error wrapper (avoid try-catch in every route)
+const asyncHandler = (fn) => (req, res, next) => {
+    Promise.resolve(fn(req, res, next)).catch(next);
+};
+
+// Example with async handler
+app.get('/api/async-users', asyncHandler(async (req, res) => {
+    // Simulate async operation
+    const users = await Promise.resolve([...users]);
+    res.json({ success: true, data: users });
+}));
+
+// Global error handler
+app.use((err, req, res, next) => {
+    err.statusCode = err.statusCode || 500;
+    err.status = err.status || 'error';
+
+    if (process.env.NODE_ENV === 'development') {
+        res.status(err.statusCode).json({
+            status: err.status,
+            error: err,
+            message: err.message,
+            stack: err.stack
+        });
+    } else {
+        // Production: don't leak error details
+        if (err.isOperational) {
+            res.status(err.statusCode).json({
+                status: err.status,
+                message: err.message
+            });
+        } else {
+            console.error('ERROR 💥', err);
+            res.status(500).json({
+                status: 'error',
+                message: 'Something went wrong!'
+            });
+        }
+    }
+});
+
+// Graceful shutdown
+process.on('SIGTERM', () => {
+    console.log('SIGTERM received. Shutting down gracefully...');
+    server.close(() => {
+        console.log('Process terminated');
+    });
+});`
+        } ];
 
         // Updated Questions array aligned with authentication & security topics
         const questions = [

@@ -362,7 +362,57 @@ const refreshTokenPayload = {
     jti: 'unique-refresh-token-456',
     type: 'refresh'
 };`
+        },
+        {
+            tabTitle: "Password Security",
+            title: "Password Security",
+            content: `// ###################### PASSWORD SECURITY ##############################
+Hashing vs Encryption - Key Difference:
+- Hashing: One-way function (cannot be reversed)
+
+- Encryption: Two-way function (can be decrypted with key)
+
+=> Passwords should always be HASHED, never encrypted.
+
+=> There are many Hashing algorithms but Argon2 is the current winner of the Password Hashing 
+Competition and is considered the most secure option for modern applications.
+
+const bcrypt = require('bcryptjs');
+
+const passwordService = {
+    async hashPassword(password) {
+        const saltRounds = 12; // Modern standard (was 10 previously)
+        return await bcrypt.hash(password, saltRounds);
+    },
+
+    async verifyPassword(password, hashedPassword) {
+        return await bcrypt.compare(password, hashedPassword);
+    },
+
+    validatePasswordStrength(password) {
+        const minLength = 8;
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasLowerCase = /[a-z]/.test(password);
+        const hasNumbers = /\d/.test(password);
+        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+        if (password.length < minLength) {
+            throw new Error('Password must be at least 8 characters long');
         }
+        if (!hasUpperCase || !hasLowerCase) {
+            throw new Error('Password must contain both uppercase and lowercase letters');
+        }
+        if (!hasNumbers) {
+            throw new Error('Password must contain at least one number');
+        }
+        if (!hasSpecialChar) {
+            throw new Error('Password must contain at least one special character');
+        }
+
+        return true;
+    }
+};`
+        },
         ];
 
         // Updated Questions array aligned with authentication & security topics
