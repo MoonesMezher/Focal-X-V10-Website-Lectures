@@ -4,297 +4,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 9: Complete E-commerce Backend System</title>
+    <title>Task 9: Auth Mini API — JWT, Roles &amp; Security</title>
     <link rel="manifest" href="../manifest.json" />
     <link rel="apple-touch-icon" href="../logo.jpg">
     <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
     <meta name="theme-color" content="#b21f1f">
     <link rel="shortcut icon" href="../logo.jpg" type="image/x-icon">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body {
             background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            color: #333; line-height: 1.6; padding: 20px; min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
         }
-        
         .container {
-            width: 100%;
-            max-width: 1000px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            margin: 20px 0;
+            width: 100%; max-width: 1000px; background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); margin: 20px 0;
         }
-        
         .coach {
-            background-color: white;
-            width: 80px;
-            border-radius: 0 0 50% 0;
-            color: black;
-            padding: 10px;
-            position: absolute;
-            left: 0;
-            top: 0;
-            z-index: 100;
+            background-color: white; width: 80px; border-radius: 0 0 50% 0;
+            color: black; padding: 10px; position: absolute; left: 0; top: 0; z-index: 100;
         }
-        
-        header {
-            background: #2c3e50;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-        }
-        
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-        }
-        
-        .subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-        
-        #title {
-            padding-top: 20px;
-        }
-        
+        header { background: #2c3e50; color: white; padding: 20px; text-align: center; position: relative; }
+        h1 { font-size: 2.2rem; margin-bottom: 10px; }
+        .subtitle { font-size: 1.1rem; opacity: 0.9; }
+        #title { padding-top: 20px; }
         .language-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background 0.3s;
+            position: absolute; top: 20px; right: 20px; background: #3498db; color: white;
+            border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: 600;
         }
-        
-        .language-toggle:hover {
-            background: #2980b9;
-        }
-        
-        .task-content {
-            padding: 30px;
-        }
-        
+        .language-toggle:hover { background: #2980b9; }
+        .task-content { padding: 30px; }
         .section {
-            margin-bottom: 30px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px; padding: 20px; background: #f8f9fa;
+            border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
-        
-        h2 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #3498db;
-        }
-        
-        h3 {
-            color: #2980b9;
-            margin: 15px 0;
-        }
-        
-        p {
-            margin-bottom: 15px;
-        }
-        
-        ul,
-        ol {
-            margin-left: 20px;
-            margin-bottom: 15px;
-        }
-        
-        li {
-            margin-bottom: 8px;
-        }
-        
-        .code-block {
-            background: #2c3e50;
-            color: #ecf0f1;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-            margin: 15px 0;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-        
-        .requirements {
-            background: #e8f4fc;
-            border-left: 5px solid #3498db;
-        }
-        
-        .bonus {
-            background: #fff3cd;
-            border-left: 5px solid #ffc107;
-        }
-        
+        .story-section { background: #f0f8ff; border-left: 5px solid #3178c6; }
+        .requirements { background: #e8f4fc; border-left: 5px solid #3498db; }
+        .note-section { background: #fff3cd; border-left: 5px solid #ffc107; }
+        h2 { color: #2c3e50; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #3498db; }
+        .story-section h2 { border-bottom-color: #3178c6; }
+        .note-section h2 { border-bottom-color: #ffc107; }
+        h3 { color: #2980b9; margin: 15px 0; }
+        p { margin-bottom: 15px; }
+        ul, ol { margin-left: 20px; margin-bottom: 15px; }
+        li { margin-bottom: 8px; }
         .output-example {
-            background: #d4edda;
-            border-left: 5px solid #28a745;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 15px 0;
-            font-family: monospace;
-            white-space: pre;
-            overflow: auto;
-            direction: ltr !important;
-            text-align: left !important;
+            background: #d4edda; border-left: 5px solid #28a745; padding: 15px; border-radius: 5px;
+            margin: 15px 0; font-family: monospace; white-space: pre; overflow: auto;
+            direction: ltr !important; text-align: left !important;
         }
-        
         .timer-section {
-            text-align: center;
-            padding: 20px;
-            background: #2c3e50;
-            color: white;
-            margin-top: 30px;
-            border-radius: 10px;
+            text-align: center; padding: 20px; background: #2c3e50; color: white;
+            margin-top: 30px; border-radius: 10px;
         }
-        
-        .timer {
-            font-size: 2rem;
-            font-weight: bold;
-            margin: 10px 0;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-        
-        .timer-unit {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px;
-            border-radius: 5px;
-            min-width: 80px;
-        }
-        
-        .timer-value {
-            font-size: 2.5rem;
-            display: block;
-        }
-        
-        .timer-label {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            display: block;
-        }
-        
-        .finish-date {
-            font-size: 1.2rem;
-            margin-top: 10px;
-        }
-        
+        .timer { font-size: 2rem; font-weight: bold; margin: 10px 0; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .timer-unit { background: rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 5px; min-width: 80px; }
+        .timer-value { font-size: 2.5rem; display: block; }
+        .timer-label { font-size: 0.9rem; text-transform: uppercase; display: block; }
+        .finish-date { font-size: 1.2rem; margin-top: 10px; }
         .thank-you {
-            text-align: center;
-            padding: 20px;
-            font-style: italic;
-            color: #6c757d;
-            border-top: 1px solid #dee2e6;
-            margin-top: 30px;
+            text-align: center; padding: 20px; font-style: italic; color: #6c757d;
+            border-top: 1px solid #dee2e6; margin-top: 30px;
         }
-        
         .footer {
-            text-align: center;
-            padding: 20px;
-            background: #2c3e50;
-            color: white;
-            width: 100%;
-            max-width: 1000px;
-            border-radius: 15px;
+            text-align: center; padding: 20px; background: #2c3e50; color: white;
+            width: 100%; max-width: 1000px; border-radius: 15px;
         }
-        
-        .footer a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        
-        .footer p {
-            padding: 0 !important;
-            margin: 0 !important;
-        }
-        
-        .footer a:hover {
-            text-decoration: underline;
-        }
-        
+        .footer a { color: #3498db; text-decoration: none; }
+        .footer p { padding: 0 !important; margin: 0 !important; }
         @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-            .task-content {
-                padding: 15px;
-            }
-            .language-toggle {
-                position: relative;
-                top: 0;
-                right: 0;
-                margin-bottom: 15px;
-                display: block;
-                width: 100%;
-            }
-            .timer {
-                font-size: 1.5rem;
-                flex-wrap: wrap;
-            }
-            .timer-unit {
-                min-width: 70px;
-            }
-            .timer-value {
-                font-size: 2rem;
-            }
-        }
-        
-        .typescript-feature {
-            background: #f0f8ff;
-            border-left: 5px solid #3178c6;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 5px;
-        }
-        
-        .code-comparison {
-            display: flex;
-            gap: 20px;
-            margin: 20px 0;
-        }
-        
-        .code-comparison>div {
-            flex: 1;
-        }
-        
-        .js-code {
-            border-left: 3px solid #f7df1e;
-        }
-        
-        .ts-code {
-            border-left: 3px solid #3178c6;
-        }
-        
-        @media (max-width: 768px) {
-            .code-comparison {
-                flex-direction: column;
-            }
+            h1 { font-size: 1.8rem; }
+            .task-content { padding: 15px; }
+            .language-toggle { position: relative; top: 0; right: 0; margin-bottom: 15px; display: block; width: 100%; }
         }
     </style>
 </head>
@@ -303,42 +85,26 @@
     <div class="container">
         <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
         <header>
-            <h1 id="title">Task 9: Complete E-commerce Backend System</h1>
-            <p class="subtitle" id="subtitle">Create a complete Express.js server with MongoDB integration, middleware, and CRUD operations for movies and genres.</p>
+            <h1 id="title">Task 9: Auth Mini API</h1>
+            <p class="subtitle" id="subtitle">Small Express API focused on authentication, authorization, and security middleware — Lectures 23–25.</p>
             <button class="language-toggle" id="languageToggle">العربية / English</button>
         </header>
 
-        <div class="task-content" id="taskContent">
-            <!-- Content will be dynamically inserted here -->
-        </div>
+        <div class="task-content" id="taskContent"></div>
 
         <div class="timer-section">
             <h3 id="timer-title">Time Remaining to Complete Task</h3>
             <div class="timer" id="timer">
-                <div class="timer-unit">
-                    <span class="timer-value" id="days">00</span>
-                    <span class="timer-label" id="days-label">Days</span>
-                </div>
-                <div class="timer-unit">
-                    <span class="timer-value" id="hours">00</span>
-                    <span class="timer-label" id="hours-label">Hours</span>
-                </div>
-                <div class="timer-unit">
-                    <span class="timer-value" id="minutes">00</span>
-                    <span class="timer-label" id="minutes-label">Minutes</span>
-                </div>
-                <div class="timer-unit">
-                    <span class="timer-value" id="seconds">00</span>
-                    <span class="timer-label" id="seconds-label">Seconds</span>
-                </div>
+                <div class="timer-unit"><span class="timer-value" id="days">00</span><span class="timer-label" id="days-label">Days</span></div>
+                <div class="timer-unit"><span class="timer-value" id="hours">00</span><span class="timer-label" id="hours-label">Hours</span></div>
+                <div class="timer-unit"><span class="timer-value" id="minutes">00</span><span class="timer-label" id="minutes-label">Minutes</span></div>
+                <div class="timer-unit"><span class="timer-value" id="seconds">00</span><span class="timer-label" id="seconds-label">Seconds</span></div>
             </div>
-            <p class="finish-date" id="finish-date">Finish by: November 22, 2026</p>
+            <p class="finish-date" id="finish-date">Finish by: June 10, 2026</p>
             <p id="timer-message">Complete the task before the deadline!</p>
         </div>
 
-        <div class="thank-you" id="thankYou">
-            "Thank you for your hard work and dedication. Your efforts are appreciated!"
-        </div>
+        <div class="thank-you" id="thankYou">"Thank you for your hard work and dedication. Your efforts are appreciated!"</div>
     </div>
 
     <div class="footer">
@@ -347,543 +113,280 @@
 
     <script src="../reg.js"></script>
     <script>
-        // Content data structure
         const taskData = {
             en: {
-                title: "Task 9: Complete E-commerce Backend System",
-                subtitle: "Build a full-featured e-commerce backend with authentication, product management, orders, payments, and admin dashboard",
+                title: "Task 9: Auth Mini API",
+                subtitle: "Practice Auth 1–3 only: JWT in cookies, argon2, role middleware, rate limiting, XSS protection, and express-validator — not a full business system.",
                 sections: [{
-                    type: "idea",
-                    title: "💡 Task 9: \"Complete E-commerce Backend System\"",
-                    content: "Develop a complete backend API for an e-commerce platform that allows users to browse products, manage shopping carts, place orders, make payments, and includes an admin panel for store management."
+                    type: "story",
+                    title: "🔐 The goal: understand auth, not build a product",
+                    paragraphs: [
+                        "This task is intentionally small. You are not building a library, shop, or multi-module platform.",
+                        "You are building a minimal Express + MongoDB API whose only job is to let you practice what you covered in Lectures 23, 24, and 25: sign users up, log them in, protect routes, and harden the server.",
+                        "If you can explain each middleware and test each endpoint in Postman or Thunder Client, you have succeeded."
+                    ]
+                }, {
+                    type: "note",
+                    title: "📚 Lecture alignment",
+                    content: "Map your work to: <a href=\"../lecture23.html\" target=\"_blank\" rel=\"noopener\">Lecture 23 — Auth 1: Authentication, Authorization, JWT</a> · <a href=\"../lecture24.html\" target=\"_blank\" rel=\"noopener\">Lecture 24 — Auth 2: Role middlewares, cookies, rate limiter</a> · <a href=\"../lecture25.html\" target=\"_blank\" rel=\"noopener\">Lecture 25 — Auth 3: XSS, express-validator</a>."
                 }, {
                     type: "requirements",
-                    title: "📋 Project Requirements",
+                    title: "📝 What to build (minimum scope)",
                     content: [{
                         type: "list",
-                        title: "System Story:",
+                        title: "User model (MongoDB + Mongoose):",
                         items: [
-                            "An entrepreneur wants to launch an online store selling various products",
-                            "Customers should be able to browse products with filters and search functionality",
-                            "Users need to create accounts to save their information and order history",
-                            "Shopping cart functionality with ability to add/remove items before checkout",
-                            "Secure payment processing with order confirmation emails",
-                            "Admin users should manage products, orders, and view sales analytics",
-                            "Customers should be able to upload product reviews with images",
-                            "Inventory management with stock tracking and low stock alerts",
-                            "Password reset functionality via email with secure token validation"
+                            "Fields: <code>name</code>, <code>email</code> (unique), <code>password</code> (never return in JSON), <code>role</code> (<code>user</code> | <code>admin</code>), optional <code>createdAt</code>.",
+                            "On signup: hash password with <strong>argon2</strong> before save.",
+                            "Seed or document one admin user for testing (e.g. via script or manual insert with hashed password)."
                         ]
                     }, {
                         type: "list",
-                        title: "User Stories:",
+                        title: "Auth endpoints (prefix e.g. <code>/api/v1/auth</code>):",
                         items: [
-                            "As a customer, I want to browse products by category, price range, and ratings",
-                            "As a customer, I want to create an account to save my shipping information",
-                            "As a customer, I want to add products to my cart and update quantities",
-                            "As a customer, I want to apply discount codes during checkout",
-                            "As a customer, I want to track my order status after purchase",
-                            "As a customer, I want to write reviews with images for purchased products",
-                            "As a customer, I want to receive order confirmation and shipping updates via email",
-                            "As a customer, I want to reset my password if I forget it via email",
-                            "As an admin, I want to add/edit/delete products with images",
-                            "As an admin, I want to manage product categories and inventory levels",
-                            "As an admin, I want to view and update order statuses",
-                            "As an admin, I want to see sales reports and analytics dashboard",
-                            "As an admin, I want to manage user accounts and roles"
+                            "<code>POST /signup</code> — register; validate body; return safe user object (no password).",
+                            "<code>POST /login</code> — verify email + password with argon2; issue JWT <strong>access token</strong>; store it in an <strong>httpOnly cookie</strong> (not only in JSON body).",
+                            "<code>POST /logout</code> — clear the auth cookie.",
+                            "<code>GET /profile</code> — protected; return current user from token/cookie."
                         ]
                     }, {
                         type: "list",
-                        title: "Database Schemas Structure:",
+                        title: "JWT & cookies:",
                         items: [
-                            "User Model: id, name, email, password, role, isVerified, avatar, addresses, phone, createdAt, updatedAt",
-                            "Product Model: id, name, description, price, category, images, stock, ratings, numReviews, features, brand, createdAt",
-                            "Category Model: id, name, description, image, parentCategory, createdAt",
-                            "Cart Model: id, user, items, totalPrice, createdAt, updatedAt",
-                            "CartItem Model: product, quantity, price",
-                            "Order Model: id, user, items, shippingAddress, paymentMethod, paymentResult, itemsPrice, taxPrice, shippingPrice, totalPrice, isPaid, paidAt, isDelivered, deliveredAt, createdAt",
-                            "OrderItem Model: name, quantity, image, price, product",
-                            "Review Model: id, user, product, rating, comment, images, createdAt",
-                            "Token Model: id, userId, token, type, expiresAt, createdAt",
-                            "Address Model: street, city, state, zipCode, country, isDefault"
+                            "Sign access token with <code>jsonwebtoken</code> (or equivalent); payload at least <code>userId</code> and <code>role</code>.",
+                            "Use <code>cookie-parser</code>; set cookie on login (httpOnly, secure in production, sameSite as appropriate).",
+                            "Auth middleware reads token from cookie, verifies JWT, attaches user to <code>req</code> (e.g. <code>req.user</code>)."
                         ]
                     }, {
                         type: "list",
-                        title: "Technical Requirements:",
+                        title: "Controllers (required — routes stay thin):",
                         items: [
-                            "Node.js with Express.js framework",
-                            "MongoDB with Mongoose ODM for database operations",
-                            "JWT authentication with refresh tokens stored in HTTP-only cookies",
-                            "Argon2 for secure password hashing during registration/login",
-                            "Express-validator for comprehensive request validation",
-                            "Multer for file uploads with Cloudinary integration for image storage",
-                            "Nodemailer for sending transactional emails (order confirmations, password reset)",
-                            "Complete testing with Postman (export and include collection in submission)",
-                            "Deploy to Render.com as free service with MongoDB Atlas connection",
-                            "Implement comprehensive security measures",
-                            "Follow folder structure exactly as specified",
-                            "Token model for password reset with expiration"
+                            "Put request/response logic in <strong>controllers</strong>, not inside route files. Routes only wire middleware + controller method.",
+                            "<code>src/controllers/auth.controller.js</code> — signup, login, logout, profile handlers.",
+                            "<code>src/controllers/protected.controller.js</code> (or split <code>user.controller.js</code> + <code>admin.controller.js</code>) — handlers for the 5 role-aware APIs below."
                         ]
                     }, {
                         type: "list",
-                        title: "Security Implementation Requirements:",
+                        title: "Role middleware + 5 protected APIs:",
                         items: [
-                            "Helmet.js for setting secure HTTP headers",
-                            "CORS configuration for cross-origin requests",
-                            "Rate limiting to prevent brute force attacks",
-                            "XSS protection for input sanitization",
-                            "Mongoose schema validation for data integrity",
-                            "Environment variables for sensitive data",
-                            "Secure cookie configuration for JWT tokens",
-                            "Token expiration for password reset (1 hour)",
-                            "Token deletion after use"
+                            "After <code>protect</code> (auth) middleware, use <strong>role middleware</strong> (e.g. <code>restrictTo('admin')</code>) where needed.",
+                            "Implement <strong>exactly 5 protected endpoints</strong> (plus auth routes above). Return simple JSON — no real business domain:",
+                            "<code>GET /api/v1/me/welcome</code> — any authenticated user (<code>user</code> or <code>admin</code>).",
+                            "<code>GET /api/v1/me/account-summary</code> — any authenticated user (fake summary object).",
+                            "<code>GET /api/v1/admin/overview</code> — <strong>admin only</strong> (e.g. fake counts).",
+                            "<code>GET /api/v1/admin/users</code> — <strong>admin only</strong> (list users without passwords).",
+                            "<code>DELETE /api/v1/admin/users/:id</code> — <strong>admin only</strong>; validate <code>:id</code> with express-validator; prevent deleting yourself if you wish.",
+                            "Test matrix: <code>user</code> gets 200 on the two <code>/me/*</code> routes and <strong>403</strong> on the three <code>/admin/*</code> routes; <code>admin</code> gets 200 on all five."
                         ]
                     }, {
                         type: "list",
-                        title: "What Students Should Deliver:",
+                        title: "Security & validation (required):",
                         items: [
-                            "Complete working code with all endpoints functional",
-                            "Clear README.md with setup instructions and API documentation",
-                            "Postman collection exported and included in repository",
-                            "Live deployment on Render.com with MongoDB Atlas connection",
-                            "All models, controllers, routes, and middleware as per structure",
-                            "Error handling middleware and 404 not found middleware",
-                            "asyncHandler implementation instead of try-catch blocks",
-                            "Proper use of population for relational data",
-                            "Image upload functionality for product images and reviews",
-                            "Email sending functionality for order confirmations and password reset",
-                            "Password reset flow with email verification"
+                            "<strong>XSS protection</strong> — use middleware such as <code>xss-clean</code> or <code>xss</code> (as in lecture) to sanitize user input.",
+                            "<strong>Rate limiter</strong> — apply to auth routes (login/signup) with <code>express-rate-limit</code> (stricter limit on login).",
+                            "<strong>express-validator</strong> — validate <strong>all</strong> <code>req.body</code> and <code>req.params</code> on auth routes (email format, password min length, name rules, etc.); centralize validation chains and return 400 with clear errors."
                         ]
                     }, {
                         type: "output",
-                        title: "Required API Endpoints (Minimum):",
-                        content: "Implement at least these endpoints with proper validation and error handling:",
-                        example: `## Authentication Endpoints
-POST   /api/auth/register     - Register new user (with argon2 password hashing)
-POST   /api/auth/login        - Login user (set JWT in HTTP-only cookie)
-POST   /api/auth/logout       - Logout user (clear cookie)
-POST   /api/auth/refresh      - Refresh access token
-GET    /api/auth/verify-email/:token - Verify email token
-POST   /api/auth/forgot-password - Send password reset email (store token in Token model)
-POST   /api/auth/reset-password/:token - Verify token and reset password
-PUT    /api/auth/update-password - Update password (authenticated users)
-
-## Product Endpoints
-GET    /api/products          - Get all products (with pagination, filters, search)
-GET    /api/products/:id      - Get single product
-POST   /api/products          - Create product (Admin only, with image upload)
-PUT    /api/products/:id      - Update product (Admin only)
-DELETE /api/products/:id      - Delete product (Admin only)
-GET    /api/products/categories - Get all categories
-
-## Cart Endpoints
-GET    /api/cart              - Get user's cart
-POST   /api/cart              - Add item to cart
-PUT    /api/cart/:itemId      - Update cart item quantity
-DELETE /api/cart/:itemId      - Remove item from cart
-DELETE /api/cart              - Clear entire cart
-
-## Order Endpoints
-POST   /api/orders            - Create new order (send confirmation email)
-GET    /api/orders            - Get user's orders
-GET    /api/orders/:id        - Get single order details
-PUT    /api/orders/:id/status - Update order status (Admin only)
-GET    /api/orders/admin/all  - Get all orders (Admin only)
-
-## Review Endpoints
-POST   /api/products/:id/reviews - Add review with image upload
-GET    /api/products/:id/reviews - Get product reviews
-PUT    /api/reviews/:id      - Update review
-DELETE /api/reviews/:id      - Delete review
-
-## User Endpoints
-GET    /api/users/profile     - Get user profile
-PUT    /api/users/profile     - Update user profile
-PUT    /api/users/address     - Add/update shipping address
-GET    /api/users/admin/all   - Get all users (Admin only)
-PUT    /api/users/:id/role    - Update user role (Admin only)
-
-## Password Reset Flow:
-1. POST /api/auth/forgot-password
-   - User submits email
-   - System generates token and saves to Token model
-   - Sends email with reset link containing token
-   
-2. POST /api/auth/reset-password/:token
-   - System verifies token exists and is not expired
-   - Validates new password
-   - Updates user password
-   - Deletes token from Token model
-   
-3. PUT /api/auth/update-password
-   - Authenticated user
-   - Verifies current password
-   - Updates to new password`
-                    }, {
-                        type: "output",
-                        title: "📝 Folder Structure (Must Follow Exactly):",
-                        example: `├── src/
-│   ├── models/
-│   │   ├── User.js
-│   │   ├── Product.js
-│   │   ├── Category.js
-│   │   ├── Cart.js
-│   │   ├── Order.js
-│   │   ├── Review.js
-│   │   └── Token.js
-│   │
-│   ├── validation/
-│   │   ├── authValidation.js
-│   │   ├── productValidation.js
-│   │   ├── orderValidation.js
-│   │   ├── userValidation.js
-│   │   └── tokenValidation.js
-│   │
-│   ├── controllers/
-│   │   ├── authController.js
-│   │   ├── productController.js
-│   │   ├── cartController.js
-│   │   ├── orderController.js
-│   │   ├── reviewController.js
-│   │   ├── userController.js
-│   │   └── adminController.js
-│   │
-│   ├── routes/
-│   │   ├── authRoutes.js
-│   │   ├── productRoutes.js
-│   │   ├── cartRoutes.js
-│   │   ├── orderRoutes.js
-│   │   ├── reviewRoutes.js
-│   │   ├── userRoutes.js
-│   │   └── adminRoutes.js
-│   │
-│   ├── middlewares/
-│   │   ├── authMiddleware.js
-│   │   ├── errorMiddleware.js
-│   │   ├── notFoundMiddleware.js
-│   │   ├── validationMiddleware.js
-│   │   ├── uploadMiddleware.js
-│   │   ├── rateLimitMiddleware.js
-│   │   └── tokenMiddleware.js
-│   │
-│   ├── utils/
-│   │   ├── asyncHandler.js
-│   │   ├── sendEmail.js
-│   │   ├── cloudinary.js
-│   │   ├── generateToken.js
-│   │   ├── apiFeatures.js
-│   │   ├── generateResetToken.js
-│   │   └── passwordUtils.js
-│   │
-│   └── app.js
-├── package.json
-├── .env
+                        title: "Suggested folder layout (keep it small):",
+                        content: "No large src tree required — stay readable:",
+                        example: `auth-mini-api/
+├── app.js
+├── .env          (PORT, MONGODB_URI, JWT_SECRET, JWT_EXPIRES_IN)
 ├── .env.example
 ├── .gitignore
-└── README.md`
+├── package.json
+└── src/
+    ├── models/User.js
+    ├── controllers/
+    │   ├── auth.controller.js       ← signup, login, logout, profile
+    │   └── protected.controller.js  ← 5 role-aware handlers
+    ├── middlewares/
+    │   ├── auth.js                  ← protect (JWT from cookie)
+    │   ├── role.js                  ← restrictTo(...)
+    │   └── validate.js              ← express-validator chains
+    └── routes/
+        ├── auth.routes.js           ← wires validators + auth.controller
+        └── protected.routes.js      ← wires protect, role, protected.controller`
+                    }, {
+                        type: "list",
+                        title: "Out of scope (do not overbuild):",
+                        items: [
+                            "No refresh tokens, OAuth, email verification, or password-reset flows unless you finish early.",
+                            "No large CRUD domains (books, orders, etc.).",
+                            "No frontend — API tests only."
+                        ]
+                    }, {
+                        type: "list",
+                        title: "Submission:",
+                        items: [
+                            "Public GitHub repo with README: env vars, how to test auth + all 5 protected routes in Postman (include sending cookies), and a small table of which role can access which route.",
+                            "Short note in README: which lecture topic each file/middleware demonstrates."
+                        ]
                     }]
                 }, {
                     type: "learning",
-                    title: "📚 Technical Areas to Master",
+                    title: "✅ Checklist before you submit",
                     content: [
-                        "Full-stack authentication with JWT and HTTP-only cookies",
-                        "Password reset flow with email verification and token management",
-                        "File uploads with Multer and Cloudinary integration",
-                        "Transactional emails with Nodemailer and templates",
-                        "Advanced Mongoose operations with population and aggregation",
-                        "Security best practices implementation",
-                        "API deployment on Render with MongoDB Atlas",
-                        "Comprehensive error handling and validation",
-                        "Middleware architecture in Express.js",
-                        "Payment system integration concepts",
-                        "Admin dashboard and role-based access control",
-                        "Token-based authentication for password reset"
+                        "Signup hashes with argon2; login compares with argon2.verify.",
+                        "JWT sent via httpOnly cookie; logout clears cookie.",
+                        "Profile fails without valid cookie/token.",
+                        "All 5 protected routes behave correctly: user → 403 on admin routes; admin → 200 on all five.",
+                        "Controllers exist; route files only delegate to controllers.",
+                        "Rate limit triggers after repeated login attempts.",
+                        "Invalid body returns 400 with validator messages.",
+                        "XSS middleware is registered globally or on JSON routes."
                     ]
                 }],
                 timer: {
                     title: "Time Remaining to Complete Task",
-                    message: "Complete the task before the deadline!",
-                    days: "Days",
-                    hours: "Hours",
-                    minutes: "Minutes",
-                    seconds: "Seconds"
+                    message: "Complete the task before the deadline. Official submissions are accepted only in the final six hours before the window closes.",
+                    days: "Days", hours: "Hours", minutes: "Minutes", seconds: "Seconds"
                 },
-                thankYou: "\"Build secure, scalable, and production-ready backend systems with proper authentication flows!\"",
+                thankYou: "\"Thank you for your hard work and dedication. Your efforts are appreciated!\"",
                 buttonText: "العربية / English",
-                finishDate: "Finish by: December 10, 2026"
+                finishDate: "Finish by: June 10, 2026 (submissions: last 6 hours)"
             },
             ar: {
-                title: "المهمة 9: نظام متكامل للخلفية لتطبيق التجارة الإلكترونية",
-                subtitle: "أنشئ نظام خلفية كامل للتجارة الإلكترونية يتضمن المصادقة، إدارة المنتجات، الطلبات، المدفوعات، ولوحة تحكم المدير",
+                title: "المهمة 9: Auth Mini API",
+                subtitle: "API صغير بـ Express يركّز على المصادقة والتفويض والأمان — المحاضرات 23–25 فقط، وليس نظاماً تجارياً كاملاً.",
                 sections: [{
-                    type: "idea",
-                    title: "💡 المهمة 9: \"نظام متكامل للخلفية لتطبيق التجارة الإلكترونية\"",
-                    content: "طور واجهة برمجة تطبيقات خلفية كاملة لمنصة تجارة إلكترونية تتيح للمستخدمين تصفح المنتجات، إدارة عربات التسوق، تقديم الطلبات، إجراء المدفوعات، وتتضمن لوحة تحكم لإدارة المتجر."
+                    type: "story",
+                    title: "🔐 الهدف: فهم الـ Auth وليس بناء منتج",
+                    paragraphs: [
+                        "هذه المهمة صغيرة عمداً. لا تبنون مكتبة أو متجراً أو منصة بعشرات الوحدات.",
+                        "تبنون API بسيطاً بـ Express و MongoDB مهمته الوحيدة ممارسة ما في المحاضرات 23 و 24 و 25: تسجيل، دخول، حماية مسارات، وتقوية الخادم.",
+                        "إن استطعت شرح كل middleware واختبار كل endpoint في Postman أو Thunder Client، فقد نجحت."
+                    ]
+                }, {
+                    type: "note",
+                    title: "📚 الربط بالمحاضرات",
+                    content: "<a href=\"../lecture23.html\" target=\"_blank\" rel=\"noopener\">المحاضرة 23 — Auth 1: المصادقة والتفويض و JWT</a> · <a href=\"../lecture24.html\" target=\"_blank\" rel=\"noopener\">المحاضرة 24 — Auth 2: الأدوار والكوكيز و rate limiter</a> · <a href=\"../lecture25.html\" target=\"_blank\" rel=\"noopener\">المحاضرة 25 — Auth 3: XSS و express-validator</a>."
                 }, {
                     type: "requirements",
-                    title: "📋 متطلبات المشروع",
+                    title: "📝 ماذا تبني (نطاق أدنى)",
                     content: [{
                         type: "list",
-                        title: "قصة النظام:",
+                        title: "نموذج User (MongoDB + Mongoose):",
                         items: [
-                            "يريد رائد أعمال إطلاق متجر إلكتروني لبيع منتجات متنوعة",
-                            "يجب أن يتمكن العملاء من تصفح المنتجات مع إمكانية التصفية والبحث",
-                            "يحتاج المستخدمون إلى إنشاء حسابات لحفظ معلوماتهم وسجل طلباتهم",
-                            "وظيفة عربة التسوق مع إمكانية إضافة/إزالة العناصر قبل الدفع",
-                            "معالجة مدفوعات آمنة مع إرسال رسائل تأكيد الطلب بالبريد الإلكتروني",
-                            "يجب أن يتمكن مدراء النظام من إدارة المنتجات والطلبات وعرض تحليلات المبيعات",
-                            "يجب أن يتمكن العملاء من تحميل تقييمات المنتجات مع الصور",
-                            "إدارة المخزون مع تتبع الكميات وتنبيهات نفاد المخزون",
-                            "وظيفة إعادة تعيين كلمة المرور عبر البريد الإلكتروني مع التحقق الآمن من الرموز"
+                            "حقول: <code>name</code>، <code>email</code> (فريد)، <code>password</code> (لا يُرجع في JSON)، <code>role</code> (<code>user</code> | <code>admin</code>)، واختياري <code>createdAt</code>.",
+                            "عند التسجيل: تشفير كلمة المرور بـ <strong>argon2</strong> قبل الحفظ.",
+                            "أضف مستخدم admin للاختبار (سكربت أو إدخال يدوي بكلمة مرور مشفّرة)."
                         ]
                     }, {
                         type: "list",
-                        title: "قصص المستخدم:",
+                        title: "مسارات Auth (مثلاً <code>/api/v1/auth</code>):",
                         items: [
-                            "كعميل، أريد تصفح المنتجات حسب الفئة، نطاق السعر، والتقييمات",
-                            "كعميل، أريد إنشاء حساب لحفظ معلومات الشحن الخاصة بي",
-                            "كعميل، أريد إضافة منتجات إلى عربة التسوق وتحديث الكميات",
-                            "كعميل، أريد تطبيق رموز الخصم أثناء عملية الدفع",
-                            "كعميل، أريد تتبع حالة طلبي بعد الشراء",
-                            "كعميل، أريد كتابة تقييمات مع صور للمنتجات المشتراة",
-                            "كعميل، أريد استلام تأكيد الطلب وتحديثات الشحن عبر البريد الإلكتروني",
-                            "كعميل، أريد إعادة تعيين كلمة مروري إذا نسيتها عبر البريد الإلكتروني",
-                            "كمدير، أريد إضافة/تعديل/حذف المنتجات مع الصور",
-                            "كمدير، أريد إدارة فئات المنتجات ومستويات المخزون",
-                            "كمدير، أريد عرض وتحديث حالات الطلبات",
-                            "كمدير، أريد رؤية تقارير المبيعات ولوحة التحليلات",
-                            "كمدير، أريد إدارة حسابات المستخدمين والأدوار"
+                            "<code>POST /signup</code> — تسجيل مع تحقق من الجسم.",
+                            "<code>POST /login</code> — التحقق بـ argon2؛ إصدار JWT كـ <strong>access token</strong>؛ حفظه في <strong>كوكي httpOnly</strong>.",
+                            "<code>POST /logout</code> — مسح كوكي المصادقة.",
+                            "<code>GET /profile</code> — محمي؛ إرجاع المستخدم الحالي من الكوكي/التوكن."
                         ]
                     }, {
                         type: "list",
-                        title: "هياكل نماذج قاعدة البيانات:",
+                        title: "JWT والكوكيز:",
                         items: [
-                            "نموذج المستخدم: id, name, email, password, role, isVerified, avatar, addresses, phone, createdAt, updatedAt",
-                            "نموذج المنتج: id, name, description, price, category, images, stock, ratings, numReviews, features, brand, createdAt",
-                            "نموذج الفئة: id, name, description, image, parentCategory, createdAt",
-                            "نموذج عربة التسوق: id, user, items, totalPrice, createdAt, updatedAt",
-                            "نموذج عنصر العربة: product, quantity, price",
-                            "نموذج الطلب: id, user, items, shippingAddress, paymentMethod, paymentResult, itemsPrice, taxPrice, shippingPrice, totalPrice, isPaid, paidAt, isDelivered, deliveredAt, createdAt",
-                            "نموذج عنصر الطلب: name, quantity, image, price, product",
-                            "نموذج التقييم: id, user, product, rating, comment, images, createdAt",
-                            "نموذج الرمز: id, userId, token, type, expiresAt, createdAt",
-                            "نموذج العنوان: street, city, state, zipCode, country, isDefault"
+                            "توقيع التوكن بـ <code>jsonwebtoken</code>؛ الحمولة على الأقل <code>userId</code> و <code>role</code>.",
+                            "<code>cookie-parser</code>؛ ضبط الكوكي عند login (httpOnly، secure في الإنتاج، sameSite مناسب).",
+                            "middleware يقرأ التوكن من الكوكي ويضيف المستخدم إلى <code>req.user</code>."
                         ]
                     }, {
                         type: "list",
-                        title: "المتطلبات التقنية:",
+                        title: "Controllers (مطلوب — المسارات رفيعة):",
                         items: [
-                            "Node.js مع إطار عمل Express.js",
-                            "MongoDB مع Mongoose ODM لعمليات قاعدة البيانات",
-                            "مصادقة JWT مع رموز التحديث المخزنة في ملفات تعريف الارتباط HTTP-only",
-                            "Argon2 لتشفير كلمات المرور بشكل آمن أثناء التسجيل/تسجيل الدخول",
-                            "Express-validator للتحقق الشامل من الطلبات",
-                            "Multer لرفع الملفات مع تكامل Cloudinary لتخزين الصور",
-                            "Nodemailer لإرسال رسائل البريد الإلكتروني (تأكيد الطلبات، إعادة تعيين كلمة المرور)",
-                            "اختبار كامل باستخدام Postman (تصدير وتضمين المجموعة في التسليم)",
-                            "نشر على Render.com كخدمة مجانية مع اتصال MongoDB Atlas",
-                            "تنفيذ إجراءات أمان شاملة",
-                            "اتباع هيكل المجلدات تمامًا كما هو محدد",
-                            "نموذج الرموز لإعادة تعيين كلمة المرور مع تاريخ انتهاء"
+                            "منطق الطلب/الاستجابة في <strong>controllers</strong> وليس داخل ملفات المسارات.",
+                            "<code>src/controllers/auth.controller.js</code> — signup, login, logout, profile.",
+                            "<code>src/controllers/protected.controller.js</code> (أو فصل user + admin) — معالجات الـ 5 APIs أدناه."
                         ]
                     }, {
                         type: "list",
-                        title: "متطلبات تنفيذ الأمان:",
+                        title: "middleware الأدوار + 5 APIs محمية:",
                         items: [
-                            "Helmet.js لتعيين رؤوس HTTP آمنة",
-                            "تهيئة CORS لطلبات cross-origin",
-                            "تحديد معدل الطلبات لمنع هجمات القوة الغاشمة",
-                            "حماية XSS لتطهير المدخلات",
-                            "التحقق من صحة مخطط Mongoose لسلامة البيانات",
-                            "متغيرات البيئة للبيانات الحساسة",
-                            "تهيئة ملفات تعريف الارتباط الآمنة لرموز JWT",
-                            "انتهاء صلاحية الرموز لإعادة تعيين كلمة المرور (ساعة واحدة)",
-                            "حذف الرموز بعد الاستخدام"
+                            "بعد <code>protect</code> استخدم <strong>middleware للدور</strong> (مثل <code>restrictTo('admin')</code>) حيث يلزم.",
+                            "نفّذ <strong>5 endpoints محمية بالضبط</strong> (بالإضافة لمسارات auth)، JSON بسيط:",
+                            "<code>GET /api/v1/me/welcome</code> — أي مستخدم مسجّل.",
+                            "<code>GET /api/v1/me/account-summary</code> — أي مستخدم مسجّل.",
+                            "<code>GET /api/v1/admin/overview</code> — <strong>admin فقط</strong>.",
+                            "<code>GET /api/v1/admin/users</code> — <strong>admin فقط</strong>.",
+                            "<code>DELETE /api/v1/admin/users/:id</code> — <strong>admin فقط</strong> + تحقق من <code>:id</code>.",
+                            "اختبر: <code>user</code> يحصل 200 على <code>/me/*</code> و 403 على <code>/admin/*</code>؛ <code>admin</code> يحصل 200 على الخمسة."
                         ]
                     }, {
                         type: "list",
-                        title: "ما يجب على الطلاب تسليمه:",
+                        title: "الأمان والتحقق (مطلوب):",
                         items: [
-                            "كود عامل كامل مع جميع نقاط النهاية عاملة",
-                            "ملف README.md واضح مع تعليمات الإعداد وتوثيق API",
-                            "مجموعة Postman مصدرة ومضمنة في المستودع",
-                            "نشر مباشر على Render.com مع اتصال MongoDB Atlas",
-                            "جميع النماذج، وحدات التحكم، المسارات، والوسائط كما هو محدد في الهيكل",
-                            "وسائط معالجة الأخطاء ووسائط 404 غير موجود",
-                            "تنفيذ asyncHandler بدلاً من كتل try-catch",
-                            "استخدام مناسب للتعبئة للبيانات العلائقية",
-                            "وظيفة رفع الصور لصور المنتجات والتقييمات",
-                            "وظيفة إرسال البريد الإلكتروني لتأكيد الطلبات وإعادة تعيين كلمة المرور",
-                            "سير عمل إعادة تعيين كلمة المرور مع التحقق عبر البريد الإلكتروني"
+                            "<strong>حماية XSS</strong> — middleware مثل <code>xss-clean</code> أو <code>xss</code>.",
+                            "<strong>Rate limiter</strong> — على مسارات login/signup بـ <code>express-rate-limit</code> (حد أشد على login).",
+                            "<strong>express-validator</strong> — تحقق من كل <code>req.body</code> و <code>req.params</code> في مسارات auth؛ إرجاع 400 برسائل واضحة."
                         ]
                     }, {
                         type: "output",
-                        title: "نقاط نهاية API المطلوبة (الحد الأدنى):",
-                        content: "قم بتنفيذ هذه النقاط على الأقل مع التحقق المناسب من الصحة ومعالجة الأخطاء:",
-                        example: `## نقاط نهاية المصادقة
-POST   /api/auth/register     - تسجيل مستخدم جديد (مع تشفير كلمة المرور بـ argon2)
-POST   /api/auth/login        - تسجيل دخول المستخدم (تعيين JWT في ملفات تعريف الارتباط HTTP-only)
-POST   /api/auth/logout       - تسجيل خروج المستخدم (مسح ملفات تعريف الارتباط)
-POST   /api/auth/refresh      - تحديث رمز الوصول
-GET    /api/auth/verify-email/:token - التحقق من رمز البريد الإلكتروني
-POST   /api/auth/forgot-password - إرسال بريد إلكتروني لإعادة تعيين كلمة المرور (حفظ الرمز في نموذج Token)
-POST   /api/auth/reset-password/:token - التحقق من الرمز وإعادة تعيين كلمة المرور
-PUT    /api/auth/update-password - تحديث كلمة المرور (للمستخدمين المصادق عليهم)
-
-## نقاط نهاية المنتجات
-GET    /api/products          - الحصول على جميع المنتجات (مع ترقيم الصفحات، المرشحات، البحث)
-GET    /api/products/:id      - الحصول على منتج واحد
-POST   /api/products          - إنشاء منتج (للمدير فقط، مع رفع الصور)
-PUT    /api/products/:id      - تحديث منتج (للمدير فقط)
-DELETE /api/products/:id      - حذف منتج (للمدير فقط)
-GET    /api/products/categories - الحصول على جميع الفئات
-
-## نقاط نهاية عربة التسوق
-GET    /api/cart              - الحصول على عربة تسوق المستخدم
-POST   /api/cart              - إضافة عنصر إلى عربة التسوق
-PUT    /api/cart/:itemId      - تحديث كمية عنصر عربة التسوق
-DELETE /api/cart/:itemId      - إزالة عنصر من عربة التسوق
-DELETE /api/cart              - مسح عربة التسوق بالكامل
-
-## نقاط نهاية الطلبات
-POST   /api/orders            - إنشاء طلب جديد (إرسال بريد تأكيد)
-GET    /api/orders            - الحصول على طلبات المستخدم
-GET    /api/orders/:id        - الحصول على تفاصيل طلب واحد
-PUT    /api/orders/:id/status - تحديث حالة الطلب (للمدير فقط)
-GET    /api/orders/admin/all  - الحصول على جميع الطلبات (للمدير فقط)
-
-## نقاط نهاية التقييمات
-POST   /api/products/:id/reviews - إضافة تقييم مع رفع الصور
-GET    /api/products/:id/reviews - الحصول على تقييمات المنتج
-PUT    /api/reviews/:id      - تحديث التقييم
-DELETE /api/reviews/:id      - حذف التقييم
-
-## نقاط نهاية المستخدمين
-GET    /api/users/profile     - الحصول على ملف تعريف المستخدم
-PUT    /api/users/profile     - تحديث ملف تعريف المستخدم
-PUT    /api/users/address     - إضافة/تحديث عنوان الشحن
-GET    /api/users/admin/all   - الحصول على جميع المستخدمين (للمدير فقط)
-PUT    /api/users/:id/role    - تحديث دور المستخدم (للمدير فقط)
-
-## سير عمل إعادة تعيين كلمة المرور:
-1. POST /api/auth/forgot-password
-   - يرسل المستخدم البريد الإلكتروني
-   - النظام يولد رمزًا ويحفظه في نموذج Token
-   - يرسل بريدًا إلكترونيًا يحتوي على رابط إعادة التعيين
-   
-2. POST /api/auth/reset-password/:token
-   - النظام يتحقق من وجود الرمز وأنه لم ينتهِ
-   - يتحقق من صحة كلمة المرور الجديدة
-   - يقوم بتحديث كلمة مرور المستخدم
-   - يحذف الرمز من نموذج Token
-   
-3. PUT /api/auth/update-password
-   - مستخدم مصادق عليه
-   - يتحقق من كلمة المرور الحالية
-   - يقوم بالتحديث إلى كلمة مرور جديدة`
-                    }, {
-                        type: "output",
-                        title: "📝 هيكل المجلدات (يجب اتباعه بالضبط):",
-                        example: `├── src/
-│   ├── models/
-│   │   ├── User.js
-│   │   ├── Product.js
-│   │   ├── Category.js
-│   │   ├── Cart.js
-│   │   ├── Order.js
-│   │   ├── Review.js
-│   │   └── Token.js
-│   │
-│   ├── validation/
-│   │   ├── authValidation.js
-│   │   ├── productValidation.js
-│   │   ├── orderValidation.js
-│   │   ├── userValidation.js
-│   │   └── tokenValidation.js
-│   │
-│   ├── controllers/
-│   │   ├── authController.js
-│   │   ├── productController.js
-│   │   ├── cartController.js
-│   │   ├── orderController.js
-│   │   ├── reviewController.js
-│   │   ├── userController.js
-│   │   └── adminController.js
-│   │
-│   ├── routes/
-│   │   ├── authRoutes.js
-│   │   ├── productRoutes.js
-│   │   ├── cartRoutes.js
-│   │   ├── orderRoutes.js
-│   │   ├── reviewRoutes.js
-│   │   ├── userRoutes.js
-│   │   └── adminRoutes.js
-│   │
-│   ├── middlewares/
-│   │   ├── authMiddleware.js
-│   │   ├── errorMiddleware.js
-│   │   ├── notFoundMiddleware.js
-│   │   ├── validationMiddleware.js
-│   │   ├── uploadMiddleware.js
-│   │   ├── rateLimitMiddleware.js
-│   │   └── tokenMiddleware.js
-│   │
-│   ├── utils/
-│   │   ├── asyncHandler.js
-│   │   ├── sendEmail.js
-│   │   ├── cloudinary.js
-│   │   ├── generateToken.js
-│   │   ├── apiFeatures.js
-│   │   ├── generateResetToken.js
-│   │   └── passwordUtils.js
-│   │
-│   └── app.js
-├── package.json
+                        title: "هيكل مقترح (صغير):",
+                        content: "ابقَ على هيكل بسيط:",
+                        example: `auth-mini-api/
+├── app.js
 ├── .env
 ├── .env.example
 ├── .gitignore
-└── README.md`
+├── package.json
+└── src/
+    ├── models/User.js
+    ├── controllers/
+    │   ├── auth.controller.js
+    │   └── protected.controller.js
+    ├── middlewares/
+    │   ├── auth.js
+    │   ├── role.js
+    │   └── validate.js
+    └── routes/
+        ├── auth.routes.js
+        └── protected.routes.js`
+                    }, {
+                        type: "list",
+                        title: "خارج النطاق:",
+                        items: [
+                            "بدون refresh token أو OAuth أو إعادة تعيين كلمة مرور (إلا إن أنهيت مبكراً).",
+                            "بدون CRUD كبير لمجالات أخرى.",
+                            "بدون واجهة أمامية — اختبار API فقط."
+                        ]
+                    }, {
+                        type: "list",
+                        title: "التسليم:",
+                        items: [
+                            "مستودع GitHub عام + README (المتغيرات، اختبار الكوكيز في Postman).",
+                            "ملاحظة قصيرة: أي موضوع محاضرة يوضحه كل middleware."
+                        ]
                     }]
                 }, {
                     type: "learning",
-                    title: "📚 المجالات التقنية لإتقانها",
+                    title: "✅ قائمة تحقق قبل التسليم",
                     content: [
-                        "المصادقة الكاملة مع JWT وملفات تعريف الارتباط HTTP-only",
-                        "سير عمل إعادة تعيين كلمة المرور مع التحقق عبر البريد الإلكتروني وإدارة الرموز",
-                        "رفع الملفات مع Multer وتكامل Cloudinary",
-                        "رسائل البريد الإلكتروني مع Nodemailer والقوالب",
-                        "عمليات Mongoose المتقدمة مع التعبئة والتجميع",
-                        "تنفيذ أفضل ممارسات الأمان",
-                        "نشر API على Render مع MongoDB Atlas",
-                        "معالجة الأخطاء والتحقق من الصحة الشامل",
-                        "هندسة الـ Middleware في Express.js",
-                        "مفاهيم تكامل نظام المدفوعات",
-                        "لوحة تحكم المدير والتحكم في الوصول القائم على الأدوار",
-                        "المصادقة القائمة على الرموز لإعادة تعيين كلمة المرور"
+                        "signup يستخدم argon2؛ login يستخدم argon2.verify.",
+                        "JWT في كوكي httpOnly؛ logout يمسح الكوكي.",
+                        "profile يرفض بدون توكن صالح.",
+                        "الـ 5 APIs المحمية تعمل حسب الدور؛ user → 403 على admin؛ admin → 200 على الكل.",
+                        "وجود controllers؛ ملفات routes تفوّض فقط للـ controllers.",
+                        "Rate limit يعمل على login المتكرر.",
+                        "جسم غير صالح يعيد 400 من express-validator.",
+                        "middleware XSS مفعّل."
                     ]
                 }],
                 timer: {
                     title: "الوقت المتبقي لإكمال المهمة",
-                    message: "أكمل المهمة قبل الموعد النهائي!",
-                    days: "أيام",
-                    hours: "ساعات",
-                    minutes: "دقائق",
-                    seconds: "ثواني"
+                    message: "أكمل المهمة قبل الموعد النهائي. يُقبل التسليم الرسمي فقط في الساعات الست الأخيرة قبل إغلاق النافذة.",
+                    days: "أيام", hours: "ساعات", minutes: "دقائق", seconds: "ثواني"
                 },
-                thankYou: "\"ابنِ أنظمة خلفية آمنة وقابلة للتطوير وجاهزة للإنتاج مع سير عمل مصادقة صحيحة!\"",
+                thankYou: "\"شكرًا لجهودك الجادة وتفانيك. نقدر جهودك!\"",
                 buttonText: "English / العربية",
-                finishDate: "الانتهاء بحلول: 10 ديسمبر 2026"
+                finishDate: "الانتهاء بحلول: 10 يونيو 2026 (التسليم: آخر 6 ساعات)"
             }
         };
 
         function renderContent(lang) {
             const data = taskData[lang];
             const taskContent = document.getElementById('taskContent');
-
-            // Update page title and subtitle
             document.getElementById('title').textContent = data.title;
             document.getElementById('subtitle').textContent = data.subtitle;
-
-            // Update timer section
             document.getElementById('timer-title').textContent = data.timer.title;
             document.getElementById('timer-message').textContent = data.timer.message;
             document.getElementById('days-label').textContent = data.timer.days;
@@ -891,41 +394,37 @@ PUT    /api/users/:id/role    - تحديث دور المستخدم (للمدير
             document.getElementById('minutes-label').textContent = data.timer.minutes;
             document.getElementById('seconds-label').textContent = data.timer.seconds;
             document.getElementById('finish-date').textContent = data.finishDate;
-
-            // Update thank you message
             document.getElementById('thankYou').textContent = data.thankYou;
-
-            // Update button text
             document.getElementById('languageToggle').textContent = data.buttonText;
-
-            // Clear existing content
             taskContent.innerHTML = '';
 
-            // Render each section
             data.sections.forEach(section => {
                 const sectionEl = document.createElement('div');
                 sectionEl.className = 'section';
-
-                if (section.type === 'requirements') {
-                    sectionEl.classList.add('requirements');
-                } else if (section.type === 'bonus') {
-                    sectionEl.classList.add('bonus');
-                }
+                if (section.type === 'requirements') sectionEl.classList.add('requirements');
+                else if (section.type === 'story') sectionEl.classList.add('story-section');
+                else if (section.type === 'note') sectionEl.classList.add('note-section');
 
                 const titleEl = document.createElement('h2');
                 titleEl.textContent = section.title;
                 sectionEl.appendChild(titleEl);
 
-                if (section.type === 'idea' || section.type === 'note') {
+                if (section.type === 'story') {
+                    (section.paragraphs || []).forEach(text => {
+                        const p = document.createElement('p');
+                        p.textContent = text;
+                        p.style.marginBottom = '14px';
+                        sectionEl.appendChild(p);
+                    });
+                } else if (section.type === 'idea' || section.type === 'note') {
                     const contentEl = document.createElement('p');
-                    contentEl.textContent = section.content;
+                    contentEl.innerHTML = section.content;
                     sectionEl.appendChild(contentEl);
                 } else if (section.type === 'requirements') {
                     section.content.forEach(item => {
                         const itemTitle = document.createElement('h3');
                         itemTitle.textContent = item.title;
                         sectionEl.appendChild(itemTitle);
-
                         if (item.type === 'list') {
                             const listEl = document.createElement('ul');
                             item.items.forEach(listItem => {
@@ -938,7 +437,6 @@ PUT    /api/users/:id/role    - تحديث دور المستخدم (للمدير
                             const contentEl = document.createElement('p');
                             contentEl.textContent = item.content;
                             sectionEl.appendChild(contentEl);
-
                             const exampleEl = document.createElement('div');
                             exampleEl.className = 'output-example';
                             exampleEl.textContent = item.example;
@@ -954,74 +452,39 @@ PUT    /api/users/:id/role    - تحديث دور المستخدم (للمدير
                     });
                     sectionEl.appendChild(listEl);
                 }
-
                 taskContent.appendChild(sectionEl);
             });
 
-            // Set text direction based on language
             if (lang === 'ar') {
                 document.body.setAttribute('dir', 'rtl');
-                document.querySelectorAll('.section').forEach(section => {
-                    section.style.textAlign = 'right';
-                });
+                document.querySelectorAll('.section').forEach(s => { s.style.textAlign = 'right'; });
             } else {
                 document.body.removeAttribute('dir');
-                document.querySelectorAll('.section').forEach(section => {
-                    section.style.textAlign = 'left';
-                });
+                document.querySelectorAll('.section').forEach(s => { s.style.textAlign = 'left'; });
             }
         }
 
-        // Timer functionality
         function startCountdown() {
-            // Set the date we're counting down to (September 27, 2026)
-            const countDownDate = new Date("Dec 10, 2026 23:59:59").getTime();
-
-            // Update the countdown every 1 second
+            const countDownDate = new Date("Jun 10, 2026 23:59:59").getTime();
             const countdown = setInterval(() => {
-                // Get today's date and time
-                const now = new Date().getTime();
-
-                // Find the distance between now and the countdown date
-                const distance = countDownDate - now;
-
-                // If the countdown is over, write some text
+                const distance = countDownDate - Date.now();
                 if (distance < 0) {
                     clearInterval(countdown);
-                    document.getElementById("days").textContent = "00";
-                    document.getElementById("hours").textContent = "00";
-                    document.getElementById("minutes").textContent = "00";
-                    document.getElementById("seconds").textContent = "00";
+                    ['days', 'hours', 'minutes', 'seconds'].forEach(id => document.getElementById(id).textContent = '00');
                     return;
                 }
-
-                // Time calculations for days, hours, minutes and seconds
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                // Display the results
-                document.getElementById("days").textContent = days.toString().padStart(2, '0');
-                document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
-                document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
-                document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
+                document.getElementById('days').textContent = String(Math.floor(distance / 86400000)).padStart(2, '0');
+                document.getElementById('hours').textContent = String(Math.floor((distance % 86400000) / 3600000)).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(Math.floor((distance % 3600000) / 60000)).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(Math.floor((distance % 60000) / 1000)).padStart(2, '0');
             }, 1000);
         }
 
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', function() {
-            // Render English content by default
+        document.addEventListener('DOMContentLoaded', () => {
             renderContent('en');
-
-            // Start the countdown timer
             startCountdown();
-
-            // Language toggle functionality
-            document.getElementById('languageToggle').addEventListener('click', function() {
-                const currentLang = document.body.getAttribute('dir') === 'rtl' ? 'ar' : 'en';
-                const newLang = currentLang === 'en' ? 'ar' : 'en';
-                renderContent(newLang);
+            document.getElementById('languageToggle').addEventListener('click', () => {
+                renderContent(document.body.getAttribute('dir') === 'rtl' ? 'en' : 'ar');
             });
         });
     </script>
