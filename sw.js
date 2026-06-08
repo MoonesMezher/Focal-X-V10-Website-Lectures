@@ -1,5 +1,5 @@
-const SITE_STATIC_CACHE_NAME = "pwa-cache-v23";
-const SITE_DYNAMIC_CACHE_NAME = "pwa-cache-dynamic-v23";
+const SITE_STATIC_CACHE_NAME = "pwa-cache-v24";
+const SITE_DYNAMIC_CACHE_NAME = "pwa-cache-dynamic-v24";
 
 const assets = [
     "/",
