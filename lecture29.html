@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focal X - Node.js Bootcamp: Lecture 29 </title>
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="apple-touch-icon" href="./logo.jpg">
+    <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
+    <meta name="theme-color" content="#b21f1f">
+    <link rel="stylesheet" href="./assets/lecture.css">
+</head>
+
+<body>
+    <div class="container">
+        <a target="_blank" href="https://moonesmezher.com" class="coach">Moones Mezher</a>
+        <header>
+            <h1 id="lecture-title">Focal X - Node.js Bootcamp</h1>
+            <p class="subtitle" id="lecture-subtitle">Node</p>
+        </header>
+
+        <div class="content">
+            <div class="lecture-content">
+                <h2>Lecture Content</h2>
+                <div id="tabs-container"></div>
+                <div id="tab-content-container"></div>
+            </div>
+
+            <div class="interactive-section">
+                <h2>Interactive Questions & Tasks</h2>
+                <div id="questions-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 <a rel="noopener" href="https://focal-x.com/" target="_blank">Focal X</a> All Right Reserved</p>
+    </footer>
+
+    <script src="./reg.js"></script>
+    <script>
+        // ==================== CONFIGURATION ====================
+        // Update these arrays to change the content of your lecture
+
+        const lectureConfig = {
+            title: "Focal X - Node.js Bootcamp",
+            subtitle: "Production Deployment"
+        };
+
+        const lectureContent = [{
+            tabTitle: "Last Lesson",
+            title: "Last Lesson Recap",
+            content: `/*
+1- File uploads with Multer
+2- Local storage vs Cloudinary
+3- File validation & security
+*/`
+        }, {
+            tabTitle: "Dev vs Production",
+            title: "Why deployment matters",
+            content: `/*
+Development vs Production:
+
+• On your laptop: nodemon, .env on disk, local MongoDB, debug logs everywhere.
+• In production: stable process, secrets from the host, managed database, health checks, HTTPS, and users you do not control.
+
+Goals of this lecture (deployment only):
+• Ship your Node/Express API so others can reach it on the internet.
+• Connect to MongoDB Atlas (cloud database).
+• Configure environment variables safely on the platform.
+• Run a production-ready server process (not "works on my machine").
+
+This lecture does NOT cover Docker — that is Lecture 30.
+*/`
+        }, {
+            tabTitle: "Render Deployment",
+            title: "Deploying on Render",
+            content: `/*
+Render.com — common free/cheap host for Node APIs
+
+Steps:
+1. Push code to GitHub (public or private repo).
+2. Create a new Web Service on Render → connect the repo.
+3. Set build command (often empty or npm install) and start command: npm start
+4. Add environment variables in the Render dashboard (never commit secrets).
+5. Deploy — Render assigns a URL and sets PORT automatically.
+
+package.json (production):
+*/
+{
+  "name": "nodejs-api",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
+
+/*
+Environment variables on Render (examples):
+• NODE_ENV=production
+• PORT — set by Render (use process.env.PORT)
+• MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/dbname
+• JWT_SECRET=long-random-string
+• Any keys your app reads via process.env
+
+Bind the server to 0.0.0.0 so the platform can route traffic:
+*/
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(\`Server running on port \${PORT}\`);
+});
+
+/*
+Health check route (Render can ping this):
+*/
+app.get('/health', (req, res) => {
+    res.status(200).json({
+        status: 'OK',
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime()
+    });
+});`
+        }, {
+            tabTitle: "MongoDB Atlas",
+            title: "Production database on Atlas",
+            content: `/*
+MongoDB Atlas — hosted MongoDB for production
+
+Setup outline:
+1. Create cluster (free tier M0 is enough to learn).
+2. Database Access → create user + password.
+3. Network Access → allow IP (0.0.0.0/0 for learning; restrict in real prod).
+4. Connect → copy connection string → MONGODB_URI in Render env.
+
+Connection in app:
+*/
+const mongoose = require('mongoose');
+
+const connectDB = async () => {
+    try {
+        const conn = await mongoose.connect(process.env.MONGODB_URI);
+        console.log(\`MongoDB Atlas connected: \${conn.connection.host}\`);
+    } catch (error) {
+        console.error('Database connection failed:', error);
+        process.exit(1);
+    }
+};
+
+/*
+Tips:
+• Use different databases or clusters for dev vs production when possible.
+• Never commit MONGODB_URI with real credentials to Git.
+• Handle disconnect / SIGTERM for graceful shutdown on redeploy.
+*/`
+        }, {
+            tabTitle: "Production Checklist",
+            title: "Before you go live",
+            content: `/*
+Pre-deploy checklist:
+
+✓ .env.example committed; real .env in .gitignore
+✓ start script runs node (not nodemon) in production
+✓ process.env.PORT used (platform assigns port)
+✓ listen on 0.0.0.0
+✓ MONGODB_URI points to Atlas
+✓ JWT_SECRET and other secrets only in host env vars
+✓ /health endpoint returns 200
+✓ CORS configured for your real frontend origin (if any)
+✓ Error handler does not leak stack traces to clients in production
+
+After deploy:
+• Test API with Postman against the live URL
+• Check Render logs for startup errors
+• Confirm Atlas shows active connections
+
+Alternatives to Render (research): Railway, Fly.io, Heroku, VPS — same ideas: env vars, start command, database URL.
+*/`
+        }];
+
+        const questions = [
+            {
+                type: "question",
+                question: "Why should a production Node server listen on 0.0.0.0 instead of localhost only?",
+                options: [
+                    "It enables HTTPS automatically",
+                    "It accepts connections from the hosting platform's network interfaces",
+                    "It makes MongoDB faster",
+                    "It is required for nodemon"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "Where should JWT_SECRET and MONGODB_URI live in production?",
+                options: [
+                    "Hard-coded in app.js",
+                    "Committed in package.json",
+                    "Platform environment variables (e.g. Render dashboard)",
+                    "In a public README"
+                ],
+                correctIndex: 2
+            }, {
+                type: "question",
+                question: "What is the main purpose of a /health endpoint on Render?",
+                options: [
+                    "To store user passwords",
+                    "To let the platform verify the service is running",
+                    "To replace MongoDB",
+                    "To send emails"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "Which npm script should Render use as the start command?",
+                options: [
+                    "npm run dev",
+                    "npm start (runs node, not nodemon)",
+                    "npm test",
+                    "npm install"
+                ],
+                correctIndex: 1
+            }, {
+                type: "question",
+                question: "Why use MongoDB Atlas instead of a local MongoDB instance on Render?",
+                options: [
+                    "Atlas runs inside the same container as Node automatically",
+                    "Render web services do not persist a local database; Atlas is a managed cloud DB",
+                    "Atlas replaces Express",
+                    "Local MongoDB is illegal on Render"
+                ],
+                correctIndex: 1
+            }, {
+                type: "task",
+                title: "Deploy your API to Render",
+                content: "Deploy a Node/Express API to Render with MongoDB Atlas. Configure all secrets as environment variables, add a health route, use npm start, and document the live URL and test steps in your README."
+            }, {
+                type: "search-task",
+                title: "Research: PaaS deployment options",
+                content: "Compare Render, Railway, and Fly.io for Node.js APIs: pricing, env vars, free tier limits, and MongoDB connection patterns."
+            }
+        ];
+    </script>
+    <script src="./assets/lecture.js"></script>
+</body>
+
+</html>
